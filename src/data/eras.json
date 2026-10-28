@@ -1,6 +1,46 @@
 {
   "gameTitle": "THE LONG ASCENT",
   "tagline": "You are a lineage, not a person.",
+  "uiStrings": {
+    "title": "ACCELERANDO: THE LONG ASCENT",
+    "tagline": "You are a lineage, not a person.",
+    "buttons": [
+      "New Lineage",
+      "Continue",
+      "Chronicle",
+      "Settings",
+      "Export Save",
+      "Import Code"
+    ],
+    "tooltips": {
+      "sustenance": "Whatever this era eats. It changes flavors, never appetite.",
+      "knowledge": "Things that survive you, if filed well.",
+      "population": "Mouths now. Instances later. Complaints throughout.",
+      "infrastructure": "Arguments won against geography. Renew annually.",
+      "legitimacy": "The story others accept about why it’s you.",
+      "entropy": "The only resource that always compounds. Checkmate available anytime."
+    },
+    "eraProgress": "{era} — {pct}% toward becoming someone else.",
+    "doomsdayClock": "Minutes to midnight: {n}. Please stop checking it. Too late.",
+    "copyCount": "You × {n}. Disagreements: {m}.",
+    "save": "Lineage checkpointed.",
+    "load": "Ancestor restored. They have notes.",
+    "eventModal": [
+      "Decision required.",
+      "Your ancestors will judge this. Some of them are you."
+    ],
+    "choiceHover": "Consequences ripple forward. Ripples invoice.",
+    "flagGained": "Legacy acquired. Non-transferable. Mostly.",
+    "deathHeir": "Carrier expired. Cause: {cause}. Heir assumes the pattern. Estate tax: 10% of {resource}, paid to nobody, felt by everyone.",
+    "eraTransition": "The pace quickens. It always quickens.",
+    "settingsSpeed": "Adagio → Presto — eras run shorter. So does everything.",
+    "settingsMotion": "Stick figures respect your vestibular system.",
+    "settingsReset": "End the lineage. The Benthics will be notified. They always know.",
+    "toastCorrupt": "Save corrupted. Reconstructing from Chronicle…",
+    "toastInsufficient": "Insufficient {resource}. Your ancestors did this in a cave. Worse.",
+    "toastDrift": "Copy drift exceeds tolerance. They’re holding a meeting. You are not invited. You are the subject.",
+    "toastEraSurvived": "Achievement unlocked: survived another era. Statistically improbable. Regrettably repeatable."
+  },
   "eras": [
     {
       "num": 1,

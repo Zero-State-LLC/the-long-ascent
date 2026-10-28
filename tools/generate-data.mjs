@@ -348,9 +348,41 @@ const ENDING_SEEDS = {
 };
 
 mkdirSync(path.join(ROOT, 'src', 'data'), { recursive: true });
+// UI strings set (copy-deck §UI STRINGS SET) — verbatim, with {braces} substitution slots.
+const UI_STRINGS = {
+  title: 'ACCELERANDO: THE LONG ASCENT',
+  tagline: 'You are a lineage, not a person.',
+  buttons: ['New Lineage', 'Continue', 'Chronicle', 'Settings', 'Export Save', 'Import Code'],
+  tooltips: {
+    sustenance: 'Whatever this era eats. It changes flavors, never appetite.',
+    knowledge: 'Things that survive you, if filed well.',
+    population: 'Mouths now. Instances later. Complaints throughout.',
+    infrastructure: 'Arguments won against geography. Renew annually.',
+    legitimacy: 'The story others accept about why it\u2019s you.',
+    entropy: 'The only resource that always compounds. Checkmate available anytime.',
+  },
+  eraProgress: '{era} \u2014 {pct}% toward becoming someone else.',
+  doomsdayClock: 'Minutes to midnight: {n}. Please stop checking it. Too late.',
+  copyCount: 'You \u00d7 {n}. Disagreements: {m}.',
+  save: 'Lineage checkpointed.',
+  load: 'Ancestor restored. They have notes.',
+  eventModal: ['Decision required.', 'Your ancestors will judge this. Some of them are you.'],
+  choiceHover: 'Consequences ripple forward. Ripples invoice.',
+  flagGained: 'Legacy acquired. Non-transferable. Mostly.',
+  deathHeir: 'Carrier expired. Cause: {cause}. Heir assumes the pattern. Estate tax: 10% of {resource}, paid to nobody, felt by everyone.',
+  eraTransition: 'The pace quickens. It always quickens.',
+  settingsSpeed: 'Adagio \u2192 Presto \u2014 eras run shorter. So does everything.',
+  settingsMotion: 'Stick figures respect your vestibular system.',
+  settingsReset: 'End the lineage. The Benthics will be notified. They always know.',
+  toastCorrupt: 'Save corrupted. Reconstructing from Chronicle\u2026',
+  toastInsufficient: 'Insufficient {resource}. Your ancestors did this in a cave. Worse.',
+  toastDrift: 'Copy drift exceeds tolerance. They\u2019re holding a meeting. You are not invited. You are the subject.',
+  toastEraSurvived: 'Achievement unlocked: survived another era. Statistically improbable. Regrettably repeatable.',
+};
 writeFileSync(path.join(ROOT, 'src', 'data', 'eras.json'), JSON.stringify({
   gameTitle: 'THE LONG ASCENT',
   tagline: 'You are a lineage, not a person.',
+  uiStrings: UI_STRINGS,
   eras: eraOut,
   transitions: TRANSITIONS,
   lineageEvent: LINEAGE,
