@@ -1,0 +1,80 @@
+{
+  "version": "2.1",
+  "source": "SPEC.md §9.5 (Scribe deliverables): era goal names + descriptions (11), first-run primer copy, tooltip strings, choice-delta flavor lines.",
+  "era_goals": [
+    {
+      "era": 1,
+      "name": "Master Fire",
+      "description": "Keep a stolen flame alive long enough that warmth stops being a rumor and starts being a schedule."
+    },
+    {
+      "era": 2,
+      "name": "Break the Ground",
+      "description": "Bend a grass into a crop, store the surplus, and accept whatever hierarchy the full granary installs in exchange."
+    },
+    {
+      "era": 3,
+      "name": "Mint an Empire",
+      "description": "Turn value into stamped metal and roads into law, before overextension presents you the cancellation fee."
+    },
+    {
+      "era": 4,
+      "name": "Keep the Flame",
+      "description": "Copy what you know by candlelight through the bottleneck; forgetting is the era, transcription is the resistance."
+    },
+    {
+      "era": 5,
+      "name": "Set Type",
+      "description": "Buy the press and put ideas on paper fast enough that reformation, plague, and science all arrive on your shift."
+    },
+    {
+      "era": 6,
+      "name": "Electrify",
+      "description": "Convert coal into motion at scale and mind the smog, because this is where the pollution counter starts keeping score."
+    },
+    {
+      "era": 7,
+      "name": "Win the Century",
+      "description": "Run the lines, finance the wars, and make consumption the operating system before the market asks whether you're selling."
+    },
+    {
+      "era": 8,
+      "name": "Hold the Clock",
+      "description": "Split the atom and survive your own deterrent: keep minutes-to-midnight counting up instead of out."
+    },
+    {
+      "era": 9,
+      "name": "Scale the Curve",
+      "description": "Ride compute doubling on schedule, hire your first agent staff, and outlive the crash that deletes offices but spares protocols."
+    },
+    {
+      "era": 10,
+      "name": "Own the Feed",
+      "description": "Extract attention at twenty-four hours a day without letting the feed's corruption tax reprice everything else you own."
+    },
+    {
+      "era": 11,
+      "name": "Sign Yourself",
+      "description": "Upload, fork, and settle who owns your life when every heir is you — before the Benthics itemize the answer."
+    }
+  ],
+  "first_run_primer": [
+    "Resources tick every second. They have no nights off and no memory of your intentions.",
+    "Events need choices. There is no option called 'wait and see' — waiting is the option; someone else picks 'see'.",
+    "Fill the bar to advance the era. It advances regardless. The only question is what you'll be when it does."
+  ],
+  "tooltips": {
+    "sustenance": "Whatever this era counts as food: grain, coin, coal, compute. The appetite outlives every menu.",
+    "knowledge": "What you know, minus what got burned, forgotten, or left in a format nobody can open.",
+    "population": "The people carrying the lineage forward. Later, the copies. Complaints included at no extra charge.",
+    "infrastructure": "Roads, grids, servers — arguments won against entropy. Renew annually or lose the verdict.",
+    "legitimacy": "How much everyone else agrees it's you in charge. Cheaper than legions, harder to store.",
+    "entropy": "Pollution, risk, debt. Never goes down easily. At 100, the lineage ends."
+  },
+  "delta_flavor": {
+    "gain": "+{n} {res}. Somewhere an ancestor nods. They want something.",
+    "loss": "−{n} {res}. Paid now or later; later has worse rates.",
+    "badge": "Badge earned: {badge}. Permanent, non-negotiable, visible forever — like the choice that got it."
+  },
+  "era_progress_label_format": "ERA PROGRESS — {pct}% → next: {era}"
+}
