@@ -1,0 +1,10 @@
+{
+  "name": "accelerando-game",
+  "version": "0.1.0",
+  "description": "ACCELERANDO: THE LONG ASCENT — a stick-figure accelerationist RPG",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/"
+  }
+}
