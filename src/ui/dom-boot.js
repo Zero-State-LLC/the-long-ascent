@@ -3,9 +3,14 @@
 
 import { createGame, POOLS } from '../core/game.js';
 import { createRenderer } from '../render/renderer.js';
+import { SpriteAnimator, loadAssets, ERA_IDS, BADGE_NAMES } from '../render/SpriteAnimator.js';
+import { AnimScene } from '../render/AnimScene.js';
+import { ParallaxBg } from '../render/ParallaxBg.js';
+import { AudioManager } from '../render/AudioManager.js';
 
 const SAVE_KEY = 'long-ascent-save-v1';
 const SETTINGS_KEY = 'long-ascent-settings-v1';
+const BADGES_KEY = 'long-ascent-badges-v1';
 
 const $ = (sel) => document.querySelector(sel);
 const el = (tag, cls, text) => {
@@ -24,7 +29,92 @@ export function bootApp({ erasData, eventsData }) {
   let viewMode = 'game'; // game | chronicle | settings | ending
 
   const renderer = createRenderer($('#scene'));
-  applySettings();
+
+  // ------------------------------------------------------- v2 media (non-blocking)
+  // Sprite/audio layers load lazily after boot; every consumer degrades to v1 when
+  // an asset is missing, so the game is playable before (or without) any of this.
+  const audio = new AudioManager();
+  audio.attachGestureUnlock(typeof document !== 'undefined' ? document : null);
+  const sprites = new SpriteAnimator(null, { reducedMotion: settings.reduceMotion });
+  const parallax = new ParallaxBg({ reducedMotion: settings.reduceMotion });
+  applySettings(); // safe now: v2 instances exist
+  renderer.setSpriteAnimator(sprites);
+  renderer.setParallax(parallax);
+  let sceneAnim = null; // AnimScene for the open event card
+  const sheetCache = new Map(); // sprite url -> Promise<img|null>
+  const bgCache = new Map();    // `${eraId}` -> {far,near} promises
+
+  function loadImage(src) {
+    return new Promise((res) => {
+      if (typeof Image === 'undefined') return res(null);
+      const img = new Image();
+      img.onload = () => res(img);
+      img.onerror = () => res(null); // graceful: caller skips the layer
+      img.src = src;
+    });
+  }
+  function cachedSheet(url) {
+    if (!sheetCache.has(url)) sheetCache.set(url, loadImage(url));
+    return sheetCache.get(url);
+  }
+
+  // Kick off sprite + first-era strip loading without awaiting (never gates boot).
+  loadAssets({ loadImage }).then(({ costumes, badges }) => {
+    sprites.assets = { costumes, badges };
+    for (const b of loadBadges()) sprites.addBadge(b);
+  }).catch(() => { /* stay parametric */ });
+  loadEraStrips(game.state.era);
+
+  function loadEraStrips(eraNum) {
+    const eraId = ERA_IDS[eraNum - 1];
+    if (!eraId) return;
+    if (!bgCache.has(eraId)) {
+      bgCache.set(eraId, Promise.all([
+        cachedSheet(`assets/sprites/bg_${eraId}_far.png`),
+        cachedSheet(`assets/sprites/bg_${eraId}_near.png`),
+      ]));
+    }
+    bgCache.get(eraId).then(([far, near]) => renderer.setParallaxLayers(far, near));
+  }
+
+  function loadBadges() {
+    try {
+      const arr = JSON.parse(localStorage.getItem(BADGES_KEY) || '[]');
+      return Array.isArray(arr) ? arr.filter((b) => BADGE_NAMES.includes(b)) : [];
+    } catch { return []; }
+  }
+  function persistBadges() {
+    try { localStorage.setItem(BADGES_KEY, JSON.stringify(sprites.badges)); } catch { /* noop */ }
+  }
+  // Sync earned badges from game state (save codes carry them) and storage.
+  function syncBadges() {
+    const st = game.state;
+    if (!Array.isArray(st.badges)) st.badges = []; // pre-v2 deserialized saves
+    for (const b of [...st.badges]) if (sprites.addBadge(b)) persistBadges();
+    for (const b of loadBadges()) if (sprites.addBadge(b)) { if (!st.badges.includes(b)) st.badges.push(b); }
+  }
+  syncBadges();
+
+  // Era transitions: crossfade BGM + play the transition sting + swap strips.
+  renderer.onEraChange((num) => {
+    audio.play('era_transition');
+    audio.playBgm(ERA_IDS[num - 1] || 'title');
+    loadEraStrips(num);
+  });
+
+  // SFX hooks per SPEC §4.3: badge earned, carrier death (heir named), fork/drift in era 11+.
+  let prevCopies = game.state.copies;
+  let prevLineageDeaths = 0;
+  function sfxHooks() {
+    if (sprites.badges.length > (sfxHooks._badges || 0)) audio.play('upgrade');
+    sfxHooks._badges = sprites.badges.length;
+    const deaths = (game.state.chronicle || []).filter((c) => /^Died in era/.test(c.text || '')).length;
+    if (deaths > prevLineageDeaths) audio.play('lineage_death');
+    prevLineageDeaths = deaths;
+    if (game.state.copies > prevCopies) audio.play('fork');
+    else if (game.state.copies < prevCopies) audio.play('drift');
+    prevCopies = game.state.copies;
+  }
 
   // ------------------------------------------------------------------ toast
   function toast(msg) {
@@ -91,6 +181,17 @@ export function bootApp({ erasData, eventsData }) {
     const card = el('article', 'card' + (ev.kind === 'transition' ? ' card-transition' : ''));
     card.append(el('p', 'card-kicker', ev.kind === 'lineage' ? 'Lineage' : U.eventModal[0]));
     card.append(el('h2', 'card-title', ev.title || ''));
+    // v2: animated scene inset (320x180). Missing sheet -> canvas stays empty and
+    // CSS hides it; the card reads as pure v1 text.
+    let sceneCanvas = null;
+    if (ev.scene_id) {
+      sceneCanvas = document.createElement('canvas');
+      sceneCanvas.className = 'card-scene';
+      sceneCanvas.width = 320;
+      sceneCanvas.height = 180;
+      sceneCanvas.setAttribute('aria-hidden', 'true');
+      card.append(sceneCanvas);
+    }
     card.append(el('p', 'card-body', ev.body || ev.prompt || ''));
     if (ev.kind !== 'lineage') card.append(el('p', 'card-sub', U.eventModal[1]));
     const choices = el('div', 'choices');
@@ -101,11 +202,23 @@ export function bootApp({ erasData, eventsData }) {
       const hint = effectHint(c);
       if (hint) btn.append(el('span', 'choice-hint', hint));
       btn.title = U.choiceHover;
-      btn.addEventListener('click', () => onChoose(c.label));
+      btn.addEventListener('click', () => onChoose(c.label, sceneCanvas));
       choices.append(btn);
     }
     card.append(choices);
     wrap.append(card);
+
+    // Start (or restart) the scene loop for this event once its sheet resolves.
+    if (sceneAnim) { sceneAnim.stop(); sceneAnim = null; }
+    if (sceneCanvas && ev.scene_id) {
+      cachedSheet(`assets/sprites/scene_${ev.scene_id}.png`).then((img) => {
+        if (!img || !sceneCanvas.isConnected) return; // sheet missing or card replaced: stay static
+        const ctx = sceneCanvas.getContext('2d');
+        sceneCanvas.classList.add('card-scene-active');
+        sceneAnim = new AnimScene(ctx, img, 160, 180, 8, {});
+        sceneAnim.play(true);
+      });
+    }
   }
 
   function effectHint(c) {
@@ -119,19 +232,37 @@ export function bootApp({ erasData, eventsData }) {
     return parts.slice(0, 4).join(' · ');
   }
 
-  function onChoose(label) {
-    try {
-      game.choose(label);
-    } catch (err) {
-      toast(U.toastCorrupt);
-      return;
-    }
-    if (game.state.phase === 'ending') {
-      autosave();
-      showEnding();
+  function onChoose(label, sceneCanvas = null) {
+    audio.play('click_choice');
+    const advance = () => {
+      try {
+        game.choose(label);
+      } catch (err) {
+        toast(U.toastCorrupt);
+        return;
+      }
+      syncBadges();
+      sfxHooks();
+      const cur = game.state.chronicle.at(-1);
+      if (cur && /Benthics recorded this choice/.test(cur.text || '')) audio.play('benthic_ping');
+      if (sprites.badges.length && !game.state.badges.length) persistBadges();
+      if (game.state.phase === 'ending') {
+        autosave();
+        showEnding();
+      } else {
+        autosave();
+        renderAll();
+      }
+    };
+    // v2: play the outcome frames (one-shot) before advancing — capped so a slow
+    // or missing sheet can never gate gameplay.
+    if (sceneAnim && sceneCanvas && sceneCanvas.isConnected) {
+      let done = false;
+      const go = () => { if (!done) { done = true; advance(); } };
+      sceneAnim.playOnce(go);
+      setTimeout(go, 700);
     } else {
-      autosave();
-      renderAll();
+      advance();
     }
   }
 
@@ -139,6 +270,7 @@ export function bootApp({ erasData, eventsData }) {
   function showEnding() {
     viewMode = 'ending';
     const e = game.endingText();
+    if (game.state.ending) audio.play(`ending_${String(game.state.ending).replace(/^the_/, '')}`);
     const root = $('#ending-screen');
     root.hidden = false;
     root.replaceChildren();
@@ -192,7 +324,17 @@ export function bootApp({ erasData, eventsData }) {
     motion.addEventListener('change', () => { settings.reduceMotion = motion.checked; saveSettings(); applySettings(); });
     motionRow.control.append(motion);
 
-    root.append(speedRow.node, motionRow.node);
+    // v2: audio mute (persisted by AudioManager itself to localStorage)
+    const soundRow = settingRow('Sound', 'Music and effects. Silent until you click anywhere once.');
+    const sound = document.createElement('input');
+    sound.type = 'checkbox'; sound.checked = !audio.muted;
+    sound.addEventListener('change', () => {
+      if (sound.checked) { try { audio.init(); } catch { /* pre-gesture: preference still persists */ } audio.unmute(); }
+      else audio.mute();
+    });
+    soundRow.control.append(sound);
+
+    root.append(speedRow.node, motionRow.node, soundRow.node);
 
     const expBtn = el('button', 'btn', U.buttons[4]);
     expBtn.addEventListener('click', exportSave);
@@ -241,7 +383,10 @@ export function bootApp({ erasData, eventsData }) {
     try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch { /* noop */ }
   }
   function applySettings() {
-    renderer.setReducedMotion(settings.reduceMotion || matchMedia('(prefers-reduced-motion: reduce)').matches);
+    const rm = settings.reduceMotion || matchMedia('(prefers-reduced-motion: reduce)').matches;
+    renderer.setReducedMotion(rm);
+    if (typeof sprites !== 'undefined') sprites.setReducedMotion(rm);
+    if (typeof parallax !== 'undefined') parallax.setReducedMotion(rm);
     document.documentElement.dataset.speed = String(settings.speed || 2);
   }
   function exportSave() {
@@ -260,6 +405,7 @@ export function bootApp({ erasData, eventsData }) {
     game = createGame({ erasData, eventsData });
     viewMode = 'game';
     $('#ending-screen').hidden = true;
+    syncBadges(); // badges persist across lineages (SPEC §4.1)
     autosave();
     renderAll();
   }
@@ -288,11 +434,14 @@ export function bootApp({ erasData, eventsData }) {
   // ---------------------------------------------------------------- idle loop
   // The core advances progress/resources via tick(); pace follows the Speed setting.
   let acc = 0;
+  let prevEntropy = game.state.resources.entropy;
   setInterval(() => {
     if (viewMode !== 'game' || game.state.phase === 'ending') return;
     acc += Number(document.documentElement.dataset.speed || 2);
     while (acc >= 1) { acc -= 1; game.tick(); }
     if (game.state.phase === 'ending') { autosave(); showEnding(); return; }
+    if (game.state.resources.entropy > prevEntropy + 0.5) audio.play('entropy_tick');
+    prevEntropy = game.state.resources.entropy;
     renderHeader();
     renderResourceBar();
     if (!game.currentEvent()) renderEventCard();
@@ -308,10 +457,10 @@ export function bootApp({ erasData, eventsData }) {
     const btns = el('div', 'title-buttons');
     const hasSave = !!localStorage.getItem(SAVE_KEY);
     const neu = el('button', 'btn btn-primary', U.buttons[0]);
-    neu.addEventListener('click', () => { newLineage(); splash.hidden = true; });
+    neu.addEventListener('click', () => { newLineage(); splash.hidden = true; audio.playBgm(ERA_IDS[game.state.era - 1] || 'title'); });
     const cont = el('button', 'btn', U.buttons[1]);
     cont.disabled = !hasSave;
-    cont.addEventListener('click', () => { splash.hidden = true; renderAll(); });
+    cont.addEventListener('click', () => { splash.hidden = true; renderAll(); audio.playBgm(ERA_IDS[game.state.era - 1] || 'title'); });
     btns.append(neu, cont);
     splash.append(btns);
   }
@@ -323,5 +472,5 @@ export function bootApp({ erasData, eventsData }) {
 
   showTitle();
   renderAll();
-  return { get game() { return game; }, renderer, toast };
+  return { get game() { return game; }, renderer, toast, audio, sprites, parallax };
 }

@@ -29,6 +29,7 @@ export function createGame({ erasData, eventsData, rng = Math.random }) {
     carrier: 1,
     heirPending: null,
     flags: [],
+    badges: [], // earned milestone badge names (SPEC §4.1); Object.assign keeps old saves compatible via default here
     chronicle: [],
     seenEvents: [],
     pendingEventId: null,
@@ -113,6 +114,12 @@ export function createGame({ erasData, eventsData, rng = Math.random }) {
 
     applyEffects(choice.effects, ev.id);
     for (const f of choice.flags) addFlag(f);
+    // Milestone badges (SPEC §4.1): flags that name an upgrade badge light it up.
+    const BADGE_FLAG_RE = /^(got_badge|milestone)_([a-z]+)$/;
+    for (const f of choice.flags || []) {
+      const m = BADGE_FLAG_RE.exec(f);
+      if (m && !state.badges.includes(m[2])) state.badges.push(m[2]);
+    }
     if (ev.id === 'E11-12') state.lastFinaleFlags = [...choice.flags];
 
     if (ev.kind === 'transition') {
@@ -326,6 +333,7 @@ export function createGame({ erasData, eventsData, rng = Math.random }) {
     const s = JSON.parse(json);
     if (s.version !== SAVE_VERSION) throw new Error(`save version mismatch: ${s.version}`);
     Object.assign(state, s);
+    if (!Array.isArray(state.badges)) state.badges = []; // pre-v2 saves have no badges
     return state;
   }
   // Export code: base64url(JSON), offline-safe.
