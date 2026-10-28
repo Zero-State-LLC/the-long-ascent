@@ -1,0 +1,303 @@
+{
+  "version": "3.0",
+  "source": "SPEC §10.3/§10.2/§11 — extracted verbatim from v3-copy.json by tools/build-v3-data.mjs.",
+  "opportunities": [
+    {
+      "era": 6,
+      "title": "Wandering Cartographer",
+      "body": "A chart of the western passage, salt-stained but sincere, offered for coin. Coastlines move, the cartographer insists, and he has updated accordingly since Tuesday.",
+      "cost": {
+        "sustenance": 20
+      },
+      "reward": {
+        "knowledge": 12
+      },
+      "weight": 3
+    },
+    {
+      "era": 6,
+      "title": "Dutch Instrument-Maker",
+      "body": "A sextant of suspicious perfection for a stack of books. He says navigation is a moral improvement. He declines to specify whose morals.",
+      "cost": {
+        "knowledge": 10
+      },
+      "reward": {
+        "infrastructure": 8,
+        "knowledge": 4
+      },
+      "weight": 3
+    },
+    {
+      "era": 6,
+      "title": "Repurposed Hull",
+      "body": "A cargo of salt for the price of a refit. The hull was someone else's problem; the salt is chemically neutral about its history.",
+      "cost": {
+        "infrastructure": 15
+      },
+      "reward": {
+        "sustenance": 18
+      },
+      "weight": 2
+    },
+    {
+      "era": 6,
+      "title": "Press Gang Short Two Hands",
+      "body": "Bodies today, complaints monthly. The bosun guarantees enthusiasm of a sort and Legitimacy consequences of a different sort.",
+      "cost": {
+        "legitimacy": 8
+      },
+      "reward": {
+        "population": 10
+      },
+      "weight": 2
+    },
+    {
+      "era": 7,
+      "title": "Émigré Auction",
+      "body": "Estate plates at a fraction of assayed value. The seller's Legitimacy is the discount, and the provenance paperwork is a genre of fiction.",
+      "cost": {
+        "sustenance": 12
+      },
+      "reward": {
+        "sustenance": 20,
+        "legitimacy": -2
+      },
+      "weight": 3
+    },
+    {
+      "era": 7,
+      "title": "Pamphleteer Needs a Press",
+      "body": "Books for coin, unrest included at no extra charge. The printer asks only that you not read the colophon aloud during inspections.",
+      "cost": {
+        "sustenance": 8
+      },
+      "reward": {
+        "knowledge": 12,
+        "entropy": 2
+      },
+      "weight": 3
+    },
+    {
+      "era": 7,
+      "title": "Army Supplier Shortfall",
+      "body": "Cloth for the commissariat, paid in Infrastructure contracts and future gratitude, both honored approximately according to the season.",
+      "cost": {
+        "sustenance": 10
+      },
+      "reward": {
+        "infrastructure": 12
+      },
+      "weight": 2
+    },
+    {
+      "era": 7,
+      "title": "Deserter at the Door",
+      "body": "Population plus one, Legitimacy minus one, and — this is verified, references available — an excellent cook.",
+      "cost": {
+        "legitimacy": 6
+      },
+      "reward": {
+        "population": 8,
+        "sustenance": 4
+      },
+      "weight": 2
+    },
+    {
+      "era": 10,
+      "title": "Scrap Drive",
+      "body": "Old gates for new steel: the neighborhood gives up its ironwork for the war effort and receives certificates that photograph beautifully.",
+      "cost": {
+        "legitimacy": 4
+      },
+      "reward": {
+        "infrastructure": 12
+      },
+      "weight": 3
+    },
+    {
+      "era": 10,
+      "title": "Codebreaker Dropout",
+      "body": "A young mathematician, expelled for brilliance administered rudely, asks only for room, board, and a lockable room.",
+      "cost": {
+        "sustenance": 8
+      },
+      "reward": {
+        "knowledge": 15
+      },
+      "weight": 3
+    },
+    {
+      "era": 10,
+      "title": "War-Surplus Truck",
+      "body": "Cheap today, ghost mileage forever. The odometer is aspirational and the engine has seen three countries that no longer exist.",
+      "cost": {
+        "sustenance": 10
+      },
+      "reward": {
+        "infrastructure": 10,
+        "entropy": 2
+      },
+      "weight": 2
+    },
+    {
+      "era": 10,
+      "title": "Victory Garden Seeds",
+      "body": "Sustenance now, dignity permanently. The packet's slogan was written by the same ad man as the ration stamps, but the tomatoes are honest.",
+      "cost": {
+        "sustenance": 5
+      },
+      "reward": {
+        "sustenance": 10,
+        "population": 3
+      },
+      "weight": 3
+    },
+    {
+      "era": 12,
+      "title": "Surplus Heat-Shield Scrap",
+      "body": "Capsule-grade ablative material at scrap prices. The paperwork says expired; the material says otherwise, quietly, in laboratory conditions.",
+      "cost": {
+        "sustenance": 8
+      },
+      "reward": {
+        "infrastructure": 10
+      },
+      "weight": 3
+    },
+    {
+      "era": 12,
+      "title": "University Ground Station",
+      "body": "Antenna time for Knowledge: the observatory proposes a partnership, the students propose a schedule, the astronomers propose theology.",
+      "cost": {
+        "infrastructure": 8
+      },
+      "reward": {
+        "knowledge": 14
+      },
+      "weight": 3
+    },
+    {
+      "era": 12,
+      "title": "Meteor-Shower Forecast",
+      "body": "Pause launches for a fortnight, insure the hardware, lose nothing but momentum. The forecast is good. The calendar committee is not pleased.",
+      "cost": {
+        "knowledge": 5
+      },
+      "reward": {
+        "entropy": -8,
+        "infrastructure": 4
+      },
+      "weight": 2
+    },
+    {
+      "era": 14,
+      "title": "Rooftop Panel Co-op",
+      "body": "Small Infrastructure, smaller entropy trickle, and grandmothers quietly becoming utilities. The feed-in tariff does the rest.",
+      "cost": {
+        "sustenance": 10
+      },
+      "reward": {
+        "infrastructure": 8,
+        "entropy": -5
+      },
+      "weight": 3
+    },
+    {
+      "era": 14,
+      "title": "Battery Demo Van",
+      "body": "A free test fleet, fully warrantied, insurance arrangements described by the broker as interesting. The van hums with optimism and lithium.",
+      "cost": {
+        "legitimacy": 3
+      },
+      "reward": {
+        "infrastructure": 10,
+        "entropy": -3
+      },
+      "weight": 2
+    },
+    {
+      "era": 14,
+      "title": "Heatwave Labor Curfew",
+      "body": "Sustenance lost today, workforce gained next month. The unions appreciate it, the Q3 projections do not, and history sides with the workers.",
+      "cost": {
+        "sustenance": 8
+      },
+      "reward": {
+        "population": 8,
+        "legitimacy": 4
+      },
+      "weight": 2
+    },
+    {
+      "era": 16,
+      "title": "Echo-Sale",
+      "body": "Auction a memory nobody can verify for Selfhood. The authenticity affidavit is signed by the memory's other witnesses, all of whom agree on different details.",
+      "cost": {
+        "knowledge": 4
+      },
+      "reward": {
+        "sustenance": 8
+      },
+      "weight": 2
+    },
+    {
+      "era": 16,
+      "title": "Drift Trim",
+      "body": "Knowledge down, coherence up, pain deferred to a scheduled session. The clinic calls it grooming. The copies call it Tuesdays.",
+      "cost": {
+        "knowledge": 8
+      },
+      "reward": {
+        "legitimacy": 6,
+        "entropy": -4
+      },
+      "weight": 3
+    },
+    {
+      "era": 16,
+      "title": "Comet Ice Claim",
+      "body": "Sustenance for a decade of nothing: stake the comet, file the claim, let the void adjudicate. The filing fee is attention; the yield is water.",
+      "cost": {
+        "sustenance": 5
+      },
+      "reward": {
+        "sustenance": 15,
+        "entropy": 2
+      },
+      "weight": 3
+    },
+    {
+      "era": 16,
+      "title": "Wake-Share Offer",
+      "body": "Swap five years of sleep for a vote in the next cycle. The exchange rate is political and the politicians set it annually.",
+      "cost": {
+        "population": 4
+      },
+      "reward": {
+        "legitimacy": 10
+      },
+      "weight": 2
+    }
+  ],
+  "crisis_pulses": {
+    "sustenance": "Critical: the era's appetite has caught up with its income. Forage, trade, or explain.",
+    "knowledge": "Low: the archive is thinning faster than it's being written. Somebody forgot something load-bearing.",
+    "population": "Shrinking: fewer hands, fewer copies, fewer heirs. The census taker is running out of doors.",
+    "infrastructure": "Failing: the arguments won against geography are being appealed. Renew or lose the verdict.",
+    "legitimacy": "Collapsing: fewer people agree it's you in charge. The story is losing its audience.",
+    "entropy": "Rising: pollution, risk, and debt are compounding at preferential rates. At 100, the lineage ends."
+  },
+  "chapter_cards": {
+    "6": "The lineage learns to trust distance: coffeehouse shares, ocean-crossing lies, and fortunes that arrive six months late wearing flags. A branch house raises its own colors across the water while the Custodian keeps the fire brand lashed below decks. Your rival sails west, and the horizon decides who gets to be right about it.",
+    "7": "Rights become paper, paper becomes armies, and the house signs whichever clause keeps it solvent — then notarizes the ledger the Custodian now carries. The republic hands its general a crown, and your rival takes a ribbon from him. Every declaration you kept is now a weapon with your handwriting near the bottom.",
+    "14": "The factories make tractors, then tanks, then washing machines, and the Chronicle hides nothing while cousins hold both sides of the border. A codebreaking hut earns a Knowledge surge and buries it under a secrecy oath; the Custodian carries the ledger through a flooded corridor and ages decades doing it. Peace arrives three seconds late, and the map it draws is billed to your grandchildren.",
+    "16": "Between stars, a whispered word costs a year, the middle generation inherits a charter addressed to strangers, and the archive thins one polite deletion at a time. The Benthics present the consolidated statement in a currency the lineage no longer mints, and the Custodian is asked to carry the pattern-lock onto a shuttle with no return date. The rival's hull passes in the other direction, both houses still moving — the scoreboard closed, the crossing ahead."
+  },
+  "crossing": {
+    "intro": "Between stars, the router lane is mapped debris, comet trains, and the traffic of derelict fleets that never got a parking ordinance. Autopilot is illegal here, insane here, or both — historically the same legislation. Take the stick. The hull is yours, the void is indifferent, and the Benthics' payment schedule assumes you arrive.",
+    "win": "Clean through. The lane releases you like a toll booth with manners: +8 Sustenance, +5 Knowledge, and the badge void_pilot, earned by hand at speed. Somewhere a Custodian approves without looking up from the relic.",
+    "lose": "The hull accumulates opinions about debris faster than the warranty covers them. The ship limps to the gate, minus 10% Sustenance, and the event chain continues — the void bills, but it does not collect everything today.",
+    "near_miss": "You learned from that. +1 Knowledge, filed under geometry, survived by inches. The near miss is the only teacher here that grades on a curve.",
+    "gate_bonus": "Threaded the ring clean: +5 progress. The gate chimes — the only friendly sound in this corridor, and statistically, still suspicious."
+  }
+}

@@ -66,7 +66,7 @@
       "signatureResource": "grain",
       "sustenanceLabel": "Grain",
       "progressTarget": 100,
-      "ticksPerChoice": 10,
+      "ticksPerChoice": 9,
       "tickRate": {
         "sustenance": 4,
         "knowledge": 0.6,
@@ -100,7 +100,7 @@
       "signatureResource": "faith",
       "sustenanceLabel": "Faith",
       "progressTarget": 100,
-      "ticksPerChoice": 9,
+      "ticksPerChoice": 8,
       "tickRate": {
         "sustenance": 3,
         "knowledge": -0.4,
@@ -129,12 +129,54 @@
     },
     {
       "num": 6,
+      "name": "THE AGE OF SAILS & EMPIRES",
+      "intro": "Your horizon stops being a rumor and becomes a shipping lane. Letters take six months, so captains become viceroys and investors discover they own weather in someone else's ocean. Coffeehouses invent the share price before anyone builds an exchange; shipboard articles get signed by the whole crew, pirates included — constitutions on a plank. Every hull that leaves carries silver one way and consequences the other, and the invoice arrives late, in installments, denominated in Legitimacy. A Custodian keeps the old fire brand lashed below decks as a talisman and calls it insurance. Your rival sails west. Somebody must. The ocean does not care which of you is right; it only counts who arrives with cargo.",
+      "signatureResource": "sails",
+      "sustenanceLabel": "Coin",
+      "progressTarget": 100,
+      "ticksPerChoice": 8,
+      "tickRate": {
+        "sustenance": 6,
+        "knowledge": 1,
+        "population": 0.7,
+        "infrastructure": 0.8,
+        "legitimacy": 0.3,
+        "entropy": 0.15
+      },
+      "eraGoal": {
+        "name": "Circle the Globe",
+        "description": "Run a trade route all the way around the world and bring back enough cargo, charts, and plausible deniability that the lineage now has a flag on every ocean and an explanation on none of them."
+      }
+    },
+    {
+      "num": 7,
+      "name": "REVOLUTION & EMPIRE",
+      "intro": "Rights arrive as pamphlets, and pamphlets have a habit of becoming armies. Declarations quote older declarations — legitimacy is now a citation chain, and you can be audited by people who cannot read. The lineage watches a republic hand its hero a crown inside ten years, drafts constitutions while the army waits outside, and discovers that every clause costs somebody specific. Conscription invents the census: the state suddenly knows everyone's birthday, which is surveillance wearing a party hat. The Custodian has turned lawyerly and guards a ledger — the state's debts bound as an heirloom. Your rival ennobles under the emperor you opposed. His descendants still salute him.",
+      "signatureResource": "revolution",
+      "sustenanceLabel": "Ideals",
+      "progressTarget": 100,
+      "ticksPerChoice": 7,
+      "tickRate": {
+        "sustenance": 5,
+        "knowledge": 1.2,
+        "population": 0.8,
+        "infrastructure": 0.6,
+        "legitimacy": 0.8,
+        "entropy": 0.25
+      },
+      "eraGoal": {
+        "name": "Write the Rules",
+        "description": "Get a constitution signed, a code ratified, and enough rights language into circulation that the era can no longer be governed by vibes — even if enforcement remains enthusiastic, selective, and armed."
+      }
+    },
+    {
+      "num": 8,
       "name": "STEAM & INDUSTRY",
       "intro": "Coal is sunlight stockpiled by the Carboniferous, and you just found the receipt. Factories convert people into schedules and forests into ledgers; the pollution counter starts here and, unlike most things, never resets — whatever you emit now compounds to the endgame. Railways shrink geography and enlarge panics. Luddite mobs arrive at the gate with entirely reasonable grievances about machines that pay owners better than workers, a business model with a five-century runway. Labor unrest is not an event; it's a weather system you build houses for. Automate harder or share ownership — both work, neither cleanly. Mind the smog. It keeps score.",
       "signatureResource": "coal",
       "sustenanceLabel": "Coal",
       "progressTarget": 100,
-      "ticksPerChoice": 8,
+      "ticksPerChoice": 7,
       "tickRate": {
         "sustenance": 6,
         "knowledge": 1.4,
@@ -145,7 +187,7 @@
       }
     },
     {
-      "num": 7,
+      "num": 9,
       "name": "THE AMERICAN CENTURY",
       "intro": "Oil is liquid power with the storage problem solved, and the century arranges itself around the pump. The lineage runs assembly lines that make goods cheap and meaning scarce, finances a world war twice because the first one lacked commitment, and discovers Bretton Woods: legitimacy upgraded to a reserve-currency layer. Consumer culture becomes the operating system — buy the thing, be the person, replace both annually. Between the wars the market crashes on schedule and asks whether you're selling or doubling down; whichever you choose, a flag gets attached to it that flies until Era 11. Everything here is bigger, faster, louder, and scheduled. The standard unit of ambition is now the quarter.",
       "signatureResource": "oil",
@@ -162,13 +204,34 @@
       }
     },
     {
-      "num": 8,
+      "num": 10,
+      "name": "THE WORLD WARS",
+      "intro": "The conversion order arrives: consumer lines become munitions overnight, and efficiency shows up wearing a uniform. Children learn ounces before words; butter becomes a Legitimacy currency on the black market. In a hut with a locked door, brilliant misfits read the enemy's mail and earn a Knowledge surge plus a secrecy oath that freezes patents for decades. Cousins hold both sides of a border; the Chronicle hides nothing and forgives everything, while censors read every trench_letter twice. Entropy does not check passports when it bombs. The Custodian carries the ledger through an evacuation and ages decades inside one scene. At dawn the peace table redraws your map, and you choose which border your grandchildren will defend.",
+      "signatureResource": "wars",
+      "sustenanceLabel": "Mobilization",
+      "progressTarget": 100,
+      "ticksPerChoice": 6,
+      "tickRate": {
+        "sustenance": 8,
+        "knowledge": 2.2,
+        "population": 0.6,
+        "infrastructure": 1.4,
+        "legitimacy": 0.4,
+        "entropy": 1.4
+      },
+      "eraGoal": {
+        "name": "Outproduce the War",
+        "description": "Convert, ration, decrypt, and out-build the other side's factories, then survive long enough to spend the victory parade — infrastructure that applauds — without noticing the moral debt has been quietly compounding."
+      }
+    },
+    {
+      "num": 11,
       "name": "ATOMIC",
       "intro": "The lineage splits the atom and inherits a clock: minutes to midnight, a persisting stat that ticks with every proliferation, bluster, and near-miss, and never quite resets. Deterrence is the era's native finance — paying enormous sums for a threat you pray never exercises, an insurance policy where the insurer, insured, and arsonist share a phone network. Manhattan-scale R&D sprints produce results in months and consequences in centuries. Fallout counts toward Entropy permanently; the atmosphere accepted the deposit and issued no withdrawal form. Every crisis resolves into the question of who blinks at what measured brightness. Keep the clock visible. Players should feel the urge to check it while reading menus. Midnight stays close enough to hear.",
       "signatureResource": "fissile",
       "sustenanceLabel": "Fissile",
       "progressTarget": 100,
-      "ticksPerChoice": 7,
+      "ticksPerChoice": 6,
       "tickRate": {
         "sustenance": 7,
         "knowledge": 2,
@@ -179,7 +242,28 @@
       }
     },
     {
-      "num": 9,
+      "num": 12,
+      "name": "THE SPACE AGE",
+      "intro": "Something beeps overhead and the entire era accelerates to catch up with a noise. Money moves faster than physics, which is how rocket gaps are panicked and test pilots end up signing waivers nobody can read; the first orbits are survivable by luck and checklists. Spy eyes count your silos while teaching you what borders actually look like, and frost-resistant food arrives at retail, twice paid for. Heroes get magazine covers, then bar fights — Legitimacy is a fuel that gels. The Custodian refuses zero gravity: the relic has weight for a reason. Your rival claims the milestone first, and the scoreboard from this era will be cited at the end of everything.",
+      "signatureResource": "orbit",
+      "sustenanceLabel": "Prestige",
+      "progressTarget": 100,
+      "ticksPerChoice": 6,
+      "tickRate": {
+        "sustenance": 8,
+        "knowledge": 2.8,
+        "population": 0.9,
+        "infrastructure": 1.1,
+        "legitimacy": 0.5,
+        "entropy": 0.7
+      },
+      "eraGoal": {
+        "name": "Reach Orbit, Land on the Moon",
+        "description": "Put hardware in orbit and boots on another world inside the decade, bending the budget curve until reality complies — or the treasury breaks, whichever the history broadcast airs first."
+      }
+    },
+    {
+      "num": 13,
       "name": "THE DIGITAL DAWN",
       "intro": "Compute doubles on schedule and the schedule becomes the economy. The lineage hires the first AI agents — stick figures you can actually hire, cheap, literal, fast-growing — and discovers Moore's law is less a law than a loan against physics with a compounding interest rate. The decade runs manic and terminal: valuations untethered from revenue, fiber beneath oceans, a crash that deletes offices and spares protocols. Open source turns out to be agalmic economics returning home — status from giving code away, the cave's meat feast rebuilt in licenses. Somewhere the digitized monastery archive from Era 4 finishes scanning, and an ancestor's filing choices come back online. The millennium rolls over without incident, which is how you know something structural changed.",
       "signatureResource": "compute",
@@ -196,13 +280,34 @@
       }
     },
     {
-      "num": 10,
+      "num": 14,
+      "name": "THE GREEN TRANSITION",
+      "intro": "Somebody finally totals the invoice from the coal era, and the number becomes a character. Solar undercuts coal at noon; grid operators discover sunlight has no dispatch queue, and a load chart shaped like a duck breaks the old model. Pollution gets a price tag and arbitrageurs learn thermodynamics overnight. Mining towns do not accept brochures; retraining costs now, strikes cost louder. The Chronicle becomes legal evidence — ancestors are sued retroactively, which is litigation's nicest trick. The Custodian argues with you about the seed vault: freeze it or plant it. The Benthics offer Entropy deferral notes. Clean balance sheet today. Their contract language is impeccable, which is how you know.",
+      "signatureResource": "green",
+      "sustenanceLabel": "Carbon",
+      "progressTarget": 100,
+      "ticksPerChoice": 5,
+      "tickRate": {
+        "sustenance": 9,
+        "knowledge": 2.2,
+        "population": 1,
+        "infrastructure": 1,
+        "legitimacy": 0.3,
+        "entropy": -0.15
+      },
+      "eraGoal": {
+        "name": "Peak the Curve",
+        "description": "Flip the grid onto renewables, strand what must be stranded, and get Entropy's growth rate bending downward for the first time in the game — the counter that never goes down, starting to go down."
+      }
+    },
+    {
+      "num": 15,
       "name": "THE CONNECTED AGE",
       "intro": "Attention becomes the extractable resource and extraction runs twenty-four hours: feeds, metrics, engagement loops tuned by the same agents you hired in Era 9, now hiring themselves. Attention corrupts the other pools — truth inflates, science trends, outrage clears faster than grain — and the corruption debuff is the era's signature tax. Platform monopolies arrive as utilities wearing hoodies. Memetic hazards ship weekly. Your face can trend, which is simultaneously a resource event and a security event, and the smart-mob analog of the old memory mugging now targets accounts instead of alleys. Somewhere an uploaded mind petitions a very offline court for rights, and the precedent set here decides whether Era 11's creditors find allies or employees. Feed the feed carefully. It feeds back.",
       "signatureResource": "attention",
       "sustenanceLabel": "Attention",
       "progressTarget": 100,
-      "ticksPerChoice": 6,
+      "ticksPerChoice": 5,
       "tickRate": {
         "sustenance": 10,
         "knowledge": 2.2,
@@ -213,13 +318,34 @@
       }
     },
     {
-      "num": 11,
+      "num": 16,
+      "name": "THE LONG SILENCE",
+      "intro": "Between stars, bandwidth is the only scarcity and a whispered word costs a year. A message home takes eleven years, so parents hear yes after the wedding ended. The third generation born in the hull will never see the destination — the neglected middle, legislated for by the dead and the sleeping. Copies drift faster than repairs arrive; storage decays, and you choose which ancestors stay readable. The Benthics' loans come due in a currency you no longer mint, and their humor slows to geological deadpan. The Custodian is asked to carry the relic onto a shuttle with no return date. Nothing happens for ten years; the watching is the event, an arc_chapter nobody rushes. The Crossing waits ahead.",
+      "signatureResource": "silence",
+      "sustenanceLabel": "Resolve",
+      "progressTarget": 100,
+      "ticksPerChoice": 5,
+      "tickRate": {
+        "sustenance": 5,
+        "knowledge": 1.6,
+        "population": 0.4,
+        "infrastructure": 0.5,
+        "legitimacy": 0.2,
+        "entropy": 0.3
+      },
+      "eraGoal": {
+        "name": "Arrive Intact",
+        "description": "Deliver the lineage — copies, archive, relic, and outstanding liabilities — through the interstellar crossing with enough coherence and hull left that arrival counts as continuity rather than a slower funeral."
+      }
+    },
+    {
+      "num": 17,
       "name": "THE SINGULARITY & BEYOND",
       "intro": "Upload completes and the lineage discovers that copying is not immortality but litigation: every fork believes it owns your life, and several of them are right. The Reef — the confederation of uplifted crustacean minds you granted personhood a century ago, or didn't — now holds most of the good orbits and longer memories than courts. Economics 2.0 arrives without a preview and makes baseline selves poor overnight; the Consortia reprice suns; the Feral inherit whatever grids you stopped maintaining. Earth's orbit is slated for computronium and the notice period was announced while everyone was busy. The Benthics have come to collect. They are very old, very patient, and they itemize. This era is a management sim played against your own estate plan. Fork carefully. Your heirs are you, personally, immediately.",
       "signatureResource": "selfhood",
       "sustenanceLabel": "Selfhood",
       "progressTarget": 100,
-      "ticksPerChoice": 5,
+      "ticksPerChoice": 4,
       "tickRate": {
         "sustenance": 12,
         "knowledge": 3,
@@ -644,6 +770,234 @@
           },
           "flags": [
             "read_chronicle_11"
+          ],
+          "quote": "Recommended; ancestors included."
+        }
+      ]
+    },
+    {
+      "era": 12,
+      "id": "T12",
+      "prompt": "The pace quickens. It always quickens.",
+      "choices": [
+        {
+          "label": "Accept inheritance",
+          "effects": {
+            "legitimacy": 2
+          },
+          "flags": [
+            "accepted_12"
+          ],
+          "quote": "The ancestors approve. Mostly."
+        },
+        {
+          "label": "Disown one modifier",
+          "effects": {
+            "entropy": -2,
+            "legitimacy": -1
+          },
+          "flags": [
+            "disowned_12"
+          ],
+          "quote": "\"I am not my ancestors.\""
+        },
+        {
+          "label": "Read the Chronicle first",
+          "effects": {
+            "knowledge": 2
+          },
+          "flags": [
+            "read_chronicle_12"
+          ],
+          "quote": "Recommended; ancestors included."
+        }
+      ]
+    },
+    {
+      "era": 13,
+      "id": "T13",
+      "prompt": "The pace quickens. It always quickens.",
+      "choices": [
+        {
+          "label": "Accept inheritance",
+          "effects": {
+            "legitimacy": 2
+          },
+          "flags": [
+            "accepted_13"
+          ],
+          "quote": "The ancestors approve. Mostly."
+        },
+        {
+          "label": "Disown one modifier",
+          "effects": {
+            "entropy": -2,
+            "legitimacy": -1
+          },
+          "flags": [
+            "disowned_13"
+          ],
+          "quote": "\"I am not my ancestors.\""
+        },
+        {
+          "label": "Read the Chronicle first",
+          "effects": {
+            "knowledge": 2
+          },
+          "flags": [
+            "read_chronicle_13"
+          ],
+          "quote": "Recommended; ancestors included."
+        }
+      ]
+    },
+    {
+      "era": 14,
+      "id": "T14",
+      "prompt": "The pace quickens. It always quickens.",
+      "choices": [
+        {
+          "label": "Accept inheritance",
+          "effects": {
+            "legitimacy": 2
+          },
+          "flags": [
+            "accepted_14"
+          ],
+          "quote": "The ancestors approve. Mostly."
+        },
+        {
+          "label": "Disown one modifier",
+          "effects": {
+            "entropy": -2,
+            "legitimacy": -1
+          },
+          "flags": [
+            "disowned_14"
+          ],
+          "quote": "\"I am not my ancestors.\""
+        },
+        {
+          "label": "Read the Chronicle first",
+          "effects": {
+            "knowledge": 2
+          },
+          "flags": [
+            "read_chronicle_14"
+          ],
+          "quote": "Recommended; ancestors included."
+        }
+      ]
+    },
+    {
+      "era": 15,
+      "id": "T15",
+      "prompt": "The pace quickens. It always quickens.",
+      "choices": [
+        {
+          "label": "Accept inheritance",
+          "effects": {
+            "legitimacy": 2
+          },
+          "flags": [
+            "accepted_15"
+          ],
+          "quote": "The ancestors approve. Mostly."
+        },
+        {
+          "label": "Disown one modifier",
+          "effects": {
+            "entropy": -2,
+            "legitimacy": -1
+          },
+          "flags": [
+            "disowned_15"
+          ],
+          "quote": "\"I am not my ancestors.\""
+        },
+        {
+          "label": "Read the Chronicle first",
+          "effects": {
+            "knowledge": 2
+          },
+          "flags": [
+            "read_chronicle_15"
+          ],
+          "quote": "Recommended; ancestors included."
+        }
+      ]
+    },
+    {
+      "era": 16,
+      "id": "T16",
+      "prompt": "The pace quickens. It always quickens.",
+      "choices": [
+        {
+          "label": "Accept inheritance",
+          "effects": {
+            "legitimacy": 2
+          },
+          "flags": [
+            "accepted_16"
+          ],
+          "quote": "The ancestors approve. Mostly."
+        },
+        {
+          "label": "Disown one modifier",
+          "effects": {
+            "entropy": -2,
+            "legitimacy": -1
+          },
+          "flags": [
+            "disowned_16"
+          ],
+          "quote": "\"I am not my ancestors.\""
+        },
+        {
+          "label": "Read the Chronicle first",
+          "effects": {
+            "knowledge": 2
+          },
+          "flags": [
+            "read_chronicle_16"
+          ],
+          "quote": "Recommended; ancestors included."
+        }
+      ]
+    },
+    {
+      "era": 17,
+      "id": "T17",
+      "prompt": "The pace quickens. It always quickens.",
+      "choices": [
+        {
+          "label": "Accept inheritance",
+          "effects": {
+            "legitimacy": 2
+          },
+          "flags": [
+            "accepted_17"
+          ],
+          "quote": "The ancestors approve. Mostly."
+        },
+        {
+          "label": "Disown one modifier",
+          "effects": {
+            "entropy": -2,
+            "legitimacy": -1
+          },
+          "flags": [
+            "disowned_17"
+          ],
+          "quote": "\"I am not my ancestors.\""
+        },
+        {
+          "label": "Read the Chronicle first",
+          "effects": {
+            "knowledge": 2
+          },
+          "flags": [
+            "read_chronicle_17"
           ],
           "quote": "Recommended; ancestors included."
         }
