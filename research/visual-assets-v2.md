@@ -43,3 +43,30 @@ Generated asset package for the §4 visual contract. Sheet coordinates are row-m
 - SFX: `click_choice.ogg`, `era_transition.ogg`, `lineage_death.ogg`, `fork.ogg`, `drift.ogg`, `entropy_tick.ogg`, `ending_diaspora.ogg`, `ending_cathedral.ogg`, `ending_stutter.ogg`, `ending_ghosts.ogg`, `ending_ascension.ogg`, `benthic_ping.ogg`, `upgrade.ogg` (13 files). `benthic_ping.ogg` is a distinctive high double claw-click.
 
 Total deliverables: 11 carrier sheets + 1 Benthic NPC sheet + 31 scene sheets + 22 background strips + 12 badges + 37 audio files + this manifest = 115 files. Audio is synthesized, original, and royalty-free; the BGM files are compact proof-of-style loops. Forge should use graceful fallback when any optional file is unavailable.
+
+## v2.1 additions
+
+### Visual spec updates (§9.3)
+
+- **Scene canvas prominence:** render the scene at 480×270 above the event title; add a subtle vignette and drop shadow. Card order is scene → title → body → choices. Forge implements the canvas sizing, placement, and card layout; Studio has delivered no new scene assets for this change.
+- **Far-layer bob:** add a slow 2–3 px vertical drift to each era's existing far background strip. **Forge-side effect; no new asset.**
+- **Near-layer blur:** apply a slight 1 px blur to each existing near background layer for depth of field. **Forge-side effect; no new asset.**
+- **Carrier state-driven animation:** producing uses the action-A loop, an open event uses idle, and entropy above 60 occasionally flashes the reaction frame. Forge maps existing costume frames to game state; **no new asset.**
+- **Choice hover delta chips:** hovering a choice dims the scene and displays its §9.2 delta forecast as small floating chips. This is a Forge UI/data-rendering effect; **no new asset.**
+
+### New audio assets (§9.4)
+
+All six additions are original synthesized mono OGG files, compact and consistent with the existing synthesized audio style. The ambient tracks are loopable proof-of-style beds; SFX are short one-shots.
+
+| File | Role | Duration / playback |
+|---|---|---|
+| `assets/audio/bgm_choice.ogg` | Soft, warm ambient bed under event cards | 12 s; loop |
+| `assets/audio/bgm_high_entropy.ogg` | Tense, low beating drone replacing era BGM above entropy 70 | 12 s; loop |
+| `assets/audio/bgm_ending.ogg` | Open, resonant ending bed | 20 s; loop |
+| `assets/audio/sfx_resource_milestone.ogg` | Resource milestone cue | 0.42 s; one-shot |
+| `assets/audio/sfx_era_goal_complete.ogg` | Era goal completion cue | 0.82 s; one-shot |
+| `assets/audio/sfx_choice_deltas.ogg` | Soft tick when consequence deltas are revealed | 0.32 s; one-shot |
+
+### §9.5 routing boundary
+
+Studio deliverables in this update are the six audio files above and this manifest addition. Scene canvas repositioning, far-layer bob, near-layer blur, carrier state-driven frame selection, and choice-hover delta-chip display are implementation effects for Forge; they require no new Studio assets. Forge owns the first three visual implementation items per §9.5, while the hover-preview visual spec and audio/manifest assets are Studio's scope. No Scribe data deliverables are included here.
