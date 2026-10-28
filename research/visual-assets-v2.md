@@ -70,3 +70,24 @@ All six additions are original synthesized mono OGG files, compact and consisten
 ### §9.5 routing boundary
 
 Studio deliverables in this update are the six audio files above and this manifest addition. Scene canvas repositioning, far-layer bob, near-layer blur, carrier state-driven frame selection, and choice-hover delta-chip display are implementation effects for Forge; they require no new Studio assets. Forge owns the first three visual implementation items per §9.5, while the hover-preview visual spec and audio/manifest assets are Studio's scope. No Scribe data deliverables are included here.
+
+## v3 additions
+
+### New-era art (§10.4)
+
+- Added six four-frame carrier sheets: `costume_sails.png`, `costume_revolution.png`, `costume_wars.png`, `costume_orbit.png`, `costume_green.png`, and `costume_void.png` (512×256; 4 × 128×256).
+- Added twelve parallax strips, `bg_[sails|revolution|wars|orbit|green|void]_[far|near].png` (640×180; two 320×180 repeat frames), using the documented palettes and separated silhouette/particle layers.
+- Added 24×24 badges: `badge_sails`, `badge_ideals`, `badge_mobilize`, `badge_orbit`, `badge_carbon`, `badge_void`.
+- Added eight-frame 1280×180 scene sheets: `scene_sail_deal`, `scene_constitution_debate`, `scene_trench_letter`, `scene_launch_window`, `scene_carbon_audit`, `scene_void_watch`, `scene_custodian_relic`, `scene_benthic_contract`, `scene_rival_compare`, `scene_arc_chapter`.
+- The requested audit of the existing 31 scene sheets was not performed in this pass; those files remain unchanged.
+
+### Crossing (§11.3)
+
+- `ship_lineage.png`: 4×96×96; `obs_derelict.png`: 2×96×96; `obs_comet.png`: 2×48×48; `gate_ring.png`: 48×192; `badge_void_pilot.png`: 24×24.
+
+### Audio (§10.5, §11.3)
+
+- Added six new-era BGM and upgraded the eleven existing-era BGM loops to synthesized 60-second OGG + MP3 files where MP3 variants existed. Includes two contrasting harmonic-density sections and a 25ms seam fade; generated audio is not independently measured/mastered to −14 LUFS.
+- Added `custodian_theme_a/b/c.ogg`, `benthic_deal.ogg`, `rival_riff.ogg`, `opp_knock.ogg`, `crisis_pulse.ogg`, 30-second `bgm_crossing.ogg`, and Crossing one-shots `sfx_hit_thud.ogg`, `sfx_gate_chime.ogg`, `sfx_crossing_win.ogg`.
+- Arc themes use filename suffixes `_a/_b/_c` to distinguish the three variations.
+
