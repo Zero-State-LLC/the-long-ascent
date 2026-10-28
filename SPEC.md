@@ -233,3 +233,70 @@ Originals: **the Reef** (distributed person-uploads), **the Consortia** (post-hu
 **The Benthics stay** — lobster-derived AI, deadpan creditors, Greek chorus with claws.
 Studio asset: `sprites/scene_benthic_meet.png` (8-frame scene), `sprites/costume_benthic_npc.png`
 (4-frame NPC, distinct from carrier), `audio/sfx_benthic_ping.ogg`.
+
+---
+
+## 9. v2.1 — Feel, Readability & Depth (2026-10-28)
+
+Playtest feedback drove this revision: visuals now work (sprites render, backgrounds
+anchor, cards fit) but the game is hard to *read* and mechanically shallow. v2.1
+targets comprehension first, then depth.
+
+### 9.1 UI legibility (Forge)
+
+- **Label the purple bar.** The era progress meter (`#progress-fill`) gets a visible
+  caption: `ERA PROGRESS — 43% → next: Agriculture`. Always visible; not only on hover.
+- **Explain idle production.** Resource chips show per-second deltas: `Food 182 +1.2/s`.
+  While an event card is open, production **pauses by default** (Setting: "Pause during
+  choices" — on by default) so reading isn't taxed and meters don't creep mysteriously.
+- **Entropy is visible.** The Entropy pool gets a red-tinted chip and a one-line tooltip:
+  "Pollution, risk, debt. Never goes down easily. At 100, the lineage ends."
+- **First-run primer.** Three-line intro card before Era 1 (skippable, remembered):
+  1) Resources tick every second. 2) Events need choices. 3) Fill the bar to advance era.
+- **Tooltips on every stat.** Knowledge, Population, Infrastructure, Legitimacy get
+  one-line explanations (hover on desktop, long-press on touch).
+
+### 9.2 Depth: systems that make choices matter (Forge)
+
+- **Resource sinks & urgency.** Entropy now *does* things: above 50, random events
+  fire more often; above 80, resources decay 2%/tick. Choices that reduce entropy
+  (cleanup, reform, retreat) become strategically vital, not cosmetic.
+- **Choice consequences visible.** After choosing, the outcome card shows deltas:
+  `+12 Food, −3 Legitimacy, +1 badge: Fire`. The Chronicle logs them.
+- **Era goals.** Each era has a named goal (Era 1: "Master Fire"; Era 6: "Electrify")
+  shown under the progress bar. Hitting it grants a badge + resource bonus; skipping
+  locks the associated late-era branch (already flagged in events).
+- **Legacy modifiers pane.** A "Lineage" tab shows accumulated modifiers from past
+  choices (e.g. "Promethean: fire events +20%") so the player sees their build.
+
+### 9.3 Visual upgrades (Studio)
+
+- **Scene canvas is the star.** 320×180 → **480×270**, placed ABOVE the event title
+  (not between text and choices), with a subtle vignette + drop shadow. The card
+  layout reorders: scene → title → body → choices.
+- **Backgrounds get depth.** Each era's far layer gains a slow vertical drift
+  (2-3px bob) to feel alive; near layer gets a slight blur (1px) for depth of field.
+  Both are Forge-side effects — no new assets needed.
+- **Carrier animation states tied to game state:** producing → action-A loop;
+  event open → idle; entropy > 60 → reaction frame flashes occasionally.
+- **Choice hover previews.** Hovering a choice dims the scene and shows the delta
+  forecast (from §9.2 data) as small floating chips.
+
+### 9.4 Audio additions (Studio)
+
+- 3 ambient loops: `bgm_choice.ogg` (soft, under event cards), `bgm_high_entropy.ogg`
+  (tense drone, replaces era BGM when entropy > 70), `bgm_ending.ogg` bed for endings.
+- 3 new SFX: `resource_milestone.ogg`, `era_goal_complete.ogg`, `choice_deltas.ogg`
+  (soft tick on consequence reveal).
+
+### 9.5 Deliverables & routing
+
+- **Forge**: §9.1 + §9.2 + scene canvas repositioning (§9.3 item 1) + background
+  depth effects (§9.3 items 2-3). Tests for: pause-during-choices, entropy decay
+  threshold, era goal grant/lock, delta rendering. Suite ≥ 37 passing, exit 0.
+- **Studio**: §9.3 hover-preview spec additions + §9.4 three loops + three SFX.
+  Update `research/visual-assets-v2.md` manifest.
+- **Scribe**: era goal names + descriptions (11), first-run primer copy, tooltip
+  strings, choice-delta flavor lines. Drop into `src/data/` via JSON.
+
+*Rule from z0D: every turn is a PR. Spec changes PR first, then implementation PRs.*
