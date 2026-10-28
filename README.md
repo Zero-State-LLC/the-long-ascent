@@ -1,9 +1,9 @@
-# ACCELERANDO: THE LONG ASCENT
+# THE LONG ASCENT
 
 A stick-figure accelerationist RPG. One lineage, eleven eras — from a fire in a
 cave to copies of yourself crossing interstellar voids.
 
-Loosely inspired by Charles Stross's *Accelerando*.
+Loosely inspired by Charles Stross's *Accelerando* (unaffiliated homage).
 
 ## Status
 In development. See `SPEC.md` for the full game design.
