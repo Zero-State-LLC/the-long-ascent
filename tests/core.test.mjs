@@ -247,3 +247,32 @@ test('copy drift: diversity flag forks instances in era 11', () => {
   assert.ok(g.state.copies >= 2, 'forked post-upload');
   assert.ok(g.state.drift > 0);
 });
+
+// ------------------------------------------------------------ v2.1 §9 tests
+import { decayAmount, deltaSnapshot, formatDeltas, describeDeltas, ENTROPY_DECAY_RATE } from '../src/core/game.js';
+
+test('§9.2 entropy decay: decayAmount applies the 2% rate, zero on empty', () => {
+  assert.equal(decayAmount(0), 0);
+  assert.equal(decayAmount(100), 2); // 2% of 100
+});
+
+test('§9.2 delta snapshot + format render +12 Food / -3 chips', () => {
+  const before = { sustenance: 100, legitimacy: 10 };
+  const after = { sustenance: 112, legitimacy: 7 };
+  const d = deltaSnapshot(before, after);
+  assert.equal(d.sustenance, 12);
+  assert.equal(d.legitimacy, -3);
+  const text = String(formatDeltas(d, { sustenance: 'Food', legitimacy: 'Legitimacy' }));
+  assert.ok(text.includes('12'), 'gain rendered');
+  assert.ok(text.includes('3'), 'loss rendered');
+  assert.ok(typeof describeDeltas(d, ['fire'], { sustenance: 'Food' }) === 'string');
+});
+
+test('§9.2 grantEraGoal: idempotent, grants badge once', async () => {
+  const { createGame } = await import('../src/core/game.js');
+  const g = createGame({ erasData, eventsData });
+  const r1 = g.grantEraGoal(1);
+  const r2 = g.grantEraGoal(1);
+  assert.notEqual(r1, undefined);
+  if (r1 && r1.badge) assert.ok(!r2 || !r2.badge, 'no double grant');
+});

@@ -6,7 +6,18 @@
 
 export const SFX_IDS = ['click_choice', 'era_transition', 'lineage_death', 'fork', 'drift',
   'entropy_tick', 'ending_diaspora', 'ending_cathedral', 'ending_stutter', 'ending_ghosts',
-  'ending_ascension', 'benthic_ping', 'upgrade'];
+  'ending_ascension', 'benthic_ping', 'upgrade',
+  // v2.1 (§9.4): files ship with the sfx_ prefix in assets/audio/
+  'resource_milestone', 'era_goal_complete', 'choice_deltas'];
+// v2.1 ambient beds (§9.4) live alongside the 11 era themes + title.
+export const BGM_IDS = ['title', 'cave', 'agriculture', 'bronze', 'dark_ages', 'renaissance',
+  'industry', 'american', 'atomic', 'digital', 'connected', 'singularity',
+  'choice', 'high_entropy', 'ending'];
+// Assets whose on-disk filename carries an sfx_ prefix (Studio v2.1 naming).
+export const SFX_FILE_PREFIXED = new Set(['resource_milestone', 'era_goal_complete', 'choice_deltas']);
+export function sfxUrl(basePath, id) {
+  return `${basePath}/${SFX_FILE_PREFIXED.has(id) ? `sfx_${id}` : id}.ogg`;
+}
 export const MUTE_KEY = 'long-ascent-muted-v1';
 export const CROSSFADE_SEC = 1.2;
 
@@ -88,7 +99,7 @@ export class AudioManager {
     if (!this.ctx || this._muted || !SFX_IDS.includes(sfxId)) return false;
     if (this._failed.has(sfxId)) return false;
     try {
-      const url = `${this.basePath}/${sfxId}.ogg`;
+      const url = sfxUrl(this.basePath, sfxId);
       const cached = this._sources.get(sfxId);
       if (cached) { this._playBuffer(cached); return true; }
       // Fetch + decode through Web Audio; failures mark the id dead (silent).
@@ -115,15 +126,17 @@ export class AudioManager {
   }
 
   // Play the era BGM loop with a linear crossfade from whatever track was playing.
-  // Title screen uses eraId 'title'. Silent fallback on missing files.
-  playBgm(eraId) {
-    if (!this.ctx || (eraId === this._bgmEra && this._bgm.length)) return false;
-    this._bgmEra = eraId;
-    if (this._failed.has(eraId)) return false;
+  // Title screen uses eraId 'title'. v2.1 (§9.4): 'choice' (under event cards) and
+  // 'high_entropy' (entropy > 70) are ambient beds, not eras — playBgm still works
+  // for them because they share the bgm_[id].ogg contract. Silent fallback on missing files.
+  playBgm(bgmId) {
+    if (!this.ctx || (bgmId === this._bgmEra && this._bgm.length)) return false;
+    this._bgmEra = bgmId;
+    if (this._failed.has(bgmId)) return false;
     try {
       const el = this._createEl('audio');
       if (!el) return false;
-      el.src = `${this.basePath}/bgm_${eraId}.ogg`;
+      el.src = `${this.basePath}/bgm_${bgmId}.ogg`;
       el.loop = true;
       el.preload = 'auto';
       const source = this.ctx.createMediaElementSource ? this.ctx.createMediaElementSource(el) : null;
@@ -133,7 +146,7 @@ export class AudioManager {
         source.connect(gain);
         if (this.master) gain.connect(this.master);
       }
-      const entry = { el, gain, source, era: eraId };
+      const entry = { el, gain, source, era: bgmId };
       const t = this._now();
       // fade out previous tracks
       for (const prev of this._bgm) {
@@ -144,7 +157,7 @@ export class AudioManager {
         setTimeout(() => { try { prev.el.pause(); prev.el.src = ''; } catch { /* noop */ } }, CROSSFADE_SEC * 1000 + 100);
       }
       this._bgm = [entry];
-      el.onerror = () => { this._failed.add(eraId); };
+      el.onerror = () => { this._failed.add(bgmId); };
       const p = el.play?.();
       if (p?.catch) p.catch(() => {}); // autoplay/jitter: silent
       if (gain?.gain) {
@@ -153,7 +166,7 @@ export class AudioManager {
       }
       return true;
     } catch {
-      this._failed.add(eraId);
+      this._failed.add(bgmId);
       return false;
     }
   }

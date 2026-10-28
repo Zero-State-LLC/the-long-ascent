@@ -15,6 +15,14 @@ export const COSTUME_FPS = 6; // visual-assets-v2.md default
 export const COSTUME_FRAMES = 4;
 export const BADGE_SIZE = 24;
 
+// v2.1 (§9.3): carrier animation state follows the game, not a fixed loop.
+// Sheet frame order is idle(0), action-A(1), action-B(2), reaction(3).
+export const CARRIER_STATES = ['idle', 'producing', 'event'];
+export const CARRIER_STATE_FRAMES = { idle: 0, producing: 1, event: 0 };
+export const REACTION_MIN_ENTROPY = 60; // entropy > 60 => occasional reaction flash
+export const REACTION_PERIOD = 7; // seconds between reaction windows
+export const REACTION_WINDOW = 0.5 / 7; // ~0.5s flash inside each period
+
 export const ERA_IDS = ['cave', 'agriculture', 'bronze', 'dark_ages', 'renaissance', 'industry',
   'american', 'atomic', 'digital', 'connected', 'singularity'];
 export const BADGE_NAMES = ['fire', 'city', 'surplus', 'print', 'factory', 'atom', 'code',
@@ -70,12 +78,27 @@ export class SpriteAnimator {
     this.badges = []; // earned badge names, persisted by the UI layer
     this._now = opts.now || (() => (typeof performance !== 'undefined' ? performance.now() / 1000 : Date.now() / 1000));
     this.reducedMotion = !!opts.reducedMotion;
+    // v2.1 carrier anim state (§9.3): producing => action-A loop, event open =>
+    // idle, entropy > 60 => occasional reaction frame. Set by the scene layer.
+    this.carrierState = 'idle';
+    this.entropy = 0;
   }
 
   setEra(num) { this.eraNum = num; }
   setReducedMotion(v) { this.reducedMotion = !!v; }
+  setCarrierState(s) { if (CARRIER_STATES.includes(s)) this.carrierState = s; }
+  setEntropy(v) { this.entropy = Number.isFinite(v) ? v : 0; }
 
   eraId(num = this.eraNum) { return ERA_IDS[num - 1] || null; }
+
+  // Deterministic "occasional" reaction: entropy-gated periodic windows, so a
+  // test can pin elapsed time instead of praying to rng. One ~0.5s flash per
+  // REACTION_PERIOD cycle, at the end of each cycle (phase >= 1-w).
+  isReactionFrame(t = this._now()) {
+    if (!(this.entropy > REACTION_MIN_ENTROPY)) return false;
+    const phase = (t % REACTION_PERIOD) / REACTION_PERIOD;
+    return phase >= 1 - REACTION_WINDOW;
+  }
 
   // Earn a milestone badge (idempotent). Returns true when newly added.
   addBadge(name) {
@@ -91,8 +114,15 @@ export class SpriteAnimator {
     return !!(id && spriteReady(this.assets.costumes.get(id)));
   }
 
+  // Frame index for the current anim state. Event open pins frame 0 (idle);
+  // producing loops from frame 1 (action-A) so the loop never shows idle;
+  // a reaction flash overrides everything with frame 3 (§9.3).
   currentFrame(t = this._now()) {
-    return costumeFrameAt(t, this.reducedMotion ? 2 : COSTUME_FPS);
+    if (this.isReactionFrame(t)) return 3;
+    if (this.carrierState === 'event') return CARRIER_STATE_FRAMES.event;
+    if (this.reducedMotion) return 2;
+    const start = CARRIER_STATE_FRAMES[this.carrierState] ?? 0;
+    return start + (Math.floor(t * COSTUME_FPS) % (COSTUME_FRAMES - start));
   }
 
   // Overlay the costume frame centered on the figure column of the normalized

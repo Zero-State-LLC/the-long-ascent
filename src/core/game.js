@@ -5,10 +5,79 @@
 // save/load with export codes, and the endings evaluator.
 
 export const POOLS = ['sustenance', 'knowledge', 'population', 'infrastructure', 'legitimacy', 'entropy'];
-export const SAVE_VERSION = 1;
+export const SAVE_VERSION = 2; // v2.1: adds lineageMods + eraGoalsDone (SPEC §9.2)
 const CEILING = 1000;
 
-export function createGame({ erasData, eventsData, rng = Math.random }) {
+// --- v2.1 depth constants (SPEC §9.2) ---------------------------------------
+export const ENTROPY_EVENT_BOOST = 50;   // above this, events fire more often
+export const ENTROPY_DECAY_THRESHOLD = 80; // above this, resources decay per tick
+export const ENTROPY_DECAY_RATE = 0.02;  // 2%/tick of each non-entropy pool
+export const ENTROPY_BGM_THRESHOLD = 70; // UI: swap to bgm_high_entropy above this
+export const CARRIER_REACTION_ENTROPY = 60; // UI: carrier reaction flashes above this
+
+// Legacy modifiers accumulated by past choices (SPEC §9.2 "Legacy modifiers pane").
+// Data-driven so the Lineage tab and tests share one source of truth.
+export const MODIFIER_DEFS = [
+  { flag: 'promethean', name: 'Promethean', blurb: 'fire events +20%' },
+  { flag: 'promethean_flavor', name: 'Fire-Tender Bloodline', blurb: 'the flame runs in the family' },
+  { flag: 'attention_corruption', name: 'Feed Addiction', blurb: 'attention corrupts sustenance income' },
+  { flag: 'copy_diversity', name: 'Copy Diversity', blurb: 'forks instances post-upload' },
+  { flag: 'instance_spread', name: 'Instance Spread', blurb: 'forks instances post-upload' },
+  { flag: 'forced_mergers', name: 'Forced Mergers', blurb: 'copies recombine; synergy up, diversity down' },
+  { flag: 'accelerationista', name: 'Accelerationista', blurb: 'late-era options colored by the singularity' },
+  { flag: 'ai_hire_rights', name: 'Personhood Granted', blurb: 'unlocks era-11 personhood events' },
+];
+
+// Era goal badges (SPEC §9.2): hitting an era's named goal grants these at the
+// era transition. The lock side already lives in events data (no_fire_mastery).
+export const ERA_GOAL_BADGES = { 1: 'fire', 2: 'surplus', 3: 'city', 5: 'print', 6: 'factory', 8: 'atom', 9: 'code', 11: 'upload' };
+
+// One-shot production step for a pool (pure; shared by tick() and the UI's
+// per-second delta chips so "+X.X/s" always matches what actually lands).
+export function poolStepDelta(pool, baseRate, ctx = {}) {
+  let d = baseRate || 0;
+  if (pool === 'sustenance' && ctx.era >= 10 && ctx.attentionCorruption) d *= 0.7;
+  // Era 4 "Keep the Flame": knowledge decays unless the lineage keeps copying
+  // (archive_diligence slows the bleed to -0.1/tick instead of the era rate).
+  if (pool === 'knowledge' && ctx.era === 4 && d < 0) d = ctx.archiveDiligence ? Math.max(d, -0.1) : d;
+  if (pool === 'entropy') {
+    if (d < 0) d *= 0.5; // entropy never goes down easily (SPEC §3.1)
+    else d *= Math.min((ctx.tempoMult || 1) * 0.45, 0.6);
+  }
+  return d;
+}
+
+// Per-tick decay when entropy is critical (>80): 2% of each non-entropy pool.
+export function decayAmount(value, rate = ENTROPY_DECAY_RATE) {
+  if (!(value > 0)) return 0;
+  return round2Static(value * rate);
+}
+
+// Snapshot of resource deltas applied during the last choice (SPEC §9.2:
+// "+12 Food" outcome chips). Badges are listed separately.
+export function deltaSnapshot(before, after) {
+  const deltas = {};
+  for (const p of POOLS) {
+    const d = round2Static(after[p] - before[p]);
+    if (d !== 0) deltas[p] = d;
+  }
+  return deltas;
+}
+
+export function formatDeltas(deltas, labels = {}) {
+  return Object.entries(deltas).map(([p, v]) => `${v > 0 ? '+' : '−'}${Math.abs(v)} ${labels[p] || p}`);
+}
+
+// Chronicle line for a choice's consequences ("+12 Food, −3 Legitimacy").
+export function describeDeltas(deltas, badges = [], labels = {}) {
+  const parts = formatDeltas(deltas, labels);
+  for (const b of badges) parts.push(`+1 badge: ${b[0].toUpperCase()}${b.slice(1)}`);
+  return parts.join(', ');
+}
+
+function round2Static(x) { return Math.round(x * 100) / 100; }
+
+export function createGame({ erasData, eventsData, copyData = null, rng = Math.random }) {
   const eraDefs = erasData.eras;
   const transitions = new Map(erasData.transitions.map((t) => [t.era, t]));
   const allEvents = eventsData.events;
@@ -35,6 +104,11 @@ export function createGame({ erasData, eventsData, rng = Math.random }) {
     pendingEventId: null,
     seedCounts: {},
     ending: null,
+    // v2.1 (SPEC §9.2): legacy modifiers harvested from flags at each choice,
+    // and which era goals have already paid out their badge + bonus.
+    lineageMods: [],
+    eraGoalsDone: [],
+    lastDeltas: null, // deltas of the most recent choice, for the outcome chips
     rngSeedNote: 'rng not serialized; saves resume deterministically from state only',
   };
 
@@ -112,27 +186,34 @@ export function createGame({ erasData, eventsData, rng = Math.random }) {
     const choice = ev.choices.find((c) => c.label === choiceLabel);
     if (!choice) throw new Error(`unknown choice "${choiceLabel}" for ${ev.id}`);
 
+    const before = { ...state.resources };
     applyEffects(choice.effects, ev.id);
+    state.lastDeltas = deltaSnapshot(before, state.resources);
     for (const f of choice.flags) addFlag(f);
+    harvestModifiers(choice.flags);
     // Milestone badges (SPEC §4.1): flags that name an upgrade badge light it up.
     const BADGE_FLAG_RE = /^(got_badge|milestone)_([a-z]+)$/;
+    const newBadges = [];
     for (const f of choice.flags || []) {
       const m = BADGE_FLAG_RE.exec(f);
-      if (m && !state.badges.includes(m[2])) state.badges.push(m[2]);
+      if (m && !state.badges.includes(m[2])) { state.badges.push(m[2]); newBadges.push(m[2]); }
     }
     if (ev.id === 'E11-12') state.lastFinaleFlags = [...choice.flags];
 
     if (ev.kind === 'transition') {
       advanceEra();
-      return { ok: true, era: state.era };
+      return { ok: true, era: state.era, deltas: state.lastDeltas, badges: newBadges };
     }
     if (ev.kind === 'lineage') {
       resolveLineageDeath(choice);
-      return { ok: true, era: state.era };
+      return { ok: true, era: state.era, deltas: state.lastDeltas, badges: newBadges };
     }
 
     state.seenEvents.push(ev.id);
     chronicle(`Era ${state.era}: Carrier ${roman(state.carrier)} chose “${ev.title}” — ${choice.label}. ${choice.quote || ''}`.trim());
+    // v2.1 (SPEC §9.2): the consequences ride along in the Chronicle.
+    const deltaLine = describeDeltas(state.lastDeltas, newBadges, { sustenance: eraDef().sustenanceLabel });
+    if (deltaLine) chronicle(deltaLine, 'outcome');
     if (/\bBenthic/i.test(ev.body + ev.title)) chronicle('The Benthics recorded this choice. They always record this choice.', 'outcome');
     state.pendingEventId = null;
 
@@ -145,10 +226,20 @@ export function createGame({ erasData, eventsData, rng = Math.random }) {
       const claimed = (choice.flags || []).filter((f) => f.startsWith('seed_') && f !== 'seed_none_claimed');
       // A lineage that refused every trajectory outranks a driver-forced seed pick.
       finalizeEnding(state.flags.includes('seed_none_claimed') ? [] : claimed);
-      return { ok: true, era: state.era };
+      return { ok: true, era: state.era, deltas: state.lastDeltas, badges: newBadges };
     }
     checkEndingConditions();
-    return { ok: true, era: state.era };
+    return { ok: true, era: state.era, deltas: state.lastDeltas, badges: newBadges };
+  }
+
+  // v2.1: fold newly-taken flags into the visible Lineage modifier list (§9.2).
+  function harvestModifiers(flags) {
+    for (const f of flags || []) {
+      const def = MODIFIER_DEFS.find((d) => d.flag === f);
+      if (def && !state.lineageMods.some((m) => m.flag === f)) {
+        state.lineageMods.push({ flag: def.flag, name: def.name, blurb: def.blurb, era: state.era });
+      }
+    }
   }
 
   function roman(n) {
@@ -194,30 +285,50 @@ export function createGame({ erasData, eventsData, rng = Math.random }) {
   }
 
   // ------------------------------------------------------------- ticks & progression
-  function tick() {
-    if (state.phase === 'ending') return;
+  // Shared context for pool deltas (tick + UI per-second chips stay in lockstep).
+  function stepCtx() {
     const def = eraDef();
-    // Entropy pressure scales with the era's tempo: eras that run faster also
-    // bill faster, but a careful lineage keeps negative choices in reserve.
-    const tempoMult = Math.min(10 / def.ticksPerChoice, 2);
-    const rate = def.tickRate;
-    for (const p of POOLS) {
-      let d = rate[p] || 0;
-      if (p === 'sustenance' && state.era >= 10 && hasFlag('attention_corruption')) d *= 0.7; // attention corrupts other pools
-      if (p === 'knowledge' && state.era === 4) d = Math.min(d, hasFlag('archive_diligence') ? -0.1 : d); // knowledge decay mini-mechanic
-      // Entropy never goes down easily (SPEC §3.1): positive drift always lands,
-      // negative effects only bite at half strength.
-      if (p === 'entropy' && d < 0) d *= 0.5;
-      if (p === 'entropy' && d > 0) d *= Math.min(tempoMult * 0.45, 0.6); // entropy scales with era tempo, survivably
-      state.resources[p] = clamp(round2(state.resources[p] + d), p === 'entropy' ? 0 : -CEILING, CEILING);
+    return {
+      era: state.era,
+      tempoMult: Math.min(10 / def.ticksPerChoice, 2),
+      attentionCorruption: hasFlag('attention_corruption'),
+      archiveDiligence: hasFlag('archive_diligence'),
+    };
+  }
+
+  // Per-tick production delta for one pool at current state (UI: "+X.X/s").
+  function poolRate(pool) {
+    return poolStepDelta(pool, eraDef().tickRate[pool] || 0, stepCtx());
+  }
+
+  // v2.1 (§9.2): above 50 entropy, events fire more often (halved cooldown).
+  function eventCooldown() {
+    const base = eraDef().ticksPerChoice;
+    return state.resources.entropy > ENTROPY_EVENT_BOOST ? Math.max(3, Math.ceil(base / 2)) : base;
+  }
+
+  function tick(paused = false) {
+    if (state.phase === 'ending') return;
+    // Pause during choices (SPEC §9.1): the UI passes paused=true while an event
+    // card is open so reading doesn't cost resources. Progress still advances —
+    // "it advances regardless" is the game's thesis, not a bug to pause away.
+    if (!paused) {
+      const ctx = stepCtx();
+      const rate = eraDef().tickRate;
+      const decay = state.resources.entropy > ENTROPY_DECAY_THRESHOLD; // §9.2: >80 => 2%/tick
+      for (const p of POOLS) {
+        let d = poolStepDelta(p, rate[p] || 0, ctx);
+        if (decay && p !== 'entropy') d -= decayAmount(state.resources[p]);
+        state.resources[p] = clamp(round2(state.resources[p] + d), p === 'entropy' ? 0 : -CEILING, CEILING);
+      }
     }
     state.progress = round2(state.progress + 1);
     state.tickCount += 1;
     if (state.resources.entropy >= 100) { checkEndingConditions(); return; }
-    if (state.progress >= def.progressTarget) {
+    if (state.progress >= progressTargetForEra()) {
       state.phase = 'transition';
       state.pendingEventId = null;
-    } else if (state.ticksSinceChoice >= def.ticksPerChoice) {
+    } else if (state.ticksSinceChoice >= eventCooldown()) {
       state.ticksSinceChoice = 0;
       const nextId = pickNextEventId();
       // lineage death opportunity: once per era, gated on era>=2 and rng
@@ -229,7 +340,7 @@ export function createGame({ erasData, eventsData, rng = Math.random }) {
         state.pendingEventId = nextId;
       } else {
         // every scheduled event in this era has played; let the ascent continue
-        state.progress = def.progressTarget;
+        state.progress = progressTargetForEra();
         state.phase = 'transition';
         state.pendingEventId = null;
       }
@@ -237,6 +348,8 @@ export function createGame({ erasData, eventsData, rng = Math.random }) {
       state.ticksSinceChoice += 1;
     }
   }
+
+  const progressTargetForEra = () => eraDef().progressTarget;
 
   function forcedLineageEvent() {
     // exposed for tests/UI introspection; consumption happens in currentEvent()
@@ -247,12 +360,39 @@ export function createGame({ erasData, eventsData, rng = Math.random }) {
 
   function advanceEra() {
     if (state.era >= 11) { finalizeEnding(); return; }
+    grantEraGoal(state.era); // §9.2: goal completes as the bar fills
     state.era += 1;
     state.progress = 0;
     state.ticksSinceChoice = 0;
     state.phase = 'event';
     state.pendingEventId = pickNextEventId();
     chronicle(`Era ${state.era} begins: ${eraDef().name}. The pace quickens. It always quickens.`, 'era');
+  }
+
+  // ------------------------------------------------------------- era goals (SPEC §9.2)
+  // Named per-era goal from v21-copy.json (Scribe copy). The progress bar IS the
+  // goal meter: reaching the transition = hitting the goal, UNLESS the lineage
+  // explicitly refused it (Era 1: no_fire_mastery locks the Promethean branch).
+  function eraGoal(n = state.era) {
+    const goals = (copyData && copyData.era_goals) || [];
+    return goals.find((g) => g.era === n) || null;
+  }
+  function eraGoalRefused(n = state.era) {
+    if (n === 1) return hasFlag('no_fire_mastery');
+    return false;
+  }
+  // Pay out the goal at the era transition: badge + resource bonus, once per era.
+  function grantEraGoal(n = state.era) {
+    if (state.eraGoalsDone.includes(n)) return null;
+    state.eraGoalsDone.push(n);
+    const goal = eraGoal(n);
+    if (!goal || eraGoalRefused(n)) return null;
+    const badge = ERA_GOAL_BADGES[n] || null;
+    if (badge && !state.badges.includes(badge)) state.badges.push(badge);
+    state.resources.knowledge = clamp(round2(state.resources.knowledge + 5), -CEILING, CEILING);
+    state.resources.legitimacy = clamp(round2(state.resources.legitimacy + 3), -CEILING, CEILING);
+    chronicle(`Era ${n} goal “${goal.name}” complete. ${badge ? `+1 badge: ${badge[0].toUpperCase()}${badge.slice(1)}. ` : ''}+5 Knowledge, +3 Legitimacy.`, 'goal');
+    return { goal, badge };
   }
 
   // ------------------------------------------------------------- endings
@@ -334,6 +474,9 @@ export function createGame({ erasData, eventsData, rng = Math.random }) {
     if (s.version !== SAVE_VERSION) throw new Error(`save version mismatch: ${s.version}`);
     Object.assign(state, s);
     if (!Array.isArray(state.badges)) state.badges = []; // pre-v2 saves have no badges
+    if (!Array.isArray(state.lineageMods)) state.lineageMods = []; // v2.1
+    if (!Array.isArray(state.eraGoalsDone)) state.eraGoalsDone = []; // v2.1
+    harvestModifiers(state.flags); // rebuild modifier pane for saves written pre-v2.1
     return state;
   }
   // Export code: base64url(JSON), offline-safe.
@@ -375,6 +518,10 @@ export function createGame({ erasData, eventsData, rng = Math.random }) {
   return {
     state,
     eraDef,
+    eraGoal,
+    grantEraGoal,
+    poolRate,
+    eventCooldown,
     currentEvent,
     forcedLineageEvent,
     choose,
