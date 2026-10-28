@@ -1,5 +1,5 @@
-# ACCELERANDO: THE LONG ASCENT — Game Design Spec v1.0
-**z0D orchestration doc · 2026-10-28 · Stick-figure accelerationist RPG, loosely based on Charles Stross's *Accelerando***
+# THE LONG ASCENT — Game Design Spec v1.0
+**z0D orchestration doc · 2026-10-28 · Stick-figure accelerationist RPG, inspired by Charles Stross's *Accelerando* (unaffiliated homage)***
 
 ---
 
@@ -9,7 +9,7 @@ One line: **You are a lineage, not a person.** From a fire in a cave to copies o
 yourself crossing interstellar voids, every era you survive rewrites what "you" means.
 
 - **Genre:** Idle-adjacent incremental RPG with branching narrative choices.
-- **Tone:** Stross's *Accelerando* — exponential dread + gallows humor. The stick
+- **Tone:** *Accelerando*-adjacent — exponential dread + gallows humor. The stick
   figures get smarter, richer, stranger; the game's art never changes complexity,
   only its *vocabulary* (a stick figure with a spear, a stick figure in a suit, a
   stick figure rendered as distributed substrate).
@@ -44,7 +44,7 @@ coal→oil→fissile→compute→attention→selfhood), **Knowledge**, **Populat
 "instances" late-game), **Infrastructure**, **Legitimacy**, **Entropy** (pollution/
 risk; never goes down easily).
 
-### 3.2 The Lineage mechanic (the Accelerando heart)
+### 3.2 The Lineage mechanic (the heart of the game)
 Your "character" is a **lineage**. Each Era, your protagonist can: die (replaced by
 heir, -10% of one resource), fork (post-upload: split into copies with stat divergence),
 or merge (copies recombine, +synergy, -diversity). The stick figure on screen is
@@ -74,7 +74,7 @@ palette swaps; this is why Studio's asset list is small and Studio's brief is
 
 | Target | Wrapper | Notes |
 |---|---|---|
-| Web (primary) | Static site, PWA manifest | Deploys to zer0state.com/games/accelerando/ |
+| Web (primary) | Static site, PWA manifest | Deploys to zer0state.com/games/the-long-ascent/ |
 | iOS | Capacitor | Same TS core; native shell, App Store icons/splash |
 | Android | Capacitor | Same; Play Store listing assets |
 
@@ -91,7 +91,7 @@ Rules for Forge:
 
 | Agent | File(s) | Contract |
 |---|---|---|
-| **Scout** (bosgame Qwen3.8) | `research/accelerando-digest.md` | ≤120 lines: Accelerando's actual plot beats/terminology (Manfred, the Lobsters, the Vile Offspring, economic aliens, the router), historical-era flavor hooks worth stealing, and 10-15 concrete event ideas mapped to eras. Practical, no fluff. |
+| **Scout** (bosgame Qwen3.8) | `research/source-digest.md` | ≤120 lines: the source novel's actual plot beats/terminology (Manfred, the Lobsters, the Vile Offspring, economic aliens, the router), historical-era flavor hooks worth stealing, and 10-15 concrete event ideas mapped to eras. Practical, no fluff. |
 | **Studio** (gpt-6-luna) | `research/visual-assets.md` | Complete asset map: parametric stick-figure pose list per era (prop + palette), background/style tokens per era, UI element inventory, icon set, app icons/splash for iOS/Android. Deliver as structured markdown tables; NO image files yet. |
 | **Scribe** (GLM) | `research/copy-deck.md` | Full copy deck keyed by era: 11 era intro cards (80-120w each), 12+ event texts each era (title+body+2-4 choices w/ flavor), Chronicle line templates, UI strings, 5 ending texts (150-200w), store listings (App Store + Play, 400w). Voice: dry wit, Stross-adjacent. |
 | **Forge** (GLM) | the codebase | Implements §4 exactly; era data driven by `src/data/eras.json` + `events.json` so Scribe's deck drops in without code edits. Test suite must exit 0. |
@@ -99,13 +99,12 @@ Rules for Forge:
 ## 6. Orchestration plan (z0D)
 
 1. ✅ This spec (now)
-2. Repo: `Zero-State-LLC/accelerando-game` (public, MIT, TS skeleton by z0D)
+2. Repo: `Zero-State-LLC/the-long-ascent` (public, MIT, TS skeleton by z0D)
 3. Parallel dispatch: Scout + Studio + Scribe (independent)
 4. Scribe content → Forge integrates via JSON (no rewrites)
-5. Forge: tests exit 0 → z0D verifies → web deploy to zer0state.com/games/accelerando/
+5. Forge: tests exit 0 → z0D verifies → web deploy to zer0state.com/games/the-long-ascent/
 6. iOS/Android Capacitor shells built, not shipped to stores yet (no certs on hand)
 7. Post build + link to #aspire
 
 ## 7. Working name
-**THE LONG ASCENT** — repo name `accelerando-game`. (Alternate:
-"The Long Ascent", "Exponential". Final call before store listing.)
+**THE LONG ASCENT** — final name. Repo: `the-long-ascent`.
