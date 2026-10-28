@@ -106,7 +106,7 @@ export class SpriteAnimator {
     if (spriteReady(img)) {
       ctx.save();
       if (this.eraId() === 'singularity') ctx.globalAlpha = 0.85; // partly-transparent carrier (§4.1)
-      drewCostume = drawFrame(ctx, img, f, 32, 88 - 72, 36, 72);
+      drewCostume = drawFrame(ctx, img, f, 32, 88 - 72, 36, 72, 4);
       ctx.restore();
     }
     this.drawBadges(ctx, t);
@@ -121,7 +121,7 @@ export class SpriteAnimator {
       if (!spriteReady(img)) return;
       const [bx, by] = BADGE_ORBIT[i % BADGE_ORBIT.length];
       const bob = this.reducedMotion ? 0 : Math.sin(t * 1.6 + i * 1.3) * 0.6;
-      drawFrame(ctx, img, 0, bx - size / 2, by - size / 2 + bob, size, size);
+      drawFrame(ctx, img, 0, bx - size / 2, by - size / 2 + bob, size, size, 1);
     });
   }
 }

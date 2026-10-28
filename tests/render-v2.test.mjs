@@ -61,7 +61,7 @@ test('loadAssets resolves null (never throws) when every file is missing', async
 });
 
 test('badges are unique, validated, and drawn only when their glyph loaded', () => {
-  const badgeImg = { complete: true, naturalWidth: 24 };
+  const badgeImg = { complete: true, naturalWidth: 24, naturalHeight: 24 };
   const sa = new SpriteAnimator({ costumes: new Map(), badges: new Map([['fire', badgeImg]]) });
   assert.equal(sa.addBadge('fire'), true);
   assert.equal(sa.addBadge('fire'), false);       // idempotent

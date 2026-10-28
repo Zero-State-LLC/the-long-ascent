@@ -29,11 +29,22 @@ export function sliceFrames(sheetWidth, frameCount) {
 }
 
 // Draw frame `f` of `sprite` into ctx at (dx, dy) scaled to (dw, dh).
+// Frame cell size is derived from the sprite's natural size and `frameCount`,
+// so scene sheets (8x 160x180), costume sheets (4x 128x256) and single-frame
+// badge PNGs (24x24) are all sliced correctly from the same helper.
 // No-ops when the sprite is missing or not yet loaded (graceful degradation).
-export function drawFrame(ctx, sprite, f, dx, dy, dw, dh) {
+export function drawFrame(ctx, sprite, f, dx, dy, dw, dh, frameCount = 0) {
   if (!sprite || !spriteReady(sprite)) return false;
-  const sx = f * SCENE_FRAME_W;
-  ctx.drawImage(sprite, sx, 0, SCENE_FRAME_W, SCENE_FRAME_H, dx, dy, dw, dh);
+  const natW = sprite.naturalWidth || sprite.width || 0;
+  const natH = sprite.naturalHeight || sprite.height || 0;
+  if (!natW || !natH) return false;
+  // Cell geometry: explicit frameCount -> one row of that many equal cells;
+  // otherwise assume scene-sheet geometry for wide sheets, single frame otherwise.
+  const cells = frameCount || (natW >= natH * 4 ? Math.round(natW / natH) || 1 : 1);
+  const cellW = natW / cells;
+  const frame = ((f % cells) + cells) % cells;
+  const sx = frame * cellW;
+  ctx.drawImage(sprite, sx, 0, cellW, natH, dx, dy, dw, dh);
   return true;
 }
 
@@ -122,8 +133,7 @@ export class AnimScene {
 
   render() {
     if (!this.ctx) return;
-    if (!drawFrame(this.ctx, this.sprite, this.currentFrame, 0, 0, this.ctx.canvas?.width || this.frameW * 2, this.ctx.canvas?.height || this.frameH)) {
-      // graceful degradation: leave the canvas as-is (UI paints a placeholder)
-    }
+    drawFrame(this.ctx, this.sprite, this.currentFrame, 0, 0, this.ctx.canvas?.width || this.frameW * 2, this.ctx.canvas?.height || this.frameH, this.totalFrames);
+    // graceful degradation: drawFrame no-ops when the sheet is missing/unloaded
   }
 }

@@ -58,14 +58,18 @@ body {
 
 /* stage / cards ------------------------------------------------------ */
 #stage {
-  position: fixed; z-index: 2; left: 0; right: 0; bottom: calc(6.4rem + env(safe-area-inset-bottom));
-  display: flex; justify-content: center; padding: 0 1rem;
+  position: fixed; z-index: 2; left: 0; right: 0; top: 0.5rem;
+  bottom: calc(6.4rem + env(safe-area-inset-bottom));
+  display: flex; justify-content: center; align-items: flex-end;
+  overflow-y: auto; overscroll-behavior: contain;
+  padding: 0 1rem;
   pointer-events: none;
 }
 #card-wrap { width: min(100%, 560px); pointer-events: auto; }
 .card {
   background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
   padding: 0.9rem 1rem 1rem; backdrop-filter: blur(6px);
+  max-height: 100%;
 }
 .card-kicker { margin: 0; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
 .card-title { margin: 0.3rem 0 0.4rem; font-size: 1.15rem; line-height: 1.25; }
