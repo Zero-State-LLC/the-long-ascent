@@ -1,7 +1,7 @@
 // THE LONG ASCENT — UI layer. DOM screens over the pure core: resource bar,
 // event cards, choice buttons, Chronicle, settings, endings. No game logic here.
 
-import { createGame, POOLS } from '../core/game.js';
+import { createGame, POOLS, ENTROPY_BGM_THRESHOLD } from '../core/game.js';
 import { createRenderer } from '../render/renderer.js';
 import { SpriteAnimator, loadAssets, ERA_IDS, BADGE_NAMES } from '../render/SpriteAnimator.js';
 import { AnimScene } from '../render/AnimScene.js';
@@ -11,6 +11,7 @@ import { AudioManager } from '../render/AudioManager.js';
 const SAVE_KEY = 'long-ascent-save-v1';
 const SETTINGS_KEY = 'long-ascent-settings-v1';
 const BADGES_KEY = 'long-ascent-badges-v1';
+const PRIMER_KEY = 'long-ascent-primer-seen-v1'; // §9.1: first-run primer, remembered
 
 const $ = (sel) => document.querySelector(sel);
 const el = (tag, cls, text) => {
@@ -21,10 +22,14 @@ const el = (tag, cls, text) => {
 };
 const fmt = (tpl, vars) => tpl.replace(/\{(\w+)\}/g, (_, k) => (vars[k] ?? ''));
 
-export function bootApp({ erasData, eventsData }) {
+export function bootApp({ erasData, eventsData, copyData = null }) {
   const U = erasData.uiStrings;
+  // v2.1 copy (SPEC §9.5, Scribe): tooltips/primer/goals/delta flavor. Missing
+  // file -> fall back to the era uiStrings so the game never renders empty.
+  const COPY = copyData || {};
+  const TOOLTIPS = { ...U.tooltips, ...(COPY.tooltips || {}) };
   let toastTimer = null;
-  let game = loadGame() || createGame({ erasData, eventsData });
+  let game = loadGame() || createGame({ erasData, eventsData, copyData: COPY });
   let settings = loadSettings();
   let viewMode = 'game'; // game | chronicle | settings | ending
 
@@ -105,9 +110,15 @@ export function bootApp({ erasData, eventsData }) {
   // SFX hooks per SPEC §4.3: badge earned, carrier death (heir named), fork/drift in era 11+.
   let prevCopies = game.state.copies;
   let prevLineageDeaths = 0;
+  // Era goal completion sting (§9.1): the Chronicle line is written by core; here
+  // we hear it once per new entry and light the sprite badge.
+  let prevGoalLines = 0;
   function sfxHooks() {
     if (sprites.badges.length > (sfxHooks._badges || 0)) audio.play('upgrade');
     sfxHooks._badges = sprites.badges.length;
+    const goalLines = (game.state.chronicle || []).filter((c) => c.kind === 'goal').length;
+    if (goalLines > prevGoalLines) audio.play('era_goal_complete');
+    prevGoalLines = goalLines;
     const deaths = (game.state.chronicle || []).filter((c) => /^Died in era/.test(c.text || '')).length;
     if (deaths > prevLineageDeaths) audio.play('lineage_death');
     prevLineageDeaths = deaths;
@@ -136,9 +147,13 @@ export function bootApp({ erasData, eventsData }) {
     };
     for (const pool of POOLS) {
       const row = el('div', 'res' + (pool === 'entropy' ? ' res-entropy' : ''));
-      row.title = U.tooltips[pool];
+      row.title = TOOLTIPS[pool] || ''; // §9.1: hover on desktop, long-press on touch
       row.append(el('span', 'res-label', labels[pool]));
       row.append(el('span', 'res-value', String(Math.round(game.state.resources[pool] * 10) / 10)));
+      // §9.1: explain idle production — "Food 182 +1.2/s". Deltas come from the
+      // same core function tick() applies, so chips never lie about the sim.
+      const rate = game.poolRate(pool);
+      if (rate !== 0) row.append(el('span', 'res-delta', `${rate > 0 ? '+' : '−'}${Math.abs(rate).toFixed(1)}/s`));
       if (pool === 'entropy') row.append(el('span', 'res-pattern', ''));
       bar.append(row);
     }
@@ -149,7 +164,20 @@ export function bootApp({ erasData, eventsData }) {
     const era = game.eraDef();
     const st = game.state;
     $('#era-title').textContent = `ERA ${era.num} — ${era.name}`;
-    $('#era-sub').textContent = fmt(U.eraProgress, { era: era.signatureResource, pct: Math.min(100, Math.round(st.progress)) });
+    // §9.1: label the purple bar — always-visible caption, not a hover ghost.
+    const pct = Math.min(100, Math.round(st.progress));
+    const nextName = (erasData.eras[era.num] && erasData.eras[era.num].name) || 'what comes next';
+    const labelTpl = COPY.era_progress_label_format || 'ERA PROGRESS — {pct}% → next: {era}';
+    $('#progress-label').textContent = fmt(labelTpl, { pct, era: nextName });
+    const goal = game.eraGoal();
+    if (goal) {
+      const done = st.eraGoalsDone.includes(goal.era);
+      $('#era-goal').textContent = `${done ? '✓ ' : ''}${goal.name} — ${goal.description}`;
+      $('#era-goal').classList.toggle('era-goal-done', done);
+    } else {
+      $('#era-goal').textContent = '';
+    }
+    $('#era-sub').textContent = fmt(U.eraProgress, { era: era.signatureResource, pct });
     const meta = [];
     meta.push(`Carrier ${roman(st.carrier)}`);
     if (st.copies > 1) meta.push(fmt(U.copyCount, { n: st.copies, m: Math.round(st.drift) }));
@@ -179,19 +207,19 @@ export function bootApp({ erasData, eventsData }) {
       return;
     }
     const card = el('article', 'card' + (ev.kind === 'transition' ? ' card-transition' : ''));
-    card.append(el('p', 'card-kicker', ev.kind === 'lineage' ? 'Lineage' : U.eventModal[0]));
-    card.append(el('h2', 'card-title', ev.title || ''));
-    // v2: animated scene inset (320x180). Missing sheet -> canvas stays empty and
-    // CSS hides it; the card reads as pure v1 text.
+    // §9.3: scene canvas is the star — 480x270, ABOVE the title, card order
+    // scene → title → body → choices (vignette + drop shadow live in styles.css).
     let sceneCanvas = null;
     if (ev.scene_id) {
       sceneCanvas = document.createElement('canvas');
       sceneCanvas.className = 'card-scene';
-      sceneCanvas.width = 320;
-      sceneCanvas.height = 180;
+      sceneCanvas.width = 480;
+      sceneCanvas.height = 270;
       sceneCanvas.setAttribute('aria-hidden', 'true');
       card.append(sceneCanvas);
     }
+    card.append(el('p', 'card-kicker', ev.kind === 'lineage' ? 'Lineage' : U.eventModal[0]));
+    card.append(el('h2', 'card-title', ev.title || ''));
     card.append(el('p', 'card-body', ev.body || ev.prompt || ''));
     if (ev.kind !== 'lineage') card.append(el('p', 'card-sub', U.eventModal[1]));
     const choices = el('div', 'choices');
@@ -232,11 +260,42 @@ export function bootApp({ erasData, eventsData }) {
     return parts.slice(0, 4).join(' · ');
   }
 
+  // §9.2 outcome reveal: "+12 Food, −3 Legitimacy, +1 badge: Fire" as chips under
+  // the card, using Scribe delta_flavor copy for the hover/aria line.
+  function deltaChips(deltas, badges = []) {
+    const wrapEl = el('div', 'outcome-chips');
+    const labels = { ...poolLabels() };
+    const parts = [];
+    for (const [p, v] of Object.entries(deltas || {})) {
+      const chip = el('span', 'chip ' + (v > 0 ? 'chip-up' : 'chip-down'), `${v > 0 ? '+' : '−'}${Math.abs(v)} ${labels[p] || p}`);
+      const tpl = v > 0 ? COPY.delta_flavor?.gain : COPY.delta_flavor?.loss;
+      if (tpl) chip.title = fmt(tpl, { n: Math.abs(v), res: labels[p] || p });
+      wrapEl.append(chip);
+      parts.push(chip.textContent);
+    }
+    for (const b of badges) {
+      const chip = el('span', 'chip chip-badge', `+1 badge: ${b[0].toUpperCase()}${b.slice(1)}`);
+      if (COPY.delta_flavor?.badge) chip.title = fmt(COPY.delta_flavor.badge, { badge: b });
+      wrapEl.append(chip);
+      parts.push(chip.textContent);
+    }
+    return { node: wrapEl, text: parts.join(', ') };
+  }
+
+  function poolLabels() {
+    return {
+      sustenance: game.eraDef().sustenanceLabel, knowledge: 'Knowledge',
+      population: game.state.copies > 1 ? 'Instances' : 'Population',
+      infrastructure: 'Infrastructure', legitimacy: 'Legitimacy', entropy: 'Entropy',
+    };
+  }
+
   function onChoose(label, sceneCanvas = null) {
     audio.play('click_choice');
     const advance = () => {
+      let res;
       try {
-        game.choose(label);
+        res = game.choose(label);
       } catch (err) {
         toast(U.toastCorrupt);
         return;
@@ -246,12 +305,17 @@ export function bootApp({ erasData, eventsData }) {
       const cur = game.state.chronicle.at(-1);
       if (cur && /Benthics recorded this choice/.test(cur.text || '')) audio.play('benthic_ping');
       if (sprites.badges.length && !game.state.badges.length) persistBadges();
+      // §9.2: soft tick when consequences become visible (+ sfx_era_goal_complete
+      // when the choice carried the era across its goal line).
+      const hasDeltas = res && res.deltas && Object.keys(res.deltas).length;
+      if (hasDeltas || (res && res.badges && res.badges.length)) audio.play('choice_deltas');
       if (game.state.phase === 'ending') {
         autosave();
         showEnding();
       } else {
         autosave();
         renderAll();
+        if (hasDeltas || (res && res.badges && res.badges.length)) showOutcomeChips(res.deltas, res.badges);
       }
     };
     // v2: play the outcome frames (one-shot) before advancing — capped so a slow
@@ -266,11 +330,19 @@ export function bootApp({ erasData, eventsData }) {
     }
   }
 
+  function showOutcomeChips(deltas, badges = []) {
+    const { node } = deltaChips(deltas, badges);
+    const wrap = $('#card-wrap');
+    wrap.append(node);
+    setTimeout(() => { try { node.remove?.(); } catch { /* shim without remove: harmless */ } }, 5200);
+  }
+
   // ------------------------------------------------------------------ ending
   function showEnding() {
     viewMode = 'ending';
     const e = game.endingText();
     if (game.state.ending) audio.play(`ending_${String(game.state.ending).replace(/^the_/, '')}`);
+    audio.playBgm('ending'); // §9.4: bgm_ending bed under every ending screen
     const root = $('#ending-screen');
     root.hidden = false;
     root.replaceChildren();
@@ -307,6 +379,23 @@ export function bootApp({ erasData, eventsData }) {
   }
   const eraAccent = (n) => ['#FF7A32', '#D49B3B', '#D5A64B', '#E5B95E', '#8B3F3B', '#D18A42', '#C84D46', '#A8D879', '#54D6C8', '#E779B7', '#B79CFF'][n - 1] || '#fff';
 
+  // --------------------------------------------------------------- lineage (§9.2)
+  // "Legacy modifiers pane": everything past choices did to this bloodline,
+  // straight from state.lineageMods (persisted in the save).
+  function renderLineage() {
+    const list = $('#lineage-list');
+    list.replaceChildren();
+    const mods = game.state.lineageMods || [];
+    if (!mods.length) { list.append(el('li', 'chron-empty', 'No modifiers yet. Every choice so far was deniable.')); return; }
+    for (const m of mods) {
+      const li = el('li', 'lineage-mod');
+      li.append(el('span', 'lineage-mod-era', `E${m.era}`));
+      li.append(el('span', 'lineage-mod-name', m.name));
+      li.append(el('span', 'lineage-mod-blurb', m.blurb));
+      list.append(li);
+    }
+  }
+
   // ---------------------------------------------------------------- settings
   function renderSettings() {
     const root = $('#settings-form');
@@ -334,7 +423,14 @@ export function bootApp({ erasData, eventsData }) {
     });
     soundRow.control.append(sound);
 
-    root.append(speedRow.node, motionRow.node, soundRow.node);
+    // §9.1: "Pause during choices" — on by default, persisted with the rest of settings.
+    const pauseRow = settingRow('Pause during choices', 'Production stops while an event card is open. Reading should not cost Food.');
+    const pause = document.createElement('input');
+    pause.type = 'checkbox'; pause.checked = settings.pauseDuringChoices !== false;
+    pause.addEventListener('change', () => { settings.pauseDuringChoices = pause.checked; saveSettings(); });
+    pauseRow.control.append(pause);
+
+    root.append(speedRow.node, motionRow.node, soundRow.node, pauseRow.node);
 
     const expBtn = el('button', 'btn', U.buttons[4]);
     expBtn.addEventListener('click', exportSave);
@@ -367,7 +463,7 @@ export function bootApp({ erasData, eventsData }) {
     try {
       const raw = localStorage.getItem(SAVE_KEY);
       if (!raw) return null;
-      const g = createGame({ erasData, eventsData });
+      const g = createGame({ erasData, eventsData, copyData: COPY });
       g.deserialize(raw);
       toast(U.load);
       return g;
@@ -377,7 +473,8 @@ export function bootApp({ erasData, eventsData }) {
     }
   }
   function loadSettings() {
-    try { return JSON.parse(localStorage.getItem(SETTINGS_KEY)) || { speed: 2, reduceMotion: false }; } catch { return { speed: 2, reduceMotion: false }; }
+    // pauseDuringChoices defaults ON (SPEC §9.1): reading a card must not cost resources.
+    try { return JSON.parse(localStorage.getItem(SETTINGS_KEY)) || { speed: 2, reduceMotion: false, pauseDuringChoices: true }; } catch { return { speed: 2, reduceMotion: false, pauseDuringChoices: true }; }
   }
   function saveSettings() {
     try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch { /* noop */ }
@@ -402,7 +499,7 @@ export function bootApp({ erasData, eventsData }) {
     try { game.importCode(code.trim()); autosave(); toast(U.load); renderAll(); } catch { toast(U.toastCorrupt); }
   }
   function newLineage() {
-    game = createGame({ erasData, eventsData });
+    game = createGame({ erasData, eventsData, copyData: COPY });
     viewMode = 'game';
     $('#ending-screen').hidden = true;
     syncBadges(); // badges persist across lineages (SPEC §4.1)
@@ -418,16 +515,44 @@ export function bootApp({ erasData, eventsData }) {
     if (viewMode === 'ending') showEnding();
   }
 
+  // §9.1: first-run primer — three lines before Era 1, skippable, remembered in
+  // localStorage so it never interrupts a second lineage uninvited.
+  function primerSeen() {
+    try { return localStorage.getItem(PRIMER_KEY) === '1'; } catch { return false; }
+  }
+  function markPrimerSeen() {
+    try { localStorage.setItem(PRIMER_KEY, '1'); } catch { /* noop */ }
+  }
+  function showPrimer(onDone) {
+    const lines = COPY.first_run_primer || [];
+    if (!lines.length) return onDone();
+    const splash = $('#primer-screen');
+    splash.hidden = false;
+    splash.replaceChildren();
+    splash.append(el('p', 'primer-kicker', 'BEFORE THE FIRST FIRE'));
+    for (const line of lines) splash.append(el('p', 'primer-line', line));
+    const go = el('button', 'btn btn-primary', 'Begin the ascent');
+    go.addEventListener('click', () => { markPrimerSeen(); splash.hidden = true; onDone(); });
+    const skip = el('button', 'btn', 'Skip');
+    skip.addEventListener('click', () => { markPrimerSeen(); splash.hidden = true; onDone(); });
+    splash.append(go, skip);
+    return true;
+  }
+
   function renderAll() {
     renderHeader();
     renderResourceBar();
     renderEventCard();
     if (viewMode === 'chronicle') renderChronicle();
+    if (viewMode === 'lineage') renderLineage();
     if (viewMode === 'settings') renderSettings();
     if (viewMode === 'ending') showEnding();
     renderer.setEra(game.state.era);
     renderer.setEntropy(game.state.resources.entropy);
     renderer.setCopies(game.state.copies);
+    // §9.3 carrier anim state: event open => idle; otherwise the era is producing.
+    sprites.setCarrierState(game.currentEvent() ? 'event' : 'producing');
+    sprites.setEntropy(game.state.resources.entropy);
     document.body.dataset.view = viewMode;
   }
 
@@ -438,14 +563,27 @@ export function bootApp({ erasData, eventsData }) {
   setInterval(() => {
     if (viewMode !== 'game' || game.state.phase === 'ending') return;
     acc += Number(document.documentElement.dataset.speed || 2);
-    while (acc >= 1) { acc -= 1; game.tick(); }
+    // §9.1: production pauses while an event card is open (setting, default ON).
+    const paused = settings.pauseDuringChoices !== false && !!game.currentEvent();
+    while (acc >= 1) { acc -= 1; game.tick(paused); }
     if (game.state.phase === 'ending') { autosave(); showEnding(); return; }
     if (game.state.resources.entropy > prevEntropy + 0.5) audio.play('entropy_tick');
     prevEntropy = game.state.resources.entropy;
+    ambientBgm();
     renderHeader();
     renderResourceBar();
     if (!game.currentEvent()) renderEventCard();
   }, 400);
+
+  // §9.4 audio beds: bgm_choice under open event cards, bgm_high_entropy when
+  // entropy > 70 (outranks everything — that is the point), otherwise the era
+  // theme. Only re-calls AudioManager when the desired bed actually changes.
+  function ambientBgm() {
+    const ent = game.state.resources.entropy;
+    const want = ent > ENTROPY_BGM_THRESHOLD ? 'high_entropy'
+      : (game.currentEvent() ? 'choice' : (ERA_IDS[game.state.era - 1] || 'title'));
+    if (want !== ambientBgm._cur) { ambientBgm._cur = want; audio.playBgm(want); }
+  }
 
   // intro splash
   function showTitle() {
@@ -456,11 +594,19 @@ export function bootApp({ erasData, eventsData }) {
     splash.append(el('p', 'title-tag', U.tagline));
     const btns = el('div', 'title-buttons');
     const hasSave = !!localStorage.getItem(SAVE_KEY);
+    const startGame = () => {
+      splash.hidden = true;
+      audio.playBgm(ERA_IDS[game.state.era - 1] || 'title');
+    };
     const neu = el('button', 'btn btn-primary', U.buttons[0]);
-    neu.addEventListener('click', () => { newLineage(); splash.hidden = true; audio.playBgm(ERA_IDS[game.state.era - 1] || 'title'); });
+    neu.addEventListener('click', () => {
+      newLineage();
+      // §9.1: first-run primer gates Era 1 exactly once (skippable, remembered).
+      if (!primerSeen()) showPrimer(startGame); else startGame();
+    });
     const cont = el('button', 'btn', U.buttons[1]);
     cont.disabled = !hasSave;
-    cont.addEventListener('click', () => { splash.hidden = true; renderAll(); audio.playBgm(ERA_IDS[game.state.era - 1] || 'title'); });
+    cont.addEventListener('click', startGame);
     btns.append(neu, cont);
     splash.append(btns);
   }

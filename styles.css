@@ -34,6 +34,10 @@ body {
   background: rgba(218, 232, 255, 0.15); overflow: hidden;
 }
 #progress-fill { height: 100%; width: 0%; background: var(--accent); transition: width 0.5s ease; }
+/* v2.1 §9.1: always-visible caption under the bar + era goal line */
+#progress-label { margin: 0.3rem 0 0; font-size: 0.68rem; letter-spacing: 0.1em; color: var(--ink); opacity: 0.85; text-transform: uppercase; }
+#era-goal { margin: 0.15rem 0 0; font-size: 0.72rem; color: var(--muted); font-style: italic; max-width: 640px; margin-inline: auto; }
+#era-goal.era-goal-done { color: var(--accent); font-style: normal; }
 
 /* resource bar ------------------------------------------------------ */
 #resource-bar {
@@ -49,8 +53,9 @@ body {
 }
 .res-label { color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.62rem; }
 .res-value { font-variant-numeric: tabular-nums; font-weight: 600; }
-.res-entropy { border: 1px dashed var(--warn); }
+.res-entropy { border: 1px dashed var(--warn); background: rgba(255, 77, 79, 0.12); } /* §9.1: red-tinted */
 .res-entropy .res-value { color: var(--warn); }
+.res-delta { font-size: 0.62rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 .res-pattern {
   width: 10px; height: 10px; border-radius: 2px;
   background: repeating-linear-gradient(45deg, var(--warn) 0 2px, transparent 2px 4px);
@@ -77,10 +82,19 @@ body {
 .card-sub { margin: -0.3rem 0 0.7rem; font-size: 0.7rem; color: var(--muted); font-style: italic; }
 .waiting { text-align: center; opacity: 0.8; }
 
-/* v2 scene inset: hidden until its sprite sheet loads and starts animating */
-.card-scene { display: none; width: min(100%, 320px); height: auto; aspect-ratio: 16 / 9;
-  margin: 0 0 0.6rem; border-radius: 8px; border: 1px solid var(--line); background: rgba(0, 0, 0, 0.25); }
+/* v2.1 §9.3: scene canvas is the star — 480x270 above the title, vignette + shadow */
+.card-scene { display: none; width: min(100%, 480px); height: auto; aspect-ratio: 16 / 9;
+  margin: 0 0 0.7rem; border-radius: 8px; border: 1px solid var(--line); background: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55), inset 0 0 46px rgba(0, 0, 0, 0.38); }
 .card-scene-active { display: block; }
+
+/* v2.1 §9.2: outcome delta chips under the card */
+.outcome-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; justify-content: center; margin-top: 0.6rem; }
+.chip { font-size: 0.7rem; padding: 0.2rem 0.55rem; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--surface); cursor: help; }
+.chip-up { color: #8fd694; border-color: rgba(143, 214, 148, 0.5); }
+.chip-down { color: var(--warn); border-color: rgba(255, 77, 79, 0.5); }
+.chip-badge { color: var(--accent); border-color: var(--accent); }
 
 .choices { display: grid; gap: 0.45rem; }
 .choice {
@@ -95,13 +109,18 @@ body {
 .choice-hint { font-size: 0.68rem; color: var(--muted); }
 
 /* full screens -------------------------------------------------------- */
-#chronicle-screen, #settings-screen, #ending-screen, #title-screen {
+#chronicle-screen, #settings-screen, #ending-screen, #title-screen, #lineage-screen, #primer-screen {
   position: fixed; inset: 0; z-index: 4; overflow-y: auto;
   background: rgba(9, 15, 28, 0.94); padding: 2rem 1rem calc(6rem + env(safe-area-inset-bottom));
 }
-#chronicle-screen h2, #settings-screen h2 { text-align: center; letter-spacing: 0.14em; text-transform: uppercase; font-size: 1rem; }
-#chronicle-list { list-style: none; margin: 0 auto; padding: 0; max-width: 620px; display: grid; gap: 0.5rem; }
+#chronicle-screen h2, #settings-screen h2, #lineage-screen h2 { text-align: center; letter-spacing: 0.14em; text-transform: uppercase; font-size: 1rem; }
+#chronicle-list, #lineage-list { list-style: none; margin: 0 auto; padding: 0; max-width: 620px; display: grid; gap: 0.5rem; }
 .chron-entry { display: flex; gap: 0.6rem; align-items: baseline; font-size: 0.82rem; line-height: 1.45; }
+.chron-goal .chron-text { color: var(--accent); }
+.lineage-mod { display: flex; gap: 0.6rem; align-items: baseline; font-size: 0.82rem; line-height: 1.45; }
+.lineage-mod-era { flex: 0 0 auto; font-size: 0.62rem; padding: 0.1rem 0.4rem; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
+.lineage-mod-name { font-weight: 600; color: var(--accent); }
+.lineage-mod-blurb { color: var(--muted); font-style: italic; }
 .chron-era {
   flex: 0 0 auto; font-size: 0.62rem; padding: 0.1rem 0.4rem;
   border: 1px solid var(--line); border-radius: 999px; color: var(--muted);
@@ -132,6 +151,12 @@ body {
 .title-tag { margin: 0; color: var(--muted); font-style: italic; }
 .title-buttons { display: flex; gap: 0.7rem; margin-top: 1rem; }
 
+/* v2.1 §9.1 primer — three lines before Era 1 */
+#primer-screen { align-content: center; justify-items: center; gap: 0.8rem; text-align: center; }
+#primer-screen:not([hidden]) { display: grid; }
+.primer-kicker { margin: 0; font-size: 0.7rem; letter-spacing: 0.3em; color: var(--muted); }
+.primer-line { max-width: 520px; font-size: 0.95rem; line-height: 1.6; margin: 0; }
+
 /* buttons --------------------------------------------------------------- */
 .btn {
   font: inherit; cursor: pointer; color: var(--ink);
@@ -159,6 +184,7 @@ body {
 #nav-rail button:hover { color: var(--ink); }
 body[data-view="game"] #nav-rail [data-view="game"],
 body[data-view="chronicle"] #nav-rail [data-view="chronicle"],
+body[data-view="lineage"] #nav-rail [data-view="lineage"],
 body[data-view="settings"] #nav-rail [data-view="settings"],
 body[data-view="ending"] #nav-rail [data-view="game"] {
   color: var(--ink); border-color: var(--line); background: var(--surface);
@@ -174,8 +200,10 @@ body[data-view="ending"] #nav-rail [data-view="game"] {
 
 /* view visibility ------------------------------------------------------------ */
 body[data-view="chronicle"] #chronicle-screen,
+body[data-view="lineage"] #lineage-screen,
 body[data-view="settings"] #settings-screen { display: block; }
 body:not([data-view="chronicle"]) #chronicle-screen,
+body:not([data-view="lineage"]) #lineage-screen,
 body:not([data-view="settings"]) #settings-screen { display: none; }
 body[data-view="ending"] #ending-screen { display: grid; }
 body[data-view="ending"] #ending-screen[hidden] { display: none; }

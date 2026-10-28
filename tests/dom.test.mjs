@@ -94,3 +94,15 @@ test('choosing through the UI advances the core and autosaves', async () => {
   navButtons[1].click();
   assert.ok(registry.get('#chronicle-list').children.length >= 1, 'chronicle has entries after a choice');
 });
+
+test('§9.1 pause during choices: paused tick leaves resources untouched', async () => {
+  const { bootApp } = await import('../src/ui/dom-boot.js');
+  const app = bootApp({ erasData, eventsData });
+  app.game._setPhase('event');
+  const before = { ...app.game.state.resources };
+  app.game.tick(true);
+  for (const k of Object.keys(before)) {
+    if (k === 'entropy') continue;
+    assert.equal(app.game.state.resources[k], before[k], `${k} unchanged while paused`);
+  }
+});

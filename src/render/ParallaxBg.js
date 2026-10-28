@@ -19,6 +19,18 @@ export function eraTempo(eraIndex0) {
 export const LAYER_FACTOR = { far: 0.12, near: 0.35 };
 export const BASE_SPEED = 10; // px/sec at tempo 1.0
 
+// v2.1 depth cues (SPEC §9.3): the far layer bobs slowly on the vertical axis
+// (2-3px in view units) and the near layer gets a 1px blur, so the two planes
+// separate even when the palette is subtle. Bob is time-based (no state drift).
+export const BOB_AMPLITUDE = 2.5; // view units (~2-3px at typical canvas scale)
+export const BOB_PERIOD = 9; // seconds per full bob cycle
+export const NEAR_BLUR_PX = 1;
+
+export function bobOffset(t, amplitude = BOB_AMPLITUDE, period = BOB_PERIOD) {
+  if (!Number.isFinite(t)) return 0;
+  return Math.sin((t / period) * Math.PI * 2) * amplitude;
+}
+
 // Wrap a raw offset into [0, period). Negative-safe (leftward scroll).
 export function wrapOffset(offset, period) {
   if (!(period > 0)) return 0;
@@ -88,15 +100,17 @@ export class ParallaxBg {
     // Strip natural aspect: 640x180 => each frame is 320x180 (16:9-ish band).
     const natW = this.stripWidth();
     const frameAspect = (STRIP_FRAME_W / 180); // ~1.78 wide
-    // Far layer: spans full width, height = width / aspect, bottom at horizon (62% down).
-    // Near layer: spans full width, bottom at ground (88% = figure baseline), drawn shorter
-    // by cropping scale so it reads as foreground detail rather than a second horizon.
+    const t = this._now();
+    const bob = this.reducedMotion ? 0 : bobOffset(t);
+    // Far layer: spans full width, height = width / aspect, bottom at horizon (62% down),
+    // slow vertical bob for depth (§9.3). Near layer: shorter band at the ground line,
+    // scrolls faster (parallax) and carries a 1px blur so it reads as a distinct plane.
     const specs = [
-      // [layer, bottomY, heightUnits] — heights keep strip aspect for far; near slightly squashed
-      ['far', viewH * 0.62, (viewW / frameAspect)],
-      ['near', viewH * 0.88, (viewW / frameAspect) * 0.62],
+      // [layer, bottomY, heightUnits, dyBob, blurPx]
+      ['far', viewH * 0.62 + bob, (viewW / frameAspect), 0, 0],
+      ['near', viewH * 0.88, (viewW / frameAspect) * 0.62, 0, NEAR_BLUR_PX],
     ];
-    for (const [name, bottomY, bandH] of specs) {
+    for (const [name, bottomY, bandH, , blurPx] of specs) {
       const img = this.layers[name];
       if (!img || !(img.complete === undefined || img.complete)) continue;
       if (img.naturalWidth === 0) continue;
@@ -106,6 +120,7 @@ export class ParallaxBg {
       const period = viewW;
       const y = bottomY - bandH;
       ctx.save();
+      if (blurPx > 0 && 'filter' in ctx) ctx.filter = `blur(${blurPx}px)`;
       const off = wrapOffset(this.offsets[name] * (period / this.stripWidth()), period);
       for (let x = -off; x < viewW; x += period) {
         ctx.drawImage(img, x, y, period, bandH);
