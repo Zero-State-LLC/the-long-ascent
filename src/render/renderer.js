@@ -1,8 +1,12 @@
-// src/render/renderer.js — canvas scene composer: background + figure + era transitions.
-// Owns the rAF loop and DPR scaling; the UI layer calls setEra()/setMotion().
+// src/render/renderer.js — canvas scene composer: parallax strips + background +
+// figure (+ costume overlay, badges) + era transitions. Owns the rAF loop and DPR
+// scaling; the UI layer calls setEra()/setMotion(). v2: optional SpriteAnimator and
+// ParallaxBg layers are composited when available; anything missing degrades to the
+// v1 procedural drawing (gameplay is never gated on art).
 
 import { drawBackground } from './palettes.js';
 import { drawFigure } from './figure.js';
+import { ERA_IDS } from './SpriteAnimator.js';
 
 export function createRenderer(canvas) {
   const ctx = canvas.getContext('2d');
@@ -14,6 +18,9 @@ export function createRenderer(canvas) {
   let crossfadeStart = -1; // time of last era change (-1 = none active)
   let running = true;
   let raf = null;
+  let spriteAnimator = null; // SpriteAnimator | null
+  let parallax = null;       // ParallaxBg | null
+  const bgListeners = new Set(); // notified on era change (audio/UI hooks)
 
   function resize() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -45,6 +52,9 @@ export function createRenderer(canvas) {
       drawBackground(ctx, eraNum, entropy, t);
       drawFigure(ctx, eraNum, t, { reducedMotion, copies });
     }
+    // v2 layers over the parametric base (no-ops when assets/instances absent)
+    if (parallax) { parallax.update(); parallax.draw(ctx); }
+    if (spriteAnimator) spriteAnimator.draw(ctx, t);
     raf = requestAnimationFrame(frame);
   }
 
@@ -52,11 +62,35 @@ export function createRenderer(canvas) {
 
   return {
     setEra(n) {
-      if (n !== eraNum) { prevEra = eraNum; eraNum = n; crossfadeStart = performance.now() / 1000; }
+      if (n !== eraNum) {
+        prevEra = eraNum; eraNum = n; crossfadeStart = performance.now() / 1000;
+        if (spriteAnimator) spriteAnimator.setEra(n);
+        if (parallax) parallax.setEra(n);
+        for (const cb of bgListeners) { try { cb(n, prevEra); } catch { /* listener errors never break the loop */ } }
+      }
     },
     setEntropy(v) { entropy = v; },
     setCopies(c) { copies = c; },
-    setReducedMotion(v) { reducedMotion = !!v; },
+    setReducedMotion(v) {
+      reducedMotion = !!v;
+      if (spriteAnimator) spriteAnimator.setReducedMotion(reducedMotion);
+      if (parallax) parallax.setReducedMotion(reducedMotion);
+    },
+    // v2 wiring: pass instances once loaded; null-safe, callable any time.
+    setSpriteAnimator(sa) {
+      spriteAnimator = sa || null;
+      if (spriteAnimator) { spriteAnimator.setEra(eraNum); spriteAnimator.setReducedMotion(reducedMotion); }
+    },
+    setParallax(p) {
+      parallax = p || null;
+      if (parallax) { parallax.setEra(eraNum); parallax.setReducedMotion(reducedMotion); }
+    },
+    // Swap one era's strip pair without resetting scroll offsets mid-era.
+    setParallaxLayers(farImg, nearImg) {
+      if (parallax) parallax.layers = { far: farImg ?? null, near: nearImg ?? null };
+    },
+    onEraChange(cb) { bgListeners.add(cb); return () => bgListeners.delete(cb); },
+    eraId(num = eraNum) { return ERA_IDS[num - 1] || null; },
     stop() { running = false; if (raf) cancelAnimationFrame(raf); },
   };
 }

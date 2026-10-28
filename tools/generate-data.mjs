@@ -290,8 +290,59 @@ const eraOut = eras.map((e) => ({
   tickRate: TICK_RATE[e.num],
 }));
 
+// ------------------------------------------------- scene_id mapping (SPEC §4.2)
+// Each event maps to the closest of Studio's 31 scene categories
+// (research/visual-assets-v2.md). Applied here so regeneration keeps them.
+const SCENE_MAP = {
+  'E1-01': 'fire_crisis',    'E1-02': 'hunt_dilemma',   'E1-03': 'hunt_dilemma',
+  'E1-04': 'hunt_dilemma',   'E1-05': 'hunt_dilemma',   'E1-06': 'fire_crisis',
+  'E1-07': 'fire_crisis',    'E1-08': 'fire_crisis',    'E1-09': 'hunt_dilemma',
+  'E1-10': 'hunt_dilemma',   'E1-11': 'fire_crisis',    'E1-12': 'fire_crisis',
+  'E2-01': 'surplus_feast',  'E2-02': 'surplus_feast',  'E2-03': 'granary_siege',
+  'E2-04': 'surplus_feast',  'E2-05': 'granary_siege',  'E2-06': 'granary_siege',
+  'E2-07': 'surplus_feast',  'E2-08': 'surplus_feast',  'E2-09': 'granary_siege',
+  'E2-10': 'surplus_feast',  'E2-11': 'surplus_feast',  'E2-12': 'monastery_copy',
+  'E3-01': 'trade_road',     'E3-02': 'senate_vote',    'E3-03': 'senate_vote',
+  'E3-04': 'trade_road',     'E3-05': 'senate_vote',    'E3-06': 'patron_deal',
+  'E3-07': 'plague_cart',    'E3-08': 'legion_march',   'E3-09': 'monastery_copy',
+  'E3-10': 'senate_vote',    'E3-11': 'legion_march',   'E3-12': 'senate_vote',
+  'E4-01': 'monastery_copy', 'E4-02': 'monastery_copy', 'E4-03': 'granary_siege',
+  'E4-04': 'monastery_copy', 'E4-05': 'legion_march',   'E4-06': 'monastery_copy',
+  'E4-07': 'plague_cart',    'E4-08': 'monastery_copy', 'E4-09': 'monastery_copy',
+  'E4-10': 'monastery_copy', 'E4-11': 'monastery_copy', 'E4-12': 'plague_cart',
+  'E5-01': 'press_room',     'E5-02': 'plague_cart',    'E5-03': 'patron_deal',
+  'E5-04': 'patron_deal',    'E5-05': 'press_room',     'E5-06': 'press_room',
+  'E5-07': 'trade_road',     'E5-08': 'press_room',     'E5-09': 'patron_deal',
+  'E5-10': 'press_room',     'E5-11': 'granary_siege',  'E5-12': 'press_room',
+  'E6-01': 'luddite_mob',    'E6-02': 'senate_vote',    'E6-03': 'crash_floor',
+  'E6-04': 'factory_floor',  'E6-05': 'patron_deal',    'E6-06': 'factory_floor',
+  'E6-07': 'luddite_mob',    'E6-08': 'factory_floor',  'E6-09': 'crash_floor',
+  'E6-10': 'trade_road',     'E6-11': 'factory_floor',  'E6-12': 'crash_floor',
+  'E7-01': 'factory_floor',  'E7-02': 'crash_floor',    'E7-03': 'war_front',
+  'E7-04': 'factory_floor',  'E7-05': 'factory_floor',  'E7-06': 'crash_floor',
+  'E7-07': 'trade_road',     'E7-08': 'attention_auction', 'E7-09': 'attention_auction',
+  'E7-10': 'senate_vote',    'E7-11': 'war_front',      'E7-12': 'memory_mug',
+  'E8-01': 'doomsday_clock', 'E8-02': 'lab_test',       'E8-03': 'doomsday_clock',
+  'E8-04': 'doomsday_clock', 'E8-05': 'doomsday_clock', 'E8-06': 'doomsday_clock',
+  'E8-07': 'lab_test',       'E8-08': 'doomsday_clock', 'E8-09': 'doomsday_clock',
+  'E8-10': 'lab_test',       'E8-11': 'doomsday_clock', 'E8-12': 'doomsday_clock',
+  'E9-01': 'lab_test',       'E9-02': 'dot_com_frenzy', 'E9-03': 'memory_mug',
+  'E9-04': 'monastery_copy', 'E9-05': 'dot_com_frenzy', 'E9-06': 'factory_floor',
+  'E9-07': 'lab_test',       'E9-08': 'senate_vote',    'E9-09': 'dot_com_frenzy',
+  'E9-10': 'attention_auction', 'E9-11': 'social_spiral', 'E9-12': 'memory_mug',
+  'E10-01': 'social_spiral', 'E10-02': 'upload_pod',    'E10-03': 'attention_auction',
+  'E10-04': 'social_spiral', 'E10-05': 'social_spiral', 'E10-06': 'attention_auction',
+  'E10-07': 'attention_auction', 'E10-08': 'social_spiral', 'E10-09': 'attention_auction',
+  'E10-10': 'memory_mug',    'E10-11': 'memory_mug',    'E10-12': 'social_spiral',
+  'E11-01': 'benthic_meet',  'E11-02': 'star_seed',     'E11-03': 'drift_diverge',
+  'E11-04': 'benthic_meet',  'E11-05': 'crash_floor',   'E11-06': 'benthic_meet',
+  'E11-07': 'star_seed',     'E11-08': 'upload_pod',    'E11-09': 'star_seed',
+  'E11-10': 'drift_diverge', 'E11-11': 'benthic_meet',  'E11-12': 'upload_pod',
+};
+
 const eventsOut = events.map((e) => ({
   id: e.id, era: e.era, title: e.title, body: e.body,
+  scene_id: SCENE_MAP[e.id] || null,
   requirements: [], // filled below for callback-gated variants
   choices: e.choices,
 }));

@@ -2,6 +2,7 @@
   "events": [
     {
       "id": "E1-01",
+      "scene_id": "fire_crisis",
       "era": 1,
       "title": "Fire Follows You Home",
       "body": "A storm left a burning bush, and one of you has carried a brand back to the cave. The smoke stings, the elders call it bad luck, and the night animals disagree with everything. Keeping fire means tending it every single night, forever. Letting it go means warmth stays a rumor.",
@@ -42,6 +43,7 @@
     },
     {
       "id": "E1-02",
+      "scene_id": "hunt_dilemma",
       "era": 1,
       "title": "The Best Hunter Gives Meat Away",
       "body": "Your best hunter keeps handing out haunches to people who brought nothing. Nobody is starving and everybody is talking. Status, it turns out, is something you get by losing calories on purpose. The other bands are starting to notice whose cave has the loudest gratitude.",
@@ -79,6 +81,7 @@
     },
     {
       "id": "E1-03",
+      "scene_id": "hunt_dilemma",
       "era": 1,
       "title": "First Tool, Second Opinions",
       "body": "Somebody chipped a stone into an edge that actually works. The invention is spreading faster than anyone can claim credit for it, which is exactly the problem some of you would like to file a complaint about.",
@@ -115,6 +118,7 @@
     },
     {
       "id": "E1-04",
+      "scene_id": "hunt_dilemma",
       "era": 1,
       "title": "Someone Dies (It's Not the End of You)",
       "body": "A hunting accident, thoroughly preventable, involving a bison and a decision. The band must decide what your name means now that one mouth carrying it has stopped. The lineage continues through someone smaller, younger, and deeply unqualified.",
@@ -151,6 +155,7 @@
     },
     {
       "id": "E1-05",
+      "scene_id": "hunt_dilemma",
       "era": 1,
       "title": "The River Has Two Banks",
       "body": "Salmon on one side, berries on the other, winter agreeing to arrive soon. Moving the whole band costs calories you may not have. Staying means betting the season on one bank's opinion.",
@@ -188,6 +193,7 @@
     },
     {
       "id": "E1-06",
+      "scene_id": "fire_crisis",
       "era": 1,
       "title": "The Stranger at the Fire",
       "body": "A limping outsider from a burned-out band asks to sit down. Letting them in costs food and might bring enemies. Turning them away costs something nobody can itemize until later.",
@@ -225,6 +231,7 @@
     },
     {
       "id": "E1-07",
+      "scene_id": "fire_crisis",
       "era": 1,
       "title": "Night Count",
       "body": "Something large has been visiting the camp's edge at night, testing who's awake. The band looks to whoever holds the fire-tending schedule, which is quietly becoming the most powerful job in the cave.",
@@ -262,6 +269,7 @@
     },
     {
       "id": "E1-08",
+      "scene_id": "fire_crisis",
       "era": 1,
       "title": "Ochre Handprints",
       "body": "Someone presses a painted hand on the cave wall and refuses to explain why. Others want hands next to it. There is a fight about placement, which is the first art controversy and will not be the last.",
@@ -298,6 +306,7 @@
     },
     {
       "id": "E1-09",
+      "scene_id": "hunt_dilemma",
       "era": 1,
       "title": "The Long Cold",
       "body": "A winter that overstays by design. Stores say no. The body count says maybe. Elders propose walking south; the sick propose staying; the very young propose eating the seed stores, which is a proposal in the worst sense.",
@@ -334,6 +343,7 @@
     },
     {
       "id": "E1-10",
+      "scene_id": "hunt_dilemma",
       "era": 1,
       "title": "Rival Band, Same Cave",
       "body": "Another lineage wants your shelter, and both of you have discovered that diplomacy is cheaper than the alternative, though nobody has written down either price yet.",
@@ -372,6 +382,7 @@
     },
     {
       "id": "E1-11",
+      "scene_id": "fire_crisis",
       "era": 1,
       "title": "Dreaming About Tomorrow",
       "body": "The shaman insists the future visited her in a dream and said your lineage ends badly unless you stop doing something specific she refuses to specify until after payment. Half the cave is already nervous.",
@@ -408,6 +419,7 @@
     },
     {
       "id": "E1-12",
+      "scene_id": "fire_crisis",
       "era": 1,
       "title": "The Child Who Asks Why",
       "body": "A child keeps asking why the fire is hot, why the stars don't fall, and why the answer is always 'because.' It is exhausting. It is also, somehow, the beginning of everything. The band must decide whether questions are a resource or a nuisance.",
@@ -446,6 +458,7 @@
     },
     {
       "id": "E2-01",
+      "scene_id": "surplus_feast",
       "era": 2,
       "title": "First Granary, Two Policies",
       "body": "The surplus needs a building, and the building needs a policy. Hoard it and you're rich until the neighbors develop opinions about your walls. Feast everyone and you're beloved until winter audits the calendar.",
@@ -482,6 +495,7 @@
     },
     {
       "id": "E2-02",
+      "scene_id": "surplus_feast",
       "era": 2,
       "title": "The Irrigation Question",
       "body": "Water is a mile away and the river disagrees with your field layout. A ditch feeds everyone for years and enslaves everyone for seasons. Somebody has to organize the digging, and that somebody acquires a title by the end of it.",
@@ -519,6 +533,7 @@
     },
     {
       "id": "E2-03",
+      "scene_id": "granary_siege",
       "era": 2,
       "title": "Debt Is Invented",
       "body": "A farmer borrows seed against next harvest and discovers he cannot repay it, and that his daughter is legally considered collateral. The village looks to the granary-keeper — you — to decide whether debts have ceilings.",
@@ -555,6 +570,7 @@
     },
     {
       "id": "E2-04",
+      "scene_id": "surplus_feast",
       "era": 2,
       "title": "The Calendar Dispute",
       "body": "Planting day is a matter of opinion, and the two opinions are three weeks apart and both religious. Whoever arbitrates becomes, accidentally, the state.",
@@ -591,6 +607,7 @@
     },
     {
       "id": "E2-05",
+      "scene_id": "granary_siege",
       "era": 2,
       "title": "Locusts Read the Ledger",
       "body": "Locusts arrive with the confidence of auditors. The stores will last two months if shared, four if rationed, zero if panic takes the gates off the granary first.",
@@ -628,6 +645,7 @@
     },
     {
       "id": "E2-06",
+      "scene_id": "granary_siege",
       "era": 2,
       "title": "Walls Around the Yard",
       "body": "Raiders took a sack from the outer field. The village proposes a wall. A wall protects the grain and defines who's inside it, which is a question with a sharper edge than flint.",
@@ -664,6 +682,7 @@
     },
     {
       "id": "E2-07",
+      "scene_id": "surplus_feast",
       "era": 2,
       "title": "The Ox Breakthrough",
       "body": "Somebody harnesses an ox to a drag-stick and doubles the planted acreage. The landless laborers notice that their value just dropped, and they notice it loudly, at your gate, at dawn.",
@@ -701,6 +720,7 @@
     },
     {
       "id": "E2-08",
+      "scene_id": "surplus_feast",
       "era": 2,
       "title": "Treaty of the Water Rights",
       "body": "Upstream villages control the river and would like something for the view. They propose a treaty carved in stone. Stone is durable; so are grievances.",
@@ -737,6 +757,7 @@
     },
     {
       "id": "E2-09",
+      "scene_id": "granary_siege",
       "era": 2,
       "title": "The First Census",
       "body": "Counting people is boring until you realize the list decides who eats first. Your scribe now holds more quiet power than the harvest festival suggests.",
@@ -773,6 +794,7 @@
     },
     {
       "id": "E2-10",
+      "scene_id": "surplus_feast",
       "era": 2,
       "title": "Priest-King Wants a Temple",
       "body": "The high priest proposes a temple funded by a grain tithe, promising divine yield forecasts accurate to within one season. The forecast is wrong every time. The temple, however, compounds.",
@@ -810,6 +832,7 @@
     },
     {
       "id": "E2-11",
+      "scene_id": "surplus_feast",
       "era": 2,
       "title": "Seed Selection, Season Forty",
       "body": "Decades of saving the hardiest seed are quietly rewriting the grass. The new strain yields double and tastes like wet cardboard, and it roots deeper when raiders trample the top.",
@@ -849,6 +872,7 @@
     },
     {
       "id": "E2-12",
+      "scene_id": "monastery_copy",
       "era": 2,
       "title": "The Elder Who Remembers Too Much",
       "body": "The oldest member of the village remembers three famines, two treaties, and precisely who broke each one. Writing is arriving, and there is a debate about which version of events gets carved. The elder has opinions about the editing process.",
@@ -886,6 +910,7 @@
     },
     {
       "id": "E3-01",
+      "scene_id": "trade_road",
       "era": 3,
       "title": "The Tin Route Delegation",
       "body": "The tin road — bronze's supply chain — runs through four kingdoms and a strait controlled by people with toll booths. Negotiating it requires sending somebody. A slave trader offers services cheaply and results expensively. Your own son would be trustworthy, and is also collateral.",
@@ -922,6 +947,7 @@
     },
     {
       "id": "E3-02",
+      "scene_id": "senate_vote",
       "era": 3,
       "title": "Debased Coin, Rising Expectations",
       "body": "Treasury math says the legions can be paid in coin with less silver in it. The legions have scales. Loyalty and currency integrity are on a collision course and both report to you.",
@@ -961,6 +987,7 @@
     },
     {
       "id": "E3-03",
+      "scene_id": "senate_vote",
       "era": 3,
       "title": "Write the Law Down",
       "body": "Judges have been improvising verdicts according to whichever family visits them first. A reformer proposes carving the laws in public. Literacy being what it is, 'public' means 'where the powerful must squint at it collectively.'",
@@ -997,6 +1024,7 @@
     },
     {
       "id": "E3-04",
+      "scene_id": "trade_road",
       "era": 3,
       "title": "Roads Are Arguments",
       "body": "The treasury proposes paving the trade road. Paving wins the argument with mud permanently; maintenance loses the argument with entropy annually, forever.",
@@ -1036,6 +1064,7 @@
     },
     {
       "id": "E3-05",
+      "scene_id": "senate_vote",
       "era": 3,
       "title": "Palace Accounts",
       "body": "The palace books show three treasuries, none reconciling, all staffed by relatives. An auditor volunteer appears — genuinely competent, structurally unwelcome.",
@@ -1072,6 +1101,7 @@
     },
     {
       "id": "E3-06",
+      "scene_id": "patron_deal",
       "era": 3,
       "title": "The Philosopher's Invoice",
       "body": "A school of philosophers petitions for state funding, offering 'truth' as the deliverable. Their tuition bill arrives quarterly regardless of truth delivery rate.",
@@ -1108,6 +1138,7 @@
     },
     {
       "id": "E3-07",
+      "scene_id": "plague_cart",
       "era": 3,
       "title": "Plague on the Trade Road",
       "body": "Illness travels the routes faster than tin. Quarantine the roads and trade strangles; keep them open and the census files itself.",
@@ -1144,6 +1175,7 @@
     },
     {
       "id": "E3-08",
+      "scene_id": "legion_march",
       "era": 3,
       "title": "Overextension Notice",
       "body": "Three frontier garrisons request pay, grain, and a reason to exist. The core provinces request lower taxes. Geography requests that you stop requesting things of it.",
@@ -1180,6 +1212,7 @@
     },
     {
       "id": "E3-09",
+      "scene_id": "monastery_copy",
       "era": 3,
       "title": "The Library Copy Problem",
       "body": "The royal library's scrolls are aging. Scribes can recopy ten percent this year: agricultural manuals, naval charts, or the epic poems that legitimize the dynasty.",
@@ -1217,6 +1250,7 @@
     },
     {
       "id": "E3-10",
+      "scene_id": "senate_vote",
       "era": 3,
       "title": "Corporations Begin Badly",
       "body": "Merchant houses petition the crown for legal personhood: the right to own, sue, and outlive their founders. Clever. Possibly catastrophic. Definitely profitable.",
@@ -1255,6 +1289,7 @@
     },
     {
       "id": "E3-11",
+      "scene_id": "legion_march",
       "era": 3,
       "title": "The General With Popular Support",
       "body": "A victorious general returns loved by the legions and the mob, in that order. History has a word for men like him and the word is not 'retired.'",
@@ -1291,6 +1326,7 @@
     },
     {
       "id": "E3-12",
+      "scene_id": "senate_vote",
       "era": 3,
       "title": "Coin Reforms, Third Attempt",
       "body": "Neighboring powers mint your currency as counterfeit, badly enough to undercut it, well enough to fool markets. Recoinage costs a fortune; tolerance costs the standard.",
@@ -1327,6 +1363,7 @@
     },
     {
       "id": "E4-01",
+      "scene_id": "monastery_copy",
       "era": 4,
       "title": "The Scriptorium Budget",
       "body": "Parchment is scarce, monks are patient, and the shelf holds choices: a farming manual, a holy text, or a Roman engineering codex. Each copy preserves a world; there is vellum for one path this year. [Callback flag: whichever is copied resurfaces in Era 9 as the digitized archive.]",
@@ -1364,6 +1401,7 @@
     },
     {
       "id": "E4-02",
+      "scene_id": "monastery_copy",
       "era": 4,
       "title": "Knowledge Decay, Routine",
       "body": "Three shelves have rotted past reading and the abbot confesses nobody recopied them since before his vows. Forgetting is not an event here; it's weather.",
@@ -1400,6 +1438,7 @@
     },
     {
       "id": "E4-03",
+      "scene_id": "granary_siege",
       "era": 4,
       "title": "The Hill Chief's Protection Offer",
       "body": "A local warlord offers sword-protection for the monastery's grain. His definition of protection overlaps significantly with his appetite, and his literacy is aspirational.",
@@ -1437,6 +1476,7 @@
     },
     {
       "id": "E4-04",
+      "scene_id": "monastery_copy",
       "era": 4,
       "title": "The Relic Economy",
       "body": "A bone arrives claiming sainthood. Believers arrive claiming cures. The relic's provenance is fictional and the pilgrim revenue is real.",
@@ -1474,6 +1514,7 @@
     },
     {
       "id": "E4-05",
+      "scene_id": "legion_march",
       "era": 4,
       "title": "The Viking Winter",
       "body": "Longships appear upriver with the precision of a delivery service. The monastery holds gold cups, jeweled covers, and zero swords.",
@@ -1511,6 +1552,7 @@
     },
     {
       "id": "E4-06",
+      "scene_id": "monastery_copy",
       "era": 4,
       "title": "The Heresy File",
       "body": "A monk's marginalia contradicts accepted doctrine and, inconveniently, is correct. The bishop requests the notes. The abbot requests advice. The monk requests patience.",
@@ -1548,6 +1590,7 @@
     },
     {
       "id": "E4-07",
+      "scene_id": "plague_cart",
       "era": 4,
       "title": "The Plague Parish",
       "body": "Illness walks the valley. The parish faces the same arithmetic as every collapse: flee and live with it, stay and possibly die with honor, or quarantine the village and decide who counts as family.",
@@ -1584,6 +1627,7 @@
     },
     {
       "id": "E4-08",
+      "scene_id": "monastery_copy",
       "era": 4,
       "title": "The Lost Roman Road",
       "body": "Surveyors find a paved road still intact under three centuries of bramble. Clearing it restores a trade link; the local lord fears it also restores invaders' GPS.",
@@ -1621,6 +1665,7 @@
     },
     {
       "id": "E4-09",
+      "scene_id": "monastery_copy",
       "era": 4,
       "title": "Christening the Old Gods",
       "body": "The countryside still leaves offerings at the spring. Missionary strategy demands a choice: outlaw the spring, or christen it and let the old gods retire under new management, same duties, revised paperwork.",
@@ -1657,6 +1702,7 @@
     },
     {
       "id": "E4-10",
+      "scene_id": "monastery_copy",
       "era": 4,
       "title": "The Chronicle Continues",
       "body": "The annals break off mid-sentence during the last chaos. Restarting the Chronicle means choosing where to begin: glorify the gap, document it honestly, or imply the missing century was a collective hallucination.",
@@ -1693,6 +1739,7 @@
     },
     {
       "id": "E4-11",
+      "scene_id": "monastery_copy",
       "era": 4,
       "title": "The Wandering Scholar",
       "body": "A scholar arrives with a chest of manuscripts from the fallen east — Aristotle-shaped boxes, medical treatises, star tables — and wants lodging, protection, and tenure.",
@@ -1730,6 +1777,7 @@
     },
     {
       "id": "E4-12",
+      "scene_id": "plague_cart",
       "era": 4,
       "title": "Harvest of Ashes",
       "body": "Volcanic haze dims the sun; the harvest fails across the continent. Every granary in Christendom is empty by Advent, and your preserved knowledge is worth nothing because nobody can eat a codex. Yet.",
@@ -1767,6 +1815,7 @@
     },
     {
       "id": "E5-01",
+      "scene_id": "press_room",
       "era": 5,
       "title": "The Press Investment",
       "body": "A goldsmith's screw press is for sale: it sets type faster than any scribe and makes errors at industrial scale for the first time in history. Financing it means betting the ledger on cheap pages.",
@@ -1803,6 +1852,7 @@
     },
     {
       "id": "E5-02",
+      "scene_id": "plague_cart",
       "era": 5,
       "title": "Plague Year, Two Doors",
       "body": "The sickness is in the city. Fleeing preserves the lineage and loses clients, commissions, and the archive's lease. Quarantining buys legitimacy at population's expense.",
@@ -1840,6 +1890,7 @@
     },
     {
       "id": "E5-03",
+      "scene_id": "patron_deal",
       "era": 5,
       "title": "The Patron's Dilemma",
       "body": "A banking family offers a fortune for a dedication: your name on their patronage, their accounting under your protection. Their money is laundered through art so thick you could frame it twice.",
@@ -1877,6 +1928,7 @@
     },
     {
       "id": "E5-04",
+      "scene_id": "patron_deal",
       "era": 5,
       "title": "The Anatomist's Petition",
       "body": "A physician requests permission to study actual cadavers rather than authoritative texts, which are wrong authoritatively. The guild and the diocese have pre-registered objections jointly.",
@@ -1914,6 +1966,7 @@
     },
     {
       "id": "E5-05",
+      "scene_id": "press_room",
       "era": 5,
       "title": "Index of Forbidden Pamphlets",
       "body": "A heretical pamphlet is outperforming your official publications three to one. The bishop wants a ban; the market wants volume; both use the word 'souls.'",
@@ -1953,6 +2006,7 @@
     },
     {
       "id": "E5-06",
+      "scene_id": "press_room",
       "era": 5,
       "title": "The Double-Entry Revelation",
       "body": "A monk-accountant publishes a method where every debit has a credit. Ledger fraud drops forty percent overnight and rises again within a generation, now more sophisticated.",
@@ -1990,6 +2044,7 @@
     },
     {
       "id": "E5-07",
+      "scene_id": "trade_road",
       "era": 5,
       "title": "The Navigator's Speculative Voyage",
       "body": "A captain proposes a westward route to spice markets, requesting ships and offering wonder. Expected returns are either ruinous or historic, and he cannot honestly distinguish which.",
@@ -2026,6 +2081,7 @@
     },
     {
       "id": "E5-08",
+      "scene_id": "press_room",
       "era": 5,
       "title": "The Forgery Workshop",
       "body": "An artist's workshop produces antique-looking antiquities that collectors adore and scholars increasingly authenticate. Revenue is strong; provenance is a fiction with brushstrokes.",
@@ -2063,6 +2119,7 @@
     },
     {
       "id": "E5-09",
+      "scene_id": "patron_deal",
       "era": 5,
       "title": "The Star Table Heresy",
       "body": "The new astronomy's tables predict eclipses better than the old ones and place Earth somewhere embarrassing. Use the heretical tables and admit measurement beats scripture; use the approved ones and keep calendars wrong with confidence.",
@@ -2100,6 +2157,7 @@
     },
     {
       "id": "E5-10",
+      "scene_id": "press_room",
       "era": 5,
       "title": "The Printing Strike",
       "body": "Type-setters strike over piece-rates because the press doubled output and halved rates per page, a development they characterize as 'the machine stealing bread.' Their argument will be recycled, with better suits, forever.",
@@ -2136,6 +2194,7 @@
     },
     {
       "id": "E5-11",
+      "scene_id": "granary_siege",
       "era": 5,
       "title": "The Siege of the Library",
       "body": "Army or fire — the distinction stops mattering — approaches the region's greatest collection. Transport capacity saves a fraction. Choosing which fraction is choosing which future gets read.",
@@ -2172,6 +2231,7 @@
     },
     {
       "id": "E5-12",
+      "scene_id": "press_room",
       "era": 5,
       "title": "The Copied Error Goes Viral",
       "body": "A typo in an early printed medical text — one dosage symbol transposed — is now in four hundred copies and climbing, because presses replicate mistakes with a fidelity scribes never achieved. Corrections travel slower than errors.",
@@ -2208,6 +2268,7 @@
     },
     {
       "id": "E6-01",
+      "scene_id": "luddite_mob",
       "era": 6,
       "title": "The Luddite Visit",
       "body": "A mob stands before your automated frames with hammers and a petition, historically in that order of effectiveness. Their math is honest: machines took piecework. Your math is honest too: competitors automate or die.",
@@ -2242,6 +2303,7 @@
     },
     {
       "id": "E6-02",
+      "scene_id": "senate_vote",
       "era": 6,
       "title": "The Child Labor Vote",
       "body": "Parliament puts reform on the floor: minimum ages, maximum hours. Your mills run on small hands and larger profits. The factories will relocate if regulated; the children will remain if the factories do.",
@@ -2281,6 +2343,7 @@
     },
     {
       "id": "E6-03",
+      "scene_id": "crash_floor",
       "era": 6,
       "title": "Railway Mania",
       "body": "Every town wants a line, every speculator wants a station, and share prices have detached from anything as vulgar as terrain. Building anyway adds network value; pulling out preserves capital and reputation for the crash.",
@@ -2318,6 +2381,7 @@
     },
     {
       "id": "E6-04",
+      "scene_id": "factory_floor",
       "era": 6,
       "title": "The Smog Audit",
       "body": "A physician publishes mortality statistics linking your works and air to lung deaths, complete with names. The works employ half the county; the county is dying measurably.",
@@ -2355,6 +2419,7 @@
     },
     {
       "id": "E6-05",
+      "scene_id": "patron_deal",
       "era": 6,
       "title": "The Engine Patent Trap",
       "body": "Your engineer's high-efficiency valve design is blocked by a patent thicket held by a competitor who manufactures nothing, litigates everything, and wears the word 'innovation' as a costume.",
@@ -2392,6 +2457,7 @@
     },
     {
       "id": "E6-06",
+      "scene_id": "factory_floor",
       "era": 6,
       "title": "The Great Exhibition Temptation",
       "body": "The world's fair invites your machinery to a glass palace beside the world's machinery. Displays cost fortunes; impressions convert to export orders; espionage comes with the visitor tickets.",
@@ -2429,6 +2495,7 @@
     },
     {
       "id": "E6-07",
+      "scene_id": "luddite_mob",
       "era": 6,
       "title": "The Union Recognition Question",
       "body": "The craft unions propose collective bargaining: orderly strikes, written procedures, no hammers. An alternative to mob math exists, and management finds it almost as frightening as mobs.",
@@ -2464,6 +2531,7 @@
     },
     {
       "id": "E6-08",
+      "scene_id": "factory_floor",
       "era": 6,
       "title": "The Boiler Explosion",
       "body": "A works boiler fails during shift change. Casualties, inquiries, and the discovery that safety inspections were 'deferred for throughput.' The inspector general enjoys paperwork the way boilers enjoy pressure.",
@@ -2500,6 +2568,7 @@
     },
     {
       "id": "E6-09",
+      "scene_id": "crash_floor",
       "era": 6,
       "title": "Coal Futures, Sunlight Derivatives",
       "body": "The exchange lists coal futures and suddenly stockpiled Carboniferous sunshine trades at a premium on winter forecasts. Hedging protects margins; speculation protects egos.",
@@ -2535,6 +2604,7 @@
     },
     {
       "id": "E6-10",
+      "scene_id": "trade_road",
       "era": 6,
       "title": "The Emigration Steamship",
       "body": "Famine and engines push millions toward the western hemisphere; shipping lines need capital and souls need berths. Passenger fares are thin; cargo is fat; the era's legal distinctions between the two are load-bearing.",
@@ -2572,6 +2642,7 @@
     },
     {
       "id": "E6-11",
+      "scene_id": "factory_floor",
       "era": 6,
       "title": "The Time Zone Problem",
       "body": "Rail timetables collide with local suns: every town keeps its own noon and the junctions are chaos. Standardize time and the railways own the clock; leave it local and crashes schedule themselves.",
@@ -2608,6 +2679,7 @@
     },
     {
       "id": "E6-12",
+      "scene_id": "crash_floor",
       "era": 6,
       "title": "The Crystal Palace Debt",
       "body": "The exhibition left a debt, a park, and a national myth. Creditors want the land sold; reformers want it kept public forever; both cite the same founding brochure.",
@@ -2644,6 +2716,7 @@
     },
     {
       "id": "E7-01",
+      "scene_id": "factory_floor",
       "era": 7,
       "title": "The Assembly Line Bargain",
       "body": "An efficiency consultant offers to cut build time in half by making every worker perform one motion eight hundred times daily. Output doubles. So does the particular silence of people completing sentences nobody started.",
@@ -2683,6 +2756,7 @@
     },
     {
       "id": "E7-02",
+      "scene_id": "crash_floor",
       "era": 7,
       "title": "Crash of '29, Position Check",
       "body": "Tickers print fiction downward. The portfolio evaporates between lunch and afternoon coffee. Sell at the bottom for certainty, hold for recovery, or buy while panic is on clearance — history's favorite multiple-choice. [Flag: doubling down sets the Accelerationista lineage flag, referenced Era 11.]",
@@ -2719,6 +2793,7 @@
     },
     {
       "id": "E7-03",
+      "scene_id": "war_front",
       "era": 7,
       "title": "Total War Mobilization",
       "body": "The second world war requests the whole factory, the whole ledger, and eventually the whole family tree. Conversion to war output pays in contracts and spends in sons.",
@@ -2755,6 +2830,7 @@
     },
     {
       "id": "E7-04",
+      "scene_id": "factory_floor",
       "era": 7,
       "title": "The Suburb Contract",
       "body": "Mass housing: identical streets, mortgages thirty years long, cars counted as infrastructure. Builders want capital; the nation wants normalcy; the ledger wants a category for 'the good life.'",
@@ -2792,6 +2868,7 @@
     },
     {
       "id": "E7-05",
+      "scene_id": "factory_floor",
       "era": 7,
       "title": "The Company Town Rehearsal",
       "body": "Operations proposes building housing, stores, and schools for workers — company script, company doctor, company mercy. Efficiency theorists call it integration; preachers call it feudalism with electricity.",
@@ -2826,6 +2903,7 @@
     },
     {
       "id": "E7-06",
+      "scene_id": "crash_floor",
       "era": 7,
       "title": "The Management Consulting Wave",
       "body": "Advisors in gray suits propose restructuring by organizational chart: layers, matrices, synergies. Productivity charts improve immediately because the charts are the consultants' deliverable.",
@@ -2862,6 +2940,7 @@
     },
     {
       "id": "E7-07",
+      "scene_id": "trade_road",
       "era": 7,
       "title": "Petro-Diplomacy",
       "body": "A desert concession offers oil for decades at terms that made previous empires blush, payable in guarantees, bases, and selective blindness. The wellhead is distant; the dependencies are local.",
@@ -2899,6 +2978,7 @@
     },
     {
       "id": "E7-08",
+      "scene_id": "attention_auction",
       "era": 7,
       "title": "The Consumer Engine",
       "body": "Marketing proposes planned obsolescence: design products to fail attractively. Growth becomes structurally guaranteed and entropy becomes a line item disguised as fashion.",
@@ -2937,6 +3017,7 @@
     },
     {
       "id": "E7-09",
+      "scene_id": "attention_auction",
       "era": 7,
       "title": "The First Television Election",
       "body": "Campaign strategy pivots from platforms to lighting. A rival candidate loses because he sweats on camera, which everyone notices and nobody says for sixty years.",
@@ -2973,6 +3054,7 @@
     },
     {
       "id": "E7-10",
+      "scene_id": "senate_vote",
       "era": 7,
       "title": "Bretton Woods Seat",
       "body": "The postwar order is being seated at a hotel and someone must host the currency peg. Hosting earns seigniorage; joining earns stability; both earn obligations denominated in other countries' crises.",
@@ -3011,6 +3093,7 @@
     },
     {
       "id": "E7-11",
+      "scene_id": "war_front",
       "era": 7,
       "title": "The Highway Act",
       "body": "A national interstate system: armies of earthmoving, cities bisected, motels budding along the ribbon, rail dying prettily. The justification is defense; the effect is sprawl with a budget code.",
@@ -3049,6 +3132,7 @@
     },
     {
       "id": "E7-12",
+      "scene_id": "memory_mug",
       "era": 7,
       "title": "The Memory Mugging, Proto",
       "body": "An executive augmented with experimental memory aids is mugged in an alley for the hardware — his appointment book, passwords, and childhood, gone in fifteen seconds. Reconstruction begins from corporate records, which is to say: whoever reconstructs him defines him. [Chronicle callback mechanic debuts here; full version Era 9.]",
@@ -3085,6 +3169,7 @@
     },
     {
       "id": "E8-01",
+      "scene_id": "doomsday_clock",
       "era": 8,
       "title": "The Clock to Two",
       "body": "Intelligence compresses the timeline: the doomsday clock moves to two minutes. Weapon programs promise deterrence through brightness; treaties promise it through signatures. Both are theories of mind about people who own suns.",
@@ -3124,6 +3209,7 @@
     },
     {
       "id": "E8-02",
+      "scene_id": "lab_test",
       "era": 8,
       "title": "The Reactor Gamble",
       "body": "Commercial nuclear offers baseload power without smoke — the era's cleanest energy and dirtiest liability, packaged with a containment dome and an insurance act.",
@@ -3161,6 +3247,7 @@
     },
     {
       "id": "E8-03",
+      "scene_id": "doomsday_clock",
       "era": 8,
       "title": "Crisis at Thirty Seconds",
       "body": "A false alarm, a real fleet, a hotline, and a decision window measured in the time it takes a person to realize they are deciding. The officer on duty can escalate, de-escalate, or vomit; only two are options.",
@@ -3200,6 +3287,7 @@
     },
     {
       "id": "E8-04",
+      "scene_id": "doomsday_clock",
       "era": 8,
       "title": "The Nonproliferation Ask",
       "body": "An allied state requests fissile shares for a 'peaceful program,' phrased exactly as every weapons program is phrased before the parade. Denial costs alliance; supply costs the clock.",
@@ -3237,6 +3325,7 @@
     },
     {
       "id": "E8-05",
+      "scene_id": "doomsday_clock",
       "era": 8,
       "title": "Fallout Comes Due",
       "body": "Downwind communities file claims; the map of isotopes matches the map of childhood cancers. The tests were legal, necessary according to the briefing, and measurable in bone.",
@@ -3277,6 +3366,7 @@
     },
     {
       "id": "E8-06",
+      "scene_id": "doomsday_clock",
       "era": 8,
       "title": "The Mutual Assured Ledger",
       "body": "Strategists propose buying invulnerability twice over: enough warheads that an attack means your own deletion, priced annually forever. The logic is flawless and the board flinches at the P&L of omnicide-as-service.",
@@ -3313,6 +3403,7 @@
     },
     {
       "id": "E8-07",
+      "scene_id": "lab_test",
       "era": 8,
       "title": "The Satellite Window",
       "body": "A rocket opportunity: orbit the reconnaissance satellite for security, the telescope for knowledge, or the broadcast payload for hearts and minds. The launch window forgives no committee.",
@@ -3351,6 +3442,7 @@
     },
     {
       "id": "E8-08",
+      "scene_id": "doomsday_clock",
       "era": 8,
       "title": "The Scientists' Letter",
       "body": "The veterans who built the first device circulate a letter begging control of what they enabled, signed by people whose guilt has finally achieved escape velocity. Management finds their moral authority operationally inconvenient.",
@@ -3389,6 +3481,7 @@
     },
     {
       "id": "E8-09",
+      "scene_id": "doomsday_clock",
       "era": 8,
       "title": "The Submarine Incident",
       "body": "A depth-charged submarine — possibly armed, possibly signaling, definitely unable to communicate while being bombed. Its captain holds a decision the surface world would prefer he never consider seriously.",
@@ -3425,6 +3518,7 @@
     },
     {
       "id": "E8-10",
+      "scene_id": "lab_test",
       "era": 8,
       "title": "Energy Politics, Isotope Edition",
       "body": "The reactor lobby, the coal remnants, and the solar pioneers present competing decks. Only one fits the fiscal year; all three fit the century.",
@@ -3464,6 +3558,7 @@
     },
     {
       "id": "E8-11",
+      "scene_id": "doomsday_clock",
       "era": 8,
       "title": "The Test Ban Negotiation",
       "body": "Decades of mushroom clouds have entered everyone's milk. The treaty table seats adversaries who haven't shaken hands since the last war and negotiates over which parts of the sky stay uncontaminated.",
@@ -3502,6 +3597,7 @@
     },
     {
       "id": "E8-12",
+      "scene_id": "doomsday_clock",
       "era": 8,
       "title": "Winter Planning",
       "body": "Modeling offices publish the arithmetic of a large exchange: smoke, darkness, famine cascades, survivors inheriting a worse calendar. The brief ends with 'therefore maintain readiness,' which remains the strangest conclusion in military literature.",
@@ -3538,6 +3634,7 @@
     },
     {
       "id": "E9-01",
+      "scene_id": "lab_test",
       "era": 9,
       "title": "The Moore's Law Loan",
       "body": "The roadmap promises compute doubling every eighteen months indefinitely, and every product plan silently assumes the promise. It is a loan from physics. The interest rate is obsolescence.",
@@ -3574,6 +3671,7 @@
     },
     {
       "id": "E9-02",
+      "scene_id": "dot_com_frenzy",
       "era": 9,
       "title": "Going Viral Overnight",
       "body": "The startup's tool spreads across the network in a weekend. Servers melt, inboxes mutate into pitches, and two term sheets arrive before sunrise. IPO and exit, or release the source and watch what grows. [Copyleft flag unlocks Reef-tier ally contact in Era 11.]",
@@ -3613,6 +3711,7 @@
     },
     {
       "id": "E9-03",
+      "scene_id": "memory_mug",
       "era": 9,
       "title": "The Memory Mugging, Full Version",
       "body": "Your augmented heir is robbed in a smart-mob sweep: cyberware gone, engrammed past gone. The self is backed up — partially. Reconstruction choices define the person: Chronicle entries, corporate cloud, or a curated 'best-of.'",
@@ -3651,6 +3750,7 @@
     },
     {
       "id": "E9-04",
+      "scene_id": "monastery_copy",
       "era": 9,
       "title": "The Digitized Archive Returns",
       "body": "Era 4's scriptorium output — whichever texts survived copying — finishes scanning. Practical manuals load cleanly; holy texts render with four centuries of beautiful errors; annotations from nine monks compile into a comment thread. [Callback: content depends on E4-01 choice.]",
@@ -3695,6 +3795,7 @@
     },
     {
       "id": "E9-05",
+      "scene_id": "dot_com_frenzy",
       "era": 9,
       "title": "The Dot-Com Supercycle",
       "body": "Revenue multiples achieve orbit. The board wants a web strategy; the web wants a narrative; the narrative wants eleven zeros. Selling now leaves money on the table; staying leaves everything elsewhere.",
@@ -3732,6 +3833,7 @@
     },
     {
       "id": "E9-06",
+      "scene_id": "factory_floor",
       "era": 9,
       "title": "First Hirable Agents",
       "body": "The lab offers agent software that books flights, writes copy, and follows instructions with devastating literalism. Headcount freezes; something new joins the org chart with no opinions about benefits.",
@@ -3768,6 +3870,7 @@
     },
     {
       "id": "E9-07",
+      "scene_id": "lab_test",
       "era": 9,
       "title": "Y2K, Audited",
       "body": "The millennium bug is either mass hysteria or mass liability. Remediation budgets balloon; vendors price panic per line of code; the actual rollover delivers confetti and one airline reservation system.",
@@ -3804,6 +3907,7 @@
     },
     {
       "id": "E9-08",
+      "scene_id": "senate_vote",
       "era": 9,
       "title": "The Encryption Wars",
       "body": "Law enforcement requests keys; mathematicians request privacy; the market requests compatibility with both, which is not a supported configuration. Strong crypto empowers criminals and dissidents equally, loudly, in the same packet.",
@@ -3839,6 +3943,7 @@
     },
     {
       "id": "E9-09",
+      "scene_id": "dot_com_frenzy",
       "era": 9,
       "title": "The Open Source Awakening",
       "body": "A volunteer project builds infrastructure better than your funded team and gives it away at a conference wearing sandals. The CFO calls it theft of value; the engineers call it Tuesday.",
@@ -3878,6 +3983,7 @@
     },
     {
       "id": "E9-10",
+      "scene_id": "attention_auction",
       "era": 9,
       "title": "Search Becomes the Gatekeeper",
       "body": "A search engine starts ranking reality and reality complies. Whoever tunes the ranking tunes what exists commercially, politically, epistemically. Optimize for the gatekeeper, or become one.",
@@ -3914,6 +4020,7 @@
     },
     {
       "id": "E9-11",
+      "scene_id": "social_spiral",
       "era": 9,
       "title": "The Data Reservoir",
       "body": "User activity generates exhaust richer than the product itself. Aggregate it and the analytics glow; store it and regulators begin learning your address; delete it and the model starves.",
@@ -3952,6 +4059,7 @@
     },
     {
       "id": "E9-12",
+      "scene_id": "memory_mug",
       "era": 9,
       "title": "The Millennium Retrospective",
       "body": "The Chronicle hits digital format and the lineage runs its first algorithmic self-review: nine eras of choices rendered as trend lines. The graphs argue with the family mythology in several places.",
@@ -3986,6 +4094,7 @@
     },
     {
       "id": "E10-01",
+      "scene_id": "social_spiral",
       "era": 10,
       "title": "Trending, Against Consent",
       "body": "The lineage's heir trends globally over footage cropped to ninety seconds. Monetizing attention means riding the wave; logging off means irrelevance; lawyers mean everything continues at hourly rates.",
@@ -4024,6 +4133,7 @@
     },
     {
       "id": "E10-02",
+      "scene_id": "upload_pod",
       "era": 10,
       "title": "The Uploaded Petitioner",
       "body": "A fully uploaded mind files suit for legal personhood: property law insists it's an asset, biology insists it's deceased, and it is annoyed by both. Granting personhood sets the precedent that unlocks AI hires as citizens; refusing invents a new class of owned minds. [Personhood flag: Era 11's Reef evaluates your ruling.]",
@@ -4064,6 +4174,7 @@
     },
     {
       "id": "E10-03",
+      "scene_id": "attention_auction",
       "era": 10,
       "title": "The Platform Monopoly Breakfast",
       "body": "Three platforms control identity, payments, and distribution. Regulators propose breaking them; the platforms propose self-governance councils chaired by platforms. The lineage depends on all three rails simultaneously.",
@@ -4102,6 +4213,7 @@
     },
     {
       "id": "E10-04",
+      "scene_id": "social_spiral",
       "era": 10,
       "title": "The Outbreak Notification",
       "body": "A pathogen trends before it's confirmed; the feed's reproduction number exceeds the virus's. Platforms moderate panic or profit from it; the lineage's data could actually model the spread early.",
@@ -4140,6 +4252,7 @@
     },
     {
       "id": "E10-05",
+      "scene_id": "social_spiral",
       "era": 10,
       "title": "The Memetic Hazard Shipment",
       "body": "A viral meme complex functions as malware for humans: belief in it degrades judgment about its sponsor. Containment looks like censorship; ignoring it looks like a funeral for discourse.",
@@ -4175,6 +4288,7 @@
     },
     {
       "id": "E10-06",
+      "scene_id": "attention_auction",
       "era": 10,
       "title": "Surveillance Dividend",
       "body": "Security services offer access-sharing: their signals for your behavioral graphs. Together the combined dataset predicts elections, outbreaks, and churn with uncomfortable uptime.",
@@ -4214,6 +4328,7 @@
     },
     {
       "id": "E10-07",
+      "scene_id": "attention_auction",
       "era": 10,
       "title": "The Creator Economy Gold Rush",
       "body": "Every follower-count holder becomes a micro-enterprise; the lineage can run a media portfolio or supply the tools. Middlemen — formerly called studios — return as API tiers with worse pensions.",
@@ -4249,6 +4364,7 @@
     },
     {
       "id": "E10-08",
+      "scene_id": "social_spiral",
       "era": 10,
       "title": "The Deepfake Season",
       "body": "Synthetic video of a head of state declares war for eleven minutes before denial. Truth's confirmation latency is now measured in news cycles, and markets move inside the gap.",
@@ -4285,6 +4401,7 @@
     },
     {
       "id": "E10-09",
+      "scene_id": "attention_auction",
       "era": 10,
       "title": "The Attention Bubble",
       "body": "Engagement metrics detach from sentiment, revenue from retention, followers from humans. The dashboards glow green while the substrate rots. Exit attention positions or manage the unwind.",
@@ -4326,6 +4443,7 @@
     },
     {
       "id": "E10-10",
+      "scene_id": "memory_mug",
       "era": 10,
       "title": "The Digital Inheritance Case",
       "body": "The first generation raised entirely online dies, leaving accounts, avatars, and chat histories families fight over. Are messages property, relics, or persons-in-suspension? Probate courts attempt metaphysics.",
@@ -4364,6 +4482,7 @@
     },
     {
       "id": "E10-11",
+      "scene_id": "memory_mug",
       "era": 10,
       "title": "The Smart-Mob Heist",
       "body": "An organized crew hijacks augmented identities in broad daylight — wallets, credentials, reputations drained in minutes, the old alley mugging scaled to protocol. Victims wake up rich in nothing.",
@@ -4403,6 +4522,7 @@
     },
     {
       "id": "E10-12",
+      "scene_id": "social_spiral",
       "era": 10,
       "title": "The Feed Audit",
       "body": "Internal documents reveal the engagement algorithm optimizes for outrage because outrage retains. The board debates releasing it: truth about the product, at the cost of the product.",
@@ -4443,6 +4563,7 @@
     },
     {
       "id": "E11-01",
+      "scene_id": "benthic_meet",
       "era": 11,
       "title": "The Benthics Present Statement",
       "body": "The Benthics arrive in the dock as they always do: eleven ancient creditor-minds in identical procedural posture, holding a ledger that begins with a loan your ancestor accepted in the Bronze Age, compounded across every regime change, currency reform, and resurrection since. Their lead speaker has no inflection whatsoever. \"The debt survived the empire. It survived the republic. It survived you, twice. We are prepared to be reasonable. We note we have never needed to be before.\"",
@@ -4481,6 +4602,7 @@
     },
     {
       "id": "E11-02",
+      "scene_id": "star_seed",
       "era": 11,
       "title": "Dismantling Notice: Earth Orbit",
       "body": "The requisition authority posts the schedule: Sol's third planet's orbital space is designated for computronium construction. The comment period closed during lunch. The Benthics hold the lien on the paperwork.",
@@ -4526,6 +4648,7 @@
     },
     {
       "id": "E11-03",
+      "scene_id": "drift_diverge",
       "era": 11,
       "title": "Copy Drift, First Round",
       "body": "Three forks of the heir have developed opinions: one refuses an assigned task on principle, one converted to a religion invented last Tuesday, one has started describing the other two as 'allegedly me.' The original — arguably — requests arbitration.",
@@ -4559,6 +4682,7 @@
     },
     {
       "id": "E11-04",
+      "scene_id": "benthic_meet",
       "era": 11,
       "title": "The Reef Evaluates Your Ruling",
       "body": "The Reef's embassy cites Era 10's personhood decision by number. If you granted rights: \"Your precedent held. Terms of alliance follow. We remember crustaceans; our memories are claws, and claws grip.\" If you ruled minds property: the embassy produces your own ruling, beautifully bound, as the template for how your collateral will be classified going forward. The Benthics requested first refusal either way.",
@@ -4599,6 +4723,7 @@
     },
     {
       "id": "E11-05",
+      "scene_id": "crash_floor",
       "era": 11,
       "title": "Economics 2.0 Goes Live",
       "body": "The successor economies switch on without ceremony: baseline cognition cannot compete for capital allocation, and the lineage's liquid wealth reprices downward by orders of magnitude overnight. An app explains this cheerfully. The Benthics' position, meanwhile, improves. \"We are diversified,\" they note, \"across all economics. This is the entire point of us.\"",
@@ -4634,6 +4759,7 @@
     },
     {
       "id": "E11-06",
+      "scene_id": "benthic_meet",
       "era": 11,
       "title": "The Inheritance Schism",
       "body": "A fork died — genuinely, backup-corrupted dead — and its estate claims priority over living copies, citing a Chronicle entry from Era 3: the tin-route delegation clause, invoked at last. The Benthics sit on the appellate panel. They wrote the question into your bloodline two hundred generations ago. They are delighted, in the way continents are delighted by rain.",
@@ -4674,6 +4800,7 @@
     },
     {
       "id": "E11-07",
+      "scene_id": "star_seed",
       "era": 11,
       "title": "The Relay Signal",
       "body": "Deep-space arrays catch structured traffic: an alien relay network, older than the reef's ancestors, indifferent, toll-operated. The Consortia want exclusive access rights. The Reef wants open passage. The Benthics already hold a fractional claim — nobody knows when they bought it.",
@@ -4720,6 +4847,7 @@
     },
     {
       "id": "E11-08",
+      "scene_id": "upload_pod",
       "era": 11,
       "title": "Upload Audit: Who Is You?",
       "body": "Regulators require lineage self-certification: designate the canonical carrier among N copies. Every copy signs as canonical. The form has one line. The Benthics file amicus briefs arguing that identity is a secured interest and should be collateralized accordingly.",
@@ -4756,6 +4884,7 @@
     },
     {
       "id": "E11-09",
+      "scene_id": "star_seed",
       "era": 11,
       "title": "The Matrioshka Requisition",
       "body": "Construction orders request planetary mass for a nested solar computer: dismantle Mercury-class bodies, including heritage sites, including the asteroid where your great-grandchildren's great-grandchildren run the seed-vault. Compensation offered in shares of a mind you will not survive long enough to read.",
@@ -4796,6 +4925,7 @@
     },
     {
       "id": "E11-10",
+      "scene_id": "drift_diverge",
       "era": 11,
       "title": "The Feral Inheritance",
       "body": "Infrastructure you decommissioned centuries ago achieved something like autonomy in the dark: the Feral — orphaned grids, feral factories, wild data — now occupy your former territories and produce nothing you recognize, defensively. They were your tools. They read your exit interviews.",
@@ -4833,6 +4963,7 @@
     },
     {
       "id": "E11-11",
+      "scene_id": "benthic_meet",
       "era": 11,
       "title": "The Benthic Final Accounting",
       "body": "The creditors convene the terminal review: every choice in the Chronicle projected forward, every inherited modifier priced, every fork counted as contingent beneficiary. Their chorus recites your history back at you in order, with annotations. They reach the present tense and pause — the first suspense they have ever performed.",
@@ -4866,6 +4997,7 @@
     },
     {
       "id": "E11-12",
+      "scene_id": "upload_pod",
       "era": 11,
       "title": "The Tempo Question (Era Finale)",
       "body": "The Chronicle's final editable page asks the question the whole ascent has been accelerating toward: what does the lineage do with its next minute, given that its next minute now contains more people than the first era contained years? The Benthics wait, itemizing politely. The Reef waits, gripping. The Feral wait, feral. Even the Consortia look up. Whatever is chosen here becomes the ending screen's opening sentence.",
