@@ -91,7 +91,7 @@ Rules for Forge:
 
 | Agent | File(s) | Contract |
 |---|---|---|
-| **Scout** (bosgame Qwen3.8) | `research/source-digest.md` | ≤120 lines: the source novel's actual plot beats/terminology (Manfred, the Lobsters, the Vile Offspring, economic aliens, the router), historical-era flavor hooks worth stealing, and 10-15 concrete event ideas mapped to eras. Practical, no fluff. |
+| **Scout** (bosgame Qwen3.8) | `research/source-digest.md` | ≤120 lines: the source novel's plot beats and ideas — studied for STRUCTURE and tone only. DO NOT import proper nouns (no character/relic/faction names from the book). Exception: lobster-themed AI agents stay, under original names (see §8). Include historical-era flavor hooks worth stealing, and 10-15 concrete event ideas mapped to eras. Practical, no fluff. |
 | **Studio** (gpt-6-luna) | `research/visual-assets.md` | Complete asset map: parametric stick-figure pose list per era (prop + palette), background/style tokens per era, UI element inventory, icon set, app icons/splash for iOS/Android. Deliver as structured markdown tables; NO image files yet. |
 | **Scribe** (GLM) | `research/copy-deck.md` | Full copy deck keyed by era: 11 era intro cards (80-120w each), 12+ event texts each era (title+body+2-4 choices w/ flavor), Chronicle line templates, UI strings, 5 ending texts (150-200w), store listings (App Store + Play, 400w). Voice: dry wit, Stross-adjacent. |
 | **Forge** (GLM) | the codebase | Implements §4 exactly; era data driven by `src/data/eras.json` + `events.json` so Scribe's deck drops in without code edits. Test suite must exit 0. |
@@ -108,3 +108,17 @@ Rules for Forge:
 
 ## 7. Working name
 **THE LONG ASCENT** — final name. Repo: `the-long-ascent`.
+
+## 8. Original-names rule + the Lobsters
+All proper nouns from the source novel are OFF LIMITS in shipped content (characters,
+factions, artifacts, places). Scout's digest names them only so we understand the
+SOURCE OF the ideas; Scribe must invent originals for anything structural we borrow:
+distributed-AI "personality uploads" (ours: **the Reef**), post-human corporations
+(ours: **the Consortia**), incomprehensible fast-thinkers (ours: **the Feral**).
+
+**The one exception — lobsters stay.** Lobster-flavored distributed AI is public-domain
+marine biology humor and too good to lose. Ours are **the Benthics**: lobster-derived
+minds running on ocean-floor compute, first contacted in the Digital Dawn era,
+recurring through the endgame as deadpan creditors and reluctant allies. Scribe
+writes them as a Greek chorus with claws. Studio's asset map: one benthic pose
+(claw raised, contract in claw), era palettes only.
