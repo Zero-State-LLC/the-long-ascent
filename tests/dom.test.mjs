@@ -70,7 +70,7 @@ const eventsData = JSON.parse(readFileSync(new URL('../src/data/events.json', im
 test('app boots on the title screen and starts a lineage', async () => {
   const { bootApp } = await import('../src/ui/dom-boot.js');
   const app = bootApp({ erasData, eventsData });
-  assert.ok(registry.get('#title-screen').textContent.includes('ACCELERANDO'), 'title splash rendered');
+  assert.ok(registry.get('#title-screen').textContent.includes('THE LONG ASCENT'), 'title splash rendered');
   assert.equal(app.game.state.era, 1);
   // click New Lineage
   const neu = findDeep(registry.get('#title-screen'), (n) => n.tagName === 'button' && n.textContent.includes('New Lineage'));
