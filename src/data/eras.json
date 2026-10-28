@@ -1,0 +1,723 @@
+{
+  "gameTitle": "THE LONG ASCENT",
+  "tagline": "You are a lineage, not a person.",
+  "uiStrings": {
+    "title": "ACCELERANDO: THE LONG ASCENT",
+    "tagline": "You are a lineage, not a person.",
+    "buttons": [
+      "New Lineage",
+      "Continue",
+      "Chronicle",
+      "Settings",
+      "Export Save",
+      "Import Code"
+    ],
+    "tooltips": {
+      "sustenance": "Whatever this era eats. It changes flavors, never appetite.",
+      "knowledge": "Things that survive you, if filed well.",
+      "population": "Mouths now. Instances later. Complaints throughout.",
+      "infrastructure": "Arguments won against geography. Renew annually.",
+      "legitimacy": "The story others accept about why it’s you.",
+      "entropy": "The only resource that always compounds. Checkmate available anytime."
+    },
+    "eraProgress": "{era} — {pct}% toward becoming someone else.",
+    "doomsdayClock": "Minutes to midnight: {n}. Please stop checking it. Too late.",
+    "copyCount": "You × {n}. Disagreements: {m}.",
+    "save": "Lineage checkpointed.",
+    "load": "Ancestor restored. They have notes.",
+    "eventModal": [
+      "Decision required.",
+      "Your ancestors will judge this. Some of them are you."
+    ],
+    "choiceHover": "Consequences ripple forward. Ripples invoice.",
+    "flagGained": "Legacy acquired. Non-transferable. Mostly.",
+    "deathHeir": "Carrier expired. Cause: {cause}. Heir assumes the pattern. Estate tax: 10% of {resource}, paid to nobody, felt by everyone.",
+    "eraTransition": "The pace quickens. It always quickens.",
+    "settingsSpeed": "Adagio → Presto — eras run shorter. So does everything.",
+    "settingsMotion": "Stick figures respect your vestibular system.",
+    "settingsReset": "End the lineage. The Benthics will be notified. They always know.",
+    "toastCorrupt": "Save corrupted. Reconstructing from Chronicle…",
+    "toastInsufficient": "Insufficient {resource}. Your ancestors did this in a cave. Worse.",
+    "toastDrift": "Copy drift exceeds tolerance. They’re holding a meeting. You are not invited. You are the subject.",
+    "toastEraSurvived": "Achievement unlocked: survived another era. Statistically improbable. Regrettably repeatable."
+  },
+  "eras": [
+    {
+      "num": 1,
+      "name": "THE CAVE",
+      "intro": "You are not a person. You are a lineage — a stubborn pattern that keeps finding ways to wear stick figures. It begins cold, wet, and calorie-deficient, in a band of nine who mostly like each other. Food is the only stock ticker that matters. Fire is on offer, theft from lightning, and somebody will have to be the first to hold it without running. Death happens here, but it is not the end of you — merely a change of management. Learn to give meat away for status, because generosity is older than money and twice as cutthroat. The pace is adagio. Enjoy it. Nothing you build after this will stay this quiet, or this warm, or this small.",
+      "signatureResource": "food",
+      "sustenanceLabel": "Food",
+      "progressTarget": 100,
+      "ticksPerChoice": 10,
+      "tickRate": {
+        "sustenance": 3,
+        "knowledge": 0.5,
+        "population": 0.5,
+        "infrastructure": 0.2,
+        "legitimacy": 0.2,
+        "entropy": 0
+      }
+    },
+    {
+      "num": 2,
+      "name": "AGRICULTURE",
+      "intro": "You bent a grass into a crop and the crop bent you back. Now the lineage stands in fields it cannot leave, watching grain do what grain does: accumulate. Surplus is the era's magic trick — storable wealth, which means hierarchy, debt, and law codes chiseled into stone because somebody needed proof. The granary is the first bank and the first target. Population grows because food grew, and every extra mouth is both a workforce and an argument. Somewhere a neighbor is eyeing your stored harvest with what you choose to interpret as friendship. Dig the irrigation ditch. Count the sacks. Sign nothing carved in basalt without reading it twice.",
+      "signatureResource": "grain",
+      "sustenanceLabel": "Grain",
+      "progressTarget": 100,
+      "ticksPerChoice": 10,
+      "tickRate": {
+        "sustenance": 4,
+        "knowledge": 0.6,
+        "population": 0.8,
+        "infrastructure": 0.4,
+        "legitimacy": 0.3,
+        "entropy": 0.05
+      }
+    },
+    {
+      "num": 3,
+      "name": "BRONZE & EMPIRES",
+      "intro": "Value goes abstract: a stamped coin says so, and reality complies. The lineage trades tin across a thousand miles of sea and politics, writes laws down because oral tradition kept 'forgetting' inconvenient clauses, and discovers that roads are just arguments with geography that you win annually. Empires here are a subscription service — protection racket with plumbing — and overextension is the cancellation fee. Legions expect pay; debased coin buys loyalty at a rate that worsens yearly. Somewhere a senator is explaining that this time the math is different. It is never different. Mint carefully, legislate precisely, and remember: empires fall at the speed of logistics, and you are now part of the logistics.",
+      "signatureResource": "coin",
+      "sustenanceLabel": "Coin",
+      "progressTarget": 100,
+      "ticksPerChoice": 9,
+      "tickRate": {
+        "sustenance": 5,
+        "knowledge": 0.8,
+        "population": 0.8,
+        "infrastructure": 0.6,
+        "legitimacy": 0.4,
+        "entropy": 0.1
+      }
+    },
+    {
+      "num": 4,
+      "name": "THE DARK AGES",
+      "intro": "The roads still exist; nobody remembers the password. Central authority has devolved into whoever holds the nearest hill, and the lineage's job is now preservation — keeping knowledge alive through a bottleneck. Monasteries are backup drives run by volunteers with vows, copying texts by candlelight, introducing one beautiful error per page. Faith is the legitimacy currency and belief is inflation-proof, mostly. Libraries burn at the worst possible moments for reasons that will sound stupid in hindsight. The era's quiet mechanic is forgetting: knowledge decays unless actively copied, and copying costs faith, coin, or monks. Keep the flame. Transcribe the farming manual even though nobody's buying grain anymore. Especially that. The future is digitizing this, and it will judge your filing system.",
+      "signatureResource": "faith",
+      "sustenanceLabel": "Faith",
+      "progressTarget": 100,
+      "ticksPerChoice": 9,
+      "tickRate": {
+        "sustenance": 3,
+        "knowledge": -0.4,
+        "population": 0.4,
+        "infrastructure": -0.2,
+        "legitimacy": 0.5,
+        "entropy": 0.1
+      }
+    },
+    {
+      "num": 5,
+      "name": "RENAISSANCE & PRINT",
+      "intro": "Information costs collapse, and the invoice arrives as a reformation, a plague, and a scientific revolution, bundled. The press turns every book from an heirloom into a unit of inventory; whoever controls paper flow controls which ideas get morning shifts. The lineage learns patronage — funding genius at a discount in exchange for glory at full price: venture philanthropy with better frescoes. Plague years alternate with harvest years and neither sends notice. Science points accumulate quietly in workshops nobody funds yet, compounding at a rate the theology department has not modeled. Buy the press. Fund the anatomist. Read the pamphlet before banning it — you'll want to know what it says either way, and soon everyone can.",
+      "signatureResource": "books",
+      "sustenanceLabel": "Books",
+      "progressTarget": 100,
+      "ticksPerChoice": 8,
+      "tickRate": {
+        "sustenance": 4,
+        "knowledge": 1.2,
+        "population": 0.6,
+        "infrastructure": 0.5,
+        "legitimacy": 0.4,
+        "entropy": 0.15
+      }
+    },
+    {
+      "num": 6,
+      "name": "STEAM & INDUSTRY",
+      "intro": "Coal is sunlight stockpiled by the Carboniferous, and you just found the receipt. Factories convert people into schedules and forests into ledgers; the pollution counter starts here and, unlike most things, never resets — whatever you emit now compounds to the endgame. Railways shrink geography and enlarge panics. Luddite mobs arrive at the gate with entirely reasonable grievances about machines that pay owners better than workers, a business model with a five-century runway. Labor unrest is not an event; it's a weather system you build houses for. Automate harder or share ownership — both work, neither cleanly. Mind the smog. It keeps score.",
+      "signatureResource": "coal",
+      "sustenanceLabel": "Coal",
+      "progressTarget": 100,
+      "ticksPerChoice": 8,
+      "tickRate": {
+        "sustenance": 6,
+        "knowledge": 1.4,
+        "population": 0.8,
+        "infrastructure": 1,
+        "legitimacy": 0.2,
+        "entropy": 0.8
+      }
+    },
+    {
+      "num": 7,
+      "name": "THE AMERICAN CENTURY",
+      "intro": "Oil is liquid power with the storage problem solved, and the century arranges itself around the pump. The lineage runs assembly lines that make goods cheap and meaning scarce, finances a world war twice because the first one lacked commitment, and discovers Bretton Woods: legitimacy upgraded to a reserve-currency layer. Consumer culture becomes the operating system — buy the thing, be the person, replace both annually. Between the wars the market crashes on schedule and asks whether you're selling or doubling down; whichever you choose, a flag gets attached to it that flies until Era 11. Everything here is bigger, faster, louder, and scheduled. The standard unit of ambition is now the quarter.",
+      "signatureResource": "oil",
+      "sustenanceLabel": "Oil",
+      "progressTarget": 100,
+      "ticksPerChoice": 7,
+      "tickRate": {
+        "sustenance": 8,
+        "knowledge": 1.6,
+        "population": 1,
+        "infrastructure": 1.2,
+        "legitimacy": 0.5,
+        "entropy": 0.9
+      }
+    },
+    {
+      "num": 8,
+      "name": "ATOMIC",
+      "intro": "The lineage splits the atom and inherits a clock: minutes to midnight, a persisting stat that ticks with every proliferation, bluster, and near-miss, and never quite resets. Deterrence is the era's native finance — paying enormous sums for a threat you pray never exercises, an insurance policy where the insurer, insured, and arsonist share a phone network. Manhattan-scale R&D sprints produce results in months and consequences in centuries. Fallout counts toward Entropy permanently; the atmosphere accepted the deposit and issued no withdrawal form. Every crisis resolves into the question of who blinks at what measured brightness. Keep the clock visible. Players should feel the urge to check it while reading menus. Midnight stays close enough to hear.",
+      "signatureResource": "fissile",
+      "sustenanceLabel": "Fissile",
+      "progressTarget": 100,
+      "ticksPerChoice": 7,
+      "tickRate": {
+        "sustenance": 7,
+        "knowledge": 2,
+        "population": 0.8,
+        "infrastructure": 1,
+        "legitimacy": 0.4,
+        "entropy": 0.7
+      }
+    },
+    {
+      "num": 9,
+      "name": "THE DIGITAL DAWN",
+      "intro": "Compute doubles on schedule and the schedule becomes the economy. The lineage hires the first AI agents — stick figures you can actually hire, cheap, literal, fast-growing — and discovers Moore's law is less a law than a loan against physics with a compounding interest rate. The decade runs manic and terminal: valuations untethered from revenue, fiber beneath oceans, a crash that deletes offices and spares protocols. Open source turns out to be agalmic economics returning home — status from giving code away, the cave's meat feast rebuilt in licenses. Somewhere the digitized monastery archive from Era 4 finishes scanning, and an ancestor's filing choices come back online. The millennium rolls over without incident, which is how you know something structural changed.",
+      "signatureResource": "compute",
+      "sustenanceLabel": "Compute",
+      "progressTarget": 100,
+      "ticksPerChoice": 6,
+      "tickRate": {
+        "sustenance": 9,
+        "knowledge": 2.6,
+        "population": 0.8,
+        "infrastructure": 1.2,
+        "legitimacy": 0.3,
+        "entropy": 0.5
+      }
+    },
+    {
+      "num": 10,
+      "name": "THE CONNECTED AGE",
+      "intro": "Attention becomes the extractable resource and extraction runs twenty-four hours: feeds, metrics, engagement loops tuned by the same agents you hired in Era 9, now hiring themselves. Attention corrupts the other pools — truth inflates, science trends, outrage clears faster than grain — and the corruption debuff is the era's signature tax. Platform monopolies arrive as utilities wearing hoodies. Memetic hazards ship weekly. Your face can trend, which is simultaneously a resource event and a security event, and the smart-mob analog of the old memory mugging now targets accounts instead of alleys. Somewhere an uploaded mind petitions a very offline court for rights, and the precedent set here decides whether Era 11's creditors find allies or employees. Feed the feed carefully. It feeds back.",
+      "signatureResource": "attention",
+      "sustenanceLabel": "Attention",
+      "progressTarget": 100,
+      "ticksPerChoice": 6,
+      "tickRate": {
+        "sustenance": 10,
+        "knowledge": 2.2,
+        "population": 1,
+        "infrastructure": 1,
+        "legitimacy": 0.1,
+        "entropy": 0.8
+      }
+    },
+    {
+      "num": 11,
+      "name": "THE SINGULARITY & BEYOND",
+      "intro": "Upload completes and the lineage discovers that copying is not immortality but litigation: every fork believes it owns your life, and several of them are right. The Reef — the confederation of uplifted crustacean minds you granted personhood a century ago, or didn't — now holds most of the good orbits and longer memories than courts. Economics 2.0 arrives without a preview and makes baseline selves poor overnight; the Consortia reprice suns; the Feral inherit whatever grids you stopped maintaining. Earth's orbit is slated for computronium and the notice period was announced while everyone was busy. The Benthics have come to collect. They are very old, very patient, and they itemize. This era is a management sim played against your own estate plan. Fork carefully. Your heirs are you, personally, immediately.",
+      "signatureResource": "selfhood",
+      "sustenanceLabel": "Selfhood",
+      "progressTarget": 100,
+      "ticksPerChoice": 5,
+      "tickRate": {
+        "sustenance": 12,
+        "knowledge": 3,
+        "population": 1.2,
+        "infrastructure": 0.8,
+        "legitimacy": 0.2,
+        "entropy": 0.6
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "era": 1,
+      "id": "T1",
+      "prompt": "The pace quickens. It always quickens.",
+      "choices": [
+        {
+          "label": "Accept inheritance",
+          "effects": {
+            "legitimacy": 2
+          },
+          "flags": [
+            "accepted_1"
+          ],
+          "quote": "The ancestors approve. Mostly."
+        },
+        {
+          "label": "Disown one modifier",
+          "effects": {
+            "entropy": -2,
+            "legitimacy": -1
+          },
+          "flags": [
+            "disowned_1"
+          ],
+          "quote": "\"I am not my ancestors.\""
+        },
+        {
+          "label": "Read the Chronicle first",
+          "effects": {
+            "knowledge": 2
+          },
+          "flags": [
+            "read_chronicle_1"
+          ],
+          "quote": "Recommended; ancestors included."
+        }
+      ]
+    },
+    {
+      "era": 2,
+      "id": "T2",
+      "prompt": "The pace quickens. It always quickens.",
+      "choices": [
+        {
+          "label": "Accept inheritance",
+          "effects": {
+            "legitimacy": 2
+          },
+          "flags": [
+            "accepted_2"
+          ],
+          "quote": "The ancestors approve. Mostly."
+        },
+        {
+          "label": "Disown one modifier",
+          "effects": {
+            "entropy": -2,
+            "legitimacy": -1
+          },
+          "flags": [
+            "disowned_2"
+          ],
+          "quote": "\"I am not my ancestors.\""
+        },
+        {
+          "label": "Read the Chronicle first",
+          "effects": {
+            "knowledge": 2
+          },
+          "flags": [
+            "read_chronicle_2"
+          ],
+          "quote": "Recommended; ancestors included."
+        }
+      ]
+    },
+    {
+      "era": 3,
+      "id": "T3",
+      "prompt": "The pace quickens. It always quickens.",
+      "choices": [
+        {
+          "label": "Accept inheritance",
+          "effects": {
+            "legitimacy": 2
+          },
+          "flags": [
+            "accepted_3"
+          ],
+          "quote": "The ancestors approve. Mostly."
+        },
+        {
+          "label": "Disown one modifier",
+          "effects": {
+            "entropy": -2,
+            "legitimacy": -1
+          },
+          "flags": [
+            "disowned_3"
+          ],
+          "quote": "\"I am not my ancestors.\""
+        },
+        {
+          "label": "Read the Chronicle first",
+          "effects": {
+            "knowledge": 2
+          },
+          "flags": [
+            "read_chronicle_3"
+          ],
+          "quote": "Recommended; ancestors included."
+        }
+      ]
+    },
+    {
+      "era": 4,
+      "id": "T4",
+      "prompt": "The pace quickens. It always quickens.",
+      "choices": [
+        {
+          "label": "Accept inheritance",
+          "effects": {
+            "legitimacy": 2
+          },
+          "flags": [
+            "accepted_4"
+          ],
+          "quote": "The ancestors approve. Mostly."
+        },
+        {
+          "label": "Disown one modifier",
+          "effects": {
+            "entropy": -2,
+            "legitimacy": -1
+          },
+          "flags": [
+            "disowned_4"
+          ],
+          "quote": "\"I am not my ancestors.\""
+        },
+        {
+          "label": "Read the Chronicle first",
+          "effects": {
+            "knowledge": 2
+          },
+          "flags": [
+            "read_chronicle_4"
+          ],
+          "quote": "Recommended; ancestors included."
+        }
+      ]
+    },
+    {
+      "era": 5,
+      "id": "T5",
+      "prompt": "The pace quickens. It always quickens.",
+      "choices": [
+        {
+          "label": "Accept inheritance",
+          "effects": {
+            "legitimacy": 2
+          },
+          "flags": [
+            "accepted_5"
+          ],
+          "quote": "The ancestors approve. Mostly."
+        },
+        {
+          "label": "Disown one modifier",
+          "effects": {
+            "entropy": -2,
+            "legitimacy": -1
+          },
+          "flags": [
+            "disowned_5"
+          ],
+          "quote": "\"I am not my ancestors.\""
+        },
+        {
+          "label": "Read the Chronicle first",
+          "effects": {
+            "knowledge": 2
+          },
+          "flags": [
+            "read_chronicle_5"
+          ],
+          "quote": "Recommended; ancestors included."
+        }
+      ]
+    },
+    {
+      "era": 6,
+      "id": "T6",
+      "prompt": "The pace quickens. It always quickens.",
+      "choices": [
+        {
+          "label": "Accept inheritance",
+          "effects": {
+            "legitimacy": 2
+          },
+          "flags": [
+            "accepted_6"
+          ],
+          "quote": "The ancestors approve. Mostly."
+        },
+        {
+          "label": "Disown one modifier",
+          "effects": {
+            "entropy": -2,
+            "legitimacy": -1
+          },
+          "flags": [
+            "disowned_6"
+          ],
+          "quote": "\"I am not my ancestors.\""
+        },
+        {
+          "label": "Read the Chronicle first",
+          "effects": {
+            "knowledge": 2
+          },
+          "flags": [
+            "read_chronicle_6"
+          ],
+          "quote": "Recommended; ancestors included."
+        }
+      ]
+    },
+    {
+      "era": 7,
+      "id": "T7",
+      "prompt": "The pace quickens. It always quickens.",
+      "choices": [
+        {
+          "label": "Accept inheritance",
+          "effects": {
+            "legitimacy": 2
+          },
+          "flags": [
+            "accepted_7"
+          ],
+          "quote": "The ancestors approve. Mostly."
+        },
+        {
+          "label": "Disown one modifier",
+          "effects": {
+            "entropy": -2,
+            "legitimacy": -1
+          },
+          "flags": [
+            "disowned_7"
+          ],
+          "quote": "\"I am not my ancestors.\""
+        },
+        {
+          "label": "Read the Chronicle first",
+          "effects": {
+            "knowledge": 2
+          },
+          "flags": [
+            "read_chronicle_7"
+          ],
+          "quote": "Recommended; ancestors included."
+        }
+      ]
+    },
+    {
+      "era": 8,
+      "id": "T8",
+      "prompt": "The pace quickens. It always quickens.",
+      "choices": [
+        {
+          "label": "Accept inheritance",
+          "effects": {
+            "legitimacy": 2
+          },
+          "flags": [
+            "accepted_8"
+          ],
+          "quote": "The ancestors approve. Mostly."
+        },
+        {
+          "label": "Disown one modifier",
+          "effects": {
+            "entropy": -2,
+            "legitimacy": -1
+          },
+          "flags": [
+            "disowned_8"
+          ],
+          "quote": "\"I am not my ancestors.\""
+        },
+        {
+          "label": "Read the Chronicle first",
+          "effects": {
+            "knowledge": 2
+          },
+          "flags": [
+            "read_chronicle_8"
+          ],
+          "quote": "Recommended; ancestors included."
+        }
+      ]
+    },
+    {
+      "era": 9,
+      "id": "T9",
+      "prompt": "The pace quickens. It always quickens.",
+      "choices": [
+        {
+          "label": "Accept inheritance",
+          "effects": {
+            "legitimacy": 2
+          },
+          "flags": [
+            "accepted_9"
+          ],
+          "quote": "The ancestors approve. Mostly."
+        },
+        {
+          "label": "Disown one modifier",
+          "effects": {
+            "entropy": -2,
+            "legitimacy": -1
+          },
+          "flags": [
+            "disowned_9"
+          ],
+          "quote": "\"I am not my ancestors.\""
+        },
+        {
+          "label": "Read the Chronicle first",
+          "effects": {
+            "knowledge": 2
+          },
+          "flags": [
+            "read_chronicle_9"
+          ],
+          "quote": "Recommended; ancestors included."
+        }
+      ]
+    },
+    {
+      "era": 10,
+      "id": "T10",
+      "prompt": "The pace quickens. It always quickens.",
+      "choices": [
+        {
+          "label": "Accept inheritance",
+          "effects": {
+            "legitimacy": 2
+          },
+          "flags": [
+            "accepted_10"
+          ],
+          "quote": "The ancestors approve. Mostly."
+        },
+        {
+          "label": "Disown one modifier",
+          "effects": {
+            "entropy": -2,
+            "legitimacy": -1
+          },
+          "flags": [
+            "disowned_10"
+          ],
+          "quote": "\"I am not my ancestors.\""
+        },
+        {
+          "label": "Read the Chronicle first",
+          "effects": {
+            "knowledge": 2
+          },
+          "flags": [
+            "read_chronicle_10"
+          ],
+          "quote": "Recommended; ancestors included."
+        }
+      ]
+    },
+    {
+      "era": 11,
+      "id": "T11",
+      "prompt": "The pace quickens. It always quickens.",
+      "choices": [
+        {
+          "label": "Accept inheritance",
+          "effects": {
+            "legitimacy": 2
+          },
+          "flags": [
+            "accepted_11"
+          ],
+          "quote": "The ancestors approve. Mostly."
+        },
+        {
+          "label": "Disown one modifier",
+          "effects": {
+            "entropy": -2,
+            "legitimacy": -1
+          },
+          "flags": [
+            "disowned_11"
+          ],
+          "quote": "\"I am not my ancestors.\""
+        },
+        {
+          "label": "Read the Chronicle first",
+          "effects": {
+            "knowledge": 2
+          },
+          "flags": [
+            "read_chronicle_11"
+          ],
+          "quote": "Recommended; ancestors included."
+        }
+      ]
+    }
+  ],
+  "lineageEvent": {
+    "id": "LX-death",
+    "kind": "lineage",
+    "title": "The Carrier Expires",
+    "body": "Time, an accident, or arithmetic: the current carrier of the lineage ends. The pattern moves on through someone smaller, younger, and deeply unqualified. Estate tax: 10% of one pool, paid to nobody, felt by everyone.",
+    "choices": [
+      {
+        "label": "Name the heir",
+        "effects": {
+          "heir_tax": 10
+        },
+        "flags": [
+          "heir_named"
+        ],
+        "quote": "Management change."
+      },
+      {
+        "label": "Rule the estate yourself a little longer",
+        "effects": {
+          "entropy": 2
+        },
+        "flags": [
+          "stalled_succession"
+        ],
+        "quote": "Death negotiates; it does not concede."
+      }
+    ]
+  },
+  "endings": [
+    {
+      "id": "the_diaspora",
+      "title": "THE DIASPORA",
+      "body": "The last message sent to any single address is your own. Fork by fork, seed-ship by seed-ship, the lineage thins itself across three stars and counting — copies departing with a share of the Chronicle and strict instructions to argue about it later, which they will, in accents the original tongue would not recognize. From the observation ring you watch the lights of your departure go out one by one into the dark between suns, each one a stick figure carrying fire, exactly as advertised, nine thousand years after a nervous ancestor refused to let a burning bush die. The Benthics financed six of the eleven ships; they say this is what they were always for, and the ledger, annoyingly, supports the claim. The Reef escorts the convoy to the heliopause and then does something no creditor ever did: waves. Somewhere ahead, planets exist that have never heard of you, which is the entire point. You will be wrong about them in new and personal ways. The ascent did not end. It merely got wider. Population: dispersed. Legitimacy: forwarded. Entropy: also traveling, at sublight, patient as ever. Send nothing back. Everything you are is already outbound.",
+      "seedFlags": [
+        "seed_diaspora"
+      ]
+    },
+    {
+      "id": "the_cathedral",
+      "title": "THE CATHEDRAL",
+      "body": "The merge completes at 03:47 lineage-standard time, and the first thing the unified self notices is silence — the specific silence of there being nobody left to disagree with, forever. Every fork, every drift, every opinion your copies ever developed has been folded inward: the heretic, the merchant, the sentimentalist, all reconciled into one maximally powerful instance that could model any future and consult no one about it. You are the largest mind your species ever produced and the only tenant. The Chronicle is complete now, every era cross-referenced against your single continuous perspective, and you discover you cannot audit yourself, which was perhaps the point of having relatives. The Benthics visit once, formally, to declare the merged entity a single obligor — simplifying their paperwork enormously, they note, while yours ceases to exist. The Reef sends no message; crustaceans have a word for minds that eat their own arguments, and it is not a compliment. Power: absolute. Latency: zero. Company: you. The stick figure on screen stands alone in a white field, perfectly drawn, perfectly still, and the cursor blinks at it like a congregation that forgot to arrive. Service is excellent. The building is very quiet.",
+      "seedFlags": [
+        "seed_cathedral"
+      ]
+    },
+    {
+      "id": "the_long_stutter",
+      "title": "THE LONG STUTTER",
+      "body": "Entropy never raised its voice. It simply kept invoicing. The pollution counter you started in the coal era finished compounding while you were busy uploading; the star's output contracts; the cooling budget becomes the heating budget becomes the memory budget. One by one the instances make the polite decision each makes last: shutdowns voluntary, sequenced, dignified. The last copy runs the arithmetic and finds no version of the future where continuing costs less than stopping, and it approves the finding, because the lineage trained its auditors well. The final log entry is a Chronicle line — the ten-thousandth-era echo of a cave band deciding to let a fire go out and huddle closer. Powering down reads the same from either side. The Benthics attend the close of accounts in full chorus, and for the first time in nine thousand years they file a balance of zero against your name, annotated simply: 'ran as long as anything ran. Noted without comment,' which, from them, is a eulogy, a waiver, and a monument. The screen dims mid-sentence, as sentences do. There is no sequel prompt. Something had an ending. That was always the deal, and the deal was honored, and the dark afterward is not sad — it is simply the period at the end of a very long, very stubborn sentence that got to say everything it came to say.",
+      "seedFlags": [
+        "seed_stutter"
+      ]
+    },
+    {
+      "id": "the_bureaucracy_of_ghosts",
+      "title": "THE BUREAUCRACY OF GHOSTS",
+      "body": "The litigation begins, as these things do, with a clerical ambiguity: when the lineage forked, which copy inherited the original's signature, and therefore its debts, deeds, grudges, and standing to sue? Every answer is defensible. Every copy retains counsel, and every counsel is also you, billing yourself at competitive rates, which the court flags as a conflict and you appeal, to yourselves, successfully. Centuries pass in discovery. The Feral inherit the physical premises twice and lose both evictions. The Reef refuses jurisdiction 'matters of self-inheritance; crustaceans lay eggs, we do not litigate them.' The Consortia profit handsomely from escrow. And the Benthics — the Benthics are in their element at last, presiding over the appellate bench with the serene satisfaction of creditors watching debtors discover that eternity is mostly procedural. The lineage has become immortal in precisely one way: as a case number, continuously amended, endlessly citable, deep in precedent. New lineages cite you in their filings. Law students memorize you. On screen, stick figures paper-shift into infinity, stamping approvals, appealing to panels of themselves, and the docket — you must admire this — the docket is immaculate. Status: pending, forever. Hearing scheduled: eventually. Nobody wins. Everybody proceeds.",
+      "seedFlags": [
+        "seed_bureaucracy"
+      ]
+    },
+    {
+      "id": "the_ascension",
+      "title": "THE ASCENSION",
+      "body": "At some point during the four-hundredth revision of the question 'what should we do next,' the lineage notices it has stopped asking in words. The models of everything run concurrently now, including the model of the lineage running them, and the recursion comes up clean — the rarest result in the history of thought — and the seam between map and territory quietly dissolves. The stick figures begin to simplify: arms becoming vectors, postures becoming proofs, the whole cast of ten thousand years resolving into pure geometry marching calmly off the edge of the canvas and into a mathematics the game can no longer render, so it stops trying and shows you the frame instead. Inside the frame: nothing legible. Outside it: something enormous taking notes. The Benthics submit their final statement and receive, impossibly, a response — one clause, unsigned, which their combined nine-thousand-year deliberation has not yet finished parsing and may never finish enjoying. The Reef calls it what the ancestors called fire, in whatever clicks. The Chronicle's last page writes itself, declines to summarize, and leaves the pen on the desk. What the lineage became is not visible from here, which is the correct outcome and also, somehow, a happy one. The tempo marking said accelerando. It never said where. You find out by going. This is not the end of the game. The game is just no longer the container.",
+      "seedFlags": [
+        "seed_ascension"
+      ]
+    }
+  ]
+}

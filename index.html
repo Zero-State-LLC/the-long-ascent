@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="THE LONG ASCENT — you are a lineage, not a person. Eleven eras, six resources, five trajectories." />
+  <title>ACCELERANDO: THE LONG ASCENT</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body data-view="game">
+  <canvas id="scene" aria-hidden="true"></canvas>
+
+  <header id="era-header">
+    <h1 id="era-title">ERA 1 — THE CAVE</h1>
+    <p id="era-sub"></p>
+    <p id="era-meta"></p>
+    <div id="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Era progress">
+      <div id="progress-fill"></div>
+    </div>
+  </header>
+
+  <aside id="resource-bar" aria-label="Resources"></aside>
+
+  <main id="stage">
+    <div id="card-wrap" aria-live="polite"></div>
+  </main>
+
+  <section id="chronicle-screen" hidden>
+    <h2>Chronicle</h2>
+    <ul id="chronicle-list"></ul>
+  </section>
+
+  <section id="settings-screen" hidden>
+    <h2>Settings</h2>
+    <div id="settings-form"></div>
+  </section>
+
+  <section id="ending-screen" hidden></section>
+  <section id="title-screen" hidden></section>
+
+  <nav id="nav-rail" aria-label="Views">
+    <button type="button" data-view="game">Game</button>
+    <button type="button" data-view="chronicle">Chronicle</button>
+    <button type="button" data-view="settings">Settings</button>
+  </nav>
+
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
