@@ -1,0 +1,91 @@
+{
+  "version": "3.0",
+  "source": "SPEC §10: era_goals re-keyed to the 17-era spine (v21-copy old nums -> new nums via §10.1 insertion table) + 6 new eraGoal objects from v3-copy.json.",
+  "era_goals": [
+    {
+      "era": 1,
+      "name": "Master Fire",
+      "description": "Keep a stolen flame alive long enough that warmth stops being a rumor and starts being a schedule."
+    },
+    {
+      "era": 2,
+      "name": "Break the Ground",
+      "description": "Bend a grass into a crop, store the surplus, and accept whatever hierarchy the full granary installs in exchange."
+    },
+    {
+      "era": 3,
+      "name": "Mint an Empire",
+      "description": "Turn value into stamped metal and roads into law, before overextension presents you the cancellation fee."
+    },
+    {
+      "era": 4,
+      "name": "Keep the Flame",
+      "description": "Copy what you know by candlelight through the bottleneck; forgetting is the era, transcription is the resistance."
+    },
+    {
+      "era": 5,
+      "name": "Set Type",
+      "description": "Buy the press and put ideas on paper fast enough that reformation, plague, and science all arrive on your shift."
+    },
+    {
+      "era": 6,
+      "name": "Circle the Globe",
+      "description": "Run a trade route all the way around the world and bring back enough cargo, charts, and plausible deniability that the lineage now has a flag on every ocean and an explanation on none of them."
+    },
+    {
+      "era": 7,
+      "name": "Write the Rules",
+      "description": "Get a constitution signed, a code ratified, and enough rights language into circulation that the era can no longer be governed by vibes — even if enforcement remains enthusiastic, selective, and armed."
+    },
+    {
+      "era": 8,
+      "name": "Electrify",
+      "description": "Convert coal into motion at scale and mind the smog, because this is where the pollution counter starts keeping score."
+    },
+    {
+      "era": 9,
+      "name": "Win the Century",
+      "description": "Run the lines, finance the wars, and make consumption the operating system before the market asks whether you're selling."
+    },
+    {
+      "era": 10,
+      "name": "Outproduce the War",
+      "description": "Convert, ration, decrypt, and out-build the other side's factories, then survive long enough to spend the victory parade — infrastructure that applauds — without noticing the moral debt has been quietly compounding."
+    },
+    {
+      "era": 11,
+      "name": "Hold the Clock",
+      "description": "Split the atom and survive your own deterrent: keep minutes-to-midnight counting up instead of out."
+    },
+    {
+      "era": 12,
+      "name": "Reach Orbit, Land on the Moon",
+      "description": "Put hardware in orbit and boots on another world inside the decade, bending the budget curve until reality complies — or the treasury breaks, whichever the history broadcast airs first."
+    },
+    {
+      "era": 13,
+      "name": "Scale the Curve",
+      "description": "Ride compute doubling on schedule, hire your first agent staff, and outlive the crash that deletes offices but spares protocols."
+    },
+    {
+      "era": 14,
+      "name": "Peak the Curve",
+      "description": "Flip the grid onto renewables, strand what must be stranded, and get Entropy's growth rate bending downward for the first time in the game — the counter that never goes down, starting to go down."
+    },
+    {
+      "era": 15,
+      "name": "Own the Feed",
+      "description": "Extract attention at twenty-four hours a day without letting the feed's corruption tax reprice everything else you own."
+    },
+    {
+      "era": 16,
+      "name": "Arrive Intact",
+      "description": "Deliver the lineage — copies, archive, relic, and outstanding liabilities — through the interstellar crossing with enough coherence and hull left that arrival counts as continuity rather than a slower funeral."
+    },
+    {
+      "era": 17,
+      "name": "Sign Yourself",
+      "description": "Upload, fork, and settle who owns your life when every heir is you — before the Benthics itemize the answer."
+    }
+  ]
+}

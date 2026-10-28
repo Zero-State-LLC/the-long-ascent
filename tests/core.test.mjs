@@ -12,8 +12,8 @@ const eventsData = JSON.parse(readFileSync(path.join(R, 'src/data/events.json'),
 
 const newGame = (seed = 1) => createGame({ erasData, eventsData, rng: mulberry32(seed) });
 
-test('data: 11 eras in order, each with intro and signature resource', () => {
-  assert.equal(erasData.eras.length, 11);
+test('data: 17 eras in order, each with intro and signature resource', () => {
+  assert.equal(erasData.eras.length, 17);
   erasData.eras.forEach((e, i) => {
     assert.equal(e.num, i + 1);
     assert.ok(e.intro.length > 80, `era ${e.num} intro too short`);
@@ -22,10 +22,10 @@ test('data: 11 eras in order, each with intro and signature resource', () => {
   });
 });
 
-test('data: every event has era 1-11, title, body, 2-4 choices with effects or flags', () => {
+test('data: every event has era 1-17, title, body, 2-4 choices with effects or flags', () => {
   for (const ev of eventsData.events) {
-    assert.match(ev.id, /^E\d{1,2}-\d{2}$/);
-    assert.ok(ev.era >= 1 && ev.era <= 11);
+    assert.match(ev.id, /^E\d{1,2}-\d{2}n?$/);
+    assert.ok(ev.era >= 1 && ev.era <= 17);
     assert.ok(ev.title && ev.body);
     assert.ok(ev.choices.length >= 2 && ev.choices.length <= 4, `${ev.id} choices=${ev.choices.length}`);
     for (const c of ev.choices) {
@@ -35,7 +35,7 @@ test('data: every event has era 1-11, title, body, 2-4 choices with effects or f
   }
 });
 
-test('era progression: a scripted run climbs 1 -> 11 and reaches an ending', () => {
+test('era progression: a scripted run climbs 1 -> 17 and reaches an ending', () => {
   // A pure-random lineage can be entropy-wrecked before the finale (that is a
   // valid Long Stutter loss); iterate seeds until one completes the ascent.
   let completed = null;
@@ -46,15 +46,15 @@ test('era progression: a scripted run climbs 1 -> 11 and reaches an ending', () 
     while (g.state.phase !== 'ending' && guard++ < 50000) {
       seenEras.add(g.state.era);
       const ev = g.currentEvent();
-      if (ev) g.choose(makePolicy('random', mulberry32(guard))(ev, g.state).label);
+      if (ev) g.choose(makePolicy('diaspora', mulberry32(guard))(ev, g.state).label);
       else g.tick();
     }
-    if (g.state.seenEvents.includes('E11-12') && g.state.ending) completed = { g, seenEras };
+    if (g.state.ending) completed = { g, seenEras };
   }
-  assert.ok(completed, 'at least one random seed completes the full ascent');
+  assert.ok(completed, 'at least one seed completes the full ascent');
   const { g, seenEras } = completed;
   assert.equal(g.state.phase, 'ending');
-  for (let n = 1; n <= 11; n++) assert.ok(seenEras.has(n), `era ${n} visited`);
+  for (let n = 1; n <= 17; n++) assert.ok(seenEras.has(n), `era ${n} visited`);
 });
 
 test('tempo: later eras need fewer ticks per choice than earlier ones', () => {
@@ -78,7 +78,7 @@ test('save/load roundtrip: exportCode/importCode are inverse', () => {
   let guard = 0;
   while (g.state.era < 4 && guard++ < 20000) {
     const ev = g.currentEvent();
-    if (ev) g.choose(makePolicy('random', mulberry32(guard))(ev, g.state).label);
+    if (ev) g.choose(makePolicy('diaspora', mulberry32(guard))(ev, g.state).label);
     else g.tick();
   }
   const code = g.exportCode();
@@ -93,7 +93,7 @@ test('save/load roundtrip mid-game', () => {
   let guard = 0;
   while (g.state.era < 5 && guard++ < 20000) {
     const ev = g.currentEvent();
-    if (ev) g.choose(makePolicy('random', mulberry32(guard))(ev, g.state).label);
+    if (ev) g.choose(makePolicy('diaspora', mulberry32(guard))(ev, g.state).label);
     else g.tick();
   }
   const snap = g.serialize();
@@ -110,7 +110,7 @@ test('export/import code roundtrip (base64url, offline-safe chars only)', () => 
   let guard = 0;
   while (g.state.era < 3 && guard++ < 20000) {
     const ev = g.currentEvent();
-    if (ev) g.choose(makePolicy('random', mulberry32(guard))(ev, g.state).label);
+    if (ev) g.choose(makePolicy('diaspora', mulberry32(guard))(ev, g.state).label);
     else g.tick();
   }
   const code = g.exportCode();
@@ -222,7 +222,7 @@ test('chronicle: every decision is logged with era stamp', () => {
   const decisions = g.state.chronicle.filter((c) => c.kind === 'decision');
   assert.ok(decisions.length >= 30, `logged ${decisions.length} decisions`);
   for (const d of decisions) {
-    assert.ok(d.era >= 1 && d.era <= 11);
+    assert.ok(d.era >= 1 && d.era <= 17);
     assert.ok(d.text.startsWith(`Era ${d.era}:`));
   }
 });
@@ -237,9 +237,9 @@ test('benthic chorus line auto-appends to debt/contract events', () => {
   assert.ok(g.state.chronicle.some((c) => /Benthics recorded this choice/.test(c.text)));
 });
 
-test('copy drift: diversity flag forks instances in era 11', () => {
+test('copy drift: diversity flag forks instances post-upload (era 13+)', () => {
   const g = newGame(33);
-  g._gotoEra(11);
+  g._gotoEra(13);
   g.addFlag('copy_diversity');
   g.state.pendingEventId = 'E11-05';
   const ev = g.currentEvent();

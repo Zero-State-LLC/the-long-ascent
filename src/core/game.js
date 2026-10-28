@@ -1,11 +1,19 @@
 // THE LONG ASCENT — core game logic. Pure: zero DOM imports, runs in node.
-// Implements SPEC §3: era state machine (11 eras), 6-pool resource model with
-// per-era re-keying, data-driven event engine, choice/flag system, the Lineage
-// mechanic (death/heir, fork/merge post-upload, copy-drift), Chronicle log,
-// save/load with export codes, and the endings evaluator.
+// Implements SPEC §3 + §10 (v3): era state machine (17 eras), 6-pool resource
+// model with per-era re-keying, data-driven event engine, choice/flag system,
+// the Lineage mechanic (death/heir, fork/merge post-upload, copy-drift),
+// Chronicle log, save/load with export codes + v2→v3 migration, story arcs
+// (§10.2), opportunity/crisis mini-events (§10.3) and the endings evaluator.
+
+import { createArcState, observeEvent, applyTransitionEntropy, convergenceSummary } from './arcs.js';
+import { migrateV2toV3, isLegacySave, SAVE_VERSION_V3 } from './migration.js';
+import { checkCrossings, createCrisisTracker } from './crisisPulses.js';
+import { createOpportunityTracker, canOfferOpportunity, pickOpportunity, consumeSlot, applyOpportunity, OPP_CHANCE } from './opportunities.js';
 
 export const POOLS = ['sustenance', 'knowledge', 'population', 'infrastructure', 'legitimacy', 'entropy'];
-export const SAVE_VERSION = 2; // v2.1: adds lineageMods + eraGoalsDone (SPEC §9.2)
+export const SAVE_VERSION = SAVE_VERSION_V3; // v3: 17-era spine + arcs (SPEC §10.1); migrates v2 saves
+export const FINALE_ERA = 17; // the Singularity finale (E11-12 kept its legacy id) (SPEC §10.1)
+export const UPLOAD_ERA = 13; // copies exist from the Digital Dawn onward (v3 spine)
 const CEILING = 1000;
 
 // --- v2.1 depth constants (SPEC §9.2) ---------------------------------------
@@ -28,18 +36,36 @@ export const MODIFIER_DEFS = [
   { flag: 'ai_hire_rights', name: 'Personhood Granted', blurb: 'unlocks era-11 personhood events' },
 ];
 
-// Era goal badges (SPEC §9.2): hitting an era's named goal grants these at the
-// era transition. The lock side already lives in events data (no_fire_mastery).
-export const ERA_GOAL_BADGES = { 1: 'fire', 2: 'surplus', 3: 'city', 5: 'print', 6: 'factory', 8: 'atom', 9: 'code', 11: 'upload' };
+// Era goal badges (SPEC §9.2 + §10.1): hitting an era's named goal grants these
+// at the era transition, keyed to the 17-era spine. Legacy badges keep their old
+// slots (remapped through the §10.1 insertion table); each new era earns its own.
+export const ERA_GOAL_BADGES = {
+  1: 'fire', 2: 'surplus', 3: 'city',            // cave, agriculture, bronze
+  4: 'sails',                                     // Sails & Empires (new)
+  5: 'ideals',                                    // Revolution & Empire (new)
+  6: 'print',                                     // Renaissance (old era 4)
+  7: 'factory',                                   // Steam (old era 5)
+  9: 'atom',                                      // Atomic (old era 6)
+  10: 'orbit',                                    // Space Age (new)
+  11: 'code',                                     // Digital Dawn (old era 7)
+  12: 'carbon',                                   // Green Transition (new)
+  16: 'void',                                     // Long Silence (new)
+  17: 'upload',                                   // Singularity (old era 11)
+};
+
+// v3 story-arc flags (SPEC §10.2). The arc state machine in arcs.js mirrors
+// these; events data carries `arc` + per-choice flags.
+const CUSTODIAN_RE = /^custodian_/;
+const RIVAL_MIRROR_RE = /^rival_(west|ennobled|opposite_flag|milestone|circular|convergence)/;
 
 // One-shot production step for a pool (pure; shared by tick() and the UI's
 // per-second delta chips so "+X.X/s" always matches what actually lands).
 export function poolStepDelta(pool, baseRate, ctx = {}) {
   let d = baseRate || 0;
-  if (pool === 'sustenance' && ctx.era >= 10 && ctx.attentionCorruption) d *= 0.7;
-  // Era 4 "Keep the Flame": knowledge decays unless the lineage keeps copying
-  // (archive_diligence slows the bleed to -0.1/tick instead of the era rate).
-  if (pool === 'knowledge' && ctx.era === 4 && d < 0) d = ctx.archiveDiligence ? Math.max(d, -0.1) : d;
+  if (pool === 'sustenance' && ctx.era >= 15 && ctx.attentionCorruption) d *= 0.7;
+  // Era 6 "Keep the Flame" (v2 era 4): knowledge decays unless the lineage keeps
+  // copying (archive_diligence slows the bleed to -0.1/tick instead of the era rate).
+  if (pool === 'knowledge' && ctx.era === 6 && d < 0) d = ctx.archiveDiligence ? Math.max(d, -0.1) : d;
   if (pool === 'entropy') {
     if (d < 0) d *= 0.5; // entropy never goes down easily (SPEC §3.1)
     else d *= Math.min((ctx.tempoMult || 1) * 0.45, 0.6);
@@ -77,11 +103,12 @@ export function describeDeltas(deltas, badges = [], labels = {}) {
 
 function round2Static(x) { return Math.round(x * 100) / 100; }
 
-export function createGame({ erasData, eventsData, copyData = null, rng = Math.random }) {
+export function createGame({ erasData, eventsData, copyData = null, miniData = null, rng = Math.random }) {
   const eraDefs = erasData.eras;
   const transitions = new Map(erasData.transitions.map((t) => [t.era, t]));
   const allEvents = eventsData.events;
   const lineageEvent = erasData.lineageEvent;
+  const MINI = miniData || {}; // v3 sidecar: opportunities + crisis_pulses (SPEC §10.3)
 
   const state = {
     version: SAVE_VERSION,
@@ -109,8 +136,15 @@ export function createGame({ erasData, eventsData, copyData = null, rng = Math.r
     lineageMods: [],
     eraGoalsDone: [],
     lastDeltas: null, // deltas of the most recent choice, for the outcome chips
+    // v3 (SPEC §10.2): story-arc ledger — custodian relics, benthic deals, rival mirrors.
+    arcs: createArcState(),
+    crossingUnlocked: false, // set on era-16 arrival; title screen offers THE CROSSING (§11.4)
     rngSeedNote: 'rng not serialized; saves resume deterministically from state only',
   };
+
+  // UI-facing trackers (not serialized): opportunity rate-limit + crisis latch.
+  const oppTracker = createOpportunityTracker();
+  const crisisTracker = createCrisisTracker();
 
   const hasFlag = (f) => state.flags.includes(f);
   const addFlag = (f) => { if (!hasFlag(f)) state.flags.push(f); };
@@ -125,7 +159,7 @@ export function createGame({ erasData, eventsData, copyData = null, rng = Math.r
   // Requirements are authored as small predicates over flags/resources so the
   // engine stays data-driven; the JSON carries requirement ids resolved here.
   const REQUIREMENTS = {
-    uploaded: () => state.era >= 11,
+    uploaded: () => state.era >= 13, // post-Digital Dawn: copies exist (v3 spine)
     personhood_granted: () => hasFlag('ai_hire_rights') || hasFlag('personhood_disruption'),
     promethean_locked: () => !hasFlag('no_fire_mastery'),
   };
@@ -191,6 +225,8 @@ export function createGame({ erasData, eventsData, copyData = null, rng = Math.r
     state.lastDeltas = deltaSnapshot(before, state.resources);
     for (const f of choice.flags) addFlag(f);
     harvestModifiers(choice.flags);
+    // v3 (§10.2): the arc ledger mirrors every resolved arc event.
+    if (ev.arc) state.arcs = observeEvent(state.arcs, ev, choice.flags);
     // Milestone badges (SPEC §4.1): flags that name an upgrade badge light it up.
     const BADGE_FLAG_RE = /^(got_badge|milestone)_([a-z]+)$/;
     const newBadges = [];
@@ -267,9 +303,9 @@ export function createGame({ erasData, eventsData, copyData = null, rng = Math.r
     state.pendingEventId = null;
   }
 
-  // Post-upload (Era 11): forks, merges, copy-drift pressure.
+  // Post-upload (Era 13+ in the v3 spine): forks, merges, copy-drift pressure.
   function maybeLateGameLineage() {
-    if (state.era < 11) return;
+    if (state.era < UPLOAD_ERA) return;
     const forked = hasFlag('copy_diversity') || hasFlag('instance_spread');
     if (forked && state.copies < 5) {
       state.copies += 1;
@@ -359,7 +395,7 @@ export function createGame({ erasData, eventsData, copyData = null, rng = Math.r
   const round2 = (x) => Math.round(x * 100) / 100;
 
   function advanceEra() {
-    if (state.era >= 11) { finalizeEnding(); return; }
+    if (state.era >= FINALE_ERA) { finalizeEnding(); return; }
     grantEraGoal(state.era); // §9.2: goal completes as the bar fills
     state.era += 1;
     state.progress = 0;
@@ -399,7 +435,7 @@ export function createGame({ erasData, eventsData, copyData = null, rng = Math.r
   function checkEndingConditions(forceStutter = false) {
     if (forceStutter) { state.ending = 'the_long_stutter'; state.phase = 'ending'; return; }
     // Entropy winning outright ends it early (The Long Stutter is a valid loss).
-    if (state.resources.entropy >= 100 && state.era < 11) {
+    if (state.resources.entropy >= 100 && state.era < FINALE_ERA) {
       state.ending = 'the_long_stutter';
       state.phase = 'ending';
       chronicle('Entropy reached critical before the finale. The long stutter begins early.', 'ending');
@@ -410,7 +446,7 @@ export function createGame({ erasData, eventsData, copyData = null, rng = Math.r
     // run always plays the whole era before the upload story resolves.
     // Safety net: if the finale somehow already played and every other event in
     // era 11 is exhausted, evaluate from the accumulated flags.
-    if (state.era === 11 && state.seenEvents.includes('E11-12') && eligibleEvents().length === 0) {
+    if (state.era === FINALE_ERA && state.seenEvents.includes('E11-12') && eligibleEvents().length === 0) {
       finalizeEnding(undefined);
     }
   }
@@ -470,12 +506,17 @@ export function createGame({ erasData, eventsData, copyData = null, rng = Math.r
     return JSON.stringify(structuredClone(state));
   }
   function deserialize(json) {
-    const s = JSON.parse(json);
+    let s = JSON.parse(json);
+    // v3 (§10.6): a v2 save (or older/absent version) migrates forward instead
+    // of throwing — era numbers remap through the §10.1 insertion table and
+    // Chronicle + lineageMods survive untouched.
+    if (isLegacySave(s)) s = migrateV2toV3(s);
     if (s.version !== SAVE_VERSION) throw new Error(`save version mismatch: ${s.version}`);
     Object.assign(state, s);
     if (!Array.isArray(state.badges)) state.badges = []; // pre-v2 saves have no badges
     if (!Array.isArray(state.lineageMods)) state.lineageMods = []; // v2.1
     if (!Array.isArray(state.eraGoalsDone)) state.eraGoalsDone = []; // v2.1
+    if (!state.arcs) state.arcs = createArcState(); // v3 arc ledger
     harvestModifiers(state.flags); // rebuild modifier pane for saves written pre-v2.1
     return state;
   }
