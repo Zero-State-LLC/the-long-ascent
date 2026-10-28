@@ -79,24 +79,36 @@ export class ParallaxBg {
   }
 
   // Draw both layers into ctx mapped to normalized 100x100 space (like figure/palettes).
-  // The strips are painted as full-width bands (far band upper, near band lower),
-  // repeated edge-to-edge with the wrapped offset. Missing layer -> skipped silently
-  // (the v1 procedural drawBackground underneath still shows).
+  // Each strip is scaled to span the full view width and anchored so its bottom sits
+  // at the horizon line (far) / ground line (near) — a proper environment, not floating
+  // mid-air bands. Far layer: taller, sits behind everything at the horizon. Near layer:
+  // shorter band at the ground line, scrolls faster (parallax). Missing layer -> skipped
+  // silently (the v1 procedural drawBackground underneath still shows).
   draw(ctx, viewW = 100, viewH = 100) {
-    const periodUnits = (viewW * this.stripWidth()) / STRIP_FRAME_W / 4; // scale strip into view
-    const bandH = viewH * (180 / STRIP_FRAME_W) / 4; // preserve strip aspect at that scale
+    // Strip natural aspect: 640x180 => each frame is 320x180 (16:9-ish band).
+    const natW = this.stripWidth();
+    const frameAspect = (STRIP_FRAME_W / 180); // ~1.78 wide
+    // Far layer: spans full width, height = width / aspect, bottom at horizon (62% down).
+    // Near layer: spans full width, bottom at ground (88% = figure baseline), drawn shorter
+    // by cropping scale so it reads as foreground detail rather than a second horizon.
     const specs = [
-      ['far', viewH * 0.18],
-      ['near', viewH * 0.58],
+      // [layer, bottomY, heightUnits] — heights keep strip aspect for far; near slightly squashed
+      ['far', viewH * 0.62, (viewW / frameAspect)],
+      ['near', viewH * 0.88, (viewW / frameAspect) * 0.62],
     ];
-    for (const [name, y] of specs) {
+    for (const [name, bottomY, bandH] of specs) {
       const img = this.layers[name];
-      if (!img || !(img.complete === undefined || img.complete) ) continue;
+      if (!img || !(img.complete === undefined || img.complete)) continue;
       if (img.naturalWidth === 0) continue;
+      // Wrap period = one seamless frame scaled to full view width; the 2-frame sheet
+      // tiles 2x per period for smooth wrap with the offset applied on the SECOND frame
+      // boundary (offset 0..period maps to sheet scroll).
+      const period = viewW;
+      const y = bottomY - bandH;
       ctx.save();
-      const off = wrapOffset(periodUnits - this.offsets[name] * (periodUnits / this.stripWidth()), periodUnits);
-      for (let x = -off; x < viewW; x += periodUnits) {
-        ctx.drawImage(img, x, y, periodUnits, bandH);
+      const off = wrapOffset(this.offsets[name] * (period / this.stripWidth()), period);
+      for (let x = -off; x < viewW; x += period) {
+        ctx.drawImage(img, x, y, period, bandH);
       }
       ctx.restore();
     }
