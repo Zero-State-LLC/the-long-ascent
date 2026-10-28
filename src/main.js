@@ -1,5 +1,5 @@
 // Entry point: load generated data, boot the UI. Plain ES modules, no build step.
-import { bootApp } from './ui/app.js';
+import { bootApp } from './ui/dom-boot.js';
 
 const [erasRes, eventsRes] = await Promise.all([
   fetch('./src/data/eras.json'),
