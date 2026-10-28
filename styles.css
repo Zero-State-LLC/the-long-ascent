@@ -109,7 +109,7 @@ body {
 .settings-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
 
 /* ending -------------------------------------------------------------- */
-#ending-screen { display: grid; align-content: center; justify-items: center; text-align: center; gap: 0.8rem; }
+#ending-screen { align-content: center; justify-items: center; text-align: center; gap: 0.8rem; }
 .ending-kicker { margin: 0; font-size: 0.7rem; letter-spacing: 0.3em; color: var(--muted); }
 .ending-title { margin: 0; font-size: clamp(1.6rem, 5vw, 2.6rem); color: var(--accent); }
 .ending-body { max-width: 560px; font-size: 0.95rem; line-height: 1.6; }
@@ -117,7 +117,8 @@ body {
 .ending-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; }
 
 /* title splash --------------------------------------------------------- */
-#title-screen { display: grid; align-content: center; justify-items: center; gap: 0.7rem; }
+#title-screen { align-content: center; justify-items: center; gap: 0.7rem; }
+#title-screen:not([hidden]) { display: grid; }
 .title-main { margin: 0; font-size: clamp(1.5rem, 6vw, 3rem); letter-spacing: 0.22em; text-align: center; }
 .title-tag { margin: 0; color: var(--muted); font-style: italic; }
 .title-buttons { display: flex; gap: 0.7rem; margin-top: 1rem; }
