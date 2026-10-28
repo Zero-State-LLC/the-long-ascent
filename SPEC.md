@@ -402,3 +402,76 @@ summarizing the arc's state. The Chronicle becomes readable as a novella.
 Each step is its own PR; z0D verifies each before the next dispatch.
 
 *Every turn is a PR. No source-novel proper nouns (§8). Benthics stay.*
+
+---
+
+## 11. v3a — The Crossing: Starship Minigame (2026-10-28)
+
+An arcade interlude for **The Long Silence** (§10.1 era 16) and replayable from the
+title screen once unlocked. The lineage's vessel threads a dense debris lane —
+the "router" between star systems — under direct player control.
+
+### 11.1 Design
+
+- **Premise:** Between stars, the ship must thread a crowded navigation corridor
+  (the router lane: mapped debris, comet trains, derelict fleet traffic). Autopilot
+  is illegal, insane, or both. You fly it by hand.
+- **Controls:** ← → steer (lateral), ↑ thrust, ↓ brake. Touch: drag left/right half
+  of screen + two pedal buttons. Keys are captured only while the minigame is focused
+  (page scroll suppressed during play, restored after).
+- **Goal:** Survive the crossing (fixed distance, ~45-60s at normal speed) and keep
+  Hull ≥ 0. Each collision costs Hull (−20) and Entropy (+3); grazing (near miss)
+  grants small Knowledge (+1, "you learned from that").
+- **Obstacles:** 3 classes — slow tumbling derelicts (large, predictable), fast comet
+  fragments (small, quick), and router gates (safe corridor rings that give +5 progress
+  bonus when threaded cleanly). Density scales with game Speed setting and era tempo.
+- **Difficulty:** scales with how well the lineage is doing — high Entropy = more
+  debris (the void is polluted too). Losing (Hull < 0) is NOT a lineage death: the
+  ship limps to the gate, costs −10% Sustenance, and the event chain continues.
+  Winning grants +8 Sustenance, +5 Knowledge, badge `void_pilot` (new 24×24 badge).
+- **Skip:** accessible from settings (Reduce motion users get it auto-skipped with
+  full rewards — the crossing happened offscreen).
+
+### 11.2 Implementation (Forge)
+
+- New module `src/render/Starfield.js` — the game canvas (reuse the existing main
+  canvas, overlay mode `data-view="crossing"`): ship sprite (Studio: 4-frame 96×96
+  sheet — idle, thrust, brake, hit), obstacle sprites (3 sheets, 2 frames each),
+  star parallax reuses `ParallaxBg` at high tempo.
+- Physics: fixed-timestep (1/60), delta-clamped; ship has inertia (accel 0.4 u/f²,
+  drag 0.98/f); obstacles spawn from the right at speed 2-6 u/f with 0.8-2.2s gaps.
+- Collision: AABB with 4px forgiveness padding. Near-miss: distance < 12px for >0.5s.
+- Router gates: rings spanning a vertical band; threading = passing through the
+  inner 60% of the band.
+- State: `crossing.js` in `src/core/` — pure logic (spawn table, collision, scoring),
+  fully unit-testable; render layer reads its state. RNG seeded from game seed.
+- **Keyboard capture rules:** listeners attach on minigame start, detach on end;
+  `e.preventDefault()` on arrows only while active. Focus trap respected (Tab exits
+  to skip button). Reduced-motion: see §11.1 skip.
+- **Audio:** `bgm_crossing.ogg` (tense, driving, 30s loop) + `hit_thud.ogg`,
+  `gate_chime.ogg`, `crossing_win.ogg` (Studio deliverables).
+- Tests: spawn table determinism (seeded), AABB + forgiveness math, gate threading,
+  hull/entropy deltas, skip-with-rewards path, keyboard capture attach/detach.
+  Suite ≥ 45 passing after §10 Forge work, ≥ 51 after this.
+
+### 11.3 Studio deliverables
+
+| File | Spec |
+|---|---|
+| `sprites/ship_lineage.png` | 4 frames × 96×96 (idle, thrust, brake, hit) |
+| `sprites/obs_derelict.png` | 2 frames × 96×96 |
+| `sprites/obs_comet.png` | 2 frames × 48×48 |
+| `sprites/gate_ring.png` | 1 frame × 48×192 (vertical band) |
+| `sprites/badge_void_pilot.png` | 24×24 |
+| `audio/bgm_crossing.ogg` | 30s loop, tense/driving |
+| `audio/sfx_hit_thud.ogg`, `sfx_gate_chime.ogg`, `sfx_crossing_win.ogg` | one-shots |
+
+Era palette: void (era 16). Style: same stick-figure language — the ship is a
+stick-figure cockpit, the derelicts are dead stick-figure stations.
+
+### 11.4 Unlock & routing
+
+- Unlocked automatically when the lineage reaches era 16; also playable from the
+  title screen after first unlock ("THE CROSSING" button under Continue).
+- Forge implements §11.2 after the §10 Forge PR merges. Tests + browser smoke
+  (arrow keys via real keydown events) required before merge.
