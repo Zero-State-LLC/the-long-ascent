@@ -1,0 +1,4016 @@
+{
+  "version": "3.0",
+  "source": "SPEC.md §10 (Scribe deliverables, v3): 6 new eras, 3 arcs (Custodian / Benthic Ledger / Rival Lineage), Chronicle chapter cards, mid-era mini-events (opportunities + crisis pulses). §11: The Crossing minigame copy. Primary research: research/digest-v3.md. Naming per §8: no source-novel proper nouns; Benthics stay; generic titles only.",
+  "eras": [
+    {
+      "num": 4,
+      "name": "The Age of Sails & Empires",
+      "signatureResource": "sails",
+      "sustenanceLabel": "Coin",
+      "intro": "Your horizon stops being a rumor and becomes a shipping lane. Letters take six months, so captains become viceroys and investors discover they own weather in someone else's ocean. Coffeehouses invent the share price before anyone builds an exchange; shipboard articles get signed by the whole crew, pirates included — constitutions on a plank. Every hull that leaves carries silver one way and consequences the other, and the invoice arrives late, in installments, denominated in Legitimacy. A Custodian keeps the old fire brand lashed below decks as a talisman and calls it insurance. Your rival sails west. Somebody must. The ocean does not care which of you is right; it only counts who arrives with cargo.",
+      "eraGoal": {
+        "name": "Circle the Globe",
+        "description": "Run a trade route all the way around the world and bring back enough cargo, charts, and plausible deniability that the lineage now has a flag on every ocean and an explanation on none of them."
+      }
+    },
+    {
+      "num": 5,
+      "name": "Revolution & Empire",
+      "signatureResource": "revolution",
+      "sustenanceLabel": "Ideals",
+      "intro": "Rights arrive as pamphlets, and pamphlets have a habit of becoming armies. Declarations quote older declarations — legitimacy is now a citation chain, and you can be audited by people who cannot read. The lineage watches a republic hand its hero a crown inside ten years, drafts constitutions while the army waits outside, and discovers that every clause costs somebody specific. Conscription invents the census: the state suddenly knows everyone's birthday, which is surveillance wearing a party hat. The Custodian has turned lawyerly and guards a ledger — the state's debts bound as an heirloom. Your rival ennobles under the emperor you opposed. His descendants still salute him.",
+      "eraGoal": {
+        "name": "Write the Rules",
+        "description": "Get a constitution signed, a code ratified, and enough rights language into circulation that the era can no longer be governed by vibes — even if enforcement remains enthusiastic, selective, and armed."
+      }
+    },
+    {
+      "num": 8,
+      "name": "The World Wars",
+      "signatureResource": "wars",
+      "sustenanceLabel": "Mobilization",
+      "intro": "The conversion order arrives: consumer lines become munitions overnight, and efficiency shows up wearing a uniform. Children learn ounces before words; butter becomes a Legitimacy currency on the black market. In a hut with a locked door, brilliant misfits read the enemy's mail and earn a Knowledge surge plus a secrecy oath that freezes patents for decades. Cousins hold both sides of a border; the Chronicle hides nothing and forgives everything, while censors read every trench_letter twice. Entropy does not check passports when it bombs. The Custodian carries the ledger through an evacuation and ages decades inside one scene. At dawn the peace table redraws your map, and you choose which border your grandchildren will defend.",
+      "eraGoal": {
+        "name": "Outproduce the War",
+        "description": "Convert, ration, decrypt, and out-build the other side's factories, then survive long enough to spend the victory parade — infrastructure that applauds — without noticing the moral debt has been quietly compounding."
+      }
+    },
+    {
+      "num": 10,
+      "name": "The Space Age",
+      "signatureResource": "orbit",
+      "sustenanceLabel": "Prestige",
+      "intro": "Something beeps overhead and the entire era accelerates to catch up with a noise. Money moves faster than physics, which is how rocket gaps are panicked and test pilots end up signing waivers nobody can read; the first orbits are survivable by luck and checklists. Spy eyes count your silos while teaching you what borders actually look like, and frost-resistant food arrives at retail, twice paid for. Heroes get magazine covers, then bar fights — Legitimacy is a fuel that gels. The Custodian refuses zero gravity: the relic has weight for a reason. Your rival claims the milestone first, and the scoreboard from this era will be cited at the end of everything.",
+      "eraGoal": {
+        "name": "Reach Orbit, Land on the Moon",
+        "description": "Put hardware in orbit and boots on another world inside the decade, bending the budget curve until reality complies — or the treasury breaks, whichever the history broadcast airs first."
+      }
+    },
+    {
+      "num": 12,
+      "name": "The Green Transition",
+      "signatureResource": "green",
+      "sustenanceLabel": "Carbon",
+      "intro": "Somebody finally totals the invoice from the coal era, and the number becomes a character. Solar undercuts coal at noon; grid operators discover sunlight has no dispatch queue, and a load chart shaped like a duck breaks the old model. Pollution gets a price tag and arbitrageurs learn thermodynamics overnight. Mining towns do not accept brochures; retraining costs now, strikes cost louder. The Chronicle becomes legal evidence — ancestors are sued retroactively, which is litigation's nicest trick. The Custodian argues with you about the seed vault: freeze it or plant it. The Benthics offer Entropy deferral notes. Clean balance sheet today. Their contract language is impeccable, which is how you know.",
+      "eraGoal": {
+        "name": "Peak the Curve",
+        "description": "Flip the grid onto renewables, strand what must be stranded, and get Entropy's growth rate bending downward for the first time in the game — the counter that never goes down, starting to go down."
+      }
+    },
+    {
+      "num": 16,
+      "name": "The Long Silence",
+      "signatureResource": "silence",
+      "sustenanceLabel": "Resolve",
+      "intro": "Between stars, bandwidth is the only scarcity and a whispered word costs a year. A message home takes eleven years, so parents hear yes after the wedding ended. The third generation born in the hull will never see the destination — the neglected middle, legislated for by the dead and the sleeping. Copies drift faster than repairs arrive; storage decays, and you choose which ancestors stay readable. The Benthics' loans come due in a currency you no longer mint, and their humor slows to geological deadpan. The Custodian is asked to carry the relic onto a shuttle with no return date. Nothing happens for ten years; the watching is the event, an arc_chapter nobody rushes. The Crossing waits ahead.",
+      "eraGoal": {
+        "name": "Arrive Intact",
+        "description": "Deliver the lineage — copies, archive, relic, and outstanding liabilities — through the interstellar crossing with enough coherence and hull left that arrival counts as continuity rather than a slower funeral."
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "E4-01",
+      "era": 4,
+      "title": "Shares for a Ship",
+      "scene_id": "sail_deal",
+      "arc": null,
+      "body": "One hull is not enough for the voyage, so strangers buy pieces of it. The coffeehouse floor does the work no exchange building exists to do yet: shares change hands over cold coffee and loud arithmetic. What nobody priced is the second part — shareholders never leave. They send letters. They form committees. Your captain now reports to people who have never smelled a rope, and their patience has a shorter half-life than any provision aboard.",
+      "choices": [
+        {
+          "label": "Sell generously, answer later",
+          "effect": {
+            "sustenance": 25,
+            "legitimacy": -5
+          },
+          "quote": "Capital has no horizon. It has a meeting schedule."
+        },
+        {
+          "label": "Keep majority, sail smaller",
+          "effect": {
+            "infrastructure": 10,
+            "sustenance": -5
+          }
+        },
+        {
+          "label": "Promise routes you don't have",
+          "effect": {
+            "sustenance": 40,
+            "entropy": 8,
+            "knowledge": -5
+          },
+          "quote": "Prospectus: prophecy with a signature line."
+        }
+      ]
+    },
+    {
+      "id": "E4-02",
+      "era": 4,
+      "title": "The Charter Monopoly",
+      "scene_id": "senate_vote",
+      "arc": null,
+      "body": "The crown grants your house exclusive rights to a sea lane, which is a tax collected by you instead of them, minus the accountability. Monopoly profits land immediately, warm and heavy as bullion. Smugglers, being entrepreneurs with better boats, begin testing the clause-by-clause strength of the grant. Enforcement turns out to be a subscription service too, and the renewal fee is measured in gunpowder and grudges.",
+      "choices": [
+        {
+          "label": "Take the charter",
+          "effect": {
+            "sustenance": 30,
+            "legitimacy": -8,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Refuse and trade free",
+          "effect": {
+            "legitimacy": 10,
+            "sustenance": -10
+          },
+          "quote": "Principles: cheaper than cannons, briefly."
+        },
+        {
+          "label": "Take it, undercut it yourself",
+          "effect": {
+            "sustenance": 15,
+            "knowledge": 8,
+            "entropy": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-03",
+      "era": 4,
+      "title": "Passage Money",
+      "scene_id": "trade_road",
+      "arc": null,
+      "body": "A broker offers to fill holds with desperate families: their passage paid in advance, their labor sold forward by yours. The ships leave full, the ledgers balance beautifully, and something bleeds out of the house's story at home in slow quarterly increments. Every clause of the contract is legal, which the broker mentions the way one mentions weather. The ledger's beauty is the point: every column balances, and none of them mention names.",
+      "choices": [
+        {
+          "label": "Grant nothing. No holds, no contracts.",
+          "effect": {
+            "legitimacy": 12,
+            "sustenance": -15
+          },
+          "quote": "Some cargo is an invoice that fights back."
+        },
+        {
+          "label": "Book the passages",
+          "effect": {
+            "population": 15,
+            "sustenance": 15,
+            "legitimacy": -20
+          }
+        },
+        {
+          "label": "Middle passage terms: shorter bonds, higher rates",
+          "effect": {
+            "population": 8,
+            "sustenance": 5,
+            "legitimacy": -10,
+            "knowledge": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-04",
+      "era": 4,
+      "title": "The Privateer's Percentage",
+      "scene_id": "trade_road",
+      "arc": null,
+      "body": "A captain with more flags than scruples proposes commissions: his guns, your paper, rivals' cargo split by formula. Law, he explains with a bow, is mostly a flag you fly, and he flies several, seasonally. The math is excellent. The precedent is load-bearing, and you are standing under it. The harbor masters take their cut of the commissions and consider themselves uninvolved, which is the correct legal posture and the wrong moral one.",
+      "choices": [
+        {
+          "label": "Commission the privateers",
+          "effect": {
+            "sustenance": 25,
+            "entropy": 8,
+            "legitimacy": -6
+          }
+        },
+        {
+          "label": "Convoy instead: pay for escorts",
+          "effect": {
+            "infrastructure": 10,
+            "sustenance": -12,
+            "legitimacy": 5
+          }
+        },
+        {
+          "label": "Hire him to hunt himself",
+          "effect": {
+            "sustenance": 8,
+            "knowledge": 10,
+            "entropy": -3
+          },
+          "quote": "Poacher-turned-gamekeeper, maritime edition."
+        }
+      ]
+    },
+    {
+      "id": "E4-05",
+      "era": 4,
+      "title": "Plague Ship in the Downs",
+      "scene_id": "plague_cart",
+      "arc": null,
+      "body": "One of your own hulls sits at anchor with fever in the hold and bills of lading worth a season. The harbor wants her burned or buried; the cargo manifest wants otherwise; the crew wants absolution, available separately. Quarantine means feeding the sick and losing the goods. Sailing on means the goods arrive somewhere else's problem, wearing your flag. The crew stands on the quay afterward and watches the smoke, doing the arithmetic between cargo value and burial depth, and finding the two numbers uncomfortably close.",
+      "choices": [
+        {
+          "label": "Quarantine. Feed the sick, lose the cargo.",
+          "effect": {
+            "population": -10,
+            "legitimacy": 15,
+            "sustenance": -20
+          }
+        },
+        {
+          "label": "Sail on before anyone boards",
+          "effect": {
+            "sustenance": 20,
+            "entropy": 15
+          },
+          "quote": "The next port has heard worse rumors. Briefly."
+        },
+        {
+          "label": "Negotiate a paid pest-house",
+          "effect": {
+            "sustenance": -8,
+            "legitimacy": 8,
+            "knowledge": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-06",
+      "era": 4,
+      "title": "The Longitude Premium",
+      "scene_id": "lab_test",
+      "arc": null,
+      "body": "A bounty hangs over the western lane: build a seawatch that tells west from south, and every hull you own stops dying of arithmetic. A clockmaker with steady hands and unsteady rent claims she can do it. Every admiral says a spring watch will lie at sea. She says admirals navigate by superstition and lunch. The trials will take years and eat money at a constant rate regardless of results.",
+      "choices": [
+        {
+          "label": "Fund the clockmaker",
+          "effect": {
+            "knowledge": 20,
+            "sustenance": -15
+          },
+          "quote": "Longitude: the original hard timing problem."
+        },
+        {
+          "label": "Pay the lunar-theory mathematicians instead",
+          "effect": {
+            "knowledge": 10,
+            "sustenance": -8
+          }
+        },
+        {
+          "label": "Let the premium sit unclaimed",
+          "effect": {
+            "sustenance": 5,
+            "entropy": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-07",
+      "era": 4,
+      "title": "The Company Raises Its Flag",
+      "scene_id": "patron_deal",
+      "arc": null,
+      "body": "The trading house has grown a fort, the fort a court, the court judges, and the judges seals. Without anyone quite deciding it, you hired a proto-state that fits in a ledger. It provides law, roads, and violence in convenient bundles, invoices arriving monthly. Revenues rise. Sovereignty creeps. Somewhere a local ruler is studying your flag very closely and drafting correspondence.",
+      "choices": [
+        {
+          "label": "Let the company govern",
+          "effect": {
+            "sustenance": 20,
+            "infrastructure": 15,
+            "legitimacy": -12,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Cap the forts, keep the counters",
+          "effect": {
+            "sustenance": 8,
+            "infrastructure": 5,
+            "legitimacy": 6
+          }
+        },
+        {
+          "label": "Hand the courts to the crown",
+          "effect": {
+            "legitimacy": 10,
+            "sustenance": -10
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-08",
+      "era": 4,
+      "title": "Cargo of Somebody Else's Silver",
+      "scene_id": "crash_floor",
+      "arc": null,
+      "body": "Galleons arrive heavy with mountain silver, and prices notice before anyone votes on it. Coin buys less each tide; wages chase rents; the accountant develops a twitch labeled monetary phenomenon. The silver is real, the wealth is debatable, and the inflation does not care whose mine dug it. Hoarding feels wise for exactly one season. The wise convert metal into land, warehouses, and favors before the next galleon clears the horizon, because silver has no opinion about its own purchasing power.",
+      "choices": [
+        {
+          "label": "Convert silver to land and hulls now",
+          "effect": {
+            "infrastructure": 15,
+            "sustenance": -10
+          }
+        },
+        {
+          "label": "Lend against future cargoes at ruinous rates",
+          "effect": {
+            "sustenance": 20,
+            "legitimacy": -8,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Reprice the whole book honestly",
+          "effect": {
+            "knowledge": 10,
+            "legitimacy": 6,
+            "sustenance": -6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-09",
+      "era": 4,
+      "title": "The Cartographer's Error",
+      "scene_id": "trade_road",
+      "arc": null,
+      "body": "A chart off by a hundred miles takes two heirs and a grain hull onto rocks nobody drew. The surviving pilot insists the coast moved. A survey expedition would take three seasons and make the mistake expensive to repeat; reusing the old chart makes it cheap to repeat, which is a different accounting standard, favored by optimists. The widows petition for the survey either way. The coast keeps its position; only the paper disagrees with it, loudly, at night, in fog.",
+      "choices": [
+        {
+          "label": "Fund the survey",
+          "effect": {
+            "knowledge": 15,
+            "infrastructure": 8,
+            "sustenance": -15
+          }
+        },
+        {
+          "label": "Copy the old chart, add a footnote",
+          "effect": {
+            "sustenance": 5,
+            "entropy": 10
+          },
+          "quote": "Footnotes sink fewer ships than coastlines. Statistically contested."
+        },
+        {
+          "label": "Buy the rival house's charts",
+          "effect": {
+            "knowledge": 10,
+            "sustenance": -10,
+            "legitimacy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-10",
+      "era": 4,
+      "title": "Missionary or Factor",
+      "scene_id": "patron_deal",
+      "arc": null,
+      "body": "The heir going abroad chooses her equipment: a bible or a ledger. Both convert populations, just to different currencies, and the mission school and the counting house keep adjacent books about the same village. The missionary learns the language properly. The factor learns it phonetically, for bargaining. Whichever you fund, the correspondence will shape the region for four generations. The village gets one schoolhouse and two histories, both carefully footnoted, neither of which will be legible to the grandchildren without a guide.",
+      "choices": [
+        {
+          "label": "Fund the mission",
+          "effect": {
+            "legitimacy": 10,
+            "knowledge": 8,
+            "population": 5,
+            "sustenance": -8
+          }
+        },
+        {
+          "label": "Fund the factory",
+          "effect": {
+            "sustenance": 18,
+            "legitimacy": -8,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Fund both and reconcile neither",
+          "effect": {
+            "sustenance": 8,
+            "knowledge": 6,
+            "entropy": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-11",
+      "era": 4,
+      "title": "Blockade Season",
+      "scene_id": "trade_road",
+      "arc": null,
+      "body": "Enemy sails choke the lane and the calendar does not negotiate: miss the window and the season's cargo rots where it stands. Running the blockade costs hulls and names. Rerouting through a rival's port works fine and creates a dependency with an opinion about pricing, exercised annually, in person, by their relatives. The factors price the delay into next season's contracts, all of them, including the ones that pretend the lane is open and honest as ever.",
+      "choices": [
+        {
+          "label": "Run the blockade",
+          "effect": {
+            "sustenance": 20,
+            "population": -8,
+            "entropy": 6
+          }
+        },
+        {
+          "label": "Reroute through the rival port",
+          "effect": {
+            "sustenance": 10,
+            "legitimacy": -5,
+            "knowledge": 3
+          },
+          "quote": "Every shortcut is a lease. Read the renewal clause."
+        },
+        {
+          "label": "Sit the season out, keep crews paid",
+          "effect": {
+            "sustenance": -12,
+            "population": 5,
+            "legitimacy": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-12",
+      "era": 4,
+      "title": "The Ledger That Drowned",
+      "scene_id": "memory_mug",
+      "arc": null,
+      "body": "An heir kept double books, one per flag, and the ship carrying the wrong one went down with the only auditor. Now every entry is technically unverifiable, which reads as genius in good years and fraud in bad ones. The house trades on paper that means two things depending on the tide. Some clever successor will someday call it structured finance.",
+      "choices": [
+        {
+          "label": "Consolidate to one honest book",
+          "effect": {
+            "legitimacy": 12,
+            "sustenance": -12,
+            "knowledge": 5
+          }
+        },
+        {
+          "label": "Keep both. Edit history lightly.",
+          "effect": {
+            "sustenance": 10,
+            "entropy": 8
+          },
+          "quote": "Dual-currency household. Very modern, for it."
+        },
+        {
+          "label": "Burn the drowned ledger formally",
+          "effect": {
+            "legitimacy": 6,
+            "knowledge": -6,
+            "entropy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-13",
+      "era": 4,
+      "title": "Shipwreck Salvage Law",
+      "scene_id": "sail_deal",
+      "arc": null,
+      "body": "Wreckers claim your spilled hull by ancient custom: they arrive promptly, help thoroughly, and leave with everything. Custom, it turns out, was written by the people with the fastest dinghies. You can write salvage law — precise, boring, enforced — or adopt their custom and point it at someone else's cargo for a while. The admiralty courts inherit the finished statute two centuries later, unchanged, which is the highest praise legal drafting ever receives.",
+      "choices": [
+        {
+          "label": "Write salvage law",
+          "effect": {
+            "legitimacy": 12,
+            "knowledge": 8,
+            "sustenance": -6
+          }
+        },
+        {
+          "label": "Adopt the custom enthusiastically",
+          "effect": {
+            "sustenance": 18,
+            "legitimacy": -10,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Split salvaged cargo with the crews",
+          "effect": {
+            "sustenance": 6,
+            "population": 6,
+            "legitimacy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-14",
+      "era": 4,
+      "title": "The Lineage Sprouts a Branch",
+      "scene_id": "sail_deal",
+      "arc": "rival",
+      "flag": "branch_house",
+      "body": "A cousin-house across the ocean requests its own flag, its own books, and permission to stop asking. Half the family calls it mutiny; the other half has seen what six-month letters do to obedience. Grant the flag and gain a partner who grows independent on schedule. Demand tribute and gain a lesson in loyalty taught at cannon-point, invoiced to whoever wins.",
+      "choices": [
+        {
+          "label": "Grant the flag",
+          "effect": {
+            "sustenance": 10,
+            "legitimacy": -6,
+            "knowledge": 5
+          },
+          "quote": "Family, but distributed systems."
+        },
+        {
+          "label": "Demand tribute",
+          "effect": {
+            "sustenance": 12,
+            "entropy": 8,
+            "population": -5
+          }
+        },
+        {
+          "label": "Marriage alliance, one shared heir",
+          "effect": {
+            "legitimacy": 8,
+            "knowledge": 6,
+            "sustenance": -5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-15",
+      "era": 4,
+      "title": "Articles on a Plank",
+      "scene_id": "constitution_debate",
+      "arc": null,
+      "body": "A captured crew presents its articles: shares defined, injuries compensated, captains recallable, signed by every hand aboard, pirate paperwork with more consent in it than most navies. The admiral wants them hanged. The quartermaster who drafted the articles wants to be paid, in coin, per the schedule, and considers this the more important argument. The articles circulate among your own crews that evening, being read aloud, with commentary, by lamplight, which the admiral would classify as a second offense.",
+      "choices": [
+        {
+          "label": "Hang the lot",
+          "effect": {
+            "legitimacy": 8,
+            "population": -8,
+            "knowledge": -5
+          }
+        },
+        {
+          "label": "Copy the articles for your navy",
+          "effect": {
+            "knowledge": 12,
+            "population": 8,
+            "legitimacy": -6
+          },
+          "quote": "Best governance document this quarter: stolen."
+        },
+        {
+          "label": "Hire the quartermaster",
+          "effect": {
+            "knowledge": 8,
+            "sustenance": -8,
+            "population": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-16",
+      "era": 4,
+      "title": "The Talisman Below Decks",
+      "scene_id": "custodian_relic",
+      "arc": "custodian",
+      "flag": "custodian_sails",
+      "body": "The Custodian comes aboard with the fire brand wrapped in oilcloth and stowed below, and calls it insurance with better premiums than yours. She has carried it through more crossings than the ship has had captains. When the chaplain objects to relics, she asks what the figurehead is. He has no answer that survives contact with her tone. The brand stays. The crew prays to both.",
+      "choices": [
+        {
+          "label": "Give the Custodian a cabin and deference",
+          "effect": {
+            "legitimacy": 8,
+            "knowledge": 5,
+            "sustenance": -3
+          }
+        },
+        {
+          "label": "Stow the relic with the cargo",
+          "effect": {
+            "sustenance": 3,
+            "legitimacy": -5,
+            "entropy": 3
+          },
+          "quote": "The relic noticed. The relic has a memory."
+        },
+        {
+          "label": "Ask her to tell the brand's history aloud",
+          "effect": {
+            "knowledge": 8,
+            "population": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-17",
+      "era": 4,
+      "title": "Your Rival Sails West",
+      "scene_id": "rival_compare",
+      "arc": "rival",
+      "flag": "rival_west",
+      "body": "Word arrives with the winter fleet: your rival sailed west with three hulls and a printing press, and the lane behind him is closing to everyone else. Staying east is defensible, profitable, and increasingly quiet. Following means crowding a horizon that seats two houses comfortably and three loudly, with the third writing the maps. The lane, whichever way you take it, charges the same toll in patience, scurvy, and missed letters, and issues no refunds in any currency.",
+      "choices": [
+        {
+          "label": "Follow west",
+          "effect": {
+            "sustenance": 12,
+            "entropy": 6,
+            "knowledge": 5
+          },
+          "quote": "Imitation: the sincerest form of logistics."
+        },
+        {
+          "label": "Hold the eastern lanes",
+          "effect": {
+            "infrastructure": 10,
+            "legitimacy": 5,
+            "sustenance": -5
+          }
+        },
+        {
+          "label": "Sell him provisions at markup",
+          "effect": {
+            "sustenance": 15,
+            "legitimacy": -5
+          },
+          "quote": "Arm the gold rush. Own the shovel company."
+        }
+      ]
+    },
+    {
+      "id": "E5-01",
+      "era": 5,
+      "title": "The Petition Year",
+      "scene_id": "press_room",
+      "arc": null,
+      "body": "Rights rhetoric floods the pamphlet presses at a copper-plate per sermon, and the throne starts reading, which is somehow worse than ignoring. Every petition cites an older petition; legitimacy has become a citation chain, and citations can be audited by people who cannot read. Your printers are the busiest workshop in three provinces and the censors have begun visiting with compliments attached.",
+      "choices": [
+        {
+          "label": "Print the petitions",
+          "effect": {
+            "knowledge": 12,
+            "legitimacy": 8,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Print for the throne",
+          "effect": {
+            "sustenance": 12,
+            "legitimacy": -6
+          }
+        },
+        {
+          "label": "Print both and edit neither",
+          "effect": {
+            "sustenance": 8,
+            "knowledge": 6,
+            "entropy": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-02",
+      "era": 5,
+      "title": "Thirteen Candles",
+      "scene_id": "constitution_debate",
+      "arc": null,
+      "body": "A distant colony drafts its own legitimacy in a room with the curtains drawn, and the prose is embarrassingly good. The crown asks which side your presses serve; the colonists ask the same question in different ink. Distance makes neutrality temporarily purchasable, and the invoice for whichever side loses will arrive by ship either way. Your presses hum through the night either way, because neutrality still requires someone to print it, and printing it is itself a position.",
+      "choices": [
+        {
+          "label": "Back the crown",
+          "effect": {
+            "legitimacy": 8,
+            "sustenance": -8,
+            "knowledge": 3
+          }
+        },
+        {
+          "label": "Back the printers across the water",
+          "effect": {
+            "knowledge": 10,
+            "legitimacy": -6,
+            "sustenance": 5
+          },
+          "quote": "Bet on ideas with good distribution."
+        },
+        {
+          "label": "Declare principles, supply nobody",
+          "effect": {
+            "legitimacy": 5,
+            "sustenance": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-03",
+      "era": 5,
+      "title": "The Constitutional Convention",
+      "scene_id": "constitution_debate",
+      "arc": null,
+      "flag": "clause_written",
+      "body": "The rules of the new order are being written while the army waits outside, and every clause costs somebody specific. The constitutionalist waves your heir to a bench: property language, representation math, a comma with an army budget attached. Signing lends the house's name to a document that will be quoted, violated, and amended for centuries, in that order. The ink dries at exactly the speed history requires, which is to say too slowly for the army outside and too fast for everyone inside.",
+      "choices": [
+        {
+          "label": "Sign the constitution",
+          "effect": {
+            "legitimacy": 15,
+            "knowledge": 8,
+            "sustenance": -8
+          }
+        },
+        {
+          "label": "Protect the property clauses only",
+          "effect": {
+            "sustenance": 10,
+            "legitimacy": -5,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Walk out on the slavery compromise",
+          "effect": {
+            "legitimacy": 12,
+            "sustenance": -12,
+            "knowledge": 5
+          },
+          "quote": "History rereads abstentions generously. Sometimes."
+        }
+      ]
+    },
+    {
+      "id": "E5-04",
+      "era": 5,
+      "title": "Terror Clause",
+      "scene_id": "constitution_debate",
+      "arc": null,
+      "body": "The revolution has begun eating its writers, beginning with the ones who proofed the menu. Suspicion is the era's fastest-moving asset. Moderation buys distrust from both wings; radicalism buys influence with an expiration date printed on your own neck. The lists grow nightly and everyone named twice on them has developed opinions about weather. The committees request your house's papers weekly, flattering, urgent, filed under suspicion, alphabetized, which is how archives remember who was careful.",
+      "choices": [
+        {
+          "label": "Stay moderate",
+          "effect": {
+            "legitimacy": -5,
+            "knowledge": 6,
+            "entropy": 4
+          },
+          "quote": "Trusted by neither faction: the neutral zone is narrow and downhill."
+        },
+        {
+          "label": "Join the radicals",
+          "effect": {
+            "legitimacy": 8,
+            "entropy": 12,
+            "population": -8
+          },
+          "quote": "Heads roll. Yours included, eventually, but with seniority."
+        },
+        {
+          "label": "Leave the capital for the summer",
+          "effect": {
+            "sustenance": -6,
+            "population": 3,
+            "knowledge": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-05",
+      "era": 5,
+      "title": "The General's Coronation",
+      "scene_id": "senate_vote",
+      "arc": null,
+      "body": "Within ten years of burning thrones, the republic hands its favorite general a crown, and the ceremony is scheduled before the debate ends. Ideals versus order, packaged as a coronation. The bankers are already repricing; the poets are choosing vocabulary carefully. The general remembers every house's vote during the ceremony and some during the war before it. The poets who praised the republic now praise the ceremony in smaller font, and the accountants have already repriced both fonts accordingly.",
+      "choices": [
+        {
+          "label": "Bankroll the empire",
+          "effect": {
+            "sustenance": 18,
+            "legitimacy": -10,
+            "entropy": 6
+          }
+        },
+        {
+          "label": "Defend the republic",
+          "effect": {
+            "legitimacy": 12,
+            "sustenance": -8,
+            "population": -5
+          }
+        },
+        {
+          "label": "Finance both, honestly",
+          "effect": {
+            "knowledge": 8,
+            "entropy": 8,
+            "sustenance": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-06",
+      "era": 5,
+      "title": "Continental Blockade",
+      "scene_id": "trade_road",
+      "arc": null,
+      "body": "The empire closes a continent to trade by decree, and decrees move slower than sloops. Smuggling is now a patriotic industry with excellent margins and a felony tail. Lobbying the customs office is slower, cleaner, and priced per handshake. The blockade will fail eventually; the question is whether you'll be positioned as the proof or the cautionary tale. The customs inspectors grow rich with patriotic slowness, and the decree itself becomes a product, sold by whoever can read it first.",
+      "choices": [
+        {
+          "label": "Smuggle at scale",
+          "effect": {
+            "sustenance": 22,
+            "entropy": 10,
+            "legitimacy": -6
+          }
+        },
+        {
+          "label": "Lobby the customs office",
+          "effect": {
+            "sustenance": 6,
+            "legitimacy": 6,
+            "knowledge": 4
+          }
+        },
+        {
+          "label": "Comply loudly",
+          "effect": {
+            "legitimacy": 8,
+            "sustenance": -12
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-07",
+      "era": 5,
+      "title": "Rights of Persons Pamphlet",
+      "scene_id": "press_room",
+      "arc": null,
+      "flag": "persons_defined",
+      "body": "The new code needs a definition, and definitions compound into law: who counts as a person under it. The pamphleteers want patrons; the throne wants silence; the people being debated are, at this exact moment, alive, organized, and reading. Whatever your presses print tonight will be quoted in courts for two hundred years, usually by someone quoting it badly. The pamphlet ends with a sentence about consistency, which is the most dangerous word in any revolution's vocabulary, after supply.",
+      "choices": [
+        {
+          "label": "Print the broadest reading",
+          "effect": {
+            "legitimacy": 15,
+            "knowledge": 8,
+            "sustenance": -8,
+            "entropy": -3
+          },
+          "quote": "Ink outlives every inconvenience it causes."
+        },
+        {
+          "label": "Print the narrow reading",
+          "effect": {
+            "sustenance": 8,
+            "legitimacy": -15,
+            "entropy": 6
+          }
+        },
+        {
+          "label": "Decline to print either",
+          "effect": {
+            "sustenance": -3,
+            "knowledge": -3,
+            "legitimacy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-08",
+      "era": 5,
+      "title": "The Execution Shift",
+      "scene_id": "constitution_debate",
+      "arc": null,
+      "body": "The square's new machine runs on tickets now, and attendance records make fine Chronicle entries — legible, dated, damning. Subscribing your name to the season list is cheap insurance and permanent wallpaper. Skipping it marks you, gently, in a register kept by people who mark everything and forget nothing except mercy. The machine, meanwhile, achieves what no edict could: standardization, punctuality, and a new meaning of the phrase seasonal subscription.",
+      "choices": [
+        {
+          "label": "Subscribe to the season",
+          "effect": {
+            "legitimacy": 6,
+            "entropy": 8,
+            "sustenance": -4
+          },
+          "quote": "Attendance logged. The Chronicle has a long memory and no opt-out."
+        },
+        {
+          "label": "Refuse the tickets publicly",
+          "effect": {
+            "legitimacy": -4,
+            "knowledge": 5,
+            "entropy": -3
+          }
+        },
+        {
+          "label": "Buy the box seat, say nothing ever",
+          "effect": {
+            "knowledge": 8,
+            "sustenance": -6,
+            "entropy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-09",
+      "era": 5,
+      "title": "War Bond Gambit",
+      "scene_id": "crash_floor",
+      "arc": null,
+      "body": "Finance the revolution at five percent and the new state's spine belongs to your ledger forever afterward. Sovereign debt is immortality's uglier cousin: regimes fall, coupons persist. The risk is the one every bondholder whispers about — that the cause defaults, or worse, wins responsibly and refinances you out. The coupon clips circulate in three provinces and change hands like small printed prayers, each one a bet that tomorrow has a government.",
+      "choices": [
+        {
+          "label": "Underwrite the bonds",
+          "effect": {
+            "sustenance": 25,
+            "entropy": 8,
+            "legitimacy": -4
+          }
+        },
+        {
+          "label": "Buy them quietly at discount",
+          "effect": {
+            "sustenance": 12,
+            "knowledge": 5
+          }
+        },
+        {
+          "label": "Stay out of sovereign paper",
+          "effect": {
+            "sustenance": -5,
+            "legitimacy": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-10",
+      "era": 5,
+      "title": "The Occupied Library",
+      "scene_id": "monastery_copy",
+      "arc": null,
+      "body": "The liberating army ships your provincial archive away for safekeeping, which is what liberation calls moving van companies. The librarians offer two paths: file formal demands through a government that may last eighteen months, or network-copy — send scribes to every sister library and rebuild by collaboration before the crates leave the department. The crates are catalogued beautifully on the way out, which is the occupier's one genuine service to scholarship, performed entirely by people who miss home.",
+      "choices": [
+        {
+          "label": "Demand restitution",
+          "effect": {
+            "legitimacy": 8,
+            "sustenance": -6,
+            "knowledge": -3
+          }
+        },
+        {
+          "label": "Network-copy everything",
+          "effect": {
+            "knowledge": 18,
+            "sustenance": -10,
+            "population": 4
+          },
+          "quote": "You can steal a book. Good luck stealing the reading list."
+        },
+        {
+          "label": "Let it go, buy the auction lots back",
+          "effect": {
+            "knowledge": 6,
+            "sustenance": -15
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-11",
+      "era": 5,
+      "title": "Conscription Debate",
+      "scene_id": "senate_vote",
+      "arc": null,
+      "body": "The nation-in-arms drafts every heir, and the census-takers arrive with clipboards, which is the state learning everyone's birthday for the first time. Volunteering first is theater with legs: Legitimacy accrues, and the officer corps notices whose name was early on the roster. Exemptions are purchasable, visible, and remembered fondly by no one. The census follows the draft within the month, tender and exact, learning birthdays so the state can honor them and audit them in the right order.",
+      "choices": [
+        {
+          "label": "Volunteer the heir first",
+          "effect": {
+            "legitimacy": 15,
+            "population": -6,
+            "knowledge": 4
+          }
+        },
+        {
+          "label": "Pay the exemption",
+          "effect": {
+            "sustenance": -12,
+            "legitimacy": -8
+          }
+        },
+        {
+          "label": "Equip a company instead of joining it",
+          "effect": {
+            "sustenance": -8,
+            "legitimacy": 6,
+            "infrastructure": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-12",
+      "era": 5,
+      "title": "The Code Drafters",
+      "scene_id": "constitution_debate",
+      "arc": null,
+      "body": "One rational legal code is replacing three hundred local customs, and the drafters want the house's commercial practice as a template — every clause you bless becomes national, every loophole you close closes on you too. The customary bribes, meanwhile, are finely tuned instruments of local knowledge, and codification would flatten them into mere crime. The code prints with prefaces thanking the merchants, which is how commercial practice becomes civilization, retroactively, with receipts.",
+      "choices": [
+        {
+          "label": "Supply your templates",
+          "effect": {
+            "legitimacy": 12,
+            "knowledge": 10,
+            "sustenance": -6
+          }
+        },
+        {
+          "label": "Defend the old customs",
+          "effect": {
+            "sustenance": 8,
+            "legitimacy": -8,
+            "knowledge": -4
+          }
+        },
+        {
+          "label": "Insert one perfect clause for yourselves",
+          "effect": {
+            "sustenance": 12,
+            "entropy": 5,
+            "legitimacy": -4
+          },
+          "quote": "Legislative hygiene: skip it, enjoy it, inherit it."
+        }
+      ]
+    },
+    {
+      "id": "E5-13",
+      "era": 5,
+      "title": "Exile or Emigrate",
+      "scene_id": "trade_road",
+      "arc": null,
+      "body": "The losing faction offers the heir a choice in which neither option is good: exile with honor and no assets, or emigration with assets and no story. The émigré nobility sells family silver abroad at prices that make appraisers wince, and the silver remembers where it came from the way silver does — via provenance, eventually, at auction. Both options include a courteous escort to the border, which is the new regime's politeness, and the old regime's, which says something about regimes.",
+      "choices": [
+        {
+          "label": "Exile with honor",
+          "effect": {
+            "legitimacy": 10,
+            "sustenance": -15,
+            "knowledge": 4
+          }
+        },
+        {
+          "label": "Emigrate with the plate",
+          "effect": {
+            "sustenance": 15,
+            "legitimacy": -10
+          }
+        },
+        {
+          "label": "Stay, switch flags, survive",
+          "effect": {
+            "sustenance": 3,
+            "entropy": 6,
+            "population": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-14",
+      "era": 5,
+      "title": "The Tricolor or the Old Flag",
+      "scene_id": "sail_deal",
+      "arc": null,
+      "body": "The house sign gets repainted mid-decade, and trade partners pick a side either way, politely, while repricing contracts. Flags are marketing for governments and credit ratings for houses. Whichever cloth flies over the counting house, half the customer base will consider it a statement, and statements settle in cash. The sign painter is the only person guaranteed employment under either government, which makes him, quietly, the era's most stable fortune.",
+      "choices": [
+        {
+          "label": "Raise the tricolor",
+          "effect": {
+            "legitimacy": 8,
+            "sustenance": -6,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Keep the old flag",
+          "effect": {
+            "legitimacy": 5,
+            "sustenance": -6,
+            "knowledge": 3
+          }
+        },
+        {
+          "label": "Fly both, seasonally",
+          "effect": {
+            "sustenance": 10,
+            "entropy": 8
+          },
+          "quote": "Brand flexibility, revolutionary edition."
+        }
+      ]
+    },
+    {
+      "id": "E5-15",
+      "era": 5,
+      "title": "Suffrage Audit",
+      "scene_id": "senate_vote",
+      "arc": null,
+      "body": "The lineage's own council meets to decide who votes in the lineage's own council, because revolutions are awkward indoors. Franchise proposals circulate with footnotes; the household staff have developed unexpected interest in quorum rules. Whatever precedent set here will be cited at dinner for a century, usually by the losing side. The household learns the new math of franchises overnight, mostly correctly, entirely defensively, with footnotes prepared for dinner.",
+      "choices": [
+        {
+          "label": "Broaden the franchise",
+          "effect": {
+            "legitimacy": 10,
+            "knowledge": 6,
+            "sustenance": -4,
+            "population": 4
+          }
+        },
+        {
+          "label": "Keep the family vote",
+          "effect": {
+            "sustenance": 5,
+            "legitimacy": -6,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Votes proportional to contribution",
+          "effect": {
+            "sustenance": 8,
+            "knowledge": 4,
+            "entropy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-16",
+      "era": 5,
+      "title": "The Ledger Becomes the Relic",
+      "scene_id": "custodian_relic",
+      "arc": "custodian",
+      "flag": "custodian_ledger",
+      "body": "The Custodian arrives in lawyerly mode with the first constitutional-era account book — the state's debts bound as an heirloom — and asks where the fire brand should be filed relative to it. Her dialogue has aged from proverb to case law. The revolution's creditors and its patriots both want the ledger notarized, which is the sound of history discovering escrow.",
+      "choices": [
+        {
+          "label": "Notarize the ledger as heirloom",
+          "effect": {
+            "legitimacy": 10,
+            "knowledge": 8,
+            "sustenance": -4
+          }
+        },
+        {
+          "label": "Let the state audit it",
+          "effect": {
+            "legitimacy": 5,
+            "sustenance": 6,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Ask the Custodian her ruling",
+          "effect": {
+            "knowledge": 10,
+            "population": 3
+          },
+          "quote": "Precedent, she says, is just gossip with tenure."
+        }
+      ]
+    },
+    {
+      "id": "E5-17",
+      "era": 5,
+      "title": "The Rival Ennobles",
+      "scene_id": "rival_compare",
+      "arc": "rival",
+      "flag": "rival_ennobled",
+      "body": "Your rival takes a title from the emperor you opposed, and the portrait goes up with the ribbon prominent. His descendants still salute him; yours still argue about the argument. The court inverts your position like a lens: his name appears in grants, yours in petitions. History's scoreboard updates nightly and accepts no appeals. The portrait hangs at an angle that catches the light, which curators call composition and historians call propaganda, gently, over tea.",
+      "choices": [
+        {
+          "label": "Condemn from principle",
+          "effect": {
+            "legitimacy": 8,
+            "sustenance": -6,
+            "knowledge": 3
+          }
+        },
+        {
+          "label": "Seek the same ribbon",
+          "effect": {
+            "sustenance": 10,
+            "legitimacy": -8,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Marry into the new nobility anyway",
+          "effect": {
+            "sustenance": 8,
+            "knowledge": 5,
+            "legitimacy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-01",
+      "era": 8,
+      "title": "Total Mobilization",
+      "scene_id": "factory_floor",
+      "arc": null,
+      "body": "The conversion order lands on Friday: consumer lines become munitions by Monday, and efficiency arrives wearing a uniform. The same plant that made tractors will make tanks, then washing machines, and the tooling changes faster than the menus. Posters appear everywhere exhorting everyone to make do and mend, designed by the same ad men who sold the tractors. The time clocks multiply, the whistles govern whole towns, and the calendar acquires a military accent it will never fully lose.",
+      "choices": [
+        {
+          "label": "Convert everything, immediately",
+          "effect": {
+            "infrastructure": 18,
+            "sustenance": -10,
+            "entropy": 8
+          }
+        },
+        {
+          "label": "Convert half, keep consumer lines",
+          "effect": {
+            "infrastructure": 8,
+            "sustenance": 6,
+            "legitimacy": -4
+          }
+        },
+        {
+          "label": "Bid for the conversion contracts",
+          "effect": {
+            "sustenance": 15,
+            "infrastructure": 6,
+            "entropy": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-02",
+      "era": 8,
+      "title": "Ration Book Heir",
+      "scene_id": "surplus_feast",
+      "arc": null,
+      "body": "Children learn ounces before words; butter becomes a currency with a black-market yield curve. The ration stamps were designed by advertising men, which is how you know morale is a managed product. Paying for butter in Legitimacy is quiet arithmetic everyone does at the counter and nobody logs, until someone does. The household keeps a chart of margins above the pantry door, updated weekly, which the children assume is a game until they understand money.",
+      "choices": [
+        {
+          "label": "Follow the book exactly",
+          "effect": {
+            "legitimacy": 10,
+            "sustenance": -6
+          }
+        },
+        {
+          "label": "Work the black market gently",
+          "effect": {
+            "sustenance": 10,
+            "legitimacy": -10,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Open the estate gates to neighbors",
+          "effect": {
+            "legitimacy": 12,
+            "sustenance": -12,
+            "population": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-03",
+      "era": 8,
+      "title": "The Codebreaking Room",
+      "scene_id": "lab_test",
+      "arc": null,
+      "flag": "crypto_secret",
+      "body": "A hut full of brilliant misfits reads the enemy's mail and asks only for room, board, and absolute silence afterward. The Knowledge surge is real and enormous; the secrecy oath freezes their patents for decades, and the winning side files the whole breakthrough under never mind. One of them solves puzzles for the war effort and crossword puzzles for the soul.",
+      "choices": [
+        {
+          "label": "Fund the hut quietly",
+          "effect": {
+            "knowledge": 25,
+            "sustenance": -10,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Route them to patent law instead",
+          "effect": {
+            "knowledge": 8,
+            "sustenance": 8
+          }
+        },
+        {
+          "label": "Share the intercepts with allies",
+          "effect": {
+            "legitimacy": 10,
+            "knowledge": 10,
+            "entropy": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-04",
+      "era": 8,
+      "title": "Two Fronts, One Bloodline",
+      "scene_id": "war_front",
+      "arc": null,
+      "body": "Cousins hold both sides of a border that used to be a fence, and the Chronicle must hide nothing and forgive everything, because both cousins will read it. Every letter is censored twice, once by each army, by officers who share an aunt. Family archives become contraband with genealogy. The censor on one side reads the letter first; the censor on the other reads it second; both underline the same sentence about Aunt Ruth.",
+      "choices": [
+        {
+          "label": "Chronicle everything, truthfully",
+          "effect": {
+            "legitimacy": 10,
+            "knowledge": 8,
+            "entropy": 6
+          }
+        },
+        {
+          "label": "Publish nothing until it's safe",
+          "effect": {
+            "knowledge": -5,
+            "entropy": -3,
+            "sustenance": 3
+          }
+        },
+        {
+          "label": "Run letters between the cousins",
+          "effect": {
+            "population": 6,
+            "entropy": 8,
+            "legitimacy": 4
+          },
+          "quote": "Postal service. Extremely local. Potentially fatal."
+        }
+      ]
+    },
+    {
+      "id": "E8-05",
+      "era": 8,
+      "title": "The Home Factory Shift",
+      "scene_id": "factory_floor",
+      "arc": null,
+      "flag": "shift_change",
+      "body": "Whoever stays behind runs the line, and the line runs twenty-four hours: wages climb, hazards climb faster, and a permanent change settles into who the house employs. The foreman's daughter is now running a shift the foreman couldn't. Nobody wrote this down as progress yet, but the payroll did. The night shift starts keeping its own minutes, and the factory learns the sound of people who have discovered they are essential, permanently, at volume.",
+      "choices": [
+        {
+          "label": "Equal pay for equal shifts",
+          "effect": {
+            "legitimacy": 12,
+            "sustenance": -8,
+            "population": 6
+          }
+        },
+        {
+          "label": "War wages, old hiring",
+          "effect": {
+            "sustenance": 10,
+            "legitimacy": -8,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Safety first, quotas second",
+          "effect": {
+            "population": 8,
+            "infrastructure": -4,
+            "legitimacy": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-06",
+      "era": 8,
+      "title": "The Bombing Ledger",
+      "scene_id": "war_front",
+      "arc": null,
+      "body": "Staff officers present the choice in columns: the rival's plants or the rival's rail yards, precision measured in tonnage. Entropy doesn't check passports on the way down, and the ledger's clean arithmetic hides a footer nobody prints. Both columns win the campaign. The footer is billed to the peace, at interest. The staff college teaches the campaign for decades afterward, admiring the columns, and assigns the footer as optional reading, which is how staff colleges work.",
+      "choices": [
+        {
+          "label": "Target the plants",
+          "effect": {
+            "infrastructure": 10,
+            "entropy": 12,
+            "sustenance": 5
+          }
+        },
+        {
+          "label": "Target the rail yards",
+          "effect": {
+            "infrastructure": 6,
+            "entropy": 10,
+            "knowledge": 4
+          }
+        },
+        {
+          "label": "Refuse the precision targets",
+          "effect": {
+            "legitimacy": 10,
+            "sustenance": -8,
+            "entropy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-07",
+      "era": 8,
+      "title": "POW Parcel Exchange",
+      "scene_id": "trade_road",
+      "arc": null,
+      "body": "Small humanity is available at reasonable logistics rates: parcels of socks, tobacco, and milk powder routed through neutral channels, priced in shipping tons the war desperately needs elsewhere. Return on investment is negligible. The Legitimacy is real but soft. Do the math and the answer is no; do anything else and the answer is send them. The logistics board grumbles about tonnage for a week and then stops mentioning it, which is the closest thing the war produces to grace.",
+      "choices": [
+        {
+          "label": "Send the parcels",
+          "effect": {
+            "legitimacy": 12,
+            "sustenance": -10,
+            "entropy": -3
+          },
+          "quote": "Negligible ROI. Correct anyway. Keep the receipt."
+        },
+        {
+          "label": "Requisition the shipping tons",
+          "effect": {
+            "infrastructure": 8,
+            "legitimacy": -10
+          }
+        },
+        {
+          "label": "Send parcels, bill the neutrals",
+          "effect": {
+            "legitimacy": 6,
+            "sustenance": -3,
+            "knowledge": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-08",
+      "era": 8,
+      "title": "The Occupation Payroll",
+      "scene_id": "crash_floor",
+      "arc": null,
+      "body": "Coins stamped for occupied territories arrive in a crate with an instruction sheet. Spend them and the house inherits the stamp — every transaction a small endorsement, filed forever in metal. Refuse them and the payroll fails, the workers go unpaid, and the refusal is also a statement, just quieter and colder. The coins circulate for decades after, found in gardens, mint-fresh, each one a small museum of the question of who was paying whom.",
+      "choices": [
+        {
+          "label": "Pay workers in occupation coin",
+          "effect": {
+            "sustenance": 12,
+            "legitimacy": -15,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Refuse the stamp, pay real",
+          "effect": {
+            "sustenance": -15,
+            "legitimacy": 12
+          }
+        },
+        {
+          "label": "Hoard the coins for collectors",
+          "effect": {
+            "sustenance": 5,
+            "knowledge": 5,
+            "entropy": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-09",
+      "era": 8,
+      "title": "Displaced Experts Offer",
+      "scene_id": "lab_test",
+      "arc": null,
+      "flag": "rocket_debt",
+      "body": "Rocketry scientists are handed over at a checkpoint with a checklist of the labs they built, their handwriting meticulous, their futures negotiable. Knowledge arrives doubled; so does the moral debt, itemized in appendices nobody signs. Every clean room they fill has a previous tenant whose name the transfer papers spell approximately. The rocketry they bring works beautifully, on schedule, and lands, eventually, somewhere nobody planned, which is the entire era in one appendix.",
+      "choices": [
+        {
+          "label": "Take the team, ask little",
+          "effect": {
+            "knowledge": 25,
+            "legitimacy": -12,
+            "entropy": 6
+          }
+        },
+        {
+          "label": "Take them with full vetting",
+          "effect": {
+            "knowledge": 15,
+            "sustenance": -8,
+            "legitimacy": 4
+          }
+        },
+        {
+          "label": "Refuse the transfer",
+          "effect": {
+            "legitimacy": 8,
+            "knowledge": -5,
+            "sustenance": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-10",
+      "era": 8,
+      "title": "The Ceasefire Telegram",
+      "scene_id": "war_front",
+      "arc": null,
+      "body": "Peace arrives three seconds late to your front — the telegram timestamped, the orders still traveling, the last hour of the war fully documented and entirely optional in hindsight. Choose which final order you gave: the record keeps whatever you sign, and the historians will weigh your signature against the clock. The last casualty and the last medal share a timestamp, filed together, which some clerk considers tidy and posterity considers obscene.",
+      "choices": [
+        {
+          "label": "Halt at once, telegram or not",
+          "effect": {
+            "legitimacy": 10,
+            "population": 5,
+            "sustenance": -4
+          }
+        },
+        {
+          "label": "Take the ridge before midnight",
+          "effect": {
+            "infrastructure": 6,
+            "population": -8,
+            "entropy": 6
+          },
+          "quote": "Medals issued posthumously have excellent timing."
+        },
+        {
+          "label": "Lose the telegram entirely",
+          "effect": {
+            "entropy": 8,
+            "knowledge": -3,
+            "legitimacy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-11",
+      "era": 8,
+      "title": "War Debt Write-off",
+      "scene_id": "crash_floor",
+      "arc": null,
+      "body": "The creditor nation forgives nothing and the debtor nation prints everything; pick a side of the ledger to stand on. Creditors keep the moral high ground and slowly lose the money supply's respect. Printers keep the money flowing and meet the inflation that respects nothing. Both sides call their choice responsibility. The negotiators shake hands across a table bolted to nothing, and both delegations cable home the word responsible, meaning opposite things, correctly.",
+      "choices": [
+        {
+          "label": "Stand with the creditors",
+          "effect": {
+            "sustenance": 10,
+            "legitimacy": 6,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Stand with the printers",
+          "effect": {
+            "sustenance": 18,
+            "entropy": 12,
+            "legitimacy": -8
+          }
+        },
+        {
+          "label": "Push a partial write-off",
+          "effect": {
+            "legitimacy": 10,
+            "sustenance": -8,
+            "knowledge": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-12",
+      "era": 8,
+      "title": "Victory Parade Inventory",
+      "scene_id": "surplus_feast",
+      "arc": null,
+      "body": "Triumph costs more than the war — banners, brass bands, a mile of bunting, crowds that must be transported, fed, and photographed. Parades are infrastructure that applauds. The ledger balances in Legitimacy, a currency accepted exclusively at ceremonies, and the maintenance bill for the memorial arrives annually, forever, punctually. The bunting outlasts the veterans' pensions in storage, which tells you the true comparative budget lines of triumph and obligation.",
+      "choices": [
+        {
+          "label": "Parade on a budget",
+          "effect": {
+            "legitimacy": 8,
+            "sustenance": -6
+          }
+        },
+        {
+          "label": "Parade like an era-defining house",
+          "effect": {
+            "legitimacy": 18,
+            "sustenance": -20,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Skip the parade, fund the veterans",
+          "effect": {
+            "legitimacy": 10,
+            "population": 6,
+            "sustenance": -10
+          },
+          "quote": "Quieter. Better. Unphotographed. Correct."
+        }
+      ]
+    },
+    {
+      "id": "E8-13",
+      "era": 8,
+      "title": "The Camps Report",
+      "scene_id": "memory_mug",
+      "arc": null,
+      "flag": "report_read",
+      "body": "Liberation footage enters the Chronicle: dated, catalogued, undeniable. Some heirs refuse to read it, and the refusal is itself logged, timestamped, attributable. There is no option here that preserves comfort. There is only the option that determines what the archive says you were when the evidence arrived. The projection room stays warm late into the night, heirs arriving alone, leaving slower, and the Chronicle logs attendance without comment, which is comment enough.",
+      "choices": [
+        {
+          "label": "Read it. Enter it. Teach it.",
+          "effect": {
+            "legitimacy": 12,
+            "knowledge": 10,
+            "entropy": -3
+          }
+        },
+        {
+          "label": "File it unread",
+          "effect": {
+            "entropy": 8,
+            "legitimacy": -8,
+            "knowledge": -3
+          },
+          "quote": "The archive notes the filing method. The archive always notes."
+        },
+        {
+          "label": "Publish it widely",
+          "effect": {
+            "legitimacy": 15,
+            "knowledge": 8,
+            "sustenance": -5,
+            "entropy": -5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-14",
+      "era": 8,
+      "title": "Radar Dividend",
+      "scene_id": "lab_test",
+      "arc": null,
+      "body": "Wartime sensors go looking for peacetime jobs and find them absurdly well: microwave ovens, air traffic control, weather screens. The spin-off auction is the war's refund check, payable in products nobody asked for that everybody will want. The engineers who swore the oath are quietly unsworn and extremely employable. The kitchen counter becomes a consumer electronics showroom within five years, and nobody alive connects the microwave to the hut with the locked door. Everybody should.",
+      "choices": [
+        {
+          "label": "Commercialize aggressively",
+          "effect": {
+            "sustenance": 15,
+            "infrastructure": 8,
+            "knowledge": 8
+          }
+        },
+        {
+          "label": "License the patents openly",
+          "effect": {
+            "knowledge": 12,
+            "legitimacy": 8,
+            "sustenance": -4
+          }
+        },
+        {
+          "label": "Keep it defense-only",
+          "effect": {
+            "infrastructure": 6,
+            "sustenance": 4,
+            "entropy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-15",
+      "era": 8,
+      "title": "Treaty Signatures at Dawn",
+      "scene_id": "senate_vote",
+      "arc": null,
+      "flag": "border_chosen",
+      "body": "The peace table redraws the map in pencil before anyone has coffee, and the house picks which border its grandchildren will defend. Every line on the paper is somebody's kitchen. The delegate offering you a pen has excellent handwriting and no intention of remembering your objections after breakfast. The pencil line becomes a fence, the fence becomes a policy, and the policy becomes a generation's geography, drawn by a delegate needing a win before lunch.",
+      "choices": [
+        {
+          "label": "Take the defensible border",
+          "effect": {
+            "infrastructure": 10,
+            "legitimacy": 5,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Take the industrial border",
+          "effect": {
+            "sustenance": 15,
+            "entropy": 8,
+            "legitimacy": -5
+          }
+        },
+        {
+          "label": "Take the humane border",
+          "effect": {
+            "legitimacy": 12,
+            "population": 8,
+            "sustenance": -8
+          },
+          "quote": "Maps are promises. Pick the one you'd keep sober."
+        }
+      ]
+    },
+    {
+      "id": "E8-16",
+      "era": 8,
+      "title": "Handoff in the Bunker",
+      "scene_id": "custodian_relic",
+      "arc": "custodian",
+      "flag": "custodian_bunker",
+      "body": "During the evacuation the Custodian carries the ledger through three corridors, two sirens, and one floodgate, and ages decades inside a single scene — the jokes arriving later, thinner, better. She hands the satchel to the heir without ceremony and says the relic is heavier than it looks, which is not a statement about paper. The bunker lights flicker in agreement.",
+      "choices": [
+        {
+          "label": "Receive it with full honors",
+          "effect": {
+            "legitimacy": 10,
+            "knowledge": 8,
+            "population": 3
+          }
+        },
+        {
+          "label": "Ask her to keep carrying it",
+          "effect": {
+            "sustenance": 3,
+            "legitimacy": -6,
+            "entropy": 3
+          },
+          "quote": "She agrees. She notes who asked. Noting is her other skill."
+        },
+        {
+          "label": "Copy the ledger first, then carry",
+          "effect": {
+            "knowledge": 12,
+            "sustenance": -5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-17",
+      "era": 8,
+      "title": "Opposite Flags",
+      "scene_id": "rival_compare",
+      "arc": "rival",
+      "flag": "rival_opposite_flag",
+      "body": "The mirror completes: your rival salutes the flag you oppose, precisely, visibly, with photographs. Two lineages trained to opposite uniforms, marching toward the same Tuesday. Whatever this ends, both houses will explain it differently for a century, and the difference between the explanations will be the actual inheritance. The photographs develop slowly, in both capitals, and arrive at the same conclusion from opposite darkrooms, which the Chronicle files under symmetry.",
+      "choices": [
+        {
+          "label": "Record the divergence plainly",
+          "effect": {
+            "knowledge": 10,
+            "legitimacy": 5
+          },
+          "quote": "The Chronicle takes both versions. It always takes both versions."
+        },
+        {
+          "label": "Sabotage his unit's supply",
+          "effect": {
+            "sustenance": 8,
+            "entropy": 10,
+            "legitimacy": -8
+          }
+        },
+        {
+          "label": "Hide his cousins' children",
+          "effect": {
+            "legitimacy": 15,
+            "population": 5,
+            "entropy": -5,
+            "sustenance": -6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-18",
+      "era": 8,
+      "title": "The Censor's Evening",
+      "scene_id": "trench_letter",
+      "arc": null,
+      "body": "V-mail reduces a soldier's letters home to grams of microfilm, which the censor reads at volume before anyone else does — including the ones addressed to your own household, filed under return address because that is how filing works. A sergeant describes the war plainly and asks the censor, politely, to let it through anyway. The stamp is available in two flavors: approved, or shredded with regrets logged.",
+      "choices": [
+        {
+          "label": "Approve the plain accounts",
+          "effect": {
+            "legitimacy": 8,
+            "entropy": 4,
+            "knowledge": 5
+          },
+          "quote": "Morale, some say, is just news delivered on time."
+        },
+        {
+          "label": "Redact to weather reports",
+          "effect": {
+            "legitimacy": -4,
+            "knowledge": -3,
+            "sustenance": 3
+          }
+        },
+        {
+          "label": "Copy the sergeant's letter into the Chronicle",
+          "effect": {
+            "knowledge": 10,
+            "population": 3,
+            "entropy": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-01",
+      "era": 10,
+      "title": "The Beeping Sky",
+      "scene_id": "launch_window",
+      "arc": null,
+      "body": "A polished ball crosses the sky making one note, and the whole era accelerates to catch up with a sound. The rival power hears it first, which matters more than the physics. Budgets develop fins. Physicists receive telephone calls at hours previously reserved for emergencies, because apparently these qualify. The beeping continues for twenty-one days, indifferent to markets, budgets, and dignity, and remains the cheapest geopolitical event in history per unit weight.",
+      "choices": [
+        {
+          "label": "Answer with your own bird",
+          "effect": {
+            "knowledge": 12,
+            "sustenance": -12,
+            "infrastructure": 6
+          }
+        },
+        {
+          "label": "Study theirs obsessively",
+          "effect": {
+            "knowledge": 15,
+            "sustenance": -6
+          }
+        },
+        {
+          "label": "Call it a scientific achievement",
+          "effect": {
+            "legitimacy": 6,
+            "sustenance": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-02",
+      "era": 10,
+      "title": "Rocket Gap Panic",
+      "scene_id": "launch_window",
+      "arc": null,
+      "body": "The legislature funds anything with fins, at speeds physics has not agreed to. Money moves faster than engineering, which produces launch pads ahead of rockets and rockets ahead of test ranges. The administrator assures everyone the gap is imaginary and simultaneously requests a larger appropriation to verify that. The hearings feature rockets drawn on napkins, physicists correcting the napkins, and appropriations growing faster than thrust, which is the era's native engineering.",
+      "choices": [
+        {
+          "label": "Take the fast money",
+          "effect": {
+            "infrastructure": 15,
+            "entropy": 8,
+            "knowledge": 5
+          }
+        },
+        {
+          "label": "Slow money, rigorous testing",
+          "effect": {
+            "knowledge": 12,
+            "sustenance": -10,
+            "infrastructure": 4
+          }
+        },
+        {
+          "label": "Build test ranges and rent them out",
+          "effect": {
+            "sustenance": 10,
+            "infrastructure": 8
+          }
+        },
+        {
+          "label": "Short the hype",
+          "effect": {
+            "sustenance": 8,
+            "legitimacy": -6,
+            "knowledge": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-03",
+      "era": 10,
+      "title": "The Test Pilot's List",
+      "scene_id": "launch_window",
+      "arc": null,
+      "body": "Volunteers sign waivers nobody can read — fourteen pages, forty-point type, liability arranged like a firing squad — and first orbits turn out to be survivable by luck and checklists. The pilots joke about the actuarial tables. The actuaries do not joke about the pilots. The checklist that emerges will outlive every rocket on it. The waivers get longer every year, four pages become fourteen, and the pilots' signatures get more confident as the odds tables get quieter.",
+      "choices": [
+        {
+          "label": "Recruit aggressively",
+          "effect": {
+            "knowledge": 12,
+            "population": -5,
+            "entropy": 6
+          }
+        },
+        {
+          "label": "Invest in the checklist culture",
+          "effect": {
+            "knowledge": 10,
+            "infrastructure": 6,
+            "entropy": -4
+          },
+          "quote": "The most underrated spacecraft: paper, in order."
+        },
+        {
+          "label": "Pick cautious pilots over aces",
+          "effect": {
+            "knowledge": 8,
+            "legitimacy": 4,
+            "sustenance": -5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-04",
+      "era": 10,
+      "title": "Satellite Eyes",
+      "scene_id": "launch_window",
+      "arc": null,
+      "flag": "eyes_up",
+      "body": "Spy birds start counting borders from above, and the Knowledge surge is immediate and slightly obscene: every neighbor's silos, every coastline, your own silos as others see them, which is a perspective nobody trained for. Transparency turns out to be mutual, automatic, and non-negotiable — the view goes both directions at orbital velocity. The first imagery review ends with a long silence and the administrator's memorable note that surprise has been demoted from strategy to logistics.",
+      "choices": [
+        {
+          "label": "Launch the reconnaissance bird",
+          "effect": {
+            "knowledge": 20,
+            "entropy": 6,
+            "sustenance": -10
+          }
+        },
+        {
+          "label": "Propose open-sky treaties",
+          "effect": {
+            "legitimacy": 12,
+            "knowledge": 8,
+            "sustenance": -8
+          }
+        },
+        {
+          "label": "Sell imagery analysis commercially",
+          "effect": {
+            "sustenance": 12,
+            "knowledge": 8,
+            "entropy": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-05",
+      "era": 10,
+      "title": "The Moon Wager",
+      "scene_id": "launch_window",
+      "arc": null,
+      "flag": "moon_committed",
+      "body": "Commit publicly to a landing inside the decade, and the budget curve bends reality or breaks the treasury — the speeches do not specify which. Ten thousand vendors, a guidance computer with less memory than a grocery list, and a deadline chosen for its poetry. Physics accepts the wager without reading the press release. The vendors hire faster than the audits can follow, the schedules acquire poetry, and the word impossible is downgraded to a funding problem.",
+      "choices": [
+        {
+          "label": "Commit to the decade",
+          "effect": {
+            "knowledge": 18,
+            "infrastructure": 12,
+            "sustenance": -25,
+            "legitimacy": 10
+          }
+        },
+        {
+          "label": "Commit to robots first",
+          "effect": {
+            "knowledge": 12,
+            "sustenance": -12,
+            "legitimacy": 3
+          }
+        },
+        {
+          "label": "Decline the wager",
+          "effect": {
+            "sustenance": 8,
+            "legitimacy": -8,
+            "entropy": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-06",
+      "era": 10,
+      "title": "Spin-Off Auction",
+      "scene_id": "patron_deal",
+      "arc": null,
+      "body": "Frost-resistant food, memory foam, water filters, scratch-resistant lenses: space technology offered at retail, which means you pay for it twice — once at cost via taxes, once at the counter. The auctioneer calls it the dividend of wonder. The spreadsheet calls it margin. Both are correct in different currencies. The packaging says space-age on everything, including the spatula, and the spatula is, genuinely, excellent, which is the whole argument and the whole joke.",
+      "choices": [
+        {
+          "label": "License the food tech",
+          "effect": {
+            "sustenance": 12,
+            "population": 5
+          }
+        },
+        {
+          "label": "Buy the water filtration line",
+          "effect": {
+            "infrastructure": 10,
+            "knowledge": 5,
+            "sustenance": -6
+          }
+        },
+        {
+          "label": "Skip the novelties",
+          "effect": {
+            "sustenance": 3,
+            "knowledge": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-07",
+      "era": 10,
+      "title": "The Failed Launch Window",
+      "scene_id": "launch_window",
+      "arc": null,
+      "body": "Weather, seals, and politics align unfavorably on the pad: launch into crosswinds and ice-risk O-rings, or scrub and watch the rival take the glory slot on the evening broadcast. Both branches log cleanly in the Chronicle; only one of them logs with the vehicle intact. The flight director's gut is now a line item. The scrub decision ages well or badly depending on the tape, and the tape exists, and the tape will be watched forever by people with stopwatches.",
+      "choices": [
+        {
+          "label": "Launch",
+          "effect": {
+            "knowledge": 15,
+            "entropy": 12,
+            "legitimacy": 8,
+            "population": -5
+          }
+        },
+        {
+          "label": "Scrub the launch",
+          "effect": {
+            "legitimacy": -6,
+            "knowledge": 6,
+            "entropy": -3
+          },
+          "quote": "The pad forgives delays. It bills for them later."
+        },
+        {
+          "label": "Leak the weather data first",
+          "effect": {
+            "knowledge": 8,
+            "legitimacy": 4,
+            "entropy": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-08",
+      "era": 10,
+      "title": "Communications Relay Deal",
+      "scene_id": "patron_deal",
+      "arc": null,
+      "body": "Transponders lease nicely: television over oceans, phone calls thinned to fit, attention discovering orbit two eras early. The broadcast networks speak of unity while quietly measuring eyeballs in hemispheres. Orbit becomes real estate before anybody thinks to say estate, with zoning decided by who launched first. The first live ocean crossing broadcast makes one family in each hemisphere feel closer and ten thousand advertisers feel richer, and both are measured.",
+      "choices": [
+        {
+          "label": "Lease transponder time",
+          "effect": {
+            "sustenance": 15,
+            "infrastructure": 8,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Own the ground station",
+          "effect": {
+            "infrastructure": 12,
+            "knowledge": 6,
+            "sustenance": -8
+          }
+        },
+        {
+          "label": "Broadcast a landing live",
+          "effect": {
+            "legitimacy": 12,
+            "sustenance": -8,
+            "entropy": 5
+          },
+          "quote": "Live: the riskiest tense in broadcasting."
+        }
+      ]
+    },
+    {
+      "id": "E10-09",
+      "era": 10,
+      "title": "Planetary Protection Clause",
+      "scene_id": "constitution_debate",
+      "arc": null,
+      "body": "A treaty asks you to promise, on behalf of every microbe you might accidentally export, not to infect other worlds. The signing is ceremonial; the audits come later, conducted by successors with sterilization budgets and no sense of occasion. The lawyers love it. The biologists love it more, which tells you something. The sterilization protocols go into a drawer marked future embarrassment, where they stay, labeled beautifully, waiting for the successors with the budgets.",
+      "choices": [
+        {
+          "label": "Sign the clause",
+          "effect": {
+            "legitimacy": 10,
+            "knowledge": 6,
+            "sustenance": -5
+          }
+        },
+        {
+          "label": "Sign with reservations",
+          "effect": {
+            "legitimacy": 4,
+            "knowledge": 4,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Refuse: science first",
+          "effect": {
+            "knowledge": 8,
+            "legitimacy": -8,
+            "entropy": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-10",
+      "era": 10,
+      "title": "The Astronaut Celebrity Complex",
+      "scene_id": "social_spiral",
+      "arc": null,
+      "body": "The heroes get magazine covers, then ticker tape, then bar fights, in the canonical order. Legitimacy is a fuel that gels: usable, messy, flammable. The PR office manages smiles while the psychologists file memos nobody reads until the second tour. One astronaut asks, on camera, what he's supposed to do now. The nation hears it. The tour circuit grinds the heroes into posters, the posters into wallpaper, and the psychologists finally get read, three tours and one incident late.",
+      "choices": [
+        {
+          "label": "Manage the celebrity machine",
+          "effect": {
+            "legitimacy": 10,
+            "sustenance": -6,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Pull them off the circuit",
+          "effect": {
+            "legitimacy": -4,
+            "population": 5,
+            "knowledge": 4
+          }
+        },
+        {
+          "label": "Fund the post-flight institute",
+          "effect": {
+            "knowledge": 10,
+            "legitimacy": 6,
+            "sustenance": -10
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-11",
+      "era": 10,
+      "title": "Deep Space Network Nights",
+      "scene_id": "launch_window",
+      "arc": null,
+      "body": "The listening posts swing toward the dark and hear, among other things, Earth's own echoes bouncing back faint and strange. Infrastructure with an echo setting. The night-shift engineers develop a religion-adjacent relationship with antenna time, and the schedules they build will run the next three eras of exploration on faith and mathematics. The dishes hear pulsars, spacecraft, and one remarkable thunderstorm, and the engineers learn to love signals that arrive weak, ancient, and absolutely honest.",
+      "choices": [
+        {
+          "label": "Expand the network",
+          "effect": {
+            "infrastructure": 15,
+            "knowledge": 8,
+            "sustenance": -10
+          }
+        },
+        {
+          "label": "Share dishes internationally",
+          "effect": {
+            "knowledge": 10,
+            "legitimacy": 8,
+            "sustenance": -5
+          }
+        },
+        {
+          "label": "Prioritize deep-space over lunar",
+          "effect": {
+            "knowledge": 12,
+            "entropy": 4,
+            "sustenance": -6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-12",
+      "era": 10,
+      "title": "Budget Sunset",
+      "scene_id": "senate_vote",
+      "arc": null,
+      "flag": "program_kept",
+      "body": "The wonder window closes on schedule, as windows do, and the appropriations committee arrives with a sunset clause and kind eyes. Keep the crewed program and drain reserves funding majesty; pivot to satellites and plant the seeds of an industry nobody has named yet. Both choices are defensible. Only one compounds. The hearing ends politely, the press release uses the word transition twice, and the engineers keep their notebooks, which is how eras actually pass the torch.",
+      "choices": [
+        {
+          "label": "Keep the crewed program",
+          "effect": {
+            "legitimacy": 10,
+            "sustenance": -18,
+            "knowledge": 8
+          }
+        },
+        {
+          "label": "Pivot to satellites",
+          "effect": {
+            "sustenance": 15,
+            "infrastructure": 10,
+            "legitimacy": -5
+          }
+        },
+        {
+          "label": "Balanced retreat",
+          "effect": {
+            "sustenance": -6,
+            "infrastructure": 5,
+            "legitimacy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-13",
+      "era": 10,
+      "title": "Life Support Ethics Memo",
+      "scene_id": "lab_test",
+      "arc": null,
+      "body": "The memo traces the program's ascent through its passengers: tortoises, monkeys, then volunteers with signatures. Someone must draw the line, in ink or in blood, and the memo helpfully includes both drafting options. The review board disagrees loudly, which is the sound the future makes while being load-tested. The memo is leaked, of course, and the resulting scandal invents the review board, which survives every subsequent program, unlike several of the programs.",
+      "choices": [
+        {
+          "label": "Draw the line at volunteers",
+          "effect": {
+            "legitimacy": 10,
+            "knowledge": 6,
+            "sustenance": -6
+          }
+        },
+        {
+          "label": "Proceed past animal trials fast",
+          "effect": {
+            "knowledge": 12,
+            "entropy": 8,
+            "legitimacy": -8
+          }
+        },
+        {
+          "label": "Full ethics board, slow program",
+          "effect": {
+            "legitimacy": 8,
+            "knowledge": 4,
+            "infrastructure": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-14",
+      "era": 10,
+      "title": "The Station Proposal",
+      "scene_id": "launch_window",
+      "arc": null,
+      "body": "An engineer proposes building something that stays up — a place, not a visit — which is orbital real estate before anyone thinks to say estate. The proposal's appendix on maintenance is honest to the point of poetry. Permanence aloft is a new concept for the species and the budget line doesn't exist yet, grammatically or financially. The first module launches, docks, and stays, and the phrase permanent presence enters the language, followed within a decade by the phrase maintenance window.",
+      "choices": [
+        {
+          "label": "Fund the station",
+          "effect": {
+            "infrastructure": 18,
+            "knowledge": 10,
+            "sustenance": -15
+          }
+        },
+        {
+          "label": "Module-share with rivals",
+          "effect": {
+            "infrastructure": 10,
+            "legitimacy": 8,
+            "knowledge": 6
+          }
+        },
+        {
+          "label": "Defer to the next budget cycle",
+          "effect": {
+            "sustenance": 5,
+            "entropy": 3,
+            "knowledge": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-15",
+      "era": 10,
+      "title": "Debris Register",
+      "scene_id": "launch_window",
+      "arc": null,
+      "flag": "junk_karma",
+      "body": "The first listing of orbital junk arrives as a courtesy annex: every paint fleck and spent stage you'll never remove, catalogued with a politeness that curdles on rereading. Entropy has learned to orbit, which expands its service area permanently. The register's font is small. Its persistence is not. The register grows annually, lovingly maintained, and the engineers who mocked the courtesy annex write the removal studies that fund the next three careers.",
+      "choices": [
+        {
+          "label": "Fund removal research",
+          "effect": {
+            "entropy": -8,
+            "knowledge": 8,
+            "sustenance": -10
+          }
+        },
+        {
+          "label": "Log it and launch anyway",
+          "effect": {
+            "sustenance": 8,
+            "entropy": 10
+          }
+        },
+        {
+          "label": "Publish the register openly",
+          "effect": {
+            "legitimacy": 8,
+            "knowledge": 5,
+            "entropy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-16",
+      "era": 10,
+      "title": "The Relic Has Weight",
+      "scene_id": "custodian_relic",
+      "arc": "custodian",
+      "flag": "custodian_orbit",
+      "body": "The Custodian refuses zero gravity outright — the relic has weight for a reason, she says, and reasons do not float — and volunteers to guard the archive-seed from the ground with the wounded dignity of a woman left at the launchpad. She sends instructions for its custody anyway, numbered, initialed, and forwarded to every successor she can name. The launch team leaves her a commemorative patch, which she files in the archive beside the relic, labeled, dated, and clearly not impressed.",
+      "choices": [
+        {
+          "label": "Honor her guardianship publicly",
+          "effect": {
+            "legitimacy": 10,
+            "population": 4,
+            "knowledge": 4
+          }
+        },
+        {
+          "label": "Offer her the backup seat anyway",
+          "effect": {
+            "knowledge": 6,
+            "entropy": 3,
+            "legitimacy": -3
+          }
+        },
+        {
+          "label": "Digitize the archive against her wishes",
+          "effect": {
+            "knowledge": 12,
+            "entropy": 5,
+            "legitimacy": -5
+          },
+          "quote": "She calls it copying without praying. She's not wrong."
+        }
+      ]
+    },
+    {
+      "id": "E10-17",
+      "era": 10,
+      "title": "The Rival Claims the Milestone",
+      "scene_id": "rival_compare",
+      "arc": "rival",
+      "flag": "rival_milestone",
+      "body": "The rival lineage plants its flag on the milestone first — the broadcast proves it, the tape is checked twice, the scoreboard updates. Final-era historians will cite this exact row. The house absorbs it the way hulls absorb micrometeoroids: silently, structurally, with a small permanent dent in the institutional posture. The house studies the tape frame by frame, finds a camera angle, releases a statement about shared achievement, and means every cautious word of it.",
+      "choices": [
+        {
+          "label": "Congratulate graciously",
+          "effect": {
+            "legitimacy": 10,
+            "knowledge": 5,
+            "sustenance": -3
+          },
+          "quote": "Grace is a long-horizon investment. Compound it."
+        },
+        {
+          "label": "Race harder, corners cut",
+          "effect": {
+            "knowledge": 12,
+            "entropy": 12,
+            "population": -5
+          }
+        },
+        {
+          "label": "Claim the technical sub-milestone",
+          "effect": {
+            "knowledge": 8,
+            "legitimacy": 3,
+            "sustenance": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-01",
+      "era": 12,
+      "title": "The Carbon Audit",
+      "scene_id": "carbon_audit",
+      "arc": null,
+      "body": "Somebody finally totals the invoice from the coal era, and the number walks into the room as a character: seated at the table, speaking sometimes through consultants. It has been accruing quietly through every profitable decision since the first factory, patient as geology, accurate as grief. The board asks who owns it. The auditor says everyone, retroactively. The consultants offer a mitigation slide deck forty pages deep, and the number, unmoved, asks whether anyone intends to read the first page aloud.",
+      "choices": [
+        {
+          "label": "Publish the audit in full",
+          "effect": {
+            "legitimacy": 12,
+            "knowledge": 10,
+            "entropy": -5,
+            "sustenance": -8
+          }
+        },
+        {
+          "label": "Audit internally, quietly",
+          "effect": {
+            "knowledge": 6,
+            "entropy": 3,
+            "legitimacy": -3
+          }
+        },
+        {
+          "label": "Dispute the methodology",
+          "effect": {
+            "sustenance": 5,
+            "entropy": 8,
+            "legitimacy": -6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-02",
+      "era": 12,
+      "title": "Renewables Crossover",
+      "scene_id": "carbon_audit",
+      "arc": null,
+      "body": "Solar undercuts coal at noon, and grid operators discover that sunlight has no dispatch queue, no fuel supplier, and no union — it simply arrives, insolently free, at the worst possible hour for existing business models. The crossover point passes while the utilities are still debating whether it happened. The utilities commission convenes emergency sessions on the scandal of free weather, and the duck curve enters the official record without apology.",
+      "choices": [
+        {
+          "label": "Ride the crossover hard",
+          "effect": {
+            "infrastructure": 15,
+            "entropy": -8,
+            "sustenance": -10
+          }
+        },
+        {
+          "label": "Protect incumbent plants",
+          "effect": {
+            "sustenance": 10,
+            "entropy": 8,
+            "legitimacy": -5
+          }
+        },
+        {
+          "label": "Grandmother rooftop co-op model",
+          "effect": {
+            "infrastructure": 8,
+            "legitimacy": 8,
+            "population": 5,
+            "entropy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-03",
+      "era": 12,
+      "title": "Stranded Asset Repricing",
+      "scene_id": "crash_floor",
+      "arc": null,
+      "body": "A decree strands the reserves: value that depended on being extracted now depends on staying in the ground, and portfolios evaporate between meetings. The theory was always simple — reserve value is a function of policy nobody admits yet. The traders learn this at market speed, which is faster than comprehension. The stranded reserves stay in the ground, patient as ever, while the spreadsheets perform an autopsy on assets that never technically died.",
+      "choices": [
+        {
+          "label": "Divest before the decree",
+          "effect": {
+            "sustenance": 12,
+            "legitimacy": -6,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Hold and hedge",
+          "effect": {
+            "sustenance": -5,
+            "knowledge": 6,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Short the old economy openly",
+          "effect": {
+            "sustenance": 15,
+            "legitimacy": -10,
+            "entropy": -5
+          },
+          "quote": "Being right early is indistinguishable from being wrong loudly."
+        }
+      ]
+    },
+    {
+      "id": "E12-04",
+      "era": 12,
+      "title": "Carbon Market Launch",
+      "scene_id": "attention_auction",
+      "arc": null,
+      "body": "Pollution gets a price tag, and within a week arbitrageurs learn thermodynamics overnight — genuinely, furiously, correctly. Permits tick like a stock that trades in weather. The intent is civilization-preserving; the order book is a casino with a science degree. Both descriptions are true and only one fits on the plaque. The exchange floor installs a thermometer beside the ticker, which is either the future of finance or a very early joke about the future of finance.",
+      "choices": [
+        {
+          "label": "Trade the permits actively",
+          "effect": {
+            "sustenance": 15,
+            "entropy": -3,
+            "legitimacy": -4
+          }
+        },
+        {
+          "label": "Retire credits, don't trade them",
+          "effect": {
+            "entropy": -12,
+            "sustenance": -10,
+            "legitimacy": 8
+          }
+        },
+        {
+          "label": "Design the market rules instead",
+          "effect": {
+            "knowledge": 12,
+            "legitimacy": 8,
+            "sustenance": -6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-05",
+      "era": 12,
+      "title": "Just Transition Bargain",
+      "scene_id": "factory_floor",
+      "arc": null,
+      "flag": "transition_pact",
+      "body": "Mining towns inform the future, collectively and at volume, that brochures are not severance. Retraining costs money now; strikes cost louder and compound into politics. The bargain on the table names numbers, decades, and funerals — the honest version of the transition nobody puts on the poster. The union hall smells of coffee and arithmetic, and the negotiation runs nine days, mostly about the word dignity and almost entirely about money.",
+      "choices": [
+        {
+          "label": "Sign the retraining pact",
+          "effect": {
+            "sustenance": -15,
+            "legitimacy": 12,
+            "population": 6,
+            "entropy": -4
+          }
+        },
+        {
+          "label": "Accelerate closure, pay minimums",
+          "effect": {
+            "sustenance": 10,
+            "entropy": 8,
+            "legitimacy": -12
+          }
+        },
+        {
+          "label": "Co-own the replacement industry",
+          "effect": {
+            "infrastructure": 10,
+            "legitimacy": 8,
+            "sustenance": -8,
+            "population": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-06",
+      "era": 12,
+      "title": "The Grid Balancing Crisis",
+      "scene_id": "carbon_audit",
+      "arc": null,
+      "body": "The load chart now has a shape, and the shape is a duck: solar floods the middle of the day and vanishes at dinner while demand rises to meet it. Grid operators stare at the ramp like sailors at weather. Storage solves it expensively; brownouts solve it memorably, in the dark, with candle sales spiking. The operators name the ramp, the duck, and the evening peak in the same breath, which is what engineering sounds like when it has run out of sleep.",
+      "choices": [
+        {
+          "label": "Fund storage at scale",
+          "effect": {
+            "infrastructure": 15,
+            "entropy": -6,
+            "sustenance": -15
+          }
+        },
+        {
+          "label": "Demand-response programs",
+          "effect": {
+            "infrastructure": 8,
+            "legitimacy": 4,
+            "knowledge": 5
+          }
+        },
+        {
+          "label": "Let the evening show itself",
+          "effect": {
+            "entropy": 8,
+            "legitimacy": -8,
+            "sustenance": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-07",
+      "era": 12,
+      "title": "Rare-Earth Concentration",
+      "scene_id": "trade_road",
+      "arc": null,
+      "body": "The transition's minerals sit almost entirely under someone else's flag, and the supply-chain briefing feels like déjà vu with maps. Déjà vu is informative: the last energy era also had a chokepoint, and it had a word for it. The word was security. The word was always going to come back. The briefing ends with a map, the map ends with a chokepoint, and the chokepoint ends with a country that remembers the last energy transition fondly.",
+      "choices": [
+        {
+          "label": "Diversify suppliers aggressively",
+          "effect": {
+            "sustenance": -10,
+            "infrastructure": 8,
+            "knowledge": 6
+          }
+        },
+        {
+          "label": "Secure the single flag",
+          "effect": {
+            "sustenance": 12,
+            "legitimacy": -8,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Fund substitution research",
+          "effect": {
+            "knowledge": 14,
+            "sustenance": -10,
+            "entropy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-08",
+      "era": 12,
+      "title": "Climate Migration First Wave",
+      "scene_id": "plague_cart",
+      "arc": null,
+      "body": "Borders meet weather, and weather does not carry papers. The boats recall an earlier era's crossings, inverted: this time the water brings receipts instead of destinations. The Legitimacy stress-test arrives with lifeboats, cameras, and a political opposition that has excellent reflexes and no forecast. The reception centers open, the polling numbers move, and the forecasters discover that the public accepts data at exactly the speed the boats travel.",
+      "choices": [
+        {
+          "label": "Accept and integrate",
+          "effect": {
+            "population": 12,
+            "legitimacy": -6,
+            "sustenance": -10,
+            "entropy": -3
+          }
+        },
+        {
+          "label": "Close and externalize",
+          "effect": {
+            "legitimacy": 4,
+            "entropy": 10,
+            "population": -5
+          },
+          "quote": "The weather files a grievance. Eventually."
+        },
+        {
+          "label": "Planned relocation corridors",
+          "effect": {
+            "infrastructure": 10,
+            "legitimacy": 8,
+            "population": 6,
+            "sustenance": -12
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-09",
+      "era": 12,
+      "title": "Geoengineering Temptation",
+      "scene_id": "benthic_contract",
+      "arc": "benthic",
+      "flag": "sunshade_looked_at",
+      "body": "A sunshade fix arrives cheap, fast, and with unpriced side effects — monsoons rerouted, skies whitened, someone's agriculture ending in someone else's weather. The Benthics love this product; they have term sheets ready and claws freshly cleaned. The proposal's risk section exists. Its risk section is a hyperlink. The trial proposal includes a consent section listing every nation that did not consent, alphabetically, which the Benthics describe, accurately, as comprehensive.",
+      "choices": [
+        {
+          "label": "Reject outright",
+          "effect": {
+            "legitimacy": 8,
+            "entropy": 3,
+            "knowledge": 3
+          }
+        },
+        {
+          "label": "Fund atmospheric research only",
+          "effect": {
+            "knowledge": 12,
+            "sustenance": -8,
+            "entropy": -2
+          }
+        },
+        {
+          "label": "Field-test the sunshade small",
+          "effect": {
+            "entropy": -10,
+            "sustenance": -5,
+            "legitimacy": -8
+          },
+          "quote": "Small tests are how big mistakes get their résumés."
+        }
+      ]
+    },
+    {
+      "id": "E12-10",
+      "era": 12,
+      "title": "EV Fleet Conversion",
+      "scene_id": "carbon_audit",
+      "arc": null,
+      "body": "The lineage's trucks go electric, and range anxiety installs itself as a resource chip nobody designed: depot maps redrawn around charging math, drivers negotiating with electrons. Total cost of ownership improves; total complexity files for supervillain status. The mechanics union requests a meeting about the word silent. The depot crews adapt within a season, the accountants discover charging curves, and the word fleet acquires an electrical mood it never had before.",
+      "choices": [
+        {
+          "label": "Convert the whole fleet",
+          "effect": {
+            "entropy": -10,
+            "infrastructure": 8,
+            "sustenance": -12
+          }
+        },
+        {
+          "label": "Convert gradually",
+          "effect": {
+            "entropy": -4,
+            "sustenance": -4,
+            "knowledge": 4
+          }
+        },
+        {
+          "label": "Keep diesel, buy offsets",
+          "effect": {
+            "entropy": 4,
+            "sustenance": 5,
+            "legitimacy": -5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-11",
+      "era": 12,
+      "title": "Litigation Century Opens",
+      "scene_id": "memory_mug",
+      "arc": null,
+      "flag": "chronicle_evidence",
+      "body": "Cities begin suing emitters, and the filings reach backward: ancestors sued retroactively, the dead joined as defendants, the Chronicle subpoenaed as evidence. Every dry entry your scribes ever logged now has a plaintiff-side law firm reading it closely, lovingly, with photocopying in mind. The subpoena arrives with a bibliography, footnoted to your own Chronicle entries, cited approvingly by strangers, which is the strangest compliment the archive receives.",
+      "choices": [
+        {
+          "label": "Settle early, quietly",
+          "effect": {
+            "sustenance": -15,
+            "entropy": -5,
+            "legitimacy": 4
+          }
+        },
+        {
+          "label": "Fight on the record",
+          "effect": {
+            "legitimacy": 8,
+            "entropy": 6,
+            "sustenance": -8,
+            "knowledge": 6
+          }
+        },
+        {
+          "label": "Testify to what the Chronicle says",
+          "effect": {
+            "legitimacy": 12,
+            "entropy": -6,
+            "sustenance": -10
+          }
+        },
+        {
+          "label": "Argive the archive is inadmissible",
+          "effect": {
+            "knowledge": 5,
+            "entropy": 8,
+            "legitimacy": -8
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-12",
+      "era": 12,
+      "title": "Reforestation Futures",
+      "scene_id": "carbon_audit",
+      "arc": null,
+      "body": "Tree credits sell decades early — saplings securitized before they're planted, carbon booked against photosynthesis that hasn't started working yet. Trees audit slowly, which is either nature's forbearance or nature's strategy. The broker calls it pre-selling shade. The forest has not been asked and does not comment. The prospectus promises shade in 2060, priced today, transferrable, and the forester on the panel asks a question the microphone handles poorly.",
+      "choices": [
+        {
+          "label": "Sell futures on your acreage",
+          "effect": {
+            "sustenance": 15,
+            "entropy": 5,
+            "legitimacy": -4
+          }
+        },
+        {
+          "label": "Plant, verify, sell later",
+          "effect": {
+            "entropy": -10,
+            "sustenance": -8,
+            "knowledge": 4
+          }
+        },
+        {
+          "label": "Buy competitors' futures cheap",
+          "effect": {
+            "sustenance": 8,
+            "entropy": 3,
+            "knowledge": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-13",
+      "era": 12,
+      "title": "The Coal Town Vote",
+      "scene_id": "senate_vote",
+      "arc": null,
+      "body": "The heir must take the region or the atmosphere, and both need photographs on the same afternoon. The mine gate is decorated for the visit; the climate delegation is waiting at the airport. Speechwriters use the phrase balanced for eleven consecutive drafts, which is what surrender sounds like when it's being polite. The mine gate and the airport are forty minutes apart, and the heir spends both afternoons saying versions of the same sentence to people who notice.",
+      "choices": [
+        {
+          "label": "Side with the town",
+          "effect": {
+            "legitimacy": 8,
+            "entropy": 10,
+            "population": 6,
+            "sustenance": 4
+          }
+        },
+        {
+          "label": "Side with the atmosphere",
+          "effect": {
+            "entropy": -12,
+            "legitimacy": -6,
+            "population": -5
+          }
+        },
+        {
+          "label": "Fund both, commit to neither",
+          "effect": {
+            "sustenance": -8,
+            "entropy": 3,
+            "legitimacy": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-14",
+      "era": 12,
+      "title": "Heat Dome Week",
+      "scene_id": "carbon_audit",
+      "arc": null,
+      "body": "Seven days of heat arrive with a lid on them: grid strain at hour three, water lines by day two, funeral counts by day five, each tracked in parallel columns by an administration that has suddenly discovered spreadsheets. The crisis has receipts, and the receipts have a trend line, and the trend line has a name. The grid holds, barely, and the after-action report uses the word unprecedented eleven times, which statisticians recognize as the sound of a trend being denied.",
+      "choices": [
+        {
+          "label": "Emergency cooling centers",
+          "effect": {
+            "legitimacy": 10,
+            "population": 5,
+            "sustenance": -10,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Blame the weather, legally",
+          "effect": {
+            "entropy": 8,
+            "legitimacy": -10
+          }
+        },
+        {
+          "label": "Publish the receipts daily",
+          "effect": {
+            "legitimacy": 8,
+            "knowledge": 10,
+            "entropy": -4,
+            "sustenance": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-15",
+      "era": 12,
+      "title": "Greenwashing Exposure",
+      "scene_id": "social_spiral",
+      "arc": null,
+      "body": "Marketing has been outrunning engineering for eight quarters, and the market finally checks the sources: the green initiative is ninety percent typography. Legitimacy corrections arrive all at once, unlike gains, which trickle. The marketing director's résumé is described in the coverage as bold, which is not the compliment intended. The restatement runs shorter than the campaign did, costs more, and reads better, because honesty has always tested well against typography.",
+      "choices": [
+        {
+          "label": "Confess and restate honestly",
+          "effect": {
+            "legitimacy": 8,
+            "sustenance": -8,
+            "entropy": -3,
+            "knowledge": 5
+          }
+        },
+        {
+          "label": "Double down on typography",
+          "effect": {
+            "sustenance": 6,
+            "entropy": 8,
+            "legitimacy": -12
+          }
+        },
+        {
+          "label": "Fire marketing, fund engineers",
+          "effect": {
+            "knowledge": 10,
+            "entropy": -5,
+            "sustenance": -10,
+            "legitimacy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-16",
+      "era": 12,
+      "title": "Entropy Deferral Notes",
+      "scene_id": "benthic_contract",
+      "arc": "benthic",
+      "flag": "benthic_notes_held",
+      "body": "The Benthics slide a term sheet across with claws scrubbed to a professional gleam: Entropy deferral notes, cleaning the balance sheet today at a handling fee, the bill compounding politely into decades you haven't scheduled yet. The contract language is immaculate. Section 14 defines later. Section 15 defines later, again, more strictly. The signing ceremony is brief; the claw-click is not. Their representative calls the transaction a pleasure, in the tone one reserves for collateral.",
+      "choices": [
+        {
+          "label": "Sign for the clean quarter",
+          "effect": {
+            "entropy": -15,
+            "sustenance": 8
+          },
+          "quote": "Clause 14.2: the undersigned acknowledges that later is a security."
+        },
+        {
+          "label": "Counter-read every clause",
+          "effect": {
+            "knowledge": 10,
+            "entropy": -3,
+            "sustenance": -4
+          }
+        },
+        {
+          "label": "Decline the facility",
+          "effect": {
+            "entropy": 4,
+            "legitimacy": 5
+          },
+          "quote": "Their claw-click sounds disappointed. It sounds rehearsed."
+        }
+      ]
+    },
+    {
+      "id": "E12-17",
+      "era": 12,
+      "title": "Freeze It or Plant It",
+      "scene_id": "custodian_relic",
+      "arc": "custodian",
+      "flag": "custodian_vault",
+      "body": "The relic is now the seed vault, and the Custodian has strong feelings: freezing is custody, she argues, but planting is faith, and she has carried things long enough to know which one the future can actually eat. The vault's thermostat hums in one key; the test plot outside hums in another. She wants the lineage to pick a key.",
+      "choices": [
+        {
+          "label": "Freeze: preserve everything",
+          "effect": {
+            "knowledge": 10,
+            "entropy": -3,
+            "sustenance": -6
+          }
+        },
+        {
+          "label": "Plant: spend the reserve",
+          "effect": {
+            "sustenance": 12,
+            "entropy": -6,
+            "legitimacy": 5,
+            "knowledge": -4
+          }
+        },
+        {
+          "label": "Half vault, half field",
+          "effect": {
+            "sustenance": 6,
+            "knowledge": 6,
+            "entropy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-18",
+      "era": 12,
+      "title": "The Rival Goes Circular",
+      "scene_id": "rival_compare",
+      "arc": "rival",
+      "flag": "rival_circular",
+      "body": "The rival lineage rebrands as circular — closed loops, zero waste, a supply chain that eats its own tail tastefully — and the coverage is generous. Your engineers note privately that three of the loops are elliptical and one is decorative. Still: they shipped the story, and the market pays for stories with delivery dates attached. The auditors visit both houses eventually, and the difference between the loops survives inspection by a margin the marketing departments refuse to discuss.",
+      "choices": [
+        {
+          "label": "Match the substance quietly",
+          "effect": {
+            "entropy": -8,
+            "infrastructure": 6,
+            "sustenance": -8
+          }
+        },
+        {
+          "label": "Expose the decorative loop",
+          "effect": {
+            "legitimacy": 4,
+            "entropy": 4,
+            "sustenance": -3
+          },
+          "quote": "Auditor humor. It plays in footnotes."
+        },
+        {
+          "label": "Partner on their exchange",
+          "effect": {
+            "sustenance": 8,
+            "knowledge": 6,
+            "legitimacy": 3,
+            "entropy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-01",
+      "era": 16,
+      "title": "Light-Lag Courtship",
+      "scene_id": "void_watch",
+      "arc": null,
+      "body": "A message home takes eleven years round trip, so the reply to a wedding invitation arrives after the marriage has already produced a grandchild. Love persists; tense does not. The courtship packets travel in both directions, each one addressed to who the recipient was when it was written, which the post does not guarantee to still be there. The archive keeps every packet, sent and received, sequenced by hope rather than timestamp, which is the only filing system love has ever invented.",
+      "choices": [
+        {
+          "label": "Send everything, archive nothing",
+          "effect": {
+            "population": 6,
+            "knowledge": 4,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Compression etiquette: essentials only",
+          "effect": {
+            "knowledge": 6,
+            "sustenance": 3,
+            "population": -3
+          }
+        },
+        {
+          "label": "Send music instead of words",
+          "effect": {
+            "population": 5,
+            "legitimacy": 4,
+            "sustenance": -3
+          },
+          "quote": "Eleven years later, it's still the song from the wedding."
+        }
+      ]
+    },
+    {
+      "id": "E16-02",
+      "era": 16,
+      "title": "The Generation Ship Census",
+      "scene_id": "void_watch",
+      "arc": null,
+      "flag": "middle_generation",
+      "body": "The third generation born between stars fills out the census forms with neat handwriting and zero destination nostalgia: none of them will see the world the launch posters describe. The neglected middle, the sociologists called it, before there were no more sociologists. The laws on the books are addressed to people either unborn or departed. Someone asks who they're actually for.",
+      "choices": [
+        {
+          "label": "Rewrite the founding charter",
+          "effect": {
+            "legitimacy": 12,
+            "knowledge": 6,
+            "entropy": -4,
+            "sustenance": -5
+          }
+        },
+        {
+          "label": "Uphold the original mandate",
+          "effect": {
+            "legitimacy": 5,
+            "entropy": 6,
+            "population": -4
+          }
+        },
+        {
+          "label": "Council of the awake, revised per cycle",
+          "effect": {
+            "legitimacy": 8,
+            "population": 4,
+            "knowledge": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-03",
+      "era": 16,
+      "title": "Drift Management",
+      "scene_id": "drift_diverge",
+      "arc": null,
+      "body": "The copies diverge faster than repairs arrive: accents sharpen into dialects, dialects into positions, positions into constitutional arguments with themselves. Pruning a drifting copy is murder-shaped and administratively identical to filing. Tolerating drift preserves diversity and schedules the schism, gently, with catering. The drift charts hang in the corridor like weather maps of the self, and the crew walks past them daily, which is how normal becomes administrative.",
+      "choices": [
+        {
+          "label": "Prune the farthest drift",
+          "effect": {
+            "knowledge": -8,
+            "legitimacy": 6,
+            "entropy": -5,
+            "population": -5
+          },
+          "quote": "The pruning log is read aloud every cycle. That's not punishment. That's procedure."
+        },
+        {
+          "label": "Tolerate everything",
+          "effect": {
+            "population": 8,
+            "entropy": 10,
+            "knowledge": 5
+          }
+        },
+        {
+          "label": "Periodic re-sync rituals",
+          "effect": {
+            "knowledge": 8,
+            "entropy": 3,
+            "sustenance": -6,
+            "legitimacy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-04",
+      "era": 16,
+      "title": "The Slow Reply",
+      "scene_id": "void_watch",
+      "arc": null,
+      "body": "After forty years of silence, something answers — structured, unmistakable, and addressed by name to a crew member deceased three decades running. The signal is courteous. The delay is the cruelty. The linguistics team weeps professionally and gets to work on a reply that will be obsolete, personally, before transmission completes. The reply drafts multiply, each addressed to the living instead of the dead, and the transmission officer picks the one that is honest and sends the one that is kind.",
+      "choices": [
+        {
+          "label": "Reply in the dead's name",
+          "effect": {
+            "knowledge": 12,
+            "legitimacy": 6,
+            "entropy": 4
+          },
+          "quote": "Correspondence continues. Grief has excellent latency tolerance."
+        },
+        {
+          "label": "Reply as the lineage collective",
+          "effect": {
+            "knowledge": 10,
+            "legitimacy": 8,
+            "sustenance": -5
+          }
+        },
+        {
+          "label": "Do not reply",
+          "effect": {
+            "entropy": -3,
+            "knowledge": -5,
+            "legitimacy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-05",
+      "era": 16,
+      "title": "Cryo Arbitrage",
+      "scene_id": "benthic_contract",
+      "arc": "benthic",
+      "flag": "cryo_debt",
+      "body": "The Benthics offer a sleep-through-the-boring-centuries package: cryo for sixty years, interest accruing the entire time against you, wake-up fees disclosed in a font calibrated for patience. Their representative clicks its claws at the elegance — time deposits in the customer, withdrawals automatic. The contract calls unconsciousness a grace period. The wake-up brochure features serene illustrations of the sleeper aging gracefully into a market that moved without them, captioned simply: opportunity.",
+      "choices": [
+        {
+          "label": "Sleep sixty years",
+          "effect": {
+            "sustenance": 10,
+            "entropy": 12,
+            "population": -4
+          },
+          "quote": "Clause 9: dormancy is not payment. Dormancy is interest."
+        },
+        {
+          "label": "Sleep thirty, refinance",
+          "effect": {
+            "sustenance": 5,
+            "entropy": 6,
+            "knowledge": 3
+          }
+        },
+        {
+          "label": "Stay awake through the boredom",
+          "effect": {
+            "knowledge": 8,
+            "entropy": -4,
+            "sustenance": -6
+          },
+          "quote": "The Benthics respect this. Faintly. Like humans respect walking."
+        }
+      ]
+    },
+    {
+      "id": "E16-06",
+      "era": 16,
+      "title": "The Hull Sermon",
+      "scene_id": "void_watch",
+      "arc": null,
+      "body": "The engineer-priest maintains the ship as liturgy: torque specs as scripture, inspection rounds as processions, the leak repair manual bound in two covers because it is read in both. Faith returns at escape velocity, apparently, complete with vestments adapted for strap access. Attendance at sermons correlates, inconveniently for skeptics, with hull integrity. The choir sings in the engine bay during burn windows, and the decibel readings are technically music, which the liturgy permits and the manual tolerates.",
+      "choices": [
+        {
+          "label": "Endorse the liturgy",
+          "effect": {
+            "legitimacy": 10,
+            "population": 6,
+            "entropy": -4,
+            "knowledge": -3
+          }
+        },
+        {
+          "label": "Separate maintenance from meaning",
+          "effect": {
+            "knowledge": 8,
+            "legitimacy": -4,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Ordain the chief engineer",
+          "effect": {
+            "legitimacy": 8,
+            "population": 4,
+            "infrastructure": 5,
+            "entropy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-07",
+      "era": 16,
+      "title": "Memory Winter",
+      "scene_id": "memory_mug",
+      "arc": null,
+      "flag": "archive_thinned",
+      "body": "Storage decays without upkeep, bit by patient bit, and the archive requires triage: choose which ancestors stay readable. Every deletion is painless, reversible-looking, and final — the medium fails politely, offering no ceremony. The committee keeps meeting. The decay does not wait for consensus, only for decisions. The committee votes twice on the same ancestor, gets different answers, and decides the disagreement itself belongs in the archive, which it does, briefly.",
+      "choices": [
+        {
+          "label": "Keep the practical ancestors",
+          "effect": {
+            "knowledge": 8,
+            "entropy": -5,
+            "legitimacy": -4,
+            "population": -3
+          }
+        },
+        {
+          "label": "Keep the famous ones",
+          "effect": {
+            "legitimacy": 8,
+            "knowledge": -6,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Fund restoration over expansion",
+          "effect": {
+            "knowledge": 10,
+            "sustenance": -12,
+            "entropy": -6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-08",
+      "era": 16,
+      "title": "The Decade Watch",
+      "scene_id": "void_watch",
+      "arc": null,
+      "body": "Nothing happens for ten years. The tempo drops to adagio deliberately: sensor sweeps log nominal, hull nominal, course nominal, and the watching itself becomes the event — discipline practiced for an audience of instruments. The junior navigator asks what they're waiting for. The senior one says that's the wrong question, and does not say what the right one is. The logbooks fill with beautiful nothing, entered by hand anyway, because the day the watch stops writing is the day the ship stops being watched.",
+      "choices": [
+        {
+          "label": "Honor the quiet: full watch rotations",
+          "effect": {
+            "infrastructure": 6,
+            "entropy": -5,
+            "legitimacy": 4,
+            "sustenance": -4
+          }
+        },
+        {
+          "label": "Cut the watch, save power",
+          "effect": {
+            "sustenance": 8,
+            "entropy": 8
+          }
+        },
+        {
+          "label": "Turn the watch into ritual",
+          "effect": {
+            "legitimacy": 6,
+            "population": 4,
+            "knowledge": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-09",
+      "era": 16,
+      "title": "Arrival Disappointment",
+      "scene_id": "star_seed",
+      "arc": null,
+      "body": "The destination world resolves into focus after lifetimes of posters, and it is merely adequate: temperate, breathable, unremarkable, magnificent only by prior expectation. The colonization debate ignites instantly — land on the adequate world or keep sailing for the poster version. Fourteen generations of propaganda did not budget for adequate. The posters back home showed emerald continents and golden harbors; the planet offers brown, blue, and a firmament, and the debate goes on for a cycle.",
+      "choices": [
+        {
+          "label": "Colonize the adequate world",
+          "effect": {
+            "sustenance": 15,
+            "population": 10,
+            "entropy": 5,
+            "legitimacy": -3
+          },
+          "quote": "Home is wherever the expectations finally lose."
+        },
+        {
+          "label": "Keep sailing",
+          "effect": {
+            "knowledge": 8,
+            "entropy": 10,
+            "sustenance": -10,
+            "population": -5
+          }
+        },
+        {
+          "label": "Orbit-only settlement",
+          "effect": {
+            "infrastructure": 10,
+            "knowledge": 6,
+            "sustenance": -6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-10",
+      "era": 16,
+      "title": "The Last Broadcast From Home",
+      "scene_id": "void_watch",
+      "arc": null,
+      "body": "Earth's signal finally arrives, dated centuries ago: a newsreel, a weather report, someone's birthday greeting routed through nine relays, all of it impossibly ordinary and therefore unbearable. Timestamp grief arrives in bulk freight, unpacked slowly by archivists who keep pausing playback. The weather that day was pleasant. Nobody alive remembers it being otherwise. The archivists restore the audio first, because voices degrade fastest, and the ship thus preserves, permanently, a Tuesday afternoon nobody thought to treasure.",
+      "choices": [
+        {
+          "label": "Archive it with full honors",
+          "effect": {
+            "knowledge": 8,
+            "legitimacy": 6,
+            "population": 3,
+            "sustenance": -4
+          }
+        },
+        {
+          "label": "Broadcast it shipwide once",
+          "effect": {
+            "legitimacy": 8,
+            "population": 5,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Seal it for the fourth generation",
+          "effect": {
+            "knowledge": 6,
+            "entropy": -3,
+            "legitimacy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-11",
+      "era": 16,
+      "title": "Copy Inheritance War",
+      "scene_id": "fork_split",
+      "arc": null,
+      "flag": "probate_open",
+      "body": "A self dies intestate across nine light-years, and probate becomes interstellar: eleven copies claiming continuity, each with a notarized thread and a lawyer, the estate consisting largely of obligations. The Ghosts — copies litigating identity forever — are not an ending. They are a jurisdiction, and someone just filed in it. The court sits in three systems and one orbit, convenes by echo, and rules on procedural grounds that the estate is technically everyone, which settles nothing.",
+      "choices": [
+        {
+          "label": "Partition the estate cleanly",
+          "effect": {
+            "sustenance": 8,
+            "legitimacy": 6,
+            "entropy": 5,
+            "population": -3
+          }
+        },
+        {
+          "label": "Contest for sole continuity",
+          "effect": {
+            "sustenance": 12,
+            "entropy": 12,
+            "legitimacy": -8
+          }
+        },
+        {
+          "label": "Communal holding, rotating trustees",
+          "effect": {
+            "legitimacy": 10,
+            "population": 5,
+            "sustenance": -6,
+            "knowledge": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-12",
+      "era": 16,
+      "title": "Silence Economics",
+      "scene_id": "void_watch",
+      "arc": null,
+      "body": "Bandwidth is the only scarcity left, and economics finally behaves like physics: a whispered word costs a year, a photograph costs a decade, and everything — condolences, poetry, groceries — sounds like an invoice. Comms budgets allocate minutes per day per soul. The poet applies for a syllabus permit and is granted seventeen words. The etiquette manuals rewrite themselves around cost: condolences compressed to two syllables, proposals transmitted in advance, apologies arriving, always, after the useful hour.",
+      "choices": [
+        {
+          "label": "Strict rationing, fair queues",
+          "effect": {
+            "sustenance": 8,
+            "legitimacy": 6,
+            "population": -3,
+            "entropy": -3
+          }
+        },
+        {
+          "label": "Priority bandwidth to governance",
+          "effect": {
+            "legitimacy": 10,
+            "entropy": 4,
+            "population": -4
+          }
+        },
+        {
+          "label": "Auction the excess capacity",
+          "effect": {
+            "sustenance": 12,
+            "legitimacy": -8,
+            "entropy": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-13",
+      "era": 16,
+      "title": "The Sleep Council",
+      "scene_id": "void_watch",
+      "arc": null,
+      "body": "Governance falls to whoever is awake, and term limits are measured in cryo-cycles, which means every election is partly a scheduling conflict. The awake minority legislates for the sleeping majority with the uneasy competence of night nurses writing laws. Quorum requires a wake-up, and wake-ups are expensive, so most motions pass by default. The council chamber seats nine and sleeps three hundred, and the minutes record both camps, the awake voting, the sleeping inherited, term limits ticking in frost.",
+      "choices": [
+        {
+          "label": "Rotate councils per cycle",
+          "effect": {
+            "legitimacy": 10,
+            "knowledge": 5,
+            "entropy": 3,
+            "sustenance": -5
+          }
+        },
+        {
+          "label": "Standing awake government",
+          "effect": {
+            "legitimacy": 6,
+            "entropy": 6,
+            "population": -3
+          }
+        },
+        {
+          "label": "Sleep-weighted voting",
+          "effect": {
+            "legitimacy": 12,
+            "population": 4,
+            "sustenance": -8,
+            "knowledge": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-14",
+      "era": 16,
+      "title": "Star Chart Heresy",
+      "scene_id": "void_watch",
+      "arc": null,
+      "body": "The navigators disagree about where here is — two schools, two reductions of the same starfield, a doctrinal split expressed entirely in error bars. Celestial mechanics becomes denomination; the heresy is parallax. Both charts work for navigation. Neither forgives the other for existing, and the ship needs both to agree before the deceleration burn. The schism produces two almanacs, two academies, and one shared burn schedule, which must agree precisely, and does, which is the miracle the faithful cite.",
+      "choices": [
+        {
+          "label": "Adjudicate with a blind test",
+          "effect": {
+            "knowledge": 12,
+            "entropy": -4,
+            "sustenance": -6
+          }
+        },
+        {
+          "label": "Orthodoxy: senior chart wins",
+          "effect": {
+            "legitimacy": 6,
+            "entropy": 6,
+            "knowledge": -4
+          }
+        },
+        {
+          "label": "Schism: separate watch teams",
+          "effect": {
+            "entropy": 8,
+            "population": -4,
+            "knowledge": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-15",
+      "era": 16,
+      "title": "The Final Custody",
+      "scene_id": "custodian_relic",
+      "arc": "custodian",
+      "flag": "custodian_choice",
+      "body": "The Custodian is asked to carry the relic — the pattern-lock, last link in a chain from a cave fire — onto a shuttle with no return date. She has guarded it through every handoff since the brand, and she asks, for the first time in the Chronicle, who receives it. The honest answer is: nobody, or everyone, depending on the branch you choose. She nods. She expected both.",
+      "choices": [
+        {
+          "label": "She boards with the relic",
+          "effect": {
+            "legitimacy": 12,
+            "knowledge": 10,
+            "population": 4,
+            "entropy": -5
+          },
+          "quote": "The chain ends where it began: carried, on foot, by someone who chose it."
+        },
+        {
+          "label": "She refuses; the lineage goes without",
+          "effect": {
+            "knowledge": 6,
+            "entropy": 5,
+            "legitimacy": -4,
+            "sustenance": 4
+          },
+          "quote": "She stays with the archive. Someone had to. She says it like a punchline."
+        },
+        {
+          "label": "Copy the relic, carry both",
+          "effect": {
+            "knowledge": 12,
+            "entropy": 6,
+            "legitimacy": 4,
+            "sustenance": -8
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-16",
+      "era": 16,
+      "title": "All Loans Come Due",
+      "scene_id": "benthic_contract",
+      "arc": "benthic",
+      "flag": "benthic_settled",
+      "body": "The Benthics present the consolidated statement: every Entropy deal since the digital age, compounded, payable in a currency you no longer mint. Their representative delivers the terms at geological tempo — one clause per season, claws folded, patience as product. The humor, such as it is, has slowed to continental drift. Section 14 still defines later. The statement itemizes four centuries of deals in type calibrated for patience, and the final page thanks the lineage for its continued liability, warmly.",
+      "choices": [
+        {
+          "label": "Settle in entropy labor",
+          "effect": {
+            "entropy": -18,
+            "sustenance": -10,
+            "population": -4
+          },
+          "quote": "Payment plan accepted. Their claws click once. That is applause."
+        },
+        {
+          "label": "Contest jurisdiction light-years out",
+          "effect": {
+            "knowledge": 8,
+            "entropy": 10,
+            "legitimacy": -5
+          }
+        },
+        {
+          "label": "Refinance into void-minted resolve",
+          "effect": {
+            "sustenance": 8,
+            "entropy": 6,
+            "knowledge": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-17",
+      "era": 16,
+      "title": "The Mirror Arrives First",
+      "scene_id": "rival_compare",
+      "arc": "rival",
+      "flag": "rival_convergence",
+      "body": "The rival lineage's ship threads the same router lane from the opposite direction, and the two hulls exchange signals — the first conversation in centuries, conducted entirely in telemetry, each house reading the other's damage reports like horoscopes. The scoreboard that ran since the space age reaches its final row: two builds, opposite choices, same void, both still moving. The signal ends with the rival house's old motto, sent without comment, correctly translated, which takes longer to recover from than any insult could.",
+      "choices": [
+        {
+          "label": "Exchange archives, fully",
+          "effect": {
+            "knowledge": 15,
+            "legitimacy": 8,
+            "entropy": 4,
+            "sustenance": -6
+          },
+          "quote": "The rivalry was the longest relationship either house had."
+        },
+        {
+          "label": "Compare builds, concede nothing",
+          "effect": {
+            "knowledge": 10,
+            "entropy": 5,
+            "legitimacy": 3
+          }
+        },
+        {
+          "label": "Silent passing honors",
+          "effect": {
+            "legitimacy": 6,
+            "entropy": -3,
+            "population": 3
+          }
+        }
+      ]
+    }
+  ],
+  "chapter_cards": {
+    "4": "The lineage learns to trust distance: coffeehouse shares, ocean-crossing lies, and fortunes that arrive six months late wearing flags. A branch house raises its own colors across the water while the Custodian keeps the fire brand lashed below decks. Your rival sails west, and the horizon decides who gets to be right about it.",
+    "5": "Rights become paper, paper becomes armies, and the house signs whichever clause keeps it solvent — then notarizes the ledger the Custodian now carries. The republic hands its general a crown, and your rival takes a ribbon from him. Every declaration you kept is now a weapon with your handwriting near the bottom.",
+    "8": "The factories make tractors, then tanks, then washing machines, and the Chronicle hides nothing while cousins hold both sides of the border. A codebreaking hut earns a Knowledge surge and buries it under a secrecy oath; the Custodian carries the ledger through a flooded corridor and ages decades doing it. Peace arrives three seconds late, and the map it draws is billed to your grandchildren.",
+    "10": "Something beeps overhead and the era spends a decade catching up to the sound: checklists beat courage, spy eyes count everyone's silos, and the moon gets claimed on a deadline chosen for its poetry. The Custodian refuses zero gravity — the relic has weight for a reason — and your rival takes the milestone first, on tape, for the record. Orbital junk opens a tab that never closes.",
+    "12": "The coal era's invoice arrives, takes a seat at the table, and starts speaking through consultants: ducks break the grid, trees get securitized, and the Chronicle becomes evidence in suits against the dead. The Benthics offer Entropy deferral notes with immaculate clause structure, and the Custodian asks whether the seed vault should be frozen or planted. The counter that never goes down begins, barely, to bend.",
+    "16": "Between stars, a whispered word costs a year, the middle generation inherits a charter addressed to strangers, and the archive thins one polite deletion at a time. The Benthics present the consolidated statement in a currency the lineage no longer mints, and the Custodian is asked to carry the pattern-lock onto a shuttle with no return date. The rival's hull passes in the other direction, both houses still moving — the scoreboard closed, the crossing ahead."
+  },
+  "opportunities": [
+    {
+      "era": 4,
+      "title": "Wandering Cartographer",
+      "body": "A chart of the western passage, salt-stained but sincere, offered for coin. Coastlines move, the cartographer insists, and he has updated accordingly since Tuesday.",
+      "cost": {
+        "sustenance": 20
+      },
+      "reward": {
+        "knowledge": 12
+      },
+      "weight": 3
+    },
+    {
+      "era": 4,
+      "title": "Dutch Instrument-Maker",
+      "body": "A sextant of suspicious perfection for a stack of books. He says navigation is a moral improvement. He declines to specify whose morals.",
+      "cost": {
+        "knowledge": 10
+      },
+      "reward": {
+        "infrastructure": 8,
+        "knowledge": 4
+      },
+      "weight": 3
+    },
+    {
+      "era": 4,
+      "title": "Repurposed Hull",
+      "body": "A cargo of salt for the price of a refit. The hull was someone else's problem; the salt is chemically neutral about its history.",
+      "cost": {
+        "infrastructure": 15
+      },
+      "reward": {
+        "sustenance": 18
+      },
+      "weight": 2
+    },
+    {
+      "era": 4,
+      "title": "Press Gang Short Two Hands",
+      "body": "Bodies today, complaints monthly. The bosun guarantees enthusiasm of a sort and Legitimacy consequences of a different sort.",
+      "cost": {
+        "legitimacy": 8
+      },
+      "reward": {
+        "population": 10
+      },
+      "weight": 2
+    },
+    {
+      "era": 5,
+      "title": "Émigré Auction",
+      "body": "Estate plates at a fraction of assayed value. The seller's Legitimacy is the discount, and the provenance paperwork is a genre of fiction.",
+      "cost": {
+        "sustenance": 12
+      },
+      "reward": {
+        "sustenance": 20,
+        "legitimacy": -2
+      },
+      "weight": 3
+    },
+    {
+      "era": 5,
+      "title": "Pamphleteer Needs a Press",
+      "body": "Books for coin, unrest included at no extra charge. The printer asks only that you not read the colophon aloud during inspections.",
+      "cost": {
+        "sustenance": 8
+      },
+      "reward": {
+        "knowledge": 12,
+        "entropy": 2
+      },
+      "weight": 3
+    },
+    {
+      "era": 5,
+      "title": "Army Supplier Shortfall",
+      "body": "Cloth for the commissariat, paid in Infrastructure contracts and future gratitude, both honored approximately according to the season.",
+      "cost": {
+        "sustenance": 10
+      },
+      "reward": {
+        "infrastructure": 12
+      },
+      "weight": 2
+    },
+    {
+      "era": 5,
+      "title": "Deserter at the Door",
+      "body": "Population plus one, Legitimacy minus one, and — this is verified, references available — an excellent cook.",
+      "cost": {
+        "legitimacy": 6
+      },
+      "reward": {
+        "population": 8,
+        "sustenance": 4
+      },
+      "weight": 2
+    },
+    {
+      "era": 8,
+      "title": "Scrap Drive",
+      "body": "Old gates for new steel: the neighborhood gives up its ironwork for the war effort and receives certificates that photograph beautifully.",
+      "cost": {
+        "legitimacy": 4
+      },
+      "reward": {
+        "infrastructure": 12
+      },
+      "weight": 3
+    },
+    {
+      "era": 8,
+      "title": "Codebreaker Dropout",
+      "body": "A young mathematician, expelled for brilliance administered rudely, asks only for room, board, and a lockable room.",
+      "cost": {
+        "sustenance": 8
+      },
+      "reward": {
+        "knowledge": 15
+      },
+      "weight": 3
+    },
+    {
+      "era": 8,
+      "title": "War-Surplus Truck",
+      "body": "Cheap today, ghost mileage forever. The odometer is aspirational and the engine has seen three countries that no longer exist.",
+      "cost": {
+        "sustenance": 10
+      },
+      "reward": {
+        "infrastructure": 10,
+        "entropy": 2
+      },
+      "weight": 2
+    },
+    {
+      "era": 8,
+      "title": "Victory Garden Seeds",
+      "body": "Sustenance now, dignity permanently. The packet's slogan was written by the same ad man as the ration stamps, but the tomatoes are honest.",
+      "cost": {
+        "sustenance": 5
+      },
+      "reward": {
+        "sustenance": 10,
+        "population": 3
+      },
+      "weight": 3
+    },
+    {
+      "era": 10,
+      "title": "Surplus Heat-Shield Scrap",
+      "body": "Capsule-grade ablative material at scrap prices. The paperwork says expired; the material says otherwise, quietly, in laboratory conditions.",
+      "cost": {
+        "sustenance": 8
+      },
+      "reward": {
+        "infrastructure": 10
+      },
+      "weight": 3
+    },
+    {
+      "era": 10,
+      "title": "University Ground Station",
+      "body": "Antenna time for Knowledge: the observatory proposes a partnership, the students propose a schedule, the astronomers propose theology.",
+      "cost": {
+        "infrastructure": 8
+      },
+      "reward": {
+        "knowledge": 14
+      },
+      "weight": 3
+    },
+    {
+      "era": 10,
+      "title": "Meteor-Shower Forecast",
+      "body": "Pause launches for a fortnight, insure the hardware, lose nothing but momentum. The forecast is good. The calendar committee is not pleased.",
+      "cost": {
+        "knowledge": 5
+      },
+      "reward": {
+        "entropy": -8,
+        "infrastructure": 4
+      },
+      "weight": 2
+    },
+    {
+      "era": 12,
+      "title": "Rooftop Panel Co-op",
+      "body": "Small Infrastructure, smaller entropy trickle, and grandmothers quietly becoming utilities. The feed-in tariff does the rest.",
+      "cost": {
+        "sustenance": 10
+      },
+      "reward": {
+        "infrastructure": 8,
+        "entropy": -5
+      },
+      "weight": 3
+    },
+    {
+      "era": 12,
+      "title": "Battery Demo Van",
+      "body": "A free test fleet, fully warrantied, insurance arrangements described by the broker as interesting. The van hums with optimism and lithium.",
+      "cost": {
+        "legitimacy": 3
+      },
+      "reward": {
+        "infrastructure": 10,
+        "entropy": -3
+      },
+      "weight": 2
+    },
+    {
+      "era": 12,
+      "title": "Heatwave Labor Curfew",
+      "body": "Sustenance lost today, workforce gained next month. The unions appreciate it, the Q3 projections do not, and history sides with the workers.",
+      "cost": {
+        "sustenance": 8
+      },
+      "reward": {
+        "population": 8,
+        "legitimacy": 4
+      },
+      "weight": 2
+    },
+    {
+      "era": 16,
+      "title": "Echo-Sale",
+      "body": "Auction a memory nobody can verify for Selfhood. The authenticity affidavit is signed by the memory's other witnesses, all of whom agree on different details.",
+      "cost": {
+        "knowledge": 4
+      },
+      "reward": {
+        "sustenance": 8
+      },
+      "weight": 2
+    },
+    {
+      "era": 16,
+      "title": "Drift Trim",
+      "body": "Knowledge down, coherence up, pain deferred to a scheduled session. The clinic calls it grooming. The copies call it Tuesdays.",
+      "cost": {
+        "knowledge": 8
+      },
+      "reward": {
+        "legitimacy": 6,
+        "entropy": -4
+      },
+      "weight": 3
+    },
+    {
+      "era": 16,
+      "title": "Comet Ice Claim",
+      "body": "Sustenance for a decade of nothing: stake the comet, file the claim, let the void adjudicate. The filing fee is attention; the yield is water.",
+      "cost": {
+        "sustenance": 5
+      },
+      "reward": {
+        "sustenance": 15,
+        "entropy": 2
+      },
+      "weight": 3
+    },
+    {
+      "era": 16,
+      "title": "Wake-Share Offer",
+      "body": "Swap five years of sleep for a vote in the next cycle. The exchange rate is political and the politicians set it annually.",
+      "cost": {
+        "population": 4
+      },
+      "reward": {
+        "legitimacy": 10
+      },
+      "weight": 2
+    }
+  ],
+  "crisis_pulses": {
+    "sustenance": "Critical: the era's appetite has caught up with its income. Forage, trade, or explain.",
+    "knowledge": "Low: the archive is thinning faster than it's being written. Somebody forgot something load-bearing.",
+    "population": "Shrinking: fewer hands, fewer copies, fewer heirs. The census taker is running out of doors.",
+    "infrastructure": "Failing: the arguments won against geography are being appealed. Renew or lose the verdict.",
+    "legitimacy": "Collapsing: fewer people agree it's you in charge. The story is losing its audience.",
+    "entropy": "Rising: pollution, risk, and debt are compounding at preferential rates. At 100, the lineage ends."
+  },
+  "crossing": {
+    "intro": "Between stars, the router lane is mapped debris, comet trains, and the traffic of derelict fleets that never got a parking ordinance. Autopilot is illegal here, insane here, or both — historically the same legislation. Take the stick. The hull is yours, the void is indifferent, and the Benthics' payment schedule assumes you arrive.",
+    "win": "Clean through. The lane releases you like a toll booth with manners: +8 Sustenance, +5 Knowledge, and the badge void_pilot, earned by hand at speed. Somewhere a Custodian approves without looking up from the relic.",
+    "lose": "The hull accumulates opinions about debris faster than the warranty covers them. The ship limps to the gate, minus 10% Sustenance, and the event chain continues — the void bills, but it does not collect everything today.",
+    "near_miss": "You learned from that. +1 Knowledge, filed under geometry, survived by inches. The near miss is the only teacher here that grades on a curve.",
+    "gate_bonus": "Threaded the ring clean: +5 progress. The gate chimes — the only friendly sound in this corridor, and statistically, still suspicious."
+  }
+}
