@@ -305,7 +305,6 @@ export function bootApp({ erasData, eventsData }) {
     splash.replaceChildren();
     splash.append(el('h1', 'title-main', U.title));
     splash.append(el('p', 'title-tag', U.tagline));
-    splash.append(el('p', 'title-tag', 'build 7518d21'));
     const btns = el('div', 'title-buttons');
     const hasSave = !!localStorage.getItem(SAVE_KEY);
     const neu = el('button', 'btn btn-primary', U.buttons[0]);
