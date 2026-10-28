@@ -107,5 +107,5 @@ Rules for Forge:
 7. Post build + link to #aspire
 
 ## 7. Working name
-**ACCELERANDO: THE LONG ASCENT** — repo name `accelerando-game`. (Alternate:
+**THE LONG ASCENT** — repo name `accelerando-game`. (Alternate:
 "The Long Ascent", "Exponential". Final call before store listing.)
