@@ -120,6 +120,14 @@ body {
 .choice-marker.armed { border-color: #fff;
   box-shadow: 0 0 0 3px rgba(183, 156, 255, 0.6), 0 0 14px 4px rgba(183, 156, 255, 0.5); }
 
+/* v5 §4: mini-game launch button + ledger scoreboard on the stage */
+.btn-minigame { align-self: center; font-size: 0.72rem; padding: 0.3rem 0.9rem;
+  border-radius: 999px; border: 1px solid var(--accent); background: rgba(183, 156, 255, 0.12);
+  color: inherit; cursor: pointer; }
+.btn-minigame:hover { background: rgba(183, 156, 255, 0.28); }
+.mg-scoreboard { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center;
+  font-size: 0.62rem; letter-spacing: 0.05em; color: var(--muted); }
+
 /* v2.1 §9.2: outcome delta chips under the card */
 .outcome-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; justify-content: center; margin-top: 0.6rem; }
 .chip { font-size: 0.7rem; padding: 0.2rem 0.55rem; border-radius: 999px; border: 1px solid var(--line);

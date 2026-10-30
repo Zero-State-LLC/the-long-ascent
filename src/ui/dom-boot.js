@@ -7,6 +7,11 @@ import { SpriteAnimator, loadAssets, ERA_IDS, BADGE_NAMES } from '../render/Spri
 import { AnimScene, drawFrame } from '../render/AnimScene.js';
 import { checkSceneSheet, drawSceneFrame, drawStageFallback, FLOOR_FRAC } from '../render/stagePainter.js';
 import { StageWalk } from './stageWalk.js';
+import {
+  createRun, step as mgStep, act as mgAct, forfeit as mgForfeit, reward as mgReward,
+  isAvailable, ledgerRows, MINIGAME_COPY,
+} from '../core/minigames.js';
+import { drawMinigameFrame, drawCountdown, drawEndCard } from '../render/minigameStage.js';
 import { ParallaxBg } from '../render/ParallaxBg.js';
 import { AudioManager } from '../render/AudioManager.js';
 
@@ -53,7 +58,7 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
 
   // ---- SPEC v4 §2: walkable figure on the event-card stage -----------------
   // Pure state machine (stageWalk.js); this block is its only DOM adapter.
-  const walk = new StageWalk({ count: 0, reducedMotion: settings.reduceMotion });
+  const walk = new StageWalk({ count: 0, reducedMotion: settings.reduceMotion, v2: false });
   let stageCtx = null;        // 2D ctx of the open card's stage canvas
   let stageCanvasRef = null;  // the open card's stage canvas element
   let stageSheet = null;      // scene sheet img (null => fallback layers)
@@ -231,7 +236,7 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
       // figure on the floor line over the scene
       const ch = h * 0.5;
       const cw = stageCostume.naturalWidth && stageCostume.naturalHeight ? ch * (stageCostume.naturalWidth / 4) / stageCostume.naturalHeight : ch / 2;
-      drawFrame(stageCostume, walk.frame(t), w * walk.x - cw / 2, h * FLOOR_FRAC - ch, cw, ch, 4);
+      drawFrame(stageCtx, stageCostume, walk.frame(t), w * walk.x - cw / 2, h * FLOOR_FRAC - ch, cw, ch, 4);
     }
     for (let i = 0; i < stageMarkers.length; i++) {
       stageMarkers[i].style.left = `${walk.markers[i] * 100}%`;
@@ -248,6 +253,10 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
     walk.update(dt);
     syncArmedUi();
     stageFrame(t);
+    if (mgSession) {
+      if (mgSession.canvas !== stageCanvasRef && mgSession.canvas?.isConnected === false) mgSession = null; // host card gone
+      else mgFrame(t);
+    }
     stageRaf = requestAnimationFrame(stageLoop);
   }
   function startStageLoop() {
@@ -286,7 +295,9 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
   // Keyboard adapter: consumes arrows/Enter/Space/digits while a card is open so
   // the page never scrolls under it. Mounted once; reads live stage state.
   function stageKeydown(e) {
-    if (viewMode !== 'game' || (!stageButtons.length && !stageCtx)) return; // no card stage open
+    if (viewMode !== 'game') return;
+    if (mgSession && mgKey(e)) return; // v5: overlay owns all keys mid-run
+    if (!stageButtons.length && !stageCtx) return; // no card stage open
     const action = walk.keyAction(e.key);
     if (action === 'ignore') return;
     e.preventDefault();
@@ -316,7 +327,113 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
     if (stageRaf == null) stageFrame((typeof performance !== 'undefined' ? performance.now() : Date.now()) / 1000);
   }
 
+  // ---- SPEC v5 §4: mini-game session on the same stage canvas ----------------
+  // mgSession phases: countdown -> play -> end. The overlay owns keys while it
+  // is non-null; renderEventCard() aborts a run if its host canvas goes away.
+  let mgSession = null; // { run, phase, count, ctx, canvas, w, h, deltas, lastT }
+  const crisisActiveNow = () => Object.keys(game.state.crisisLatched || {}).length > 0;
+
+  // Offer check for the era's family (eras.json `minigame.family`). Crossing II
+  // ('crossing') is a trigger record — never an overlay (spec §3).
+  function minigameOffer() {
+    const fam = game.eraMinigame();
+    if (!fam || fam === 'crossing') return { ok: false, why: 'none' };
+    return isAvailable(game.state.minigames, fam, {
+      eraNum: game.state.era,
+      crisisActive: crisisActiveNow(),
+      crossingOpen: !!game.state.crossingUnlocked && viewMode === 'ending',
+    });
+  }
+
+  function startMinigame() {
+    const offer = minigameOffer();
+    if (!offer.ok || !stageCanvasRef || mgSession) { if (offer.why) toast(MINIGAME_COPY[offer.why] || ''); return; }
+    const fam = game.eraMinigame();
+    // Seed from run count + era so replays within a lineage differ but stay reproducible.
+    const seed = (game.state.tickCount * 2654435761 ^ (game.state.era * 97) ^ (game.state.minigames.playedThisEra * 131)) >>> 0;
+    mgSession = {
+      family: fam,
+      run: createRun(fam, { seed, diff: Math.min(1, (game.state.era - 1) / 16) }),
+      phase: 'countdown', count: 3,
+      canvas: stageCanvasRef, ctx: stageCtx,
+      lastT: 0, deltas: null,
+    };
+    audio.play('click_choice');
+    startStageLoop(); // guarantees a rAF pump for the overlay
+  }
+
+  function endMinigame(forfeited) {
+    const s = mgSession;
+    if (!s) return;
+    s.run = forfeited ? mgForfeit(s.run) : s.run;
+    s.phase = 'end';
+    s.deltas = forfeited ? {} : mgReward(s.run);
+    const applied = game.applyMinigameReward(s.family, s.deltas, { score: s.run.score });
+    autosave();
+    renderHeader();
+    renderResourceBar();
+    const { node } = deltaChips(applied);
+    $('#card-wrap').append(node);
+    setTimeout(() => { try { node.remove?.(); } catch { /* shim without remove */ } }, 5200);
+    // Let the end card sit on canvas for a beat, then tear the session down.
+    setTimeout(() => { if (mgSession === s) mgSession = null; }, 2600);
+  }
+
+  // Per-frame overlay pump; called from stageLoop when a session is active.
+  function mgFrame(nowSec) {
+    const s = mgSession;
+    if (!s || !s.ctx) return;
+    const dt = s.lastT ? Math.min(0.1, nowSec - s.lastT) : 0;
+    s.lastT = nowSec;
+    const w = s.canvas.width, h = s.canvas.height;
+    if (s.phase === 'countdown') {
+      drawCountdown(s.ctx, s.count, w, h);
+      s.count -= dt;
+      if (s.count <= 0) s.phase = 'play';
+      return;
+    }
+    if (s.phase === 'play') {
+      s.run = mgStep(s.run, dt);
+      if (s.run.done) endMinigame(false);
+      else drawMinigameFrame(s.ctx, s.run, w, h);
+      return;
+    }
+    // 'end': static verdict card with delta chips until teardown.
+    drawEndCard(s.ctx, s.run, s.deltas, w, h);
+  }
+
+  // Keyboard adapter for the overlay (spec §4): Esc forfeits; family inputs map
+  // from arrows/WASD/digits. Consumes everything while active so the walk mode
+  // and page scroll stay out of the way.
+  function mgKey(e) {
+    const s = mgSession;
+    if (!s) return false;
+    e.preventDefault();
+    if (s.phase === 'end') { if (e.key === 'Enter' || e.key === 'Escape') mgSession = null; return true; }
+    if (s.phase === 'countdown') {
+      if (walk.forfeitAction(e.key) === 'forfeit') { endMinigame(true); return true; } // Esc cancels before the gun
+      s.count = Math.min(s.count, 0.01); return true; // any other key skips ahead
+    }
+    if (walk.forfeitAction(e.key) === 'forfeit') { endMinigame(true); return true; }
+    const k = e.key;
+    const map = {
+      ArrowLeft: 'left', a: 'left', A: 'left',
+      ArrowRight: 'right', d: 'right', D: 'right',
+      ArrowUp: 'up', w: 'up', W: 'up',
+      ArrowDown: 'down', s: 'down', S: 'down',
+      ' ': s.family === 'fallout' ? 'rest' : 'duck',
+      Shift: s.family === 'fallout' ? 'run' : 'stand',
+      q: 'gate:left', Q: 'gate:left', e: 'gate:right', E: 'gate:right',
+      Enter: 'stop',
+    };
+    if (/^[0-3]$/.test(k)) { mgAct(s.run, `digit:${Number(k)}`); return true; }
+    const actName = map[k];
+    if (actName) mgAct(s.run, actName);
+    return true;
+  }
+
   function renderEventCard() {
+    if (mgSession) return; // v5: never tear down the stage under a live run
     const wrap = $('#card-wrap');
     wrap.replaceChildren();
     stopStageLoop(); // SPEC v4: previous card's stage loop/markers are gone
@@ -386,6 +503,25 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
       const ctx = sceneCanvas.getContext?.('2d'); // shim canvases without 2D: no walk render
       stageCtx = ctx || null;
       stageCanvasRef = ctx ? sceneCanvas : null;
+    }
+    // ---- SPEC v5 §4: mini-game launch button + ledger scoreboard on the stage.
+    if (stageCanvasRef && !isLineage) {
+      const offer = minigameOffer();
+      if (offer.ok) {
+        const fam = game.eraMinigame();
+        const mgBtn = el('button', 'btn btn-minigame', MINIGAME_COPY[fam]?.title || fam);
+        mgBtn.type = 'button';
+        mgBtn.title = `${MINIGAME_COPY[fam]?.blurb || ''} — Esc forfeits`;
+        mgBtn.addEventListener('click', startMinigame);
+        stage.append(mgBtn);
+      }
+      const rows = ledgerRows(game.state.minigames).filter((r) => r.best > 0);
+      if (rows.length) {
+        const board = el('div', 'mg-scoreboard');
+        board.setAttribute('aria-label', 'Mini-game ledger');
+        for (const r of rows) board.append(el('span', 'mg-score-row', `${r.title}: ${r.best}`));
+        stage.append(board);
+      }
     }
     // Era costume for the figure (missing sheet => no figure, keys 1-4 still work).
     const eraId = ERA_IDS[game.state.era - 1];
@@ -737,14 +873,16 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
     acc += Number(document.documentElement.dataset.speed || 2);
     // §9.1: production pauses while an event card is open (setting, default ON).
     const paused = settings.pauseDuringChoices !== false && !!game.currentEvent();
-    while (acc >= 1) { acc -= 1; game.tick(paused); }
+    while (acc >= 1) { acc -= 1; game.tick(paused, !!mgSession); } // frozen while a minigame is live
     if (game.state.phase === 'ending') { autosave(); showEnding(); return; }
     if (game.state.resources.entropy > prevEntropy + 0.5) audio.play('entropy_tick');
     prevEntropy = game.state.resources.entropy;
     ambientBgm();
     renderHeader();
     renderResourceBar();
-    if (!game.currentEvent()) renderEventCard();
+    // v5: a live minigame pins the card — re-rendering mid-run would kill its rAF loop
+    // (stopStageLoop) and detach its canvas. The session ends before any legit re-render.
+    if (!mgSession && !game.currentEvent()) renderEventCard();
   }, 400);
 
   // §9.4 audio beds: bgm_choice under open event cards, bgm_high_entropy when
@@ -790,5 +928,8 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
 
   showTitle();
   renderAll();
-  return { get game() { return game; }, renderer, toast, audio, sprites, parallax, walk };
+  return { get game() { return game; }, renderer, toast, audio, sprites, parallax, walk,
+    // v5 test seam: the minigame session lifecycle (mg-ui tests drive these).
+    _mg: { start: startMinigame, key: mgKey, offer: minigameOffer,
+      get session() { return mgSession; } } };
 }
