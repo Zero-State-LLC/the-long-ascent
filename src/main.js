@@ -3,12 +3,17 @@
 // stay intact and are driven by the engine instead of ticks.
 
 import { bootScroller, setPalettes } from './ui/scroller-boot.js';
+import { createEntitySystem } from './engine/entities.js';
+import * as actionsModule from './engine/actions.js';
 
-const [erasData, encounters, stones, arcs] = await Promise.all([
+const [erasData, encounters, stones, arcs, actionChoices, gatesDoc, spawnTables] = await Promise.all([
   fetch('src/data/eras.json').then((r) => r.json()),
   fetch('research/encounters-v6.json').then((r) => r.json()).catch(() => []),
   fetch('research/boundary-stones-v6.json').then((r) => r.json()).catch(() => []),
   fetch('research/arc-encounters-v6.json').then((r) => r.json()).catch(() => []),
+  fetch('research/action-choices-v7.json').then((r) => r.json()).catch(() => null),
+  fetch('research/gates-v7.json').then((r) => r.json()).catch(() => null),
+  fetch('research/spawn-tables-v7.json').then((r) => r.json()).catch(() => null),
 ]);
 
 // Studio palettes: fetch per era, tolerate missing files (defaults in boot).
@@ -30,4 +35,11 @@ bootScroller({
   promptRoot: document.getElementById('world-prompt'),
   menuRoot: document.getElementById('world-menu'),
   toastRoot: document.getElementById('toast'),
+  options: {
+    actionsModule,
+    entitySystemFactory: createEntitySystem,
+    spawnTables,
+    gatesDoc,
+    actionChoices,
+  },
 });

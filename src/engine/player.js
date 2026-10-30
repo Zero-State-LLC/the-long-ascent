@@ -18,6 +18,10 @@ import {
 
 export const NO_INPUT = Object.freeze({ left: false, right: false, jumpHeld: false, down: false });
 
+// SPEC v7 §1: optional input.maxRun overrides the horizontal target cap (sprint
+// 1.6×). Undefined default keeps every v6 call path byte-identical.
+const runCap = (input) => (Number.isFinite(input?.maxRun) ? input.maxRun : MAX_RUN);
+
 /**
  * @param {object} opts
  *   x, y        spawn position of the collision box's TOP-LEFT corner.
@@ -140,7 +144,7 @@ export function createPlayer({ x = 0, y = 0, collider } = {}) {
     // ---- horizontal: accel/friction on ground, air control ×0.7 ---------------
     const mult = p.grounded ? 1 : AIR_MULT;
     if (move !== 0) {
-      const target = move * MAX_RUN;
+      const target = move * runCap(input);
       if (!p.grounded && Math.sign(p.vx) === -move) {
         // Full air steering on reversal: set, not approach (feel §4).
         p.vx = target;

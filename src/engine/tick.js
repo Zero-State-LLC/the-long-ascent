@@ -8,6 +8,8 @@
 
 import { TILE } from './feel.js';
 import { unlockCrossing, CROSSING_GATE_ERA } from './crossingGate.js';
+import { shouldCollapse, applyCollapse } from './collapse.js';
+import { entryXForEra } from './save-v6.js';
 
 export const FIXED_DT = 1 / 60;
 
@@ -15,11 +17,15 @@ export const FIXED_DT = 1 / 60;
  * @param {object} deps { world, player, camera, encounters, transition, game,
  *                        onEvent(evt) }
  */
-export function createSim({ world, player, camera, encounters, transition, game }) {
+export function createSim({ world, player, camera, encounters, transition, game, actions = null }) {
   let acc = 0;
   let clock = 0; // seconds of simulated time (walk-cycle phase etc.)
   let shownEra = game.state.era || 1; // physical era underfoot (monotonic)
   const listeners = [];
+  let entities = null; // v7: attached via attachEntities() after construction
+
+  /** v7: wire the entity system in (boot layer calls this once). */
+  function attachEntities(es) { entities = es; }
 
   /** Feed wall-clock seconds (rAF delta). Runs whole fixed steps only. */
   function frame(dtSeconds, input) {
@@ -41,13 +47,21 @@ export function createSim({ world, player, camera, encounters, transition, game 
     // 1) Player physics — locked during menus and the set piece (SPEC §1:
     //    "the game only moves when you move"; reading signage freezes time).
     if (!menuOpen && !transitioning) {
+      // v7 §1: action verbs run BEFORE physics so speedCap/crouch apply this tick.
+      if (actions) actions.update(input || {}, dt);
       const wasAirborne = !player.grounded;
-      player.update(input || undefined, dt);
+      player.update(inputForPlayer(input), dt);
       if (player.landed && wasAirborne) {
         camera.shake(Math.min(0.5, Math.abs(player.vy) / 600 + 0.15));
         events.push({ type: 'land' });
       }
       if (player.jumped) events.push({ type: 'jump' });
+
+      // v7 §2: entities (projectiles, hazard AI, zones, cave light).
+      if (entities) {
+        const er = entities.update({ player, dt, era: world.eraAtX(player.x + player.w / 2) });
+        for (const e of er.events) events.push(e);
+      }
     }
 
     // 2) Era boundary detection: crossing a seam line triggers the set piece.
@@ -89,10 +103,30 @@ export function createSim({ world, player, camera, encounters, transition, game 
     game.state.walkX = player.x;
     const boundaryEra = world.eraAtX(player.x + player.w / 2);
     if (boundaryEra > game.state.lastBoundaryEra) game.state.lastBoundaryEra = boundaryEra;
+
+    // v7 §5: collapse — sustenance ≤ 0 fades you back to the last boundary.
+    // No death anywhere in this game; respawn is immediate under a short fade.
+    if (!menuOpen && !transitioning && shouldCollapse(game.state)) {
+      const r = applyCollapse(game.state, entryXForEra);
+      events.push({ type: 'collapse', reason: r.reason, lost: r.lost, respawnEra: r.respawnEra });
+      const x = game.state.walkX;
+      const feet = surfaceFeet(world, x);
+      player.x = x; player.y = feet - player.h;
+      player.vx = 0; player.vy = 0;
+      camera.x = Math.max(0, x - 300);
+    }
+  }
+
+  /** Player-facing input: v6 snapshot + sprint cap from the action system. */
+  function inputForPlayer(input) {
+    if (!input) return actions ? { maxRun: actions.speedCap() } : undefined;
+    if (!actions) return input;
+    return { ...input, maxRun: actions.speedCap() };
   }
 
   return {
     frame,
+    attachEntities,
     get clock() { return clock; },
     on(fn) { listeners.push(fn); },
     /** Place the player at an era entry pad (Continue / debug jump). */

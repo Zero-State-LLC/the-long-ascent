@@ -327,6 +327,22 @@ body[data-view="ending"] #ending-screen[hidden] { display: none; }
 .hud-choice-sel { border-color: var(--accent); background: rgba(183, 156, 255, 0.16); }
 .hud-menu-hint { margin: 0.5rem 0 0; font-size: 0.62rem; color: var(--muted); }
 
+/* v7 §4: greyed action-choices — visible but unpickable until the verb is met. */
+.hud-choice-off { opacity: 0.42; cursor: not-allowed; }
+.hud-choice-off:hover { border-color: var(--line); background: rgba(0, 0, 0, 0.25); }
+.hud-choice-req { color: var(--warn); font-size: 0.68rem; }
+
+/* v7 §1: hand slot next to the resource strip (held item + stamina pip). */
+.hud-hand { display: flex; align-items: center; gap: 0.45rem; margin-top: 0.35rem; }
+.hud-hand-slot {
+  width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line); border-radius: 8px; background: rgba(0, 0, 0, 0.3);
+  color: var(--muted); font-size: 0.7rem;
+}
+.hud-hand-icon { width: 26px; height: 26px; image-rendering: pixelated; }
+.hud-stamina { flex: 0 0 64px; height: 4px; border-radius: 2px; background: rgba(218, 232, 255, 0.14); overflow: hidden; display: inline-block; }
+.hud-stamina-fill { display: block; height: 100%; background: #7de08a; }
+
 @media (max-width: 720px) {
   #resource-bar { top: 5.2rem; }
   .hud-meter { width: 28px; }

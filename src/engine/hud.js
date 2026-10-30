@@ -18,7 +18,8 @@ export const POOL_ORDER = ['sustenance', 'knowledge', 'population', 'infrastruct
 export function createHud({ root, el = defaultEl }) {
   let lastEraName = null;
 
-  function render(state, { eraName, progress01 = 0, label = '' } = {}) {
+  function render(state, opts = {}) {
+    const { eraName, progress01 = 0, label = '' } = opts;
     if (!root) return;
     root.replaceChildren();
 
@@ -52,6 +53,28 @@ export function createHud({ root, el = defaultEl }) {
       strip.append(row);
     }
     root.append(strip);
+
+    // v7 §1: hand slot next to the resource strip — held item icon + stamina pip.
+    if (opts.hand) {
+      const hand = el('div', 'hud-hand');
+      hand.setAttribute?.('aria-label', 'Hand');
+      const slot = el('span', 'hud-hand-slot', opts.hand.held ? '' : '—');
+      if (opts.hand.held) {
+        slot.title = opts.hand.held;
+        const icon = el('img', 'hud-hand-icon');
+        icon.src = `assets/held_${opts.hand.held}.png`;
+        icon.alt = opts.hand.held;
+        slot.append(icon);
+      }
+      hand.append(slot);
+      const stam = el('span', 'hud-stamina');
+      const sw = el('span', 'hud-stamina-fill');
+      sw.style.width = `${Math.round(Math.min(1, Math.max(0, opts.hand.staminaFrac ?? 1)) * 100)}%`;
+      stam.append(sw);
+      stam.title = 'Stamina';
+      hand.append(stam);
+      root.append(hand);
+    }
     lastEraName = eraName;
   }
 
@@ -79,10 +102,13 @@ export function createHud({ root, el = defaultEl }) {
     if (prompt) card.append(el('p', 'hud-menu-prompt', prompt));
     const list = el('div', 'hud-menu-choices');
     choices.forEach((c, i) => {
-      const btn = el('button', 'hud-choice' + (i === selectedIndex ? ' hud-choice-sel' : ''), c.label);
+      const btn = el('button', 'hud-choice' + (i === selectedIndex ? ' hud-choice-sel' : '') + (c.disabled ? ' hud-choice-off' : ''), c.label);
       btn.type = 'button';
       btn.dataset.label = c.label;
-      if (onPick) btn.addEventListener('click', () => onPick(c.label));
+      if (c.disabled) {
+        btn.disabled = true;
+        if (c.requirement) btn.append(el('span', 'hud-choice-req', ` — ${c.requirement}`));
+      } else if (onPick) btn.addEventListener('click', () => onPick(c.label));
       list.append(btn);
     });
     card.append(list);
