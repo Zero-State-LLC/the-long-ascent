@@ -1,0 +1,2078 @@
+{
+  "markups": [
+    {
+      "id": "E1-01",
+      "choices": [
+        {
+          "label": "Feed it all night",
+          "action": {
+            "verb": "light",
+            "item": "torch",
+            "requirement": "Holding a lit torch"
+          }
+        },
+        {
+          "label": "Teach everyone to carry it",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Embers, tinder, carriers"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-02",
+      "choices": [
+        {
+          "label": "Restrict distribution to hunters",
+          "action": {
+            "verb": "climb",
+            "item": "none",
+            "requirement": "A route above the checkpoint"
+          }
+        },
+        {
+          "label": "Make it official: feasts on schedule",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Salt and road-goods to share"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-03",
+      "choices": [
+        {
+          "label": "Credit the inventor publicly",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Charcoal and a steady hand"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-04",
+      "choices": [
+        {
+          "label": "Give the heir your unfinished tool",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Hands free for the tool"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-05",
+      "choices": [
+        {
+          "label": "Build a platform over the shallows",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Reeds at the waterline"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-06",
+      "choices": [
+        {
+          "label": "Turn them away",
+          "action": {
+            "verb": "sneak",
+            "item": "none",
+            "requirement": "Crouch; cross below the watch"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-07",
+      "choices": [
+        {
+          "label": "Post rotating guards",
+          "action": {
+            "verb": "climb",
+            "item": "none",
+            "requirement": "A handhold to the hollow"
+          }
+        },
+        {
+          "label": "Chase it with torches",
+          "action": {
+            "verb": "light",
+            "item": "torch",
+            "requirement": "Torches for the chase"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-08",
+      "choices": [
+        {
+          "label": "Claim the best wall for the lineage",
+          "action": {
+            "verb": "climb",
+            "item": "none",
+            "requirement": "The wall face is climbable"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-09",
+      "choices": [
+        {
+          "label": "Walk south",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Stones loose at the cairn base"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-10",
+      "choices": [
+        {
+          "label": "Fight for it",
+          "action": {
+            "verb": "throw",
+            "item": "stone",
+            "requirement": "A stone in hand"
+          }
+        },
+        {
+          "label": "Trade instead: tools for their berry grounds",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Tools to trade, berries to take"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-11",
+      "choices": [
+        {
+          "label": "Pay the shaman",
+          "action": {
+            "verb": "pay",
+            "item": "none",
+            "requirement": "Food or goods to give"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-01",
+      "choices": [
+        {
+          "label": "Hoard the grain",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Sacks to fill at the granary"
+          }
+        },
+        {
+          "label": "Feast the whole valley",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Grain enough to give away"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-02",
+      "choices": [
+        {
+          "label": "Dig the communal ditch",
+          "action": {
+            "verb": "climb",
+            "item": "none",
+            "requirement": "Dry ground uphill to break on"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-03",
+      "choices": [
+        {
+          "label": "Enforce the debt",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Clay, stylus, witnesses"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-04",
+      "choices": [
+        {
+          "label": "Plant both fields",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Seed for both fields"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-05",
+      "choices": [
+        {
+          "label": "Lock it, guard it",
+          "action": {
+            "verb": "climb",
+            "item": "none",
+            "requirement": "The granary door is above reach"
+          }
+        },
+        {
+          "label": "Sell to neighbors at famine prices",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Coin the neighbors carry"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-06",
+      "choices": [
+        {
+          "label": "Wall the whole village",
+          "action": {
+            "verb": "climb",
+            "item": "none",
+            "requirement": "Wattle, stakes, will to haul"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-07",
+      "choices": [
+        {
+          "label": "Adopt the plough",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "An ox, a yoke, hard ground"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-08",
+      "choices": [
+        {
+          "label": "Build upstream reservoirs anyway",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Stone and clay upstream"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-09",
+      "choices": [
+        {
+          "label": "Count honestly",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Tablet, stylus, a level head"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-10",
+      "choices": [
+        {
+          "label": "Fund the temple",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Stone hauled, tithe paid"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-11",
+      "choices": [
+        {
+          "label": "Trade seed as diplomatic gift",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Seed chosen for gifting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-01",
+      "choices": [
+        {
+          "label": "Send neither; hire pirates as 'observers.'",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Coin for the observers"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-02",
+      "choices": [
+        {
+          "label": "Raise taxes to keep the silver",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Levy collected this season"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-03",
+      "choices": [
+        {
+          "label": "Publish the code",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Basalt, chisel, one clear hand"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-04",
+      "choices": [
+        {
+          "label": "Pave the main road",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Aggregate within carting distance"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-05",
+      "choices": [
+        {
+          "label": "Hire the auditor",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "A fee for honest eyes"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-06",
+      "choices": [
+        {
+          "label": "Tax their lectures",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Coin enough to tax them in"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-07",
+      "choices": [
+        {
+          "label": "Seal the roads",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Lime, timber, rope for the line"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-09",
+      "choices": [
+        {
+          "label": "Copy the technical texts",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Papyrus, ink, a quiet room"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-11",
+      "choices": [
+        {
+          "label": "Retire him. Firmly",
+          "action": {
+            "verb": "throw",
+            "item": "spear",
+            "requirement": "A spear, and what it means"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-12",
+      "choices": [
+        {
+          "label": "Flood theirs with better fakes",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Silver to flood their market"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-01",
+      "choices": [
+        {
+          "label": "Copy the farming manual",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Parchment and lamp oil"
+          }
+        },
+        {
+          "label": "Copy the engineering codex",
+          "action": {
+            "verb": "light",
+            "item": "torch",
+            "requirement": "Light for the codex pages"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-02",
+      "choices": [
+        {
+          "label": "Prioritize salvage copies",
+          "action": {
+            "verb": "climb",
+            "item": "none",
+            "requirement": "A ladder to the philosophy shelf"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-03",
+      "choices": [
+        {
+          "label": "Accept the bargain",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Coin for the chief's rate"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-04",
+      "choices": [
+        {
+          "label": "Authenticate the relic",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Calipers, provenance, nerve"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-05",
+      "choices": [
+        {
+          "label": "Pay the danegeld",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "A danegeld you can raise"
+          }
+        },
+        {
+          "label": "Resist from the tower",
+          "action": {
+            "verb": "climb",
+            "item": "none",
+            "requirement": "The tower stair, stones above"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-06",
+      "choices": [
+        {
+          "label": "Burn the notes",
+          "action": {
+            "verb": "light",
+            "item": "torch",
+            "requirement": "A torch; the notes burn fast"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-07",
+      "choices": [
+        {
+          "label": "Flee with the library",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Crates for the manuscripts"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-08",
+      "choices": [
+        {
+          "label": "Clear the road",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Tools to clear the ruts"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-09",
+      "choices": [
+        {
+          "label": "Rededicate the spring",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Fresh plaster, old water"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-11",
+      "choices": [
+        {
+          "label": "Buy the chest outright",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Coin for the whole chest"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-12",
+      "choices": [
+        {
+          "label": "Trade relics for grain from unburnt regions",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Relics the unburnt will take"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-01",
+      "choices": [
+        {
+          "label": "Own the paper mill upstream",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Rags, water, a mill race"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-03",
+      "choices": [
+        {
+          "label": "Counter: fund a public library in their name",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "A library costs silver"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-04",
+      "choices": [
+        {
+          "label": "Public dissection, licensed, ticketed",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Tickets, license, crowd control"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-05",
+      "choices": [
+        {
+          "label": "Ban it",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "The toll book, page by page"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-08",
+      "choices": [
+        {
+          "label": "Buy the best pieces for the public collection",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Deep pockets at the auction"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-10",
+      "choices": [
+        {
+          "label": "Meet the wage demands",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Coin to meet the wages"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-12",
+      "choices": [
+        {
+          "label": "Buy and burn the bad edition",
+          "action": {
+            "verb": "throw",
+            "item": "torch",
+            "requirement": "A torch; the edition burns"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-01n",
+      "choices": [
+        {
+          "label": "Keep majority, sail smaller",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Silver for a smaller hull"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-04n",
+      "choices": [
+        {
+          "label": "Convoy instead: pay for escorts",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Escort fees, posted rates"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-05n",
+      "choices": [
+        {
+          "label": "Negotiate a paid pest-house",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Coin for the pest-house"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-06n",
+      "choices": [
+        {
+          "label": "Fund the clockmaker",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "A premium, honestly funded"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-09n",
+      "choices": [
+        {
+          "label": "Fund the survey",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Line, lead, patient soundings"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-11n",
+      "choices": [
+        {
+          "label": "Run the blockade",
+          "action": {
+            "verb": "sneak",
+            "item": "none",
+            "requirement": "Crews who know the shoals"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-13",
+      "choices": [
+        {
+          "label": "Split salvaged cargo with the crews",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Floats worth salvaging"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-15",
+      "choices": [
+        {
+          "label": "Copy the articles for your navy",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "The articles, copied fair"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-17",
+      "choices": [
+        {
+          "label": "Sell him provisions at markup",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Provisions to overprice"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-01n",
+      "choices": [
+        {
+          "label": "Print the petitions",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Type, paper, a night shift"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-02n",
+      "choices": [
+        {
+          "label": "Back the printers across the water",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Shipments the printers accept"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-04n",
+      "choices": [
+        {
+          "label": "Leave the capital for the summer",
+          "action": {
+            "verb": "sneak",
+            "item": "none",
+            "requirement": "The road is watched; country is not"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-05n",
+      "choices": [
+        {
+          "label": "Bankroll the empire",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Deep credit, imperial taste"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-06n",
+      "choices": [
+        {
+          "label": "Smuggle at scale",
+          "action": {
+            "verb": "sneak",
+            "item": "none",
+            "requirement": "A sloop, crouched low in fog"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-07n",
+      "choices": [
+        {
+          "label": "Print the broadest reading",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Ink broad, spine narrow"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-09n",
+      "choices": [
+        {
+          "label": "Underwrite the bonds",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Capital to underwrite"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-10n",
+      "choices": [
+        {
+          "label": "Let it go, buy the auction lots back",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Agents at the auction house"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-11n",
+      "choices": [
+        {
+          "label": "Pay the exemption",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "The exemption has a price"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-13",
+      "choices": [
+        {
+          "label": "Emigrate with the plate",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Plate packed for one night"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-17",
+      "choices": [
+        {
+          "label": "Seek the same ribbon",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Coin to buy your own debt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-01",
+      "choices": [
+        {
+          "label": "Automate harder",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Type cases, ink, hands"
+          }
+        },
+        {
+          "label": "Private guards on the roof",
+          "action": {
+            "verb": "climb",
+            "item": "none",
+            "requirement": "Roof access; guards paid"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-03",
+      "choices": [
+        {
+          "label": "Build the trunk line",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Iron, survey stakes, capital"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-04",
+      "choices": [
+        {
+          "label": "Install scrubbers",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Lye, brushes, honest paint"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-05",
+      "choices": [
+        {
+          "label": "Design around it",
+          "action": {
+            "verb": "sneak",
+            "item": "none",
+            "requirement": "A design around the claim"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-07",
+      "choices": [
+        {
+          "label": "Recognize the union",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Signatures, roster, patience"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-08",
+      "choices": [
+        {
+          "label": "Settle quietly, fix quietly",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Parts, gaskets, honest labor"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-09",
+      "choices": [
+        {
+          "label": "Stay out of financials; dig coal",
+          "action": {
+            "verb": "climb",
+            "item": "none",
+            "requirement": "A shaft sunk by hand"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-11",
+      "choices": [
+        {
+          "label": "Impose standard time",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Steam tables; a strong clock"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-01",
+      "choices": [
+        {
+          "label": "Adopt the line",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Coal, tooling, floor space"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-02",
+      "choices": [
+        {
+          "label": "Sell everything",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "A margin call needs cash"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-03",
+      "choices": [
+        {
+          "label": "Full conversion",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Alloy, tooling, shifts"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-04",
+      "choices": [
+        {
+          "label": "Finance the subdivisions",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "Credit lines for lots"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-05",
+      "choices": [
+        {
+          "label": "Build the town",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Timber, brick, clean plans"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-07",
+      "choices": [
+        {
+          "label": "Sign the concession",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "A concession costs money"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-09",
+      "choices": [
+        {
+          "label": "Invest in studio",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "Seed money for the studio"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-11",
+      "choices": [
+        {
+          "label": "Champion the interstates",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "Bonds for concrete miles"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-01n",
+      "choices": [
+        {
+          "label": "Bid for the conversion contracts",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "Bonded against performance"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-02n",
+      "choices": [
+        {
+          "label": "Work the black market gently",
+          "action": {
+            "verb": "sneak",
+            "item": "none",
+            "requirement": "Discretion; neighbors elsewhere"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-03n",
+      "choices": [
+        {
+          "label": "Fund the hut quietly",
+          "action": {
+            "verb": "pay",
+            "item": "coin",
+            "requirement": "Unmarked funding, no receipts"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-05n",
+      "choices": [
+        {
+          "label": "Safety first, quotas second",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Guards, rails, first-aid posts"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-06n",
+      "choices": [
+        {
+          "label": "Target the rail yards",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Bomb tables, fuel, range"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-07n",
+      "choices": [
+        {
+          "label": "Send the parcels",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Socks, tobacco, milk powder"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-08n",
+      "choices": [
+        {
+          "label": "Hoard the coins for collectors",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Crate them, seal them, shelve them"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-09n",
+      "choices": [
+        {
+          "label": "Take the team, ask little",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Clearance papers, transit fuel"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-10n",
+      "choices": [
+        {
+          "label": "Lose the telegram entirely",
+          "action": {
+            "verb": "throw",
+            "item": "none",
+            "requirement": "The telegram, gone overboard"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-12n",
+      "choices": [
+        {
+          "label": "Parade like an era-defining house",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "A house-shaped budget"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-17",
+      "choices": [
+        {
+          "label": "Sabotage his unit's supply",
+          "action": {
+            "verb": "sneak",
+            "item": "none",
+            "requirement": "Access at night, no logs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-01",
+      "choices": [
+        {
+          "label": "Launch the secret program",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Ore, power, sealed rooms"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-04",
+      "choices": [
+        {
+          "label": "Supply under inspection",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "Contracts under inspection"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-06",
+      "choices": [
+        {
+          "label": "Minimum deterrent",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "A cheaper, uglier triad"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-07",
+      "choices": [
+        {
+          "label": "Reconnaissance bird",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Film, altitude, a loaned plane"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-08",
+      "choices": [
+        {
+          "label": "Amplify the letter",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "Amplifiers, lines, permits"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-11",
+      "choices": [
+        {
+          "label": "Sign the partial ban",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Sample kits, a ship, nerve"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-01n",
+      "choices": [
+        {
+          "label": "Answer with your own bird",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "A transmitter, a cage, ambition"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-02n",
+      "choices": [
+        {
+          "label": "Take the fast money",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "Fast money, faster deadlines"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-03n",
+      "choices": [
+        {
+          "label": "Pick cautious pilots over aces",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Checklists; pilots who follow them"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-04n",
+      "choices": [
+        {
+          "label": "Launch the reconnaissance bird",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Optics, film, a small rocket"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-06n",
+      "choices": [
+        {
+          "label": "Buy the water filtration line",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "License fees at retail scale"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-07n",
+      "choices": [
+        {
+          "label": "Leak the weather data first",
+          "action": {
+            "verb": "throw",
+            "item": "none",
+            "requirement": "The data, over the fence"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-08n",
+      "choices": [
+        {
+          "label": "Own the ground station",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Land, dishes, a cleared horizon"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-11n",
+      "choices": [
+        {
+          "label": "Expand the network",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Dishes, spectrum, night crews"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-14",
+      "choices": [
+        {
+          "label": "Fund the station",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "A decade of appropriations"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-16",
+      "choices": [
+        {
+          "label": "Digitize the archive against her wishes",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Scan rigs, cold storage"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-01",
+      "choices": [
+        {
+          "label": "Bet the roadmap on the curve",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Floor space, cooling, payroll"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-02",
+      "choices": [
+        {
+          "label": "IPO and exit",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Wafers, masks, clean air"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-03",
+      "choices": [
+        {
+          "label": "Rebuild from the Chronicle",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Every old memo, filed true"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-05",
+      "choices": [
+        {
+          "label": "Ride to the top",
+          "action": {
+            "verb": "climb",
+            "item": "none",
+            "requirement": "The next rung is priced in"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-06",
+      "choices": [
+        {
+          "label": "Deploy agents widely",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Cabinets, lines, a protocol"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-07",
+      "choices": [
+        {
+          "label": "Remediate everything",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Access lists, patches, time"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-08",
+      "choices": [
+        {
+          "label": "Full encryption, no exceptions",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Keys kept where courts cannot"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-10",
+      "choices": [
+        {
+          "label": "Build an independent index",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Paper, servers, custodians"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-11",
+      "choices": [
+        {
+          "label": "Collect maximally",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Beige plastic, tape drives"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-12",
+      "choices": [
+        {
+          "label": "Publish the retrospective",
+          "action": {
+            "verb": "throw",
+            "item": "none",
+            "requirement": "The disclosure, aimed kindly"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-01",
+      "choices": [
+        {
+          "label": "Publish the audit in full",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "An audit you can fund"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-02",
+      "choices": [
+        {
+          "label": "Ride the crossover hard",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Vectors, consent forms, nerve"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-03",
+      "choices": [
+        {
+          "label": "Hold and hedge",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "A hedge costs a premium"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-04",
+      "choices": [
+        {
+          "label": "Trade the permits actively",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "Margin against permits"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-05",
+      "choices": [
+        {
+          "label": "Sign the retraining pact",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "The pact, initialed, funded"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-06",
+      "choices": [
+        {
+          "label": "Fund storage at scale",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "Storage at scale is capital"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-07",
+      "choices": [
+        {
+          "label": "Fund substitution research",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Lab benches, substitutes, time"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-08",
+      "choices": [
+        {
+          "label": "Accept and integrate",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Bunks, hot meals, interpreters"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-09",
+      "choices": [
+        {
+          "label": "Field-test the sunshade small",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "A test barge, insured"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-10",
+      "choices": [
+        {
+          "label": "Convert the whole fleet",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "Chargers, depot, float"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-12",
+      "choices": [
+        {
+          "label": "Plant, verify, sell later",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Saplings, stakes, ten years"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-14",
+      "choices": [
+        {
+          "label": "Emergency cooling centers",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Cots, water, generators"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-16",
+      "choices": [
+        {
+          "label": "Counter-read every clause",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Counsel; time for Section 14"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-01",
+      "choices": [
+        {
+          "label": "Monetize the moment",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "A camera, a cut, a claim"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-04",
+      "choices": [
+        {
+          "label": "Publish the model early",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Model runs, timestamps, nerve"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-05",
+      "choices": [
+        {
+          "label": "Inoculate: prebunk campaigns",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Prebunks ready before the wave"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-08",
+      "choices": [
+        {
+          "label": "Deploy rapid-detection service",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Detectors, latency, staff"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-11",
+      "choices": [
+        {
+          "label": "Hardened identity stack",
+          "action": {
+            "verb": "sneak",
+            "item": "none",
+            "requirement": "Low signal; no broadcast self"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-12",
+      "choices": [
+        {
+          "label": "Publish the audit",
+          "action": {
+            "verb": "throw",
+            "item": "none",
+            "requirement": "The leak, aimed at daylight"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-01",
+      "choices": [
+        {
+          "label": "Compression etiquette: essentials only",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Only the essentials, filed"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-03",
+      "choices": [
+        {
+          "label": "Periodic re-sync rituals",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Rituals rehearsed, records synced"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-06",
+      "choices": [
+        {
+          "label": "Endorse the liturgy",
+          "action": {
+            "verb": "light",
+            "item": "torch",
+            "requirement": "A light for the procession"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-07",
+      "choices": [
+        {
+          "label": "Fund restoration over expansion",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Restoration media, spare power"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-08",
+      "choices": [
+        {
+          "label": "Honor the quiet: full watch rotations",
+          "action": {
+            "verb": "climb",
+            "item": "none",
+            "requirement": "The mast platform; cold watch"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-10",
+      "choices": [
+        {
+          "label": "Archive it with full honors",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Cold storage, quiet reels"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-15",
+      "choices": [
+        {
+          "label": "Copy the relic, carry both",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Molds, scan rigs, both hands"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E11-01",
+      "choices": [
+        {
+          "label": "Pay from the treasury",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "Treasury liquid enough to pay"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E11-02",
+      "choices": [
+        {
+          "label": "Merge into a single maximally-defended self",
+          "action": {
+            "verb": "gather",
+            "item": "none",
+            "requirement": "Compute mass for one self"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E11-07",
+      "choices": [
+        {
+          "label": "Buy consortium access",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "Consortia terms, signed"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E11-09",
+      "choices": [
+        {
+          "label": "Trade preservation easements instead",
+          "action": {
+            "verb": "pay",
+            "item": "credit",
+            "requirement": "Easements priced in shares"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E11-10",
+      "choices": [
+        {
+          "label": "Reclaim by root access",
+          "action": {
+            "verb": "climb",
+            "item": "none",
+            "requirement": "Physical root access, in person"
+          }
+        }
+      ]
+    }
+  ]
+}
