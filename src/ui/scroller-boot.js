@@ -16,11 +16,13 @@ import { createSim } from '../engine/tick.js';
 import { createHud } from '../engine/hud.js';
 import { drawFigure, sheetUrl } from '../engine/figure.js';
 import { PARALLAX, VIEW_W, VIEW_H, TILE, HINT_R } from '../engine/feel.js';
+import * as gatesMod from '../engine/gates.js';           // v7 §3
+import * as choicesMod from '../engine/actionChoices.js'; // v7 §4
 
 const SAVE_KEY = 'long-ascent-save-v1'; // same key: old saves migrate in place
 const SETTINGS_KEY = 'long-ascent-settings-v1';
 
-export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, menuRoot, toastRoot }) {
+export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, menuRoot, toastRoot, options = {} }) {
   const settings = loadSettings();
   const reducedMotion = () =>
     settings.reduceMotion || (typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -37,11 +39,29 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
     stones: content.stones || [],
     arcs: content.arcs || [],
   }, 'long-ascent');
+  // v7 §4: mark encounter choices with their verb requirements (grey-out source).
+  if (options.actionChoices) choicesMod.attachActionMarks(world.objects, options.actionChoices);
   const player = createPlayer({ x: world.spawn.x, y: world.spawn.y, collider: world.collider });
   const camera = createCamera({ x: Math.max(0, world.spawn.x - 300), y: world.spawn.y - VIEW_H + 140, reducedMotion: reducedMotion() });
   const encounters = createEncounterSystem(world.objects, game, world);
   const transition = createTransition(game, camera);
-  const sim = createSim({ world, player, camera, encounters, transition, game });
+  // ---- v7: actions + entities (SPEC v7; optional deps keep v6 boot alive) ------
+  let actions = null, entities = null;
+  if (options.actionsModule && options.entitySystemFactory) {
+    actions = options.actionsModule.createActionSystem({
+      game, player,
+      onThrow: (spec) => entities && entities.throwProjectile(spec),
+    });
+  }
+
+  const sim = createSim({ world, player, camera, encounters, transition, game, actions });
+  if (options.entitySystemFactory && actions) {
+    entities = options.entitySystemFactory({
+      world, game, actions, surfaceFeet: (x) => surfaceFeetAt(x),
+      toast, spawnTables: options.spawnTables,
+    });
+    sim.attachEntities(entities);
+  }
 
   // Continue: restart at the last boundary reached (SPEC §2).
   const rawSave = safeGet(SAVE_KEY);
@@ -61,20 +81,26 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
   }
 
   // ---- input ------------------------------------------------------------------
-  const keys = { left: false, right: false, jumpHeld: false, down: false };
+  const keys = { left: false, right: false, jumpHeld: false, down: false, sprint: false, crouch: false, aimHeld: false };
   let downEdgeQueued = false;
+  let dropQueued = false;
   let menuIndex = 0;
 
   function inputSnapshot() {
-    const s = { ...keys, downEdge: downEdgeQueued };
+    const s = { ...keys, downEdge: downEdgeQueued, dropPressed: dropQueued, era: world.eraAtX(player.x + player.w / 2) };
     downEdgeQueued = false;
+    dropQueued = false;
     return s;
   }
 
   function onKeyDown(e) {
     const k = e.key;
     if (encounters.active) return menuKey(e);
-    if (k === 'ArrowLeft' || k === 'a') keys.left = true;
+    if (k === 'Shift') keys.sprint = true;
+    else if (k === 'c' || k === 'C') keys.crouch = !keys.crouch; // toggle: hold-free
+    else if (k === 'x' || k === 'X') keys.aimHeld = true;
+    else if (k === 'q' || k === 'Q') dropQueued = true;
+    else if (k === 'ArrowLeft' || k === 'a') keys.left = true;
     else if (k === 'ArrowRight' || k === 'd') keys.right = true;
     else if (k === 'ArrowUp' || k === 'w' || k === ' ') { keys.jumpHeld = true; e.preventDefault?.(); }
     else if (k === 'ArrowDown' || k === 's' || k === 'e' || k === 'Enter') {
@@ -86,7 +112,9 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
   }
   function onKeyUp(e) {
     const k = e.key;
-    if (k === 'ArrowLeft' || k === 'a') keys.left = false;
+    if (k === 'Shift') keys.sprint = false;
+    else if (k === 'x' || k === 'X') keys.aimHeld = false; // release = throw (actions.js edge)
+    else if (k === 'ArrowLeft' || k === 'a') keys.left = false;
     else if (k === 'ArrowRight' || k === 'd') keys.right = false;
     else if (k === 'ArrowUp' || k === 'w' || k === ' ') keys.jumpHeld = false;
     else if (k === 'ArrowDown' || k === 's') keys.down = false;
@@ -101,6 +129,10 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
   }
   function pickChoice(label) {
     if (!label) return;
+    // v7 §4: greyed action-choices cannot be picked (keyboard path too).
+    const act = encounters.active;
+    const raw = act?.choices.find((c) => c.label === label);
+    if (raw?.disabled) return;
     const res = encounters.choose(label);
     if (res.ok) {
       autosave();
@@ -146,6 +178,16 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
     for (const u of Object.values(layers)) cachedImage(u);
   }
   for (const o of world.objects) if (o.prop) cachedImage(`assets/prop_${o.prop}.png`);
+  // v7: entity art (non-blocking; every draw call above degrades to a chip).
+  if (entities) {
+    for (const d of entities.defs) {
+      if (d.kind === 'hazard') cachedImage(`assets/hazard_${d.type}.png`);
+      else if (d.kind === 'pickup') cachedImage(`assets/pickup_${d.type}.png`);
+      else if (d.kind === 'terrain') cachedImage(`assets/terr_${d.type}.png`);
+      else if (d.kind === 'stone_pile') cachedImage('assets/terr_stone_pile.png');
+    }
+    for (const it of ['stone', 'torch', 'spear', 'fruit', 'tool']) cachedImage(`assets/held_${it}.png`);
+  }
   loadEraArt(game.state.era);
 
   // ---- HUD ---------------------------------------------------------------------
@@ -157,6 +199,7 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
       eraName: `ERA ${game.state.era} — ${eraDef?.name || ''}`,
       progress01: boundaryProgress(player.x),
       label: '',
+      hand: actions ? { held: actions.held, staminaFrac: actions.staminaFrac(), aiming: actions.aiming } : null,
     });
     // Keep the header in sync (same element contract as v4/v5).
     const title = document.getElementById('era-title');
@@ -169,26 +212,70 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
 
   // ---- render loop ---------------------------------------------------------------
   let raf = 0, lastT = 0, running = true;
+  let lightLevel = 1; // v7: dark_cave overlay (entities 'light-change' event)
 
   function frame(tms) {
     if (!running) return;
     const dt = lastT ? Math.min(0.25, (tms - lastT) / 1000) : 0;
     lastT = tms;
 
-    const events = sim.frame(dt, inputSnapshot());
+    const snap = inputSnapshot();
+    const events = sim.frame(dt, snap);
+    // v7 §2: E interacts with entities when no encounter object owns the press.
+    if (snap.downEdge && !encounters.active && entities) {
+      const r = entities.interact(player);
+      if (r.ok) { autosave(); renderHud(); }
+    }
     for (const ev of events) handleEvent(ev);
 
     paint();
+    hudTick(dt);
     raf = requestAnimationFrame(frame);
+  }
+
+  // HUD repaints only on change or on a visible meter beat (stamina drains).
+  let hudAcc = 0;
+  function hudTick(dt) {
+    hudAcc += dt;
+    const movingMeter = actions && (actions.sprinting || actions.staminaFrac() < 1);
+    if (hudAcc >= 0.25 && movingMeter) { hudAcc = 0; renderHud(); }
   }
 
   function handleEvent(ev) {
     if (ev.type === 'reequip') loadEraArt(game.state.era);
-    if (ev.type === 'era-begin' || ev.type === 'era-done') { autosave(); renderHud(); }
+    if (ev.type === 'era-begin' || ev.type === 'era-done') { onEraBoundary(ev); autosave(); renderHud(); }
     if (ev.type === 'crossing-unlocked') toast('THE CROSSING is open — the gantry stands lit.');
     if (ev.type === 'menu-open') { menuIndex = 0; }
     if (ev.type === 'menu-close') { /* menu painted from state each frame */ }
+    // ---- v7 events -----------------------------------------------------------
+    if (ev.type === 'contact') { toast(`The ${ev.hazard} catches you. −${ev.cost} sustenance.`); renderHud(); }
+    if (ev.type === 'shakedown') { toast(`${ev.guard} shakes you down for passage.`); renderHud(); }
+    if (ev.type === 'zone-drain') renderHud();
+    if (ev.type === 'throw-hit') { autosave(); }
+    if (ev.type === 'light-change') lightLevel = ev.level;
+    if (ev.type === 'collapse') {
+      fadeOutThen(() => toast(`You collapse — ${ev.reason}. Woke at the boundary stone. −1 ${ev.lost.pool}.`));
+      autosave(); renderHud();
+    }
   }
+
+  // §4 gate sign: reading the seam before entering era N offers advantage/open.
+  function onEraBoundary(ev) {
+    if (!options.gatesDoc || ev.type !== 'era-begin') return;
+    const gate = gatesMod.gateForEra(options.gatesDoc, ev.toEra);
+    if (!gate) return;
+    const chk = gatesMod.checkGate(gate, game.state, actions);
+    if (chk.met && !gatesMod.gateTaken(game.state, ev.toEra)) {
+      const adv = gatesMod.takeGate(options.gatesDoc, game.state, actions, ev.toEra);
+      if (adv.ok) toast(`${gate.sign} — ADVANTAGE PATH OPEN: ${adv.advantage}`);
+    } else {
+      toast(chk.met ? `${gate.sign}.` : `${gate.sign} — ${chk.reason}. The open path remains.`);
+    }
+  }
+
+  let fading = 0;
+  function fadeOutThen(done) { fading = 1; fadeDone = done; }
+  let fadeDone = null;
 
   function paint() {
     if (!canvas || !canvas.getContext) return;
@@ -212,8 +299,56 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
       drawObject(ctx, o);
     }
 
+    // v7 §2: entities in view (hazards, pickups, terrain, stone piles).
+    if (entities) {
+      for (const d of entities.defs) {
+        if (d.x < viewL || d.x > viewR) continue;
+        const r = entities.runtimeOf(d.id);
+        if (r.taken || r.dead) continue;
+        if (d.kind === 'terrain' && (game.state.v7.depletedBushes || []).includes(d.id)) continue;
+        let src;
+        if (d.kind === 'hazard') src = `assets/hazard_${d.type}.png`;
+        else if (d.kind === 'pickup') src = `assets/pickup_${d.type}.png`;
+        else if (d.kind === 'stone_pile') src = 'assets/terr_stone_pile.png';
+        else src = `assets/terr_${d.type}.png`;
+        const img = images.get(src);
+        const feet = surfaceFeetAt(d.x);
+        const H = d.kind === 'hazard' ? 48 : 56;
+        if (img?.img) ctx.drawImage(img.img, Math.round(d.x - H / 2), Math.round(feet - H), H, H);
+        else { ctx.fillStyle = '#7de08a'; ctx.fillRect(Math.round(d.x - 6), Math.round(feet - 24), 12, 24); }
+      }
+    }
+
     drawFigure(ctx, currentSheet, player, sim.clock, {});
+
+    // v7 §2: thrown projectiles + transient drops (meat etc.)
+    if (entities) {
+      for (const dr of entities.drops) {
+        const img = images.get(`assets/pickup_${dr.type}.png`);
+        const feet = surfaceFeetAt(dr.x);
+        if (img?.img) ctx.drawImage(img.img, Math.round(dr.x - 16), Math.round(feet - 32), 32, 32);
+        else { ctx.fillStyle = '#f4bd68'; ctx.fillRect(Math.round(dr.x - 5), Math.round(feet - 10), 10, 10); }
+      }
+      for (const p of entities.projectiles) {
+        const img = images.get(`assets/held_${p.item}.png`);
+        if (img?.img) ctx.drawImage(img.img, Math.round(p.x - 12), Math.round(p.y - 12), 24, 24);
+        else { ctx.fillStyle = '#DAE8FF'; ctx.fillRect(Math.round(p.x - 4), Math.round(p.y - 4), 8, 8); }
+      }
+    }
     ctx.restore();
+
+    // v7: dark_cave overlay — pitch black beyond the mouth without a torch.
+    if (lightLevel < 1) {
+      ctx.fillStyle = `rgba(2, 3, 8, ${(1 - lightLevel).toFixed(2)})`;
+      ctx.fillRect(0, 0, VIEW_W, VIEW_H);
+    }
+    // v7 §5: collapse fade-out (immediate respawn underneath; pure feel).
+    if (fading > 0) {
+      ctx.fillStyle = `rgba(0, 0, 0, ${Math.min(1, fading).toFixed(2)})`;
+      ctx.fillRect(0, 0, VIEW_W, VIEW_H);
+      fading += dt * 1.6;
+      if (fading >= 2.2) { fading = 0; if (fadeDone) { fadeDone(); fadeDone = null; } }
+    }
 
     // In-world UI overlays (prompt bubble + anchored choice menu).
     paintOverlays();
@@ -237,8 +372,11 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
     }
     if (menuRoot) {
       const act = encounters.active;
+      const decorated = act && actions
+        ? choicesMod.decorateChoices(act.choices, { state: game.state, actions })
+        : act?.choices || [];
       hud.renderMenu(menuRoot, act ? {
-        title: act.title || '', prompt: act.prompt || '', choices: act.choices,
+        title: act.title || '', prompt: act.prompt || '', choices: decorated,
         onPick: pickChoice, selectedIndex: menuIndex,
       } : { choices: [] });
       positionWorldElement(menuRoot, act);

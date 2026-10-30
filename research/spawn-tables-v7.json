@@ -1,0 +1,876 @@
+{
+  "seed": "long-ascent:v7-spawn",
+  "note": "fractions of the era segment (0..1); Forge places at segStart + f*SEG_W",
+  "eras": {
+    "1": {
+      "hazards": [
+        {
+          "type": "boar",
+          "f": 0.463
+        }
+      ],
+      "pickups": [
+        {
+          "type": "berry",
+          "f": 0.211
+        },
+        {
+          "type": "meat",
+          "f": 0.371
+        },
+        {
+          "type": "stone",
+          "f": 0.502
+        },
+        {
+          "type": "torch",
+          "f": 0.672
+        },
+        {
+          "type": "torch",
+          "f": 0.767
+        }
+      ],
+      "terrain": [
+        {
+          "type": "fruit_tree",
+          "f": 0.206
+        },
+        {
+          "type": "berry_bush",
+          "f": 0.365
+        },
+        {
+          "type": "crawl_gap",
+          "f": 0.526
+        },
+        {
+          "type": "dark_cave",
+          "f": 0.637
+        },
+        {
+          "type": "ledgevine",
+          "f": 0.809
+        }
+      ],
+      "stones": [
+        {
+          "type": "stone_pile",
+          "f": 0.449
+        }
+      ]
+    },
+    "2": {
+      "hazards": [
+        {
+          "type": "boar",
+          "f": 0.332
+        },
+        {
+          "type": "wolf",
+          "f": 0.687
+        }
+      ],
+      "pickups": [
+        {
+          "type": "grain",
+          "f": 0.292
+        },
+        {
+          "type": "grain",
+          "f": 0.444
+        },
+        {
+          "type": "stone",
+          "f": 0.59
+        },
+        {
+          "type": "torch",
+          "f": 0.733
+        }
+      ],
+      "terrain": [
+        {
+          "type": "grain_stalk",
+          "f": 0.249
+        },
+        {
+          "type": "berry_bush",
+          "f": 0.4
+        },
+        {
+          "type": "crawl_gap",
+          "f": 0.523
+        },
+        {
+          "type": "ledgevine",
+          "f": 0.66
+        },
+        {
+          "type": "anchor",
+          "f": 0.752
+        }
+      ],
+      "stones": [
+        {
+          "type": "stone_pile",
+          "f": 0.557
+        }
+      ]
+    },
+    "3": {
+      "hazards": [
+        {
+          "type": "wolf",
+          "f": 0.386
+        },
+        {
+          "type": "boar",
+          "f": 0.702
+        }
+      ],
+      "pickups": [
+        {
+          "type": "grain",
+          "f": 0.214
+        },
+        {
+          "type": "coin",
+          "f": 0.332
+        },
+        {
+          "type": "scroll",
+          "f": 0.479
+        },
+        {
+          "type": "spear",
+          "f": 0.648
+        },
+        {
+          "type": "stone",
+          "f": 0.806
+        }
+      ],
+      "terrain": [
+        {
+          "type": "grain_stalk",
+          "f": 0.212
+        },
+        {
+          "type": "fruit_tree",
+          "f": 0.35
+        },
+        {
+          "type": "crawl_gap",
+          "f": 0.439
+        },
+        {
+          "type": "rubble_ramp",
+          "f": 0.574
+        },
+        {
+          "type": "dark_cave",
+          "f": 0.698
+        },
+        {
+          "type": "anchor",
+          "f": 0.815
+        }
+      ],
+      "stones": [
+        {
+          "type": "stone_pile",
+          "f": 0.431
+        }
+      ]
+    },
+    "4": {
+      "hazards": [
+        {
+          "type": "wolf",
+          "f": 0.468
+        }
+      ],
+      "pickups": [
+        {
+          "type": "coin",
+          "f": 0.287
+        },
+        {
+          "type": "coin",
+          "f": 0.454
+        },
+        {
+          "type": "book",
+          "f": 0.57
+        },
+        {
+          "type": "spear",
+          "f": 0.781
+        }
+      ],
+      "terrain": [
+        {
+          "type": "fruit_tree",
+          "f": 0.292
+        },
+        {
+          "type": "rubble_ramp",
+          "f": 0.466
+        },
+        {
+          "type": "crawl_gap",
+          "f": 0.564
+        },
+        {
+          "type": "anchor",
+          "f": 0.733
+        }
+      ],
+      "stones": [
+        {
+          "type": "stone_pile",
+          "f": 0.562
+        }
+      ]
+    },
+    "5": {
+      "hazards": [
+        {
+          "type": "stray_dog",
+          "f": 0.429
+        },
+        {
+          "type": "wolf",
+          "f": 0.588
+        }
+      ],
+      "pickups": [
+        {
+          "type": "coin",
+          "f": 0.25
+        },
+        {
+          "type": "scroll",
+          "f": 0.356
+        },
+        {
+          "type": "book",
+          "f": 0.495
+        },
+        {
+          "type": "spear",
+          "f": 0.621
+        },
+        {
+          "type": "torch",
+          "f": 0.78
+        }
+      ],
+      "terrain": [
+        {
+          "type": "grain_stalk",
+          "f": 0.236
+        },
+        {
+          "type": "berry_bush",
+          "f": 0.377
+        },
+        {
+          "type": "rubble_ramp",
+          "f": 0.531
+        },
+        {
+          "type": "ledgevine",
+          "f": 0.679
+        },
+        {
+          "type": "anchor",
+          "f": 0.793
+        }
+      ],
+      "stones": [
+        {
+          "type": "stone_pile",
+          "f": 0.504
+        }
+      ]
+    },
+    "6": {
+      "hazards": [
+        {
+          "type": "stray_dog",
+          "f": 0.436
+        },
+        {
+          "type": "bandit",
+          "f": 0.601
+        }
+      ],
+      "pickups": [
+        {
+          "type": "coin",
+          "f": 0.225
+        },
+        {
+          "type": "invoice",
+          "f": 0.457
+        },
+        {
+          "type": "book",
+          "f": 0.636
+        },
+        {
+          "type": "spear",
+          "f": 0.792
+        }
+      ],
+      "terrain": [
+        {
+          "type": "grain_stalk",
+          "f": 0.226
+        },
+        {
+          "type": "fruit_tree",
+          "f": 0.426
+        },
+        {
+          "type": "rubble_ramp",
+          "f": 0.616
+        },
+        {
+          "type": "anchor",
+          "f": 0.755
+        }
+      ],
+      "stones": [
+        {
+          "type": "stone_pile",
+          "f": 0.634
+        }
+      ]
+    },
+    "7": {
+      "hazards": [
+        {
+          "type": "bandit",
+          "f": 0.412
+        },
+        {
+          "type": "stray_dog",
+          "f": 0.579
+        }
+      ],
+      "pickups": [
+        {
+          "type": "meat",
+          "f": 0.235
+        },
+        {
+          "type": "invoice",
+          "f": 0.466
+        },
+        {
+          "type": "coin",
+          "f": 0.625
+        },
+        {
+          "type": "scroll",
+          "f": 0.786
+        }
+      ],
+      "terrain": [
+        {
+          "type": "berry_bush",
+          "f": 0.333
+        },
+        {
+          "type": "rubble_ramp",
+          "f": 0.538
+        },
+        {
+          "type": "ledgevine",
+          "f": 0.699
+        }
+      ],
+      "stones": [
+        {
+          "type": "stone_pile",
+          "f": 0.479
+        }
+      ]
+    },
+    "8": {
+      "hazards": [
+        {
+          "type": "bandit",
+          "f": 0.363
+        },
+        {
+          "type": "soldier_patrol",
+          "f": 0.594
+        }
+      ],
+      "pickups": [
+        {
+          "type": "coin",
+          "f": 0.228
+        },
+        {
+          "type": "invoice",
+          "f": 0.386
+        },
+        {
+          "type": "book",
+          "f": 0.564
+        },
+        {
+          "type": "meat",
+          "f": 0.8
+        }
+      ],
+      "terrain": [
+        {
+          "type": "grain_stalk",
+          "f": 0.271
+        },
+        {
+          "type": "rubble_ramp",
+          "f": 0.524
+        },
+        {
+          "type": "crawl_gap",
+          "f": 0.76
+        }
+      ],
+      "stones": [
+        {
+          "type": "stone_pile",
+          "f": 0.556
+        }
+      ]
+    },
+    "9": {
+      "hazards": [
+        {
+          "type": "soldier_patrol",
+          "f": 0.372
+        },
+        {
+          "type": "wolf",
+          "f": 0.676
+        }
+      ],
+      "pickups": [
+        {
+          "type": "credit",
+          "f": 0.258
+        },
+        {
+          "type": "invoice",
+          "f": 0.428
+        },
+        {
+          "type": "coin",
+          "f": 0.613
+        },
+        {
+          "type": "scroll",
+          "f": 0.732
+        }
+      ],
+      "terrain": [
+        {
+          "type": "fruit_tree",
+          "f": 0.335
+        },
+        {
+          "type": "rubble_ramp",
+          "f": 0.556
+        },
+        {
+          "type": "anchor",
+          "f": 0.666
+        }
+      ],
+      "stones": [
+        {
+          "type": "stone_pile",
+          "f": 0.489
+        }
+      ]
+    },
+    "10": {
+      "hazards": [
+        {
+          "type": "soldier_patrol",
+          "f": 0.357
+        },
+        {
+          "type": "stray_dog",
+          "f": 0.643
+        }
+      ],
+      "pickups": [
+        {
+          "type": "meat",
+          "f": 0.246
+        },
+        {
+          "type": "credit",
+          "f": 0.435
+        },
+        {
+          "type": "scroll",
+          "f": 0.567
+        },
+        {
+          "type": "coin",
+          "f": 0.746
+        }
+      ],
+      "terrain": [
+        {
+          "type": "berry_bush",
+          "f": 0.277
+        },
+        {
+          "type": "rubble_ramp",
+          "f": 0.479
+        },
+        {
+          "type": "ledgevine",
+          "f": 0.69
+        }
+      ],
+      "stones": [
+        {
+          "type": "stone_pile",
+          "f": 0.639
+        }
+      ]
+    },
+    "11": {
+      "hazards": [
+        {
+          "type": "soldier_patrol",
+          "f": 0.412
+        },
+        {
+          "type": "radiation_zone",
+          "f": 0.663
+        }
+      ],
+      "pickups": [
+        {
+          "type": "chip",
+          "f": 0.225
+        },
+        {
+          "type": "credit",
+          "f": 0.466
+        },
+        {
+          "type": "meat",
+          "f": 0.604
+        },
+        {
+          "type": "book",
+          "f": 0.752
+        }
+      ],
+      "terrain": [
+        {
+          "type": "grain_stalk",
+          "f": 0.285
+        },
+        {
+          "type": "rubble_ramp",
+          "f": 0.463
+        },
+        {
+          "type": "crawl_gap",
+          "f": 0.591
+        },
+        {
+          "type": "anchor",
+          "f": 0.731
+        }
+      ],
+      "stones": [
+        {
+          "type": "stone_pile",
+          "f": 0.601
+        }
+      ]
+    },
+    "12": {
+      "hazards": [
+        {
+          "type": "smog",
+          "f": 0.414
+        },
+        {
+          "type": "soldier_patrol",
+          "f": 0.674
+        }
+      ],
+      "pickups": [
+        {
+          "type": "credit",
+          "f": 0.213
+        },
+        {
+          "type": "chip",
+          "f": 0.441
+        },
+        {
+          "type": "grain",
+          "f": 0.616
+        },
+        {
+          "type": "book",
+          "f": 0.742
+        }
+      ],
+      "terrain": [
+        {
+          "type": "berry_bush",
+          "f": 0.29
+        },
+        {
+          "type": "ledgevine",
+          "f": 0.546
+        },
+        {
+          "type": "rubble_ramp",
+          "f": 0.726
+        }
+      ],
+      "stones": [
+        {
+          "type": "stone_pile",
+          "f": 0.356
+        }
+      ]
+    },
+    "13": {
+      "hazards": [
+        {
+          "type": "datastorm",
+          "f": 0.605
+        }
+      ],
+      "pickups": [
+        {
+          "type": "chip",
+          "f": 0.318
+        },
+        {
+          "type": "credit",
+          "f": 0.514
+        },
+        {
+          "type": "book",
+          "f": 0.711
+        }
+      ],
+      "terrain": [
+        {
+          "type": "grain_stalk",
+          "f": 0.35
+        },
+        {
+          "type": "ledgevine",
+          "f": 0.504
+        },
+        {
+          "type": "anchor",
+          "f": 0.732
+        }
+      ],
+      "stones": [
+        {
+          "type": "stone_pile",
+          "f": 0.516
+        }
+      ]
+    },
+    "14": {
+      "hazards": [
+        {
+          "type": "datastorm",
+          "f": 0.373
+        },
+        {
+          "type": "smog",
+          "f": 0.647
+        }
+      ],
+      "pickups": [
+        {
+          "type": "credit",
+          "f": 0.285
+        },
+        {
+          "type": "chip",
+          "f": 0.416
+        },
+        {
+          "type": "grain",
+          "f": 0.599
+        },
+        {
+          "type": "coin",
+          "f": 0.741
+        }
+      ],
+      "terrain": [
+        {
+          "type": "fruit_tree",
+          "f": 0.324
+        },
+        {
+          "type": "rubble_ramp",
+          "f": 0.526
+        },
+        {
+          "type": "crawl_gap",
+          "f": 0.75
+        }
+      ],
+      "stones": [
+        {
+          "type": "stone_pile",
+          "f": 0.497
+        }
+      ]
+    },
+    "15": {
+      "hazards": [
+        {
+          "type": "datastorm",
+          "f": 0.431
+        }
+      ],
+      "pickups": [
+        {
+          "type": "chip",
+          "f": 0.272
+        },
+        {
+          "type": "credit",
+          "f": 0.487
+        },
+        {
+          "type": "book",
+          "f": 0.766
+        }
+      ],
+      "terrain": [
+        {
+          "type": "berry_bush",
+          "f": 0.312
+        },
+        {
+          "type": "ledgevine",
+          "f": 0.583
+        }
+      ],
+      "stones": [
+        {
+          "type": "stone_pile",
+          "f": 0.398
+        }
+      ]
+    },
+    "16": {
+      "hazards": [
+        {
+          "type": "radiation_zone",
+          "f": 0.538
+        }
+      ],
+      "pickups": [
+        {
+          "type": "grain",
+          "f": 0.29
+        },
+        {
+          "type": "chip",
+          "f": 0.487
+        },
+        {
+          "type": "credit",
+          "f": 0.75
+        }
+      ],
+      "terrain": [
+        {
+          "type": "grain_stalk",
+          "f": 0.315
+        },
+        {
+          "type": "rubble_ramp",
+          "f": 0.538
+        },
+        {
+          "type": "anchor",
+          "f": 0.749
+        }
+      ],
+      "stones": [
+        {
+          "type": "stone_pile",
+          "f": 0.543
+        }
+      ]
+    },
+    "17": {
+      "hazards": [
+        {
+          "type": "datastorm",
+          "f": 0.401
+        },
+        {
+          "type": "radiation_zone",
+          "f": 0.696
+        }
+      ],
+      "pickups": [
+        {
+          "type": "credit",
+          "f": 0.322
+        },
+        {
+          "type": "chip",
+          "f": 0.46
+        },
+        {
+          "type": "book",
+          "f": 0.683
+        }
+      ],
+      "terrain": [
+        {
+          "type": "fruit_tree",
+          "f": 0.343
+        },
+        {
+          "type": "ledgevine",
+          "f": 0.466
+        },
+        {
+          "type": "rubble_ramp",
+          "f": 0.703
+        }
+      ],
+      "stones": [
+        {
+          "type": "stone_pile",
+          "f": 0.583
+        }
+      ]
+    }
+  }
+}
