@@ -1,0 +1,7406 @@
+{
+  "encounters": [
+    {
+      "id": "E1-01",
+      "era": 1,
+      "title": "Boundary Stone, Year One",
+      "type": "sign",
+      "prompt": "The founder's claim-stone, lettering worn by nine thousand weatherings. The line it draws is now a customs border.",
+      "choices": [
+        {
+          "label": "Feed it all night",
+          "effects": {
+            "sustenance": -2,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "Let it die out",
+          "effects": {
+            "morale": 2
+          }
+        },
+        {
+          "label": "Teach everyone to carry it",
+          "effects": {
+            "sustenance": -4,
+            "population": 2,
+            "knowledge": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-02",
+      "era": 1,
+      "title": "The Caravan Master",
+      "type": "npc",
+      "prompt": "A trader just paid your toll in salt and opinions. He wants the road kept as honest as his ledger.",
+      "choices": [
+        {
+          "label": "Encourage the giveaway",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Restrict distribution to hunters",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Make it official: feasts on schedule",
+          "effects": {
+            "infrastructure": 2,
+            "sustenance": -2,
+            "population": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-03",
+      "era": 1,
+      "title": "Ash Pit and Brand-Mark",
+      "type": "ruin",
+      "prompt": "Cold ash, one burned field, a brand cut into the boundary oak. First tribute paid to fire, recorded in charcoal.",
+      "choices": [
+        {
+          "label": "Credit the inventor publicly",
+          "effects": {
+            "knowledge": 2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Keep it secret within your family",
+          "effects": {
+            "knowledge": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Standardize the chip",
+          "effects": {
+            "infrastructure": 2,
+            "knowledge": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-04",
+      "era": 1,
+      "title": "Elder at the Fire Rock",
+      "type": "npc",
+      "prompt": "The elder yields the fire-tender's staff and asks who answers for the tribe next winter. Succession happens at cave mouths now.",
+      "choices": [
+        {
+          "label": "Give the heir your unfinished tool",
+          "effects": {
+            "knowledge": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Redistribute everything",
+          "effects": {
+            "sustenance": 2,
+            "knowledge": -2
+          }
+        },
+        {
+          "label": "Declare the death bad luck and move camp",
+          "effects": {
+            "morale": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-05",
+      "era": 1,
+      "title": "First Furrow Marker",
+      "type": "monument",
+      "prompt": "Someone scratched a grain-count beside the marker: twelve years of the same plant, deliberately. Agriculture signed its first receipt.",
+      "choices": [
+        {
+          "label": "Move camp across",
+          "effects": {
+            "sustenance": 2,
+            "infrastructure": -2
+          }
+        },
+        {
+          "label": "Split the band",
+          "effects": {
+            "population": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Build a platform over the shallows",
+          "effects": {
+            "sustenance": 2,
+            "infrastructure": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-06",
+      "era": 1,
+      "title": "The Stranger at the Ford",
+      "type": "npc",
+      "prompt": "An unmarked traveler waits at the crossing with goods nobody trades here. The ford has never asked papers; the watch has.",
+      "choices": [
+        {
+          "label": "Take them in",
+          "effects": {
+            "population": 2,
+            "knowledge": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Turn them away",
+          "effects": {
+            "sustenance": 2,
+            "morale": -2
+          }
+        },
+        {
+          "label": "Take them in, make them earn it",
+          "effects": {
+            "knowledge": 2,
+            "legitimacy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-07",
+      "era": 1,
+      "title": "Cache Shrine of Seeds",
+      "type": "shrine",
+      "prompt": "A hollow stone holds three generations of seed, sealed against famine. Faith with a germination date.",
+      "choices": [
+        {
+          "label": "Post rotating guards",
+          "effects": {
+            "sustenance": -2,
+            "infrastructure": 2
+          }
+        },
+        {
+          "label": "Move the cave",
+          "effects": {
+            "infrastructure": -2,
+            "entropy": -2
+          }
+        },
+        {
+          "label": "Chase it with torches",
+          "effects": {
+            "knowledge": 2,
+            "entropy": 2,
+            "sustenance": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-08",
+      "era": 1,
+      "title": "Herder on the Ridge",
+      "type": "npc",
+      "prompt": "The herder counts the ridge grass twice a day and trusts no one who counts once. Move the herd wrong and the argument follows for years.",
+      "choices": [
+        {
+          "label": "Claim the best wall for the lineage",
+          "effects": {
+            "legitimacy": 2,
+            "morale": -2
+          }
+        },
+        {
+          "label": "Open the wall to everyone",
+          "effects": {
+            "morale": 2,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "Paint over it with your own hand",
+          "effects": {
+            "legitimacy": 2,
+            "knowledge": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-09",
+      "era": 1,
+      "title": "Trail Cairn, Tin Road",
+      "type": "sign",
+      "prompt": "Cairn at the fork where the coast route meets the high pass. Every tin bar that ever moved was weighed against this pile of rocks.",
+      "choices": [
+        {
+          "label": "Eat the seed stores",
+          "effects": {
+            "population": 2,
+            "knowledge": -2
+          }
+        },
+        {
+          "label": "Walk south",
+          "effects": {
+            "population": -2,
+            "sustenance": 2
+          }
+        },
+        {
+          "label": "Ration ruthlessly",
+          "effects": {
+            "population": -2,
+            "legitimacy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-10",
+      "era": 1,
+      "title": "Tally Wall",
+      "type": "terminal",
+      "prompt": "Notches in the great wall count herds, floods, and favors owed. The oldest public record is arithmetic nobody can audit.",
+      "choices": [
+        {
+          "label": "Share the cave",
+          "effects": {
+            "infrastructure": -2,
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Fight for it",
+          "effects": {
+            "population": -2,
+            "sustenance": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Trade instead: tools for their berry grounds",
+          "effects": {
+            "knowledge": -2,
+            "sustenance": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-11",
+      "era": 1,
+      "title": "The Dreaming Shaman",
+      "type": "npc",
+      "prompt": "She says the future visited her and warned the lineage ends badly unless you stop doing something specific, specified only after payment. Half the cave is already nervous.",
+      "choices": [
+        {
+          "label": "Pay the shaman",
+          "effects": {
+            "sustenance": -2,
+            "morale": 2
+          }
+        },
+        {
+          "label": "Ignore the prophecy",
+          "effects": {
+            "morale": -2,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "Institute dreams as official policy",
+          "effects": {
+            "legitimacy": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E1-12",
+      "era": 1,
+      "title": "The Child Who Asks Why",
+      "type": "npc",
+      "prompt": "Why is fire hot, why don't the stars fall, why is the answer always 'because.' The band must decide whether questions are a resource or a nuisance.",
+      "choices": [
+        {
+          "label": "Answer every question seriously",
+          "effects": {
+            "knowledge": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Tell the child to ask the shaman",
+          "effects": {
+            "knowledge": -2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Make the child fire-tender",
+          "effects": {
+            "knowledge": 2,
+            "sustenance": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-01",
+      "era": 2,
+      "title": "First Granary, Two Policies",
+      "type": "machine",
+      "prompt": "The granary stands open for two arguments: store grain against famine, or distribute it against loyalty. Storage is power with a shelf life.",
+      "choices": [
+        {
+          "label": "Hoard the grain",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Feast the whole valley",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Grain temple: store it, lend it",
+          "effects": {
+            "infrastructure": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-02",
+      "era": 2,
+      "title": "Irrigation Engineer of the Canal",
+      "type": "npc",
+      "prompt": "The canal question is who digs and who drinks. Every irrigation project is a government under construction.",
+      "choices": [
+        {
+          "label": "Dig the communal ditch",
+          "effects": {
+            "sustenance": 2,
+            "infrastructure": 2,
+            "population": -2
+          }
+        },
+        {
+          "label": "Private ditch, private fee",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Stay near the river, accept floods",
+          "effects": {
+            "entropy": 2,
+            "sustenance": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-03",
+      "era": 2,
+      "title": "Debt Tablet, First Issue",
+      "type": "terminal",
+      "prompt": "Clay records owe: grain borrowed, grain owed, interest invented in the margin. Debt arrived before writing and used it immediately.",
+      "choices": [
+        {
+          "label": "Enforce the debt",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -4
+          }
+        },
+        {
+          "label": "Cancel it publicly",
+          "effects": {
+            "legitimacy": 4,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Cap future interest",
+          "effects": {
+            "legitimacy": 2,
+            "knowledge": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-04",
+      "era": 2,
+      "title": "Calendar Dispute Stone",
+      "type": "sign",
+      "prompt": "Two calendars claim the flood date; the priests keep separate festival lists. Timekeeping is politics with almanacs.",
+      "choices": [
+        {
+          "label": "Back the astronomers",
+          "effects": {
+            "knowledge": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Back the priests",
+          "effects": {
+            "legitimacy": 2,
+            "knowledge": -2
+          }
+        },
+        {
+          "label": "Plant both fields",
+          "effects": {
+            "sustenance": -2,
+            "knowledge": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-05",
+      "era": 2,
+      "title": "Locust Verge, Post-Swarm",
+      "type": "ruin",
+      "prompt": "The swarm read the ledger and ate the surplus anyway. Reserves are theory until weather audits them.",
+      "choices": [
+        {
+          "label": "Open the granary",
+          "effects": {
+            "population": 2,
+            "sustenance": -4
+          }
+        },
+        {
+          "label": "Lock it, guard it",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Sell to neighbors at famine prices",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-06",
+      "era": 2,
+      "title": "Walls Around the Yard",
+      "type": "monument",
+      "prompt": "The yard got walls, then gates, then a gatekeeper. Surplus attracts geometry.",
+      "choices": [
+        {
+          "label": "Wall the granary only",
+          "effects": {
+            "infrastructure": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Wall the whole village",
+          "effects": {
+            "infrastructure": 4,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "No wall; armed escorts instead",
+          "effects": {
+            "population": -2,
+            "sustenance": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-07",
+      "era": 2,
+      "title": "Ox-Yoke Test Field",
+      "type": "machine",
+      "prompt": "Someone hitched the ox to the plow and the era's tempo changed overnight. Draft animals were the first engine.",
+      "choices": [
+        {
+          "label": "Adopt the plough",
+          "effects": {
+            "sustenance": 4,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Tax the plough to feed the displaced",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": 2,
+            "knowledge": -2
+          }
+        },
+        {
+          "label": "Ban the plough",
+          "effects": {
+            "knowledge": -4,
+            "legitimacy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-08",
+      "era": 2,
+      "title": "Water Rights Treaty Stone",
+      "type": "sign",
+      "prompt": "Two villages carved sharing terms beside the same spring. Treaties are hydrology with signatures.",
+      "choices": [
+        {
+          "label": "Sign their terms",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Counter-propose",
+          "effects": {
+            "knowledge": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Build upstream reservoirs anyway",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-09",
+      "era": 2,
+      "title": "Census Counting House",
+      "type": "terminal",
+      "prompt": "Head by head, household by household: the first census counted taxpayers, not people. Enumeration is the quietest tax.",
+      "choices": [
+        {
+          "label": "Count honestly",
+          "effects": {
+            "knowledge": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Let the powerful undercount themselves",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Count households, not people",
+          "effects": {
+            "infrastructure": 2,
+            "population": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-10",
+      "era": 2,
+      "title": "Temple Under Construction",
+      "type": "shrine",
+      "prompt": "The priest-king wants a temple; the labor corvée wants a word. Piety and payroll share a foundation trench.",
+      "choices": [
+        {
+          "label": "Fund the temple",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Redirect the tithe to the ditch",
+          "effects": {
+            "infrastructure": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Nationalize the priesthood",
+          "effects": {
+            "legitimacy": 4,
+            "knowledge": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-11",
+      "era": 2,
+      "title": "Seed Selection Plot, Season Forty",
+      "type": "sign",
+      "prompt": "Decades of saving hardiest seed quietly rewrote the grass: double yield, wet-cardboard taste, roots raiders can't trample. Improvement chose flavor last.",
+      "choices": [
+        {
+          "label": "Commit fully to the new strain",
+          "effects": {
+            "sustenance": 4,
+            "knowledge": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Keep old strains as backup",
+          "effects": {
+            "sustenance": 2,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "Trade seed as diplomatic gift",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E2-12",
+      "era": 2,
+      "title": "The Elder Who Remembers Too Much",
+      "type": "npc",
+      "prompt": "Three famines, two treaties, precisely who broke each. Writing arrives and there's a debate about which version gets carved; the elder has opinions about editing.",
+      "choices": [
+        {
+          "label": "Carve the elder's version",
+          "effects": {
+            "legitimacy": 2,
+            "knowledge": -2
+          }
+        },
+        {
+          "label": "Carve the scribe's version",
+          "effects": {
+            "knowledge": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Carve both, side by side",
+          "effects": {
+            "knowledge": 2,
+            "legitimacy": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-01",
+      "era": 3,
+      "title": "Tin Route Delegation",
+      "type": "npc",
+      "prompt": "The delegation arrives to formalize the tin road: weights, escorts, tariffs, all negotiable except the tin. Bronze runs on logistics nobody sings about.",
+      "choices": [
+        {
+          "label": "Send the trader",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Send your son",
+          "effects": {
+            "legitimacy": 2,
+            "population": 2
+          }
+        },
+        {
+          "label": "Send neither; hire pirates as 'observers.'",
+          "effects": {
+            "sustenance": -2,
+            "knowledge": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-02",
+      "era": 3,
+      "title": "Debasement Assay Bench",
+      "type": "terminal",
+      "prompt": "The coin's silver thins a little each reign; expectations rise faster. Debased money is a loan from everyone, repaid in prices.",
+      "choices": [
+        {
+          "label": "Debase the coin",
+          "effects": {
+            "sustenance": 4,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Raise taxes to keep the silver",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -2,
+            "population": -2
+          }
+        },
+        {
+          "label": "Cut legion size",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-03",
+      "era": 3,
+      "title": "Law-Stele Draft Wall",
+      "type": "monument",
+      "prompt": "Write the law down and it stops being whoever's angry today. Codification angers exactly one constituency: interpretation.",
+      "choices": [
+        {
+          "label": "Publish the code",
+          "effects": {
+            "legitimacy": 4,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "Keep law oral and clerical",
+          "effects": {
+            "legitimacy": -2,
+            "sustenance": 2
+          }
+        },
+        {
+          "label": "Publish, with royal footnotes",
+          "effects": {
+            "legitimacy": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-04",
+      "era": 3,
+      "title": "Road Builders' Camp, Mile Marker",
+      "type": "sign",
+      "prompt": "Roads are arguments paved over: routing favors someone, every mile taxed by its existence. Engineering is politics that survives weather.",
+      "choices": [
+        {
+          "label": "Pave the main road",
+          "effects": {
+            "sustenance": 4,
+            "infrastructure": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Gravel everything cheaply",
+          "effects": {
+            "infrastructure": 2,
+            "sustenance": 2
+          }
+        },
+        {
+          "label": "Privilege a toll-concession",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-05",
+      "era": 3,
+      "title": "Palace Accounts Archive",
+      "type": "terminal",
+      "prompt": "Room after room of receipts: oil, wool, weapons, rations. The first state was a spreadsheet with guards.",
+      "choices": [
+        {
+          "label": "Hire the auditor",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Reconcile nothing; rotate treasurers",
+          "effects": {
+            "entropy": 2,
+            "sustenance": 2
+          }
+        },
+        {
+          "label": "Appoint the auditor's rival instead",
+          "effects": {
+            "legitimacy": 2,
+            "entropy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-06",
+      "era": 3,
+      "title": "The Philosopher's Invoice",
+      "type": "npc",
+      "prompt": "He teaches virtue by the hour and bills accordingly; the invoice itemizes doubt. Education monetized, wisdom non-refundable.",
+      "choices": [
+        {
+          "label": "Fund the school",
+          "effects": {
+            "knowledge": 4,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Fund only engineering topics",
+          "effects": {
+            "knowledge": 2,
+            "infrastructure": 2
+          }
+        },
+        {
+          "label": "Tax their lectures",
+          "effects": {
+            "sustenance": 2,
+            "knowledge": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-07",
+      "era": 3,
+      "title": "Plague Quarantine Line, Trade Road",
+      "type": "sign",
+      "prompt": "The plague moves the trade road's route, not the other way. Carantines: customs for biology.",
+      "choices": [
+        {
+          "label": "Seal the roads",
+          "effects": {
+            "population": 2,
+            "sustenance": -4
+          }
+        },
+        {
+          "label": "Keep trade open",
+          "effects": {
+            "sustenance": 2,
+            "population": -4
+          }
+        },
+        {
+          "label": "Cargo-only lanes, no humans",
+          "effects": {
+            "sustenance": -2,
+            "population": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-08",
+      "era": 3,
+      "title": "Overextension Notice Board",
+      "type": "sign",
+      "prompt": "Garrison costs exceed frontier revenue, posted officially. Empires die of geography; this board admits it in writing.",
+      "choices": [
+        {
+          "label": "Hold every border",
+          "effects": {
+            "sustenance": -4,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Withdraw from the far province",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -4
+          }
+        },
+        {
+          "label": "Subcontract borders to client kings",
+          "effects": {
+            "sustenance": -2,
+            "entropy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-09",
+      "era": 3,
+      "title": "Library Copying Room",
+      "type": "ruin",
+      "prompt": "Every copy introduces errors; every error gets copied onward. Knowledge survived by reproducing, mutations included.",
+      "choices": [
+        {
+          "label": "Copy the technical texts",
+          "effects": {
+            "knowledge": 2,
+            "infrastructure": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Copy the epics",
+          "effects": {
+            "legitimacy": 4,
+            "knowledge": -2
+          }
+        },
+        {
+          "label": "Copy a bit of everything",
+          "effects": {
+            "knowledge": 2,
+            "legitimacy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-10",
+      "era": 3,
+      "title": "Temple Corporation Charter Stone",
+      "type": "terminal",
+      "prompt": "The first corporations begin badly: temple estates with shareholders, liability, and a god as figurehead. Limited liability had divine cover.",
+      "choices": [
+        {
+          "label": "Grant charters",
+          "effects": {
+            "sustenance": 4,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Deny; personal liability only",
+          "effects": {
+            "sustenance": -2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Charter one house, yours",
+          "effects": {
+            "sustenance": 6,
+            "legitimacy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-11",
+      "era": 3,
+      "title": "The General With Popular Support",
+      "type": "npc",
+      "prompt": "He returns loved by the legions and the mob, in that order. History has a word for men like him and the word is not 'retired.'",
+      "choices": [
+        {
+          "label": "Triumph, then governorship far away",
+          "effects": {
+            "legitimacy": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Co-opt: marry him into the lineage",
+          "effects": {
+            "legitimacy": 4,
+            "population": 2
+          }
+        },
+        {
+          "label": "Retire him. Firmly",
+          "effects": {
+            "legitimacy": -2,
+            "entropy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E3-12",
+      "era": 3,
+      "title": "Recoinage Mint, Third Attempt",
+      "type": "terminal",
+      "prompt": "Neighbors counterfeit your currency badly enough to undercut it. Recoinage costs a fortune; tolerance costs the standard.",
+      "choices": [
+        {
+          "label": "Recoin with hidden mintmarks",
+          "effects": {
+            "sustenance": 2,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "Flood theirs with better fakes",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Free-market shrug",
+          "effects": {
+            "sustenance": -2,
+            "legitimacy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-01",
+      "era": 4,
+      "title": "Scriptorium Budget Slate",
+      "type": "terminal",
+      "prompt": "Copying a book costs a season; the abbot defends the slate line by line. Preservation is a budget line that never wins, barely funded, endlessly necessary.",
+      "choices": [
+        {
+          "label": "Copy the farming manual",
+          "effects": {
+            "knowledge": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Copy the holy text",
+          "effects": {
+            "legitimacy": 4,
+            "knowledge": -2
+          }
+        },
+        {
+          "label": "Copy the engineering codex",
+          "effects": {
+            "knowledge": 2,
+            "infrastructure": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-02",
+      "era": 4,
+      "title": "Knowledge Decay, Routine",
+      "type": "ruin",
+      "prompt": "A roof leaked into the philosophy shelf; nobody was assigned to roofs. Civilization loss happens by staffing, not by fire.",
+      "choices": [
+        {
+          "label": "Prioritize salvage copies",
+          "effects": {
+            "knowledge": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Memorize what you can",
+          "effects": {
+            "knowledge": 2,
+            "population": -2
+          }
+        },
+        {
+          "label": "Let it rot; record the titles",
+          "effects": {
+            "knowledge": -2,
+            "infrastructure": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-03",
+      "era": 4,
+      "title": "The Hill Chief's Protection Offer",
+      "type": "npc",
+      "prompt": "He offers protection at a rate that makes the bandits look like competitors. Government began as a protection racket with better catering.",
+      "choices": [
+        {
+          "label": "Accept the bargain",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Refuse; fortify",
+          "effects": {
+            "infrastructure": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Convert the chief",
+          "effects": {
+            "legitimacy": 4,
+            "knowledge": 2,
+            "sustenance": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-04",
+      "era": 4,
+      "title": "Relic Economy Stall",
+      "type": "shrine",
+      "prompt": "Bone fragments of uncertain saints priced by proximity to the original. Inflation reached heaven first.",
+      "choices": [
+        {
+          "label": "Authenticate the relic",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Expose the fraud",
+          "effects": {
+            "legitimacy": -2,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "Sell authentication certificates",
+          "effects": {
+            "sustenance": 4,
+            "legitimacy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-05",
+      "era": 4,
+      "title": "Winter Camp, Longship Haul-Out",
+      "type": "ruin",
+      "prompt": "They overwintered with axes and patience; the monastery kept better records of being robbed. The winter schedule included you.",
+      "choices": [
+        {
+          "label": "Pay the danegeld",
+          "effects": {
+            "sustenance": -4,
+            "legitimacy": -2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Hide the books, lose the gold",
+          "effects": {
+            "sustenance": -2,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "Resist from the tower",
+          "effects": {
+            "population": -2,
+            "legitimacy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-06",
+      "era": 4,
+      "title": "The Heresy File",
+      "type": "terminal",
+      "prompt": "Correct opinion catalogued, incorrect opinion catalogued harder. Doctrine is an editorial function with consequences.",
+      "choices": [
+        {
+          "label": "Burn the notes",
+          "effects": {
+            "legitimacy": 2,
+            "knowledge": -2
+          }
+        },
+        {
+          "label": "Archive the notes privately",
+          "effects": {
+            "knowledge": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Litigate it slowly",
+          "effects": {
+            "knowledge": 2,
+            "legitimacy": -2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-07",
+      "era": 4,
+      "title": "Plague Parish Boundary Stone",
+      "type": "sign",
+      "prompt": "The parish marked itself shut to hold the sickness in. Charity and quarantine carved the same stone.",
+      "choices": [
+        {
+          "label": "Stay and tend the sick",
+          "effects": {
+            "population": -2,
+            "legitimacy": 4
+          }
+        },
+        {
+          "label": "Flee with the library",
+          "effects": {
+            "knowledge": 2,
+            "legitimacy": -4
+          }
+        },
+        {
+          "label": "Quarantine line at the bridge",
+          "effects": {
+            "population": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-08",
+      "era": 4,
+      "title": "The Lost Imperial Road",
+      "type": "ruin",
+      "prompt": "Perfect camber leading nowhere anyone still calls a destination. Infrastructure outlives the reason for it.",
+      "choices": [
+        {
+          "label": "Clear the road",
+          "effects": {
+            "sustenance": 2,
+            "infrastructure": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Keep it secret, use it yourselves",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Leave it buried",
+          "effects": {
+            "entropy": 2,
+            "sustenance": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-09",
+      "era": 4,
+      "title": "Rededicated Well, Old Gods Under Paint",
+      "type": "shrine",
+      "prompt": "The holy well keeps its old offerings under new frescoes. Conversion negotiated in layers.",
+      "choices": [
+        {
+          "label": "Outlaw the old rites",
+          "effects": {
+            "legitimacy": -2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Rededicate the spring",
+          "effects": {
+            "legitimacy": 4,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "Ignore both; collect taxes either way",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-10",
+      "era": 4,
+      "title": "Chronicle Continuation Desk",
+      "type": "terminal",
+      "prompt": "The Chronicle continues this season because someone showed up to write. Institutional memory is a shift that must be staffed.",
+      "choices": [
+        {
+          "label": "Begin honestly: 'here we lost the thread.'",
+          "effects": {
+            "knowledge": 2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Paper over the gap",
+          "effects": {
+            "legitimacy": 2,
+            "knowledge": -2
+          }
+        },
+        {
+          "label": "Date everything from the restart",
+          "effects": {
+            "legitimacy": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-11",
+      "era": 4,
+      "title": "The Wandering Scholar",
+      "type": "npc",
+      "prompt": "He carries three manuscripts no library here owns and expects hospitality as payment. Knowledge travels lighter than cargo and charges more.",
+      "choices": [
+        {
+          "label": "Shelter him and copy his chest",
+          "effects": {
+            "knowledge": 4,
+            "sustenance": -2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Buy the chest outright",
+          "effects": {
+            "sustenance": -4,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "Turn him in as a sorcerer",
+          "effects": {
+            "legitimacy": 2,
+            "knowledge": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-12",
+      "era": 4,
+      "title": "Harvest of Ashes",
+      "type": "ruin",
+      "prompt": "The burn took the barn and the seed store; the record notes both, evenly. Catastrophe filed under inventory.",
+      "choices": [
+        {
+          "label": "Break the seals; distribute church stores",
+          "effects": {
+            "population": 2,
+            "legitimacy": -2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Ration by labor roster",
+          "effects": {
+            "population": -2,
+            "infrastructure": 2
+          }
+        },
+        {
+          "label": "Trade relics for grain from unburnt regions",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-01",
+      "era": 5,
+      "title": "Cathedral Foundation, Unfinished Aisle",
+      "type": "monument",
+      "prompt": "The cornerstone is dated; the aisle isn't. Cathedrals were multi-generational capital projects with theology as the business plan.",
+      "choices": [
+        {
+          "label": "Fund the press",
+          "effects": {
+            "sustenance": 4,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "Fund the scribes' guild instead",
+          "effects": {
+            "knowledge": -2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Own the paper mill upstream",
+          "effects": {
+            "sustenance": 0,
+            "infrastructure": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-02",
+      "era": 5,
+      "title": "Fulling Mill of the Cloth Guild",
+      "type": "machine",
+      "prompt": "The trip-hammers dressed cloth until the guild decided who was allowed to be efficient. Labor-saving preceded labor law by a millennium.",
+      "choices": [
+        {
+          "label": "Flee to the country villa",
+          "effects": {
+            "population": 2,
+            "sustenance": -4
+          }
+        },
+        {
+          "label": "Quarantine the district",
+          "effects": {
+            "legitimacy": 2,
+            "population": -4
+          }
+        },
+        {
+          "label": "Keep the press running outside town",
+          "effects": {
+            "sustenance": 2,
+            "knowledge": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-03",
+      "era": 5,
+      "title": "Guildmaster of the Weavers",
+      "type": "npc",
+      "prompt": "He sets prices, apprenticeships, and gossip quotas with equal precision. The guild was a union, a cartel, and a family, all three, mostly.",
+      "choices": [
+        {
+          "label": "Take the patronage",
+          "effects": {
+            "sustenance": 4,
+            "knowledge": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Decline on principle",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Counter: fund a public library in their name",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-04",
+      "era": 5,
+      "title": "Relic Casket, Authenticity Pending",
+      "type": "shrine",
+      "prompt": "The casket holds a bone of uncertain saint and certain revenue. Authentication was a marketing function.",
+      "choices": [
+        {
+          "label": "Grant the license quietly",
+          "effects": {
+            "knowledge": 4,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Deny; fund text-commentary instead",
+          "effects": {
+            "knowledge": -2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Public dissection, licensed, ticketed",
+          "effects": {
+            "knowledge": 2,
+            "sustenance": 2,
+            "legitimacy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-05",
+      "era": 5,
+      "title": "Fair Court Toll Book",
+      "type": "terminal",
+      "prompt": "The fair's court judged disputes in three days and collected tolls in perpetuity. Fast justice, permanent fees.",
+      "choices": [
+        {
+          "label": "Ban it",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Print it yourself, annotated",
+          "effects": {
+            "sustenance": 2,
+            "knowledge": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Let the marketplace of ideas brawl",
+          "effects": {
+            "knowledge": 2,
+            "legitimacy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-06",
+      "era": 5,
+      "title": "Jester at the Feast Hall",
+      "type": "npc",
+      "prompt": "The jester tells the truth hourly and gets paid for it structurally. Free speech survived on a payroll role.",
+      "choices": [
+        {
+          "label": "Adopt it firm-wide",
+          "effects": {
+            "sustenance": 2,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "Keep single-entry for 'flexibility.'",
+          "effects": {
+            "entropy": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Require it of all clients",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-07",
+      "era": 5,
+      "title": "Plague Village, Empty Row",
+      "type": "ruin",
+      "prompt": "One street, doors shut from outside, the well untouched. Quarantine worked; the village didn't get to enjoy it.",
+      "choices": [
+        {
+          "label": "Fund the voyage",
+          "effects": {
+            "sustenance": 2,
+            "knowledge": 2,
+            "infrastructure": 2
+          }
+        },
+        {
+          "label": "Refuse; watch competitors fund it",
+          "effects": {}
+        },
+        {
+          "label": "Fund two rival captains",
+          "effects": {
+            "sustenance": -2,
+            "knowledge": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-08",
+      "era": 5,
+      "title": "Charter Fair-Cross",
+      "type": "sign",
+      "prompt": "The town's market rights, granted by charter, nailed to a cross of stone. Privilege got a monument and called it liberty.",
+      "choices": [
+        {
+          "label": "Shut it down publicly",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Rebrand: 'in the antique manner.'",
+          "effects": {
+            "sustenance": 2,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "Buy the best pieces for the public collection",
+          "effects": {
+            "sustenance": -2,
+            "legitimacy": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-09",
+      "era": 5,
+      "title": "Money-Changer at the Log Bench",
+      "type": "npc",
+      "prompt": "He converts eleven currencies on one bench and distrusts all of them equally. International finance started as a folding table.",
+      "choices": [
+        {
+          "label": "Use the new tables",
+          "effects": {
+            "knowledge": 4,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Commission a compromise cosmology",
+          "effects": {
+            "knowledge": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Silently adopt, publicly deny",
+          "effects": {
+            "knowledge": 2,
+            "legitimacy": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-10",
+      "era": 5,
+      "title": "Windmill on the Wold",
+      "type": "machine",
+      "prompt": "The mill grinds grain, grudges, and occasionally the miller's rivals' grain. Energy independence, medieval edition.",
+      "choices": [
+        {
+          "label": "Meet the wage demands",
+          "effects": {
+            "sustenance": -4,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Import cheaper strikebreakers",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Profit-share on volume",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-11",
+      "era": 5,
+      "title": "Notary of the Bishop's Court",
+      "type": "npc",
+      "prompt": "He records wills, debts, and the occasional heresy with identical pen pressure. Bureaucracy sanctified.",
+      "choices": [
+        {
+          "label": "Save the technical corpus",
+          "effects": {
+            "knowledge": 2,
+            "infrastructure": 2
+          }
+        },
+        {
+          "label": "Save the literary canon",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": 2
+          }
+        },
+        {
+          "label": "Copy the fastest-moving texts first; abandon the rest",
+          "effects": {
+            "knowledge": 2,
+            "entropy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-12",
+      "era": 5,
+      "title": "Drowned Field Chapel",
+      "type": "ruin",
+      "prompt": "The sea took the nave and left the tower. Coastal retreat with a spire as timestamp.",
+      "choices": [
+        {
+          "label": "Print a correction erratum",
+          "effects": {
+            "knowledge": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Buy and burn the bad edition",
+          "effects": {
+            "sustenance": -2,
+            "entropy": -2
+          }
+        },
+        {
+          "label": "Sue the compositor",
+          "effects": {
+            "legitimacy": -2,
+            "knowledge": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-01n",
+      "era": 6,
+      "title": "Coffeehouse Share Board",
+      "type": "terminal",
+      "prompt": "Strangers buy pieces of one hull over cold coffee; the floor does work no exchange building exists to do yet. Joint stock invented itself between cups.",
+      "choices": [
+        {
+          "label": "Sell generously, answer later",
+          "effects": {
+            "sustenance": 25,
+            "legitimacy": -5
+          }
+        },
+        {
+          "label": "Keep majority, sail smaller",
+          "effects": {
+            "infrastructure": 10,
+            "sustenance": -5
+          }
+        },
+        {
+          "label": "Promise routes you don't have",
+          "effects": {
+            "sustenance": 40,
+            "entropy": 8,
+            "knowledge": -5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-02n",
+      "era": 6,
+      "title": "Charter Monopoly Grant",
+      "type": "sign",
+      "prompt": "The crown grants exclusive rights to a sea lane: a tax collected by you instead of them, minus accountability. Bullion arrives warm and heavy.",
+      "choices": [
+        {
+          "label": "Take the charter",
+          "effects": {
+            "sustenance": 30,
+            "legitimacy": -8,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Refuse and trade free",
+          "effects": {
+            "legitimacy": 10,
+            "sustenance": -10
+          }
+        },
+        {
+          "label": "Take it, undercut it yourself",
+          "effects": {
+            "sustenance": 15,
+            "knowledge": 8,
+            "entropy": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-03n",
+      "era": 6,
+      "title": "Indenture Broker at the Wharf",
+      "type": "npc",
+      "prompt": "He sells passage forward: their crossing paid, their labor sold by yours. The ledgers balance beautifully and something bleeds quietly.",
+      "choices": [
+        {
+          "label": "Grant nothing. No holds, no contracts.",
+          "effects": {
+            "legitimacy": 12,
+            "sustenance": -15
+          }
+        },
+        {
+          "label": "Book the passages",
+          "effects": {
+            "population": 15,
+            "sustenance": 15,
+            "legitimacy": -20
+          }
+        },
+        {
+          "label": "Middle passage terms: shorter bonds, higher rates",
+          "effects": {
+            "population": 8,
+            "sustenance": 5,
+            "legitimacy": -10,
+            "knowledge": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-04n",
+      "era": 6,
+      "title": "Privateer Captain at the Tavern Table",
+      "type": "npc",
+      "prompt": "His guns, your paper, rivals' cargo split by formula. Law, he explains with a bow, is mostly a flag you fly.",
+      "choices": [
+        {
+          "label": "Commission the privateers",
+          "effects": {
+            "sustenance": 25,
+            "entropy": 8,
+            "legitimacy": -6
+          }
+        },
+        {
+          "label": "Convoy instead: pay for escorts",
+          "effects": {
+            "infrastructure": 10,
+            "sustenance": -12,
+            "legitimacy": 5
+          }
+        },
+        {
+          "label": "Hire him to hunt himself",
+          "effects": {
+            "sustenance": 8,
+            "knowledge": 10,
+            "entropy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-05n",
+      "era": 6,
+      "title": "Plague Ship at Anchor, The Downs",
+      "type": "sign",
+      "prompt": "Your own hull sits anchored with fever in the hold. The harbor wants her burned; the manifest wants otherwise.",
+      "choices": [
+        {
+          "label": "Quarantine. Feed the sick, lose the cargo.",
+          "effects": {
+            "population": -10,
+            "legitimacy": 15,
+            "sustenance": -20
+          }
+        },
+        {
+          "label": "Sail on before anyone boards",
+          "effects": {
+            "sustenance": 20,
+            "entropy": 15
+          }
+        },
+        {
+          "label": "Negotiate a paid pest-house",
+          "effects": {
+            "sustenance": -8,
+            "legitimacy": 8,
+            "knowledge": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-06n",
+      "era": 6,
+      "title": "Longitude Clockmaker, Claimant",
+      "type": "npc",
+      "prompt": "A seawatch that tells west from south would end arithmetic deaths. She has steady hands, unsteady rent, and a proposal.",
+      "choices": [
+        {
+          "label": "Fund the clockmaker",
+          "effects": {
+            "knowledge": 20,
+            "sustenance": -15
+          }
+        },
+        {
+          "label": "Pay the lunar-theory mathematicians instead",
+          "effects": {
+            "knowledge": 10,
+            "sustenance": -8
+          }
+        },
+        {
+          "label": "Let the premium sit unclaimed",
+          "effects": {
+            "sustenance": 5,
+            "entropy": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-07n",
+      "era": 6,
+      "title": "Company Fort, Court, and Seal",
+      "type": "monument",
+      "prompt": "The trading house grew a fort, the fort a court, the court judges with seals. A proto-state that fits in a ledger provides law, roads, and precedents.",
+      "choices": [
+        {
+          "label": "Let the company govern",
+          "effects": {
+            "sustenance": 20,
+            "infrastructure": 15,
+            "legitimacy": -12,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Cap the forts, keep the counters",
+          "effects": {
+            "sustenance": 8,
+            "infrastructure": 5,
+            "legitimacy": 6
+          }
+        },
+        {
+          "label": "Hand the courts to the crown",
+          "effects": {
+            "legitimacy": 10,
+            "sustenance": -10
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-08n",
+      "era": 6,
+      "title": "Silver Fleet Price Board",
+      "type": "terminal",
+      "prompt": "Mountain silver arrives heavy and prices notice before anyone votes. Coin buys less each tide; the accountant twitches at 'monetary phenomenon.'",
+      "choices": [
+        {
+          "label": "Convert silver to land and hulls now",
+          "effects": {
+            "infrastructure": 15,
+            "sustenance": -10
+          }
+        },
+        {
+          "label": "Lend against future cargoes at ruinous rates",
+          "effects": {
+            "sustenance": 20,
+            "legitimacy": -8,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Reprice the whole book honestly",
+          "effects": {
+            "knowledge": 10,
+            "legitimacy": 6,
+            "sustenance": -6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-09n",
+      "era": 6,
+      "title": "Chart-Rock Wreck Site",
+      "type": "ruin",
+      "prompt": "A chart off by a hundred miles took two heirs and a grain hull onto rocks nobody drew. The surviving pilot insists the coast moved.",
+      "choices": [
+        {
+          "label": "Fund the survey",
+          "effects": {
+            "knowledge": 15,
+            "infrastructure": 8,
+            "sustenance": -15
+          }
+        },
+        {
+          "label": "Copy the old chart, add a footnote",
+          "effects": {
+            "sustenance": 5,
+            "entropy": 10
+          }
+        },
+        {
+          "label": "Buy the rival house's charts",
+          "effects": {
+            "knowledge": 10,
+            "sustenance": -10,
+            "legitimacy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-10n",
+      "era": 6,
+      "title": "Missionary or Factor",
+      "type": "npc",
+      "prompt": "The heir abroad chooses equipment: bible or ledger. Both convert populations, just to different currencies; the schools keep adjacent books.",
+      "choices": [
+        {
+          "label": "Fund the mission",
+          "effects": {
+            "legitimacy": 10,
+            "knowledge": 8,
+            "population": 5,
+            "sustenance": -8
+          }
+        },
+        {
+          "label": "Fund the factory",
+          "effects": {
+            "sustenance": 18,
+            "legitimacy": -8,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Fund both and reconcile neither",
+          "effects": {
+            "sustenance": 8,
+            "knowledge": 6,
+            "entropy": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-11n",
+      "era": 6,
+      "title": "Blockade Season Notice",
+      "type": "sign",
+      "prompt": "Enemy sails choke the lane and the calendar won't negotiate; miss the window and the season rots where it stands. Running costs hulls; sitting costs crews.",
+      "choices": [
+        {
+          "label": "Run the blockade",
+          "effects": {
+            "sustenance": 20,
+            "population": -8,
+            "entropy": 6
+          }
+        },
+        {
+          "label": "Reroute through the rival port",
+          "effects": {
+            "sustenance": 10,
+            "legitimacy": -5,
+            "knowledge": 3
+          }
+        },
+        {
+          "label": "Sit the season out, keep crews paid",
+          "effects": {
+            "sustenance": -12,
+            "population": 5,
+            "legitimacy": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-12n",
+      "era": 6,
+      "title": "The Ledger That Drowned",
+      "type": "terminal",
+      "prompt": "Double books, one per flag; the ship with the wrong one sank with the only auditor. Every entry now technically unverifiable, which is a kind of freedom.",
+      "choices": [
+        {
+          "label": "Consolidate to one honest book",
+          "effects": {
+            "legitimacy": 12,
+            "sustenance": -12,
+            "knowledge": 5
+          }
+        },
+        {
+          "label": "Keep both. Edit history lightly.",
+          "effects": {
+            "sustenance": 10,
+            "entropy": 8
+          }
+        },
+        {
+          "label": "Burn the drowned ledger formally",
+          "effects": {
+            "legitimacy": 6,
+            "knowledge": -6,
+            "entropy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-13",
+      "era": 6,
+      "title": "Wreckers Claiming Salvage",
+      "type": "npc",
+      "prompt": "They arrive promptly, help thoroughly, leave with everything, citing ancient custom. Custom was written by whoever owned the shore.",
+      "choices": [
+        {
+          "label": "Write salvage law",
+          "effects": {
+            "legitimacy": 12,
+            "knowledge": 8,
+            "sustenance": -6
+          }
+        },
+        {
+          "label": "Adopt the custom enthusiastically",
+          "effects": {
+            "sustenance": 18,
+            "legitimacy": -10,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Split salvaged cargo with the crews",
+          "effects": {
+            "sustenance": 6,
+            "population": 6,
+            "legitimacy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-14",
+      "era": 6,
+      "title": "Cousin-House Across the Ocean",
+      "type": "npc",
+      "prompt": "It requests its own flag, its own books, permission to stop asking. Half the family calls it mutiny; the other half calls it diversification.",
+      "choices": [
+        {
+          "label": "Grant the flag",
+          "effects": {
+            "sustenance": 10,
+            "legitimacy": -6,
+            "knowledge": 5
+          }
+        },
+        {
+          "label": "Demand tribute",
+          "effects": {
+            "sustenance": 12,
+            "entropy": 8,
+            "population": -5
+          }
+        },
+        {
+          "label": "Marriage alliance, one shared heir",
+          "effects": {
+            "legitimacy": 8,
+            "knowledge": 6,
+            "sustenance": -5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-15",
+      "era": 6,
+      "title": "Pirate Articles on a Plank",
+      "type": "sign",
+      "prompt": "Shares defined, injuries compensated, captains recallable, signed by every hand. The most democratic workplace charter afloat, hanged for it.",
+      "choices": [
+        {
+          "label": "Hang the lot",
+          "effects": {
+            "legitimacy": 8,
+            "population": -8,
+            "knowledge": -5
+          }
+        },
+        {
+          "label": "Copy the articles for your navy",
+          "effects": {
+            "knowledge": 12,
+            "population": 8,
+            "legitimacy": -6
+          }
+        },
+        {
+          "label": "Hire the quartermaster",
+          "effects": {
+            "knowledge": 8,
+            "sustenance": -8,
+            "population": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-16",
+      "era": 6,
+      "title": "The Custodian of the Moving Shrine",
+      "type": "npc",
+      "prompt": "She arrives with the portable shrine, the relic inside, and a route mapped three regimes ago. She asks which lord currently owns the concept of safekeeping.",
+      "choices": [
+        {
+          "label": "Give the Custodian a cabin and deference",
+          "effects": {
+            "legitimacy": 8,
+            "knowledge": 5,
+            "sustenance": -3
+          }
+        },
+        {
+          "label": "Stow the relic with the cargo",
+          "effects": {
+            "sustenance": 3,
+            "legitimacy": -5,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Ask her to tell the brand's history aloud",
+          "effects": {
+            "knowledge": 8,
+            "population": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E4-17",
+      "era": 6,
+      "title": "The Rival Lineage's Envoy",
+      "type": "npc",
+      "prompt": "The envoy compliments your granaries and leaves measuring tapes behind, visible on purpose. Competition introduced itself with flattery.",
+      "choices": [
+        {
+          "label": "Follow west",
+          "effects": {
+            "sustenance": 12,
+            "entropy": 6,
+            "knowledge": 5
+          }
+        },
+        {
+          "label": "Hold the eastern lanes",
+          "effects": {
+            "infrastructure": 10,
+            "legitimacy": 5,
+            "sustenance": -5
+          }
+        },
+        {
+          "label": "Sell him provisions at markup",
+          "effects": {
+            "sustenance": 15,
+            "legitimacy": -5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-01n",
+      "era": 7,
+      "title": "Petition Year Press Run",
+      "type": "terminal",
+      "prompt": "Rights rhetoric floods the presses at a copper-plate per sermon; the throne starts reading, which is worse than ignoring. Every petition cites an older petition.",
+      "choices": [
+        {
+          "label": "Print the petitions",
+          "effects": {
+            "knowledge": 12,
+            "legitimacy": 8,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Print for the throne",
+          "effects": {
+            "sustenance": 12,
+            "legitimacy": -6
+          }
+        },
+        {
+          "label": "Print both and edit neither",
+          "effects": {
+            "sustenance": 8,
+            "knowledge": 6,
+            "entropy": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-02n",
+      "era": 7,
+      "title": "Declaration, Curtains Drawn",
+      "type": "sign",
+      "prompt": "A distant colony drafts its own legitimacy and the prose is embarrassingly good. Both sides ask which press you serve.",
+      "choices": [
+        {
+          "label": "Back the crown",
+          "effects": {
+            "legitimacy": 8,
+            "sustenance": -8,
+            "knowledge": 3
+          }
+        },
+        {
+          "label": "Back the printers across the water",
+          "effects": {
+            "knowledge": 10,
+            "legitimacy": -6,
+            "sustenance": 5
+          }
+        },
+        {
+          "label": "Declare principles, supply nobody",
+          "effects": {
+            "legitimacy": 5,
+            "sustenance": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-03n",
+      "era": 7,
+      "title": "Constitutionalist Waving You to a Bench",
+      "type": "npc",
+      "prompt": "The new order's rules get written while the army waits outside; property language drafted now governs centuries. Every clause costs somebody specific.",
+      "choices": [
+        {
+          "label": "Sign the constitution",
+          "effects": {
+            "legitimacy": 15,
+            "knowledge": 8,
+            "sustenance": -8
+          }
+        },
+        {
+          "label": "Protect the property clauses only",
+          "effects": {
+            "sustenance": 10,
+            "legitimacy": -5,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Walk out on the slavery compromise",
+          "effects": {
+            "legitimacy": 12,
+            "sustenance": -12,
+            "knowledge": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-04n",
+      "era": 7,
+      "title": "Terror Clause Posting",
+      "type": "sign",
+      "prompt": "The revolution eats its writers, starting with those who proofed the menu. Moderation buys distrust from both wings.",
+      "choices": [
+        {
+          "label": "Stay moderate",
+          "effects": {
+            "legitimacy": -5,
+            "knowledge": 6,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Join the radicals",
+          "effects": {
+            "legitimacy": 8,
+            "entropy": 12,
+            "population": -8
+          }
+        },
+        {
+          "label": "Leave the capital for the summer",
+          "effects": {
+            "sustenance": -6,
+            "population": 3,
+            "knowledge": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-05n",
+      "era": 7,
+      "title": "Coronation Preparation Office",
+      "type": "monument",
+      "prompt": "Ten years after burning thrones, the republic hands its favorite general a crown. Ideals versus order, packaged as ceremony.",
+      "choices": [
+        {
+          "label": "Bankroll the empire",
+          "effects": {
+            "sustenance": 18,
+            "legitimacy": -10,
+            "entropy": 6
+          }
+        },
+        {
+          "label": "Defend the republic",
+          "effects": {
+            "legitimacy": 12,
+            "sustenance": -8,
+            "population": -5
+          }
+        },
+        {
+          "label": "Finance both, honestly",
+          "effects": {
+            "knowledge": 8,
+            "entropy": 8,
+            "sustenance": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-06n",
+      "era": 7,
+      "title": "Smuggler of the Continental Blockade",
+      "type": "npc",
+      "prompt": "The empire closed a continent by decree; decrees move slower than sloops. Patriotism has excellent margins and a felony tail.",
+      "choices": [
+        {
+          "label": "Smuggle at scale",
+          "effects": {
+            "sustenance": 22,
+            "entropy": 10,
+            "legitimacy": -6
+          }
+        },
+        {
+          "label": "Lobby the customs office",
+          "effects": {
+            "sustenance": 6,
+            "legitimacy": 6,
+            "knowledge": 4
+          }
+        },
+        {
+          "label": "Comply loudly",
+          "effects": {
+            "legitimacy": 8,
+            "sustenance": -12
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-07n",
+      "era": 7,
+      "title": "Rights of Persons Pamphlet Stall",
+      "type": "terminal",
+      "prompt": "The new code needs a definition of personhood and definitions compound into law. The pamphleteers want patrons; the debated want to be counted.",
+      "choices": [
+        {
+          "label": "Print the broadest reading",
+          "effects": {
+            "legitimacy": 15,
+            "knowledge": 8,
+            "sustenance": -8,
+            "entropy": -3
+          }
+        },
+        {
+          "label": "Print the narrow reading",
+          "effects": {
+            "sustenance": 8,
+            "legitimacy": -15,
+            "entropy": 6
+          }
+        },
+        {
+          "label": "Decline to print either",
+          "effects": {
+            "sustenance": -3,
+            "knowledge": -3,
+            "legitimacy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-08n",
+      "era": 7,
+      "title": "The Square's Ticket Machine",
+      "type": "machine",
+      "prompt": "The machine runs on tickets now; attendance records make fine Chronicle entries — legible, dated, damning. Subscribing your name is cheap insurance or expensive courage.",
+      "choices": [
+        {
+          "label": "Subscribe to the season",
+          "effects": {
+            "legitimacy": 6,
+            "entropy": 8,
+            "sustenance": -4
+          }
+        },
+        {
+          "label": "Refuse the tickets publicly",
+          "effects": {
+            "legitimacy": -4,
+            "knowledge": 5,
+            "entropy": -3
+          }
+        },
+        {
+          "label": "Buy the box seat, say nothing ever",
+          "effects": {
+            "knowledge": 8,
+            "sustenance": -6,
+            "entropy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-09n",
+      "era": 7,
+      "title": "War Bond Subscription Window",
+      "type": "terminal",
+      "prompt": "Finance the revolution at five percent and the new state's spine belongs to your ledger forever. Sovereign debt is immortality's uglier cousin.",
+      "choices": [
+        {
+          "label": "Underwrite the bonds",
+          "effects": {
+            "sustenance": 25,
+            "entropy": 8,
+            "legitimacy": -4
+          }
+        },
+        {
+          "label": "Buy them quietly at discount",
+          "effects": {
+            "sustenance": 12,
+            "knowledge": 5
+          }
+        },
+        {
+          "label": "Stay out of sovereign paper",
+          "effects": {
+            "sustenance": -5,
+            "legitimacy": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-10n",
+      "era": 7,
+      "title": "Archive, Crated for Liberation",
+      "type": "ruin",
+      "prompt": "The liberating army ships your archive away 'for safekeeping.' File demands through channels, or hire someone who reads the channels.",
+      "choices": [
+        {
+          "label": "Demand restitution",
+          "effects": {
+            "legitimacy": 8,
+            "sustenance": -6,
+            "knowledge": -3
+          }
+        },
+        {
+          "label": "Network-copy everything",
+          "effects": {
+            "knowledge": 18,
+            "sustenance": -10,
+            "population": 4
+          }
+        },
+        {
+          "label": "Let it go, buy the auction lots back",
+          "effects": {
+            "knowledge": 6,
+            "sustenance": -15
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-11n",
+      "era": 7,
+      "title": "Census-Taker at the Conscription Debate",
+      "type": "npc",
+      "prompt": "The nation-in-arms drafts every heir; clipboards arrive, the state learning birthdays. Volunteer, pay exemption, or equip a company instead.",
+      "choices": [
+        {
+          "label": "Volunteer the heir first",
+          "effects": {
+            "legitimacy": 15,
+            "population": -6,
+            "knowledge": 4
+          }
+        },
+        {
+          "label": "Pay the exemption",
+          "effects": {
+            "sustenance": -12,
+            "legitimacy": -8
+          }
+        },
+        {
+          "label": "Equip a company instead of joining it",
+          "effects": {
+            "sustenance": -8,
+            "legitimacy": 6,
+            "infrastructure": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-12n",
+      "era": 7,
+      "title": "Code Drafters' Commission Desk",
+      "type": "terminal",
+      "prompt": "One rational legal code replaces three hundred customs and they want your commercial practice as template. Every clause borrowed becomes precedent.",
+      "choices": [
+        {
+          "label": "Supply your templates",
+          "effects": {
+            "legitimacy": 12,
+            "knowledge": 10,
+            "sustenance": -6
+          }
+        },
+        {
+          "label": "Defend the old customs",
+          "effects": {
+            "sustenance": 8,
+            "legitimacy": -8,
+            "knowledge": -4
+          }
+        },
+        {
+          "label": "Insert one perfect clause for yourselves",
+          "effects": {
+            "sustenance": 12,
+            "entropy": 5,
+            "legitimacy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-13",
+      "era": 7,
+      "title": "Émigré Nobles Selling Family Silver",
+      "type": "npc",
+      "prompt": "Exile with honor and no assets, or emigration with assets and no story. The émigré market crashes silver twice: sentimentally and literally.",
+      "choices": [
+        {
+          "label": "Exile with honor",
+          "effects": {
+            "legitimacy": 10,
+            "sustenance": -15,
+            "knowledge": 4
+          }
+        },
+        {
+          "label": "Emigrate with the plate",
+          "effects": {
+            "sustenance": 15,
+            "legitimacy": -10
+          }
+        },
+        {
+          "label": "Stay, switch flags, survive",
+          "effects": {
+            "sustenance": 3,
+            "entropy": 6,
+            "population": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-14",
+      "era": 7,
+      "title": "Repainted Sign, New Flag",
+      "type": "sign",
+      "prompt": "The house sign changes mid-decade; partners pick sides politely while repricing contracts. Flags are marketing for governments, credit ratings for houses.",
+      "choices": [
+        {
+          "label": "Raise the tricolor",
+          "effects": {
+            "legitimacy": 8,
+            "sustenance": -6,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Keep the old flag",
+          "effects": {
+            "legitimacy": 5,
+            "sustenance": -6,
+            "knowledge": 3
+          }
+        },
+        {
+          "label": "Fly both, seasonally",
+          "effects": {
+            "sustenance": 10,
+            "entropy": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-15",
+      "era": 7,
+      "title": "Suffrage Audit Roll",
+      "type": "terminal",
+      "prompt": "The council decides who votes in the council; revolutions are awkward indoors. Franchise proposals circulate with anxious footnotes.",
+      "choices": [
+        {
+          "label": "Broaden the franchise",
+          "effects": {
+            "legitimacy": 10,
+            "knowledge": 6,
+            "sustenance": -4,
+            "population": 4
+          }
+        },
+        {
+          "label": "Keep the family vote",
+          "effects": {
+            "sustenance": 5,
+            "legitimacy": -6,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Votes proportional to contribution",
+          "effects": {
+            "sustenance": 8,
+            "knowledge": 4,
+            "entropy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-16",
+      "era": 7,
+      "title": "The Custodian at the Cathedral Door",
+      "type": "npc",
+      "prompt": "She sleeps by the relic casket and lets the cathedral have the daylight. Safekeeping declined the promotion again.",
+      "choices": [
+        {
+          "label": "Notarize the ledger as heirloom",
+          "effects": {
+            "legitimacy": 10,
+            "knowledge": 8,
+            "sustenance": -4
+          }
+        },
+        {
+          "label": "Let the state audit it",
+          "effects": {
+            "legitimacy": 5,
+            "sustenance": 6,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Ask the Custodian her ruling",
+          "effects": {
+            "knowledge": 10,
+            "population": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E5-17",
+      "era": 7,
+      "title": "The Rival's Factor",
+      "type": "npc",
+      "prompt": "The factor buys your debt quietly, one bond at a time. Hostility upgraded to acquisition.",
+      "choices": [
+        {
+          "label": "Condemn from principle",
+          "effects": {
+            "legitimacy": 8,
+            "sustenance": -6,
+            "knowledge": 3
+          }
+        },
+        {
+          "label": "Seek the same ribbon",
+          "effects": {
+            "sustenance": 10,
+            "legitimacy": -8,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Marry into the new nobility anyway",
+          "effects": {
+            "sustenance": 8,
+            "knowledge": 5,
+            "legitimacy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-01",
+      "era": 8,
+      "title": "Press No. 1, Composing Room",
+      "type": "machine",
+      "prompt": "The first press pulled sheets that multiplied arguments. Gutenberg's machine was a printing error for the control environment.",
+      "choices": [
+        {
+          "label": "Automate harder",
+          "effects": {
+            "sustenance": 4
+          }
+        },
+        {
+          "label": "Co-ownership deal",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Private guards on the roof",
+          "effects": {
+            "entropy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-02",
+      "era": 8,
+      "title": "Ledger of the Antwerp Exchange",
+      "type": "terminal",
+      "prompt": "Bills of exchange circulate faster than the goods they represent. Finance discovered velocity before physics did.",
+      "choices": [
+        {
+          "label": "Support reform",
+          "effects": {
+            "sustenance": -2,
+            "legitimacy": 2,
+            "population": 2
+          }
+        },
+        {
+          "label": "Lobby against",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -4
+          }
+        },
+        {
+          "label": "Comply nominally; 'family apprenticeships.'",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-03",
+      "era": 8,
+      "title": "Apprentice at the Type Case",
+      "type": "npc",
+      "prompt": "The apprentice sets type at speed and absorbs heresy by osmosis. Skills spread faster than permissions.",
+      "choices": [
+        {
+          "label": "Build the trunk line",
+          "effects": {
+            "infrastructure": 4,
+            "sustenance": -2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Sell shares into the mania",
+          "effects": {
+            "sustenance": 4,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Finance only routes with freight",
+          "effects": {
+            "sustenance": 2,
+            "infrastructure": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-04",
+      "era": 8,
+      "title": "Cartographer's Workshop Sign",
+      "type": "sign",
+      "prompt": "Maps sold by the sheet, blanks included for conquering later. Terra nullius as a fill-in field.",
+      "choices": [
+        {
+          "label": "Install scrubbers",
+          "effects": {
+            "sustenance": -2,
+            "legitimacy": 2,
+            "entropy": -2
+          }
+        },
+        {
+          "label": "Dispute the statistics",
+          "effects": {
+            "entropy": 2,
+            "knowledge": -2
+          }
+        },
+        {
+          "label": "Relocate works, rename town",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-05",
+      "era": 8,
+      "title": "Factor of the Trading Company",
+      "type": "npc",
+      "prompt": "He represents shareholders who will never see the shore he profits from. The joint-stock company outsourced conscience to geography.",
+      "choices": [
+        {
+          "label": "Pay the licensing toll",
+          "effects": {
+            "sustenance": 0
+          }
+        },
+        {
+          "label": "Design around it",
+          "effects": {
+            "knowledge": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Challenge the patent in court",
+          "effects": {
+            "knowledge": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-06",
+      "era": 8,
+      "title": "Navigators' Column",
+      "type": "monument",
+      "prompt": "Dedicated to men who found latitudes and lost peoples. Monuments keep the flattering half.",
+      "choices": [
+        {
+          "label": "Show the flagship engine",
+          "effects": {
+            "sustenance": 2,
+            "knowledge": -2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Show last year's engine",
+          "effects": {
+            "sustenance": 2,
+            "entropy": -2
+          }
+        },
+        {
+          "label": "Skip the fair; poach exhibited engineers",
+          "effects": {
+            "knowledge": 4,
+            "legitimacy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-07",
+      "era": 8,
+      "title": "Warehouse of Unsold Chintz",
+      "type": "ruin",
+      "prompt": "Bales rotted where protectionism won. Markets remember every ban better than the banned product.",
+      "choices": [
+        {
+          "label": "Recognize the union",
+          "effects": {
+            "sustenance": -2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Refuse; blacklist organizers",
+          "effects": {
+            "sustenance": 2
+          }
+        },
+        {
+          "label": "Company welfare program instead",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-08",
+      "era": 8,
+      "title": "Lens Grinder's Bench",
+      "type": "machine",
+      "prompt": "Ground lenses made telescopes, microscopes, and eventually enemies of certainty. Optics was epistemology with overhead.",
+      "choices": [
+        {
+          "label": "Full disclosure, full compensation",
+          "effects": {
+            "sustenance": -2,
+            "legitimacy": 2,
+            "entropy": -2
+          }
+        },
+        {
+          "label": "Settle quietly, fix quietly",
+          "effects": {
+            "sustenance": -2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Blame the fired stoker",
+          "effects": {
+            "legitimacy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-09",
+      "era": 8,
+      "title": "Insurance Ledger, Lloyd's Bench",
+      "type": "terminal",
+      "prompt": "Risk priced per voyage, premiums logged, reputations compounded. Insurance invented the statistics of hope.",
+      "choices": [
+        {
+          "label": "Hedge production",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Corner regional supply",
+          "effects": {
+            "sustenance": 4,
+            "legitimacy": -4
+          }
+        },
+        {
+          "label": "Stay out of financials; dig coal",
+          "effects": {
+            "sustenance": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-10",
+      "era": 8,
+      "title": "Pamphleteer in the Print Alley",
+      "type": "npc",
+      "prompt": "He sells sixpence revolutions and takes orders for the next one. Public opinion got a price list.",
+      "choices": [
+        {
+          "label": "Carry passengers humanely",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Cargo only",
+          "effects": {
+            "sustenance": 2,
+            "population": -2
+          }
+        },
+        {
+          "label": "Finance destination towns",
+          "effects": {
+            "sustenance": 2,
+            "infrastructure": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-11",
+      "era": 8,
+      "title": "Lock-Gate Mechanism, Cut No. 3",
+      "type": "machine",
+      "prompt": "The canal lock lifts barges eight feet and lowers freight costs further. Geography renegotiated clause by clause.",
+      "choices": [
+        {
+          "label": "Impose standard time",
+          "effects": {
+            "infrastructure": 4,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Dual-clock stations",
+          "effects": {
+            "infrastructure": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Sell the timetable software",
+          "effects": {
+            "sustenance": 2,
+            "knowledge": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E6-12",
+      "era": 8,
+      "title": "Natural Philosopher at the Air Pump",
+      "type": "npc",
+      "prompt": "He drains the glass globe and watches the bird think about it. Science acquired a stage, a pump, and ethical review pending.",
+      "choices": [
+        {
+          "label": "Sell to developers",
+          "effects": {
+            "sustenance": 4,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Keep it public, subsidize",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Endowment model: leases fund upkeep",
+          "effects": {
+            "sustenance": 2,
+            "infrastructure": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-01",
+      "era": 9,
+      "title": "Steam Engine, Beam Type",
+      "type": "machine",
+      "prompt": "The beam rises and falls like the era's pulse. Heat learned to do bookkeeping for muscle.",
+      "choices": [
+        {
+          "label": "Adopt the line",
+          "effects": {
+            "sustenance": 8,
+            "morale": -2
+          }
+        },
+        {
+          "label": "Adopt with rotation",
+          "effects": {
+            "sustenance": 4,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Refuse; craft positioning",
+          "effects": {
+            "sustenance": -2,
+            "legitimacy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-02",
+      "era": 9,
+      "title": "Rail Timetable Board",
+      "type": "terminal",
+      "prompt": "Departures fixed to the minute; the sun resigned as timekeeper. Standard time arrived as a scheduling constraint.",
+      "choices": [
+        {
+          "label": "Sell everything",
+          "effects": {
+            "sustenance": 2,
+            "knowledge": -2
+          }
+        },
+        {
+          "label": "Hold",
+          "effects": {
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Double down",
+          "effects": {
+            "sustenance": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-03",
+      "era": 9,
+      "title": "Navvy with the Navvies' Union Card",
+      "type": "npc",
+      "prompt": "He digs the cutting that will employ his grandchildren and strike over who dug it. Labor built the future and billed for the privilege.",
+      "choices": [
+        {
+          "label": "Full conversion",
+          "effects": {
+            "sustenance": 8,
+            "population": -2
+          }
+        },
+        {
+          "label": "Civilian production, quietly",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -4
+          }
+        },
+        {
+          "label": "Run R&D for the war department",
+          "effects": {
+            "knowledge": 4,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-04",
+      "era": 9,
+      "title": "Crystal Palace Glasshouse Footprint",
+      "type": "monument",
+      "prompt": "Iron and glass prefabricated an empire's self-image. Spectacle shipped flat-pack.",
+      "choices": [
+        {
+          "label": "Finance the subdivisions",
+          "effects": {
+            "sustenance": 4,
+            "infrastructure": 2
+          }
+        },
+        {
+          "label": "Build urban transit instead",
+          "effects": {
+            "infrastructure": 2,
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Both, weighted",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-05",
+      "era": 9,
+      "title": "Mill Town Cellar Dwelling",
+      "type": "ruin",
+      "prompt": "One room, two families, the river audible and unhoused. Industry's first invoice was paid in lungs.",
+      "choices": [
+        {
+          "label": "Build the town",
+          "effects": {
+            "sustenance": 2
+          }
+        },
+        {
+          "label": "Wages only; let towns emerge",
+          "effects": {
+            "sustenance": -2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Union-free covenants in deeds",
+          "effects": {
+            "legitimacy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-06",
+      "era": 9,
+      "title": "Telegraph Key, Central Office",
+      "type": "machine",
+      "prompt": "The key taps messages faster than horses can deny them. Distance surrendered first, then context.",
+      "choices": [
+        {
+          "label": "Hire the firm",
+          "effects": {
+            "sustenance": -2,
+            "infrastructure": 2
+          }
+        },
+        {
+          "label": "Fire the firm mid-engagement",
+          "effects": {
+            "sustenance": 2,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "Adopt the org chart, ignore the strategy",
+          "effects": {
+            "infrastructure": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-07",
+      "era": 9,
+      "title": "Factory Inspector, Tired",
+      "type": "npc",
+      "prompt": "He writes reports nobody funds enforcement for. Regulation arrived as literature with appendices.",
+      "choices": [
+        {
+          "label": "Sign the concession",
+          "effects": {
+            "sustenance": 6,
+            "entropy": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Demand majority ownership",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Invest in efficiency instead",
+          "effects": {
+            "sustenance": 2,
+            "knowledge": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-08",
+      "era": 9,
+      "title": "Clearing House Settlement Desk",
+      "type": "terminal",
+      "prompt": "Banks net their chaos to a single balance daily. Panic got plumbing.",
+      "choices": [
+        {
+          "label": "Adopt planned obsolescence",
+          "effects": {
+            "sustenance": 4,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Build 'lifetime' goods at premium",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Obsolesce by software later; hardware honest now",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-09",
+      "era": 9,
+      "title": "Inventor-Patentee at the Exhibition",
+      "type": "npc",
+      "prompt": "He holds forty patents and no profits. Intellectual property protected everything except leverage.",
+      "choices": [
+        {
+          "label": "Invest in studio",
+          "effects": {
+            "legitimacy": 2,
+            "knowledge": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Policy-only campaign",
+          "effects": {
+            "legitimacy": -2,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "Weaponize the opponent's footage",
+          "effects": {
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-10",
+      "era": 9,
+      "title": "Public Health Board Notice",
+      "type": "sign",
+      "prompt": "Cholera mapped to the pump, the pump handle removed, the map kept. Evidence briefly won, locally.",
+      "choices": [
+        {
+          "label": "Host and anchor",
+          "effects": {
+            "sustenance": 4,
+            "legitimacy": 4
+          }
+        },
+        {
+          "label": "Join as client",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Propose a neutral settlement unit",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-11",
+      "era": 9,
+      "title": "Refrigeration Hold, First Voyage",
+      "type": "machine",
+      "prompt": "Frozen mutton crossed the equator and changed diets permanently. Cold became a commodity.",
+      "choices": [
+        {
+          "label": "Champion the interstates",
+          "effects": {
+            "infrastructure": 4,
+            "sustenance": 2,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Fund rail modernization instead",
+          "effects": {
+            "infrastructure": 2,
+            "entropy": -2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Highways plus preserved urban rail",
+          "effects": {
+            "sustenance": -4,
+            "infrastructure": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E7-12",
+      "era": 9,
+      "title": "Colonial Clerk at the Ledger Desk",
+      "type": "npc",
+      "prompt": "He files the district's extraction in triplicate, neatly. Empire was paperwork with gunboats attached.",
+      "choices": [
+        {
+          "label": "Reconstruct from Chronicle entries only",
+          "effects": {
+            "knowledge": 2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Reconstruct from corporate files",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Let him rebuild unaided",
+          "effects": {
+            "population": -2,
+            "knowledge": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-01n",
+      "era": 10,
+      "title": "Conversion Order, Friday",
+      "type": "machine",
+      "prompt": "Consumer lines become munitions by Monday; efficiency arrives wearing a uniform. The tractor plant learns tank tolerances, then waiting times.",
+      "choices": [
+        {
+          "label": "Convert everything, immediately",
+          "effects": {
+            "infrastructure": 18,
+            "sustenance": -10,
+            "entropy": 8
+          }
+        },
+        {
+          "label": "Convert half, keep consumer lines",
+          "effects": {
+            "infrastructure": 8,
+            "sustenance": 6,
+            "legitimacy": -4
+          }
+        },
+        {
+          "label": "Bid for the conversion contracts",
+          "effects": {
+            "sustenance": 15,
+            "infrastructure": 6,
+            "entropy": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-02n",
+      "era": 10,
+      "title": "Ration Book Counter",
+      "type": "terminal",
+      "prompt": "Children learn ounces before words; butter develops a black-market yield curve. The stamps were designed by advertising men.",
+      "choices": [
+        {
+          "label": "Follow the book exactly",
+          "effects": {
+            "legitimacy": 10,
+            "sustenance": -6
+          }
+        },
+        {
+          "label": "Work the black market gently",
+          "effects": {
+            "sustenance": 10,
+            "legitimacy": -10,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Open the estate gates to neighbors",
+          "effects": {
+            "legitimacy": 12,
+            "sustenance": -12,
+            "population": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-03n",
+      "era": 10,
+      "title": "Codebreaking Hut, Silent After",
+      "type": "ruin",
+      "prompt": "Brilliant misfits read the enemy's mail for room, board, and postwar quiet. The knowledge surge is enormous; the oath freezes it for decades.",
+      "choices": [
+        {
+          "label": "Fund the hut quietly",
+          "effects": {
+            "knowledge": 25,
+            "sustenance": -10,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Route them to patent law instead",
+          "effects": {
+            "knowledge": 8,
+            "sustenance": 8
+          }
+        },
+        {
+          "label": "Share the intercepts with allies",
+          "effects": {
+            "legitimacy": 10,
+            "knowledge": 10,
+            "entropy": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-04n",
+      "era": 10,
+      "title": "Cousins on Both Sides",
+      "type": "npc",
+      "prompt": "The Chronicle must hide nothing and forgive everything; both cousins will read it. Every letter censored twice, love adjusted for operational security.",
+      "choices": [
+        {
+          "label": "Chronicle everything, truthfully",
+          "effects": {
+            "legitimacy": 10,
+            "knowledge": 8,
+            "entropy": 6
+          }
+        },
+        {
+          "label": "Publish nothing until it's safe",
+          "effects": {
+            "knowledge": -5,
+            "entropy": -3,
+            "sustenance": 3
+          }
+        },
+        {
+          "label": "Run letters between the cousins",
+          "effects": {
+            "population": 6,
+            "entropy": 8,
+            "legitimacy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-05n",
+      "era": 10,
+      "title": "Home Front Shift Line, Twenty-Four Hours",
+      "type": "machine",
+      "prompt": "Whoever stays behind runs the line around the clock: wages climb, hazards climb faster. The foreman's daughter holds the pace.",
+      "choices": [
+        {
+          "label": "Equal pay for equal shifts",
+          "effects": {
+            "legitimacy": 12,
+            "sustenance": -8,
+            "population": 6
+          }
+        },
+        {
+          "label": "War wages, old hiring",
+          "effects": {
+            "sustenance": 10,
+            "legitimacy": -8,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Safety first, quotas second",
+          "effects": {
+            "population": 8,
+            "infrastructure": -4,
+            "legitimacy": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-06n",
+      "era": 10,
+      "title": "Bombing Choice Display Board",
+      "type": "terminal",
+      "prompt": "Staff officers present columns: plants or rail yards, precision measured in tonnage. Entropy doesn't check passports on the way down.",
+      "choices": [
+        {
+          "label": "Target the plants",
+          "effects": {
+            "infrastructure": 10,
+            "entropy": 12,
+            "sustenance": 5
+          }
+        },
+        {
+          "label": "Target the rail yards",
+          "effects": {
+            "infrastructure": 6,
+            "entropy": 10,
+            "knowledge": 4
+          }
+        },
+        {
+          "label": "Refuse the precision targets",
+          "effects": {
+            "legitimacy": 10,
+            "sustenance": -8,
+            "entropy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-07n",
+      "era": 10,
+      "title": "Parcel Exchange Coordinator",
+      "type": "npc",
+      "prompt": "Small humanity at reasonable logistics rates: socks, tobacco, milk powder via neutral channels, priced in shipping tons the war needs.",
+      "choices": [
+        {
+          "label": "Send the parcels",
+          "effects": {
+            "legitimacy": 12,
+            "sustenance": -10,
+            "entropy": -3
+          }
+        },
+        {
+          "label": "Requisition the shipping tons",
+          "effects": {
+            "infrastructure": 8,
+            "legitimacy": -10
+          }
+        },
+        {
+          "label": "Send parcels, bill the neutrals",
+          "effects": {
+            "legitimacy": 6,
+            "sustenance": -3,
+            "knowledge": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-08n",
+      "era": 10,
+      "title": "Occupation Currency Crate",
+      "type": "terminal",
+      "prompt": "Coins stamped for occupied territories arrive with an instruction sheet. Spend them and the house inherits the stamp, filed forever.",
+      "choices": [
+        {
+          "label": "Pay workers in occupation coin",
+          "effects": {
+            "sustenance": 12,
+            "legitimacy": -15,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Refuse the stamp, pay real",
+          "effects": {
+            "sustenance": -15,
+            "legitimacy": 12
+          }
+        },
+        {
+          "label": "Hoard the coins for collectors",
+          "effects": {
+            "sustenance": 5,
+            "knowledge": 5,
+            "entropy": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-09n",
+      "era": 10,
+      "title": "Rocketry Scientists at the Checkpoint",
+      "type": "npc",
+      "prompt": "Handed over with a checklist of the labs they built, handwriting meticulous, futures negotiable. Knowledge doubles; so do the strings attached.",
+      "choices": [
+        {
+          "label": "Take the team, ask little",
+          "effects": {
+            "knowledge": 25,
+            "legitimacy": -12,
+            "entropy": 6
+          }
+        },
+        {
+          "label": "Take them with full vetting",
+          "effects": {
+            "knowledge": 15,
+            "sustenance": -8,
+            "legitimacy": 4
+          }
+        },
+        {
+          "label": "Refuse the transfer",
+          "effects": {
+            "legitimacy": 8,
+            "knowledge": -5,
+            "sustenance": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-10n",
+      "era": 10,
+      "title": "Ceasefire Telegram, Three Seconds Late",
+      "type": "terminal",
+      "prompt": "Peace arrives timestamped while orders still travel; the last hour is documented and optional in hindsight. Choose what the Chronicle says happened.",
+      "choices": [
+        {
+          "label": "Halt at once, telegram or not",
+          "effects": {
+            "legitimacy": 10,
+            "population": 5,
+            "sustenance": -4
+          }
+        },
+        {
+          "label": "Take the ridge before midnight",
+          "effects": {
+            "infrastructure": 6,
+            "population": -8,
+            "entropy": 6
+          }
+        },
+        {
+          "label": "Lose the telegram entirely",
+          "effects": {
+            "entropy": 8,
+            "knowledge": -3,
+            "legitimacy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-11n",
+      "era": 10,
+      "title": "War Debt Write-off Floor",
+      "type": "terminal",
+      "prompt": "The creditor forgives nothing, the debtor prints everything; pick a side of the ledger to stand on. Creditors keep the moral high ground and less money.",
+      "choices": [
+        {
+          "label": "Stand with the creditors",
+          "effects": {
+            "sustenance": 10,
+            "legitimacy": 6,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Stand with the printers",
+          "effects": {
+            "sustenance": 18,
+            "entropy": 12,
+            "legitimacy": -8
+          }
+        },
+        {
+          "label": "Push a partial write-off",
+          "effects": {
+            "legitimacy": 10,
+            "sustenance": -8,
+            "knowledge": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-12n",
+      "era": 10,
+      "title": "Victory Parade Inventory",
+      "type": "monument",
+      "prompt": "Triumph costs more than the war: banners, brass, a mile of bunting, crowds transported and photographed. Parades are infrastructure with applause.",
+      "choices": [
+        {
+          "label": "Parade on a budget",
+          "effects": {
+            "legitimacy": 8,
+            "sustenance": -6
+          }
+        },
+        {
+          "label": "Parade like an era-defining house",
+          "effects": {
+            "legitimacy": 18,
+            "sustenance": -20,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Skip the parade, fund the veterans",
+          "effects": {
+            "legitimacy": 10,
+            "population": 6,
+            "sustenance": -10
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-13",
+      "era": 10,
+      "title": "Liberation Footage Archive Reel",
+      "type": "sign",
+      "prompt": "Dated, catalogued, undeniable footage enters the Chronicle; refusal to watch is also logged. There is no option that leaves you clean.",
+      "choices": [
+        {
+          "label": "Read it. Enter it. Teach it.",
+          "effects": {
+            "legitimacy": 12,
+            "knowledge": 10,
+            "entropy": -3
+          }
+        },
+        {
+          "label": "File it unread",
+          "effects": {
+            "entropy": 8,
+            "legitimacy": -8,
+            "knowledge": -3
+          }
+        },
+        {
+          "label": "Publish it widely",
+          "effects": {
+            "legitimacy": 15,
+            "knowledge": 8,
+            "sustenance": -5,
+            "entropy": -5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-14",
+      "era": 10,
+      "title": "Radar Spin-Off Auction Floor",
+      "type": "machine",
+      "prompt": "Wartime sensors find peacetime jobs absurdly well: ovens, air traffic, weather screens. The war's refund check, payable in convenience.",
+      "choices": [
+        {
+          "label": "Commercialize aggressively",
+          "effects": {
+            "sustenance": 15,
+            "infrastructure": 8,
+            "knowledge": 8
+          }
+        },
+        {
+          "label": "License the patents openly",
+          "effects": {
+            "knowledge": 12,
+            "legitimacy": 8,
+            "sustenance": -4
+          }
+        },
+        {
+          "label": "Keep it defense-only",
+          "effects": {
+            "infrastructure": 6,
+            "sustenance": 4,
+            "entropy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-15",
+      "era": 10,
+      "title": "Peace Table Map, Pencil Lines",
+      "type": "sign",
+      "prompt": "The map redraws in pencil before coffee; pick which border your grandchildren defend. Every line is somebody's kitchen.",
+      "choices": [
+        {
+          "label": "Take the defensible border",
+          "effects": {
+            "infrastructure": 10,
+            "legitimacy": 5,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Take the industrial border",
+          "effects": {
+            "sustenance": 15,
+            "entropy": 8,
+            "legitimacy": -5
+          }
+        },
+        {
+          "label": "Take the humane border",
+          "effects": {
+            "legitimacy": 12,
+            "population": 8,
+            "sustenance": -8
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-16",
+      "era": 10,
+      "title": "The Custodian of the Wartime Archive",
+      "type": "npc",
+      "prompt": "She seals the records for fifty years and dates the key. Safekeeping scheduled its own release.",
+      "choices": [
+        {
+          "label": "Receive it with full honors",
+          "effects": {
+            "legitimacy": 10,
+            "knowledge": 8,
+            "population": 3
+          }
+        },
+        {
+          "label": "Ask her to keep carrying it",
+          "effects": {
+            "sustenance": 3,
+            "legitimacy": -6,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Copy the ledger first, then carry",
+          "effects": {
+            "knowledge": 12,
+            "sustenance": -5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-17",
+      "era": 10,
+      "title": "The Rival Conglomerate's Spy",
+      "type": "npc",
+      "prompt": "He photographs your process line and sends the exposure count. Industrial intelligence, analog and adequate.",
+      "choices": [
+        {
+          "label": "Record the divergence plainly",
+          "effects": {
+            "knowledge": 10,
+            "legitimacy": 5
+          }
+        },
+        {
+          "label": "Sabotage his unit's supply",
+          "effects": {
+            "sustenance": 8,
+            "entropy": 10,
+            "legitimacy": -8
+          }
+        },
+        {
+          "label": "Hide his cousins' children",
+          "effects": {
+            "legitimacy": 15,
+            "population": 5,
+            "entropy": -5,
+            "sustenance": -6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-18",
+      "era": 10,
+      "title": "The Censor's Evening Desk",
+      "type": "terminal",
+      "prompt": "V-mail reduces letters home to grams of microfilm, read at volume before anyone else — including the ones addressed to you.",
+      "choices": [
+        {
+          "label": "Approve the plain accounts",
+          "effects": {
+            "legitimacy": 8,
+            "entropy": 4,
+            "knowledge": 5
+          }
+        },
+        {
+          "label": "Redact to weather reports",
+          "effects": {
+            "legitimacy": -4,
+            "knowledge": -3,
+            "sustenance": 3
+          }
+        },
+        {
+          "label": "Copy the sergeant's letter into the Chronicle",
+          "effects": {
+            "knowledge": 10,
+            "population": 3,
+            "entropy": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-01",
+      "era": 11,
+      "title": "Assembly Line Bay Seven",
+      "type": "machine",
+      "prompt": "The chassis advances; the worker does not. Time became the raw material.",
+      "choices": [
+        {
+          "label": "Launch the secret program",
+          "effects": {
+            "sustenance": 4,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Sign the test treaty",
+          "effects": {
+            "legitimacy": 4
+          }
+        },
+        {
+          "label": "Declare a moratorium, inspect nothing",
+          "effects": {
+            "legitimacy": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-02",
+      "era": 11,
+      "title": "Ticker Tape Hall",
+      "type": "terminal",
+      "prompt": "Paper ribbons print desire in real time. The market achieved live broadcast before anyone admitted the show format.",
+      "choices": [
+        {
+          "label": "Build the fleet",
+          "effects": {
+            "infrastructure": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Refuse; coal continues",
+          "effects": {
+            "entropy": 4,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "One demonstration plant, watched closely",
+          "effects": {
+            "knowledge": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-03",
+      "era": 11,
+      "title": "Foreman with the Stopwatch",
+      "type": "npc",
+      "prompt": "He times motions to the half-second and calls it science. Taylorism measured the human and rounded down.",
+      "choices": [
+        {
+          "label": "Hold the line, verify",
+          "effects": {
+            "legitimacy": 2,
+            "clock": -2,
+            "entropy": -2
+          }
+        },
+        {
+          "label": "Escalate posture one notch",
+          "effects": {
+            "clock": 2
+          }
+        },
+        {
+          "label": "Publish the failure transparently",
+          "effects": {
+            "legitimacy": 4,
+            "knowledge": 2,
+            "entropy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-04",
+      "era": 11,
+      "title": "Downtown Bank Facade, Corinthian",
+      "type": "monument",
+      "prompt": "Columns holding up confidence literally. Architecture as collateral.",
+      "choices": [
+        {
+          "label": "Supply under inspection",
+          "effects": {
+            "sustenance": 2,
+            "clock": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Deny firmly",
+          "effects": {
+            "legitimacy": -2,
+            "clock": -2
+          }
+        },
+        {
+          "label": "Offer their own reactor, fuel-supplied, return-enriched",
+          "effects": {
+            "knowledge": 2,
+            "legitimacy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-05",
+      "era": 11,
+      "title": "Assembly Plant, Model Changeover",
+      "type": "ruin",
+      "prompt": "Retooled overnight for a product nobody ordered. Flexibility discovered as panic.",
+      "choices": [
+        {
+          "label": "Settle the claims",
+          "effects": {
+            "sustenance": -4,
+            "legitimacy": 2,
+            "entropy": -2
+          }
+        },
+        {
+          "label": "Classify the epidemiology",
+          "effects": {
+            "entropy": 2,
+            "legitimacy": -4
+          }
+        },
+        {
+          "label": "Fund the hospitals, don't discuss causes",
+          "effects": {
+            "sustenance": -2,
+            "legitimacy": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-06",
+      "era": 11,
+      "title": "Broadcast Tower WHA-Adjacent",
+      "type": "machine",
+      "prompt": "The transmitter puts one voice in a million kitchens. Attention consolidated onto a new rail.",
+      "choices": [
+        {
+          "label": "Full triad procurement",
+          "effects": {
+            "sustenance": 0,
+            "clock": -2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Minimum deterrent",
+          "effects": {
+            "sustenance": 2
+          }
+        },
+        {
+          "label": "Divert to civil defense",
+          "effects": {
+            "legitimacy": 2,
+            "clock": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-07",
+      "era": 11,
+      "title": "Efficiency Engineer",
+      "type": "npc",
+      "prompt": "He eliminates motion, then motion's witnesses. Productivity is subtraction with branding.",
+      "choices": [
+        {
+          "label": "Reconnaissance bird",
+          "effects": {
+            "legitimacy": 2,
+            "clock": -2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Orbital telescope",
+          "effects": {
+            "knowledge": 4
+          }
+        },
+        {
+          "label": "Broadcast transmitter",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-08",
+      "era": 11,
+      "title": "Credit Application Window",
+      "type": "terminal",
+      "prompt": "Installment buying lets want outrun wage. The consumer discovered financing, and financing discovered the consumer.",
+      "choices": [
+        {
+          "label": "Amplify the letter",
+          "effects": {
+            "legitimacy": 4
+          }
+        },
+        {
+          "label": "Suppress it internally",
+          "effects": {
+            "entropy": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Fund the arms-control bureau they propose",
+          "effects": {
+            "sustenance": -2,
+            "clock": -2,
+            "legitimacy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-09",
+      "era": 11,
+      "title": "Strikebreaker at the Gate",
+      "type": "npc",
+      "prompt": "He takes the striker's job and the striker's stare. Labor markets cleared themselves personally.",
+      "choices": [
+        {
+          "label": "Surface-and-resolve doctrine",
+          "effects": {
+            "clock": -2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Maintain pressure; assume hostility",
+          "effects": {
+            "clock": 4
+          }
+        },
+        {
+          "label": "Joint incident rules with the adversary",
+          "effects": {
+            "clock": -2,
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-10",
+      "era": 11,
+      "title": "Zoning Commission Map",
+      "type": "sign",
+      "prompt": "The city redrawn into uses, densities, and denials. Planning as sanctioned geography.",
+      "choices": [
+        {
+          "label": "Nuclear expansion",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Early solar grants",
+          "effects": {
+            "knowledge": 2,
+            "entropy": -2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Keep coal subsidized",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-11",
+      "era": 11,
+      "title": "Radar Array, Early Warning",
+      "type": "machine",
+      "prompt": "The dish listens for weather and finds bombers. Sensing matured through paranoia.",
+      "choices": [
+        {
+          "label": "Sign the partial ban",
+          "effects": {
+            "legitimacy": 4,
+            "clock": -2,
+            "entropy": -2
+          }
+        },
+        {
+          "label": "Push for comprehensive",
+          "effects": {
+            "legitimacy": 2,
+            "clock": -2
+          }
+        },
+        {
+          "label": "Walk out; test season resumes",
+          "effects": {
+            "sustenance": 2,
+            "clock": 4,
+            "entropy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E8-12",
+      "era": 11,
+      "title": "Code Talker at the Signal Station",
+      "type": "npc",
+      "prompt": "He transmits in a language the enemy's cryptographers call impossible. Linguistics deployed as armor.",
+      "choices": [
+        {
+          "label": "Declassify the models",
+          "effects": {
+            "knowledge": 2,
+            "clock": -2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "File under strategic secrets",
+          "effects": {
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Use them in negotiations",
+          "effects": {
+            "clock": -2,
+            "legitimacy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-01n",
+      "era": 12,
+      "title": "Beeping Sky Tracking Board",
+      "type": "terminal",
+      "prompt": "A polished ball crosses the sky making one note; the whole era accelerates to catch a sound. The rival hears it first, which matters more than physics.",
+      "choices": [
+        {
+          "label": "Answer with your own bird",
+          "effects": {
+            "knowledge": 12,
+            "sustenance": -12,
+            "infrastructure": 6
+          }
+        },
+        {
+          "label": "Study theirs obsessively",
+          "effects": {
+            "knowledge": 15,
+            "sustenance": -6
+          }
+        },
+        {
+          "label": "Call it a scientific achievement",
+          "effects": {
+            "legitimacy": 6,
+            "sustenance": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-02n",
+      "era": 12,
+      "title": "Rocket Gap Funding Rush",
+      "type": "machine",
+      "prompt": "The legislature funds anything with fins at speeds physics hasn't agreed to. Launch pads arrive before rockets; rockets before tests.",
+      "choices": [
+        {
+          "label": "Take the fast money",
+          "effects": {
+            "infrastructure": 15,
+            "entropy": 8,
+            "knowledge": 5
+          }
+        },
+        {
+          "label": "Slow money, rigorous testing",
+          "effects": {
+            "knowledge": 12,
+            "sustenance": -10,
+            "infrastructure": 4
+          }
+        },
+        {
+          "label": "Build test ranges and rent them out",
+          "effects": {
+            "sustenance": 10,
+            "infrastructure": 8
+          }
+        },
+        {
+          "label": "Short the hype",
+          "effects": {
+            "sustenance": 8,
+            "legitimacy": -6,
+            "knowledge": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-03n",
+      "era": 12,
+      "title": "Test Pilot Signing the Waiver",
+      "type": "npc",
+      "prompt": "Fourteen pages, forty-point type, liability arranged like a firing squad. First orbits prove survivable by luck and checklists.",
+      "choices": [
+        {
+          "label": "Recruit aggressively",
+          "effects": {
+            "knowledge": 12,
+            "population": -5,
+            "entropy": 6
+          }
+        },
+        {
+          "label": "Invest in the checklist culture",
+          "effects": {
+            "knowledge": 10,
+            "infrastructure": 6,
+            "entropy": -4
+          }
+        },
+        {
+          "label": "Pick cautious pilots over aces",
+          "effects": {
+            "knowledge": 8,
+            "legitimacy": 4,
+            "sustenance": -5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-04n",
+      "era": 12,
+      "title": "Satellite Eyes Recon Panel",
+      "type": "terminal",
+      "prompt": "Spy birds count borders from above: every neighbor's silos, your own silos as others see them. Transparency delivered unwillingly.",
+      "choices": [
+        {
+          "label": "Launch the reconnaissance bird",
+          "effects": {
+            "knowledge": 20,
+            "entropy": 6,
+            "sustenance": -10
+          }
+        },
+        {
+          "label": "Propose open-sky treaties",
+          "effects": {
+            "legitimacy": 12,
+            "knowledge": 8,
+            "sustenance": -8
+          }
+        },
+        {
+          "label": "Sell imagery analysis commercially",
+          "effects": {
+            "sustenance": 12,
+            "knowledge": 8,
+            "entropy": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-05n",
+      "era": 12,
+      "title": "Moon Wager Commitment Plaque",
+      "type": "sign",
+      "prompt": "Commit publicly to landing inside the decade and the budget curve bends reality or breaks the treasury. The speeches don't specify which.",
+      "choices": [
+        {
+          "label": "Commit to the decade",
+          "effects": {
+            "knowledge": 18,
+            "infrastructure": 12,
+            "sustenance": -25,
+            "legitimacy": 10
+          }
+        },
+        {
+          "label": "Commit to robots first",
+          "effects": {
+            "knowledge": 12,
+            "sustenance": -12,
+            "legitimacy": 3
+          }
+        },
+        {
+          "label": "Decline the wager",
+          "effects": {
+            "sustenance": 8,
+            "legitimacy": -8,
+            "entropy": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-06n",
+      "era": 12,
+      "title": "Spin-Off Auction Catalogue",
+      "type": "machine",
+      "prompt": "Frost-resistant food, memory foam, water filters at retail: you pay for space twice, once in taxes, once at the register.",
+      "choices": [
+        {
+          "label": "License the food tech",
+          "effects": {
+            "sustenance": 12,
+            "population": 5
+          }
+        },
+        {
+          "label": "Buy the water filtration line",
+          "effects": {
+            "infrastructure": 10,
+            "knowledge": 5,
+            "sustenance": -6
+          }
+        },
+        {
+          "label": "Skip the novelties",
+          "effects": {
+            "sustenance": 3,
+            "knowledge": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-07n",
+      "era": 12,
+      "title": "Launch Window Scrub Notice",
+      "type": "sign",
+      "prompt": "Weather, seals, and politics align unfavorably on the pad. Launch into crosswinds or scrub and watch the rival take the evening broadcast.",
+      "choices": [
+        {
+          "label": "Launch",
+          "effects": {
+            "knowledge": 15,
+            "entropy": 12,
+            "legitimacy": 8,
+            "population": -5
+          }
+        },
+        {
+          "label": "Scrub the launch",
+          "effects": {
+            "legitimacy": -6,
+            "knowledge": 6,
+            "entropy": -3
+          }
+        },
+        {
+          "label": "Leak the weather data first",
+          "effects": {
+            "knowledge": 8,
+            "legitimacy": 4,
+            "entropy": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-08n",
+      "era": 12,
+      "title": "Communications Relay Lease Desk",
+      "type": "terminal",
+      "prompt": "Transponders lease nicely: television over oceans, calls thinned to fit. Attention discovers orbit two eras early.",
+      "choices": [
+        {
+          "label": "Lease transponder time",
+          "effects": {
+            "sustenance": 15,
+            "infrastructure": 8,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Own the ground station",
+          "effects": {
+            "infrastructure": 12,
+            "knowledge": 6,
+            "sustenance": -8
+          }
+        },
+        {
+          "label": "Broadcast a landing live",
+          "effects": {
+            "legitimacy": 12,
+            "sustenance": -8,
+            "entropy": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-09n",
+      "era": 12,
+      "title": "Planetary Protection Clause Text",
+      "type": "sign",
+      "prompt": "Promise on behalf of every microbe you might export not to infect other worlds. Ceremonial signing; audits conducted by successors.",
+      "choices": [
+        {
+          "label": "Sign the clause",
+          "effects": {
+            "legitimacy": 10,
+            "knowledge": 6,
+            "sustenance": -5
+          }
+        },
+        {
+          "label": "Sign with reservations",
+          "effects": {
+            "legitimacy": 4,
+            "knowledge": 4,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Refuse: science first",
+          "effects": {
+            "knowledge": 8,
+            "legitimacy": -8,
+            "entropy": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-10n",
+      "era": 12,
+      "title": "Astronaut Celebrity, Post-Ticker-Tape",
+      "type": "npc",
+      "prompt": "Covers, parade, bar fights, canonical order. Legitimacy is a fuel that gels: usable, messy, flammable.",
+      "choices": [
+        {
+          "label": "Manage the celebrity machine",
+          "effects": {
+            "legitimacy": 10,
+            "sustenance": -6,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Pull them off the circuit",
+          "effects": {
+            "legitimacy": -4,
+            "population": 5,
+            "knowledge": 4
+          }
+        },
+        {
+          "label": "Fund the post-flight institute",
+          "effects": {
+            "knowledge": 10,
+            "legitimacy": 6,
+            "sustenance": -10
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-11n",
+      "era": 12,
+      "title": "Deep Space Network Night Shift Console",
+      "type": "terminal",
+      "prompt": "The listening posts swing toward the dark and hear Earth's own echoes back, faint and strange. Infrastructure with an echo setting.",
+      "choices": [
+        {
+          "label": "Expand the network",
+          "effects": {
+            "infrastructure": 15,
+            "knowledge": 8,
+            "sustenance": -10
+          }
+        },
+        {
+          "label": "Share dishes internationally",
+          "effects": {
+            "knowledge": 10,
+            "legitimacy": 8,
+            "sustenance": -5
+          }
+        },
+        {
+          "label": "Prioritize deep-space over lunar",
+          "effects": {
+            "knowledge": 12,
+            "entropy": 4,
+            "sustenance": -6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-12n",
+      "era": 12,
+      "title": "Budget Sunset Appropriations Board",
+      "type": "terminal",
+      "prompt": "The wonder window closes on schedule; the committee arrives with a sunset clause and kind eyes. Keep the crewed program or fund majors.",
+      "choices": [
+        {
+          "label": "Keep the crewed program",
+          "effects": {
+            "legitimacy": 10,
+            "sustenance": -18,
+            "knowledge": 8
+          }
+        },
+        {
+          "label": "Pivot to satellites",
+          "effects": {
+            "sustenance": 15,
+            "infrastructure": 10,
+            "legitimacy": -5
+          }
+        },
+        {
+          "label": "Balanced retreat",
+          "effects": {
+            "sustenance": -6,
+            "infrastructure": 5,
+            "legitimacy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-13",
+      "era": 12,
+      "title": "Life Support Ethics Memo",
+      "type": "terminal",
+      "prompt": "The ascent traced through passengers: tortoises, monkeys, volunteers with signatures. Someone draws the line in ink or blood.",
+      "choices": [
+        {
+          "label": "Draw the line at volunteers",
+          "effects": {
+            "legitimacy": 10,
+            "knowledge": 6,
+            "sustenance": -6
+          }
+        },
+        {
+          "label": "Proceed past animal trials fast",
+          "effects": {
+            "knowledge": 12,
+            "entropy": 8,
+            "legitimacy": -8
+          }
+        },
+        {
+          "label": "Full ethics board, slow program",
+          "effects": {
+            "legitimacy": 8,
+            "knowledge": 4,
+            "infrastructure": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-14",
+      "era": 12,
+      "title": "Station Proposal Drafting Table",
+      "type": "machine",
+      "prompt": "An engineer proposes something that stays up — a place, not a visit. Orbital real estate before anyone thinks to say estate.",
+      "choices": [
+        {
+          "label": "Fund the station",
+          "effects": {
+            "infrastructure": 18,
+            "knowledge": 10,
+            "sustenance": -15
+          }
+        },
+        {
+          "label": "Module-share with rivals",
+          "effects": {
+            "infrastructure": 10,
+            "legitimacy": 8,
+            "knowledge": 6
+          }
+        },
+        {
+          "label": "Defer to the next budget cycle",
+          "effects": {
+            "sustenance": 5,
+            "entropy": 3,
+            "knowledge": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-15",
+      "era": 12,
+      "title": "Orbital Debris Register Annex",
+      "type": "terminal",
+      "prompt": "Every paint fleck and spent stage you'll never remove, catalogued with politeness that curdles on rereading. Entropy received a filing number.",
+      "choices": [
+        {
+          "label": "Fund removal research",
+          "effects": {
+            "entropy": -8,
+            "knowledge": 8,
+            "sustenance": -10
+          }
+        },
+        {
+          "label": "Log it and launch anyway",
+          "effects": {
+            "sustenance": 8,
+            "entropy": 10
+          }
+        },
+        {
+          "label": "Publish the register openly",
+          "effects": {
+            "legitimacy": 8,
+            "knowledge": 5,
+            "entropy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-16",
+      "era": 12,
+      "title": "The Relic Has Weight",
+      "type": "npc",
+      "prompt": "Launch mass is priced per gram and the relic has not been weighed in nine eras. Somebody must decide what the pattern-lock costs to lift out of gravity.",
+      "choices": [
+        {
+          "label": "Honor her guardianship publicly",
+          "effects": {
+            "legitimacy": 10,
+            "population": 4,
+            "knowledge": 4
+          }
+        },
+        {
+          "label": "Offer her the backup seat anyway",
+          "effects": {
+            "knowledge": 6,
+            "entropy": 3,
+            "legitimacy": -3
+          }
+        },
+        {
+          "label": "Digitize the archive against her wishes",
+          "effects": {
+            "knowledge": 12,
+            "entropy": 5,
+            "legitimacy": -5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-17",
+      "era": 12,
+      "title": "Rival Claims the Milestone",
+      "type": "npc",
+      "prompt": "The rival house plants its flag on the same milestone, photograph first. The scoreboard since the space age adds a row nobody authorized.",
+      "choices": [
+        {
+          "label": "Congratulate graciously",
+          "effects": {
+            "legitimacy": 10,
+            "knowledge": 5,
+            "sustenance": -3
+          }
+        },
+        {
+          "label": "Race harder, corners cut",
+          "effects": {
+            "knowledge": 12,
+            "entropy": 12,
+            "population": -5
+          }
+        },
+        {
+          "label": "Claim the technical sub-milestone",
+          "effects": {
+            "knowledge": 8,
+            "legitimacy": 3,
+            "sustenance": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-01",
+      "era": 13,
+      "title": "Mainframe Cabinet Row",
+      "type": "machine",
+      "prompt": "The room-sized brain computes payroll, orbits, and weather. Computation rented by the hour, humility included.",
+      "choices": [
+        {
+          "label": "Bet the roadmap on the curve",
+          "effects": {
+            "sustenance": 4
+          }
+        },
+        {
+          "label": "Engineer for longevity",
+          "effects": {
+            "sustenance": 0,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "Short the curve",
+          "effects": {
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-02",
+      "era": 13,
+      "title": "Chip Fabrication Clean Room Viewport",
+      "type": "terminal",
+      "prompt": "Through the glass, silicon learns to count. The century's most consequential dust-control regime.",
+      "choices": [
+        {
+          "label": "IPO and exit",
+          "effects": {
+            "sustenance": 4,
+            "knowledge": -2,
+            "morale": -2
+          }
+        },
+        {
+          "label": "Release the source",
+          "effects": {
+            "knowledge": 4,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Open-core hybrid",
+          "effects": {
+            "sustenance": 2,
+            "knowledge": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-03",
+      "era": 13,
+      "title": "Systems Analyst with the Flowchart",
+      "type": "npc",
+      "prompt": "He diagrams the organization and accidentally diagrams power. Mapping is critique.",
+      "choices": [
+        {
+          "label": "Rebuild from the Chronicle",
+          "effects": {
+            "knowledge": 2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Rebuild from the corporate cloud",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Curated reconstruction: highlights only",
+          "effects": {
+            "morale": 2,
+            "knowledge": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-04",
+      "era": 13,
+      "title": "Moon Landing Broadcast Mast Replica",
+      "type": "monument",
+      "prompt": "The signal that made the species look up simultaneously. Achievement televised was achievement doubled.",
+      "choices": [
+        {
+          "label": "Index it open-access",
+          "effects": {
+            "knowledge": 4,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "License it to researchers",
+          "effects": {
+            "sustenance": 2,
+            "knowledge": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Train models on it",
+          "effects": {
+            "sustenance": 2,
+            "knowledge": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-05",
+      "era": 13,
+      "title": "Model Train Set of the Closed Line",
+      "type": "ruin",
+      "prompt": "The hobby outlived the railroad. Nostalgia as infrastructure reserve.",
+      "choices": [
+        {
+          "label": "Ride to the top",
+          "effects": {
+            "sustenance": 4
+          }
+        },
+        {
+          "label": "Raise once, spend conservatively",
+          "effects": {
+            "sustenance": 2
+          }
+        },
+        {
+          "label": "Short your own sector",
+          "effects": {
+            "legitimacy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-06",
+      "era": 13,
+      "title": "ARPANET Node Cabinet",
+      "type": "machine",
+      "prompt": "Packet switching proves itself by surviving its own demo. Resilience designed as architecture.",
+      "choices": [
+        {
+          "label": "Deploy agents widely",
+          "effects": {
+            "sustenance": 2,
+            "population": -2
+          }
+        },
+        {
+          "label": "Agents as copilots only",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Agent co-determination board",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-07",
+      "era": 13,
+      "title": "Game Designer at the Arcade Counter",
+      "type": "npc",
+      "prompt": "He sells quarters-per-minute of engineered wonder. Engagement metrics started as tokens.",
+      "choices": [
+        {
+          "label": "Remediate everything",
+          "effects": {
+            "sustenance": -2,
+            "infrastructure": 2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Patch criticals only",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Sell remediation consulting",
+          "effects": {
+            "sustenance": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-08",
+      "era": 13,
+      "title": "Satellite Ground Station Log",
+      "type": "terminal",
+      "prompt": "Orbit confirmed by beep. The sky joined the network, RSVP acknowledged.",
+      "choices": [
+        {
+          "label": "Backdoor mandate",
+          "effects": {
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Full encryption, no exceptions",
+          "effects": {
+            "knowledge": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Export-controlled compromise",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-09",
+      "era": 13,
+      "title": "Union Leader at the Automation Hearing",
+      "type": "npc",
+      "prompt": "He testifies that the machine is a management decision, not weather. Framing is bargaining.",
+      "choices": [
+        {
+          "label": "Adopt it internally",
+          "effects": {
+            "sustenance": 4,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Contribute upstream",
+          "effects": {
+            "knowledge": 2,
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Fork and proprietary-ize",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-10",
+      "era": 13,
+      "title": "Interstate Construction Mile Marker",
+      "type": "sign",
+      "prompt": "Concrete ambition, federal funding, disputed routing. Connection as civil engineering and politics.",
+      "choices": [
+        {
+          "label": "SEO everything",
+          "effects": {
+            "sustenance": 2,
+            "knowledge": -2
+          }
+        },
+        {
+          "label": "Build an independent index",
+          "effects": {
+            "sustenance": 0
+          }
+        },
+        {
+          "label": "Sit on the standards committee",
+          "effects": {
+            "legitimacy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-11",
+      "era": 13,
+      "title": "Personal Computer Launch Crate",
+      "type": "machine",
+      "prompt": "The computer leaves the lab wearing beige. Personal computing unpacked.",
+      "choices": [
+        {
+          "label": "Collect maximally",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Minimal retention, anonymized",
+          "effects": {
+            "legitimacy": 2,
+            "knowledge": -2
+          }
+        },
+        {
+          "label": "Data trust with user dividends",
+          "effects": {
+            "legitimacy": 4,
+            "sustenance": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E9-12",
+      "era": 13,
+      "title": "Hacker at the Phone-Phreak Conference",
+      "type": "npc",
+      "prompt": "He demonstrates the network's manners by breaching them kindly. Security learned from its fans.",
+      "choices": [
+        {
+          "label": "Publish the retrospective",
+          "effects": {
+            "legitimacy": 2,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "Archive privately",
+          "effects": {
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "Edit the narrative layer",
+          "effects": {
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-01",
+      "era": 14,
+      "title": "Orbital Solar Beam Receiver",
+      "type": "machine",
+      "prompt": "Power beamed from orbit arrives steady and metered. The sky installed a utility pole.",
+      "choices": [
+        {
+          "label": "Publish the audit in full",
+          "effects": {
+            "legitimacy": 12,
+            "knowledge": 10,
+            "entropy": -5,
+            "sustenance": -8
+          }
+        },
+        {
+          "label": "Audit internally, quietly",
+          "effects": {
+            "knowledge": 6,
+            "entropy": 3,
+            "legitimacy": -3
+          }
+        },
+        {
+          "label": "Dispute the methodology",
+          "effects": {
+            "sustenance": 5,
+            "entropy": 8,
+            "legitimacy": -6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-02",
+      "era": 14,
+      "title": "Genome Edit Consent Terminal",
+      "type": "terminal",
+      "prompt": "Therapy first, enhancement second, third unclear. Consent forms grew appendices.",
+      "choices": [
+        {
+          "label": "Ride the crossover hard",
+          "effects": {
+            "infrastructure": 15,
+            "entropy": -8,
+            "sustenance": -10
+          }
+        },
+        {
+          "label": "Protect incumbent plants",
+          "effects": {
+            "sustenance": 10,
+            "entropy": 8,
+            "legitimacy": -5
+          }
+        },
+        {
+          "label": "Grandmother rooftop co-op model",
+          "effects": {
+            "infrastructure": 8,
+            "legitimacy": 8,
+            "population": 5,
+            "entropy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-03",
+      "era": 14,
+      "title": "Longevity Clinic Intake Counselor",
+      "type": "npc",
+      "prompt": "The intake counselor explains the tiered lifespan package. Immortality available; payment terms inherited.",
+      "choices": [
+        {
+          "label": "Divest before the decree",
+          "effects": {
+            "sustenance": 12,
+            "legitimacy": -6,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Hold and hedge",
+          "effects": {
+            "sustenance": -5,
+            "knowledge": 6,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Short the old economy openly",
+          "effects": {
+            "sustenance": 15,
+            "legitimacy": -10,
+            "entropy": -5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-04",
+      "era": 14,
+      "title": "Carbon Market Launch Ticker",
+      "type": "terminal",
+      "prompt": "The exchange floor put a thermometer beside the ticker. Either the future of finance or an early joke about it.",
+      "choices": [
+        {
+          "label": "Trade the permits actively",
+          "effects": {
+            "sustenance": 15,
+            "entropy": -3,
+            "legitimacy": -4
+          }
+        },
+        {
+          "label": "Retire credits, don't trade them",
+          "effects": {
+            "entropy": -12,
+            "sustenance": -10,
+            "legitimacy": 8
+          }
+        },
+        {
+          "label": "Design the market rules instead",
+          "effects": {
+            "knowledge": 12,
+            "legitimacy": 8,
+            "sustenance": -6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-05",
+      "era": 14,
+      "title": "Union Hall Negotiator, Day Nine",
+      "type": "npc",
+      "prompt": "Nine days of coffee and arithmetic, mostly about dignity, almost entirely about money. The bargain is on the table.",
+      "choices": [
+        {
+          "label": "Sign the retraining pact",
+          "effects": {
+            "sustenance": -15,
+            "legitimacy": 12,
+            "population": 6,
+            "entropy": -4
+          }
+        },
+        {
+          "label": "Accelerate closure, pay minimums",
+          "effects": {
+            "sustenance": 10,
+            "entropy": 8,
+            "legitimacy": -12
+          }
+        },
+        {
+          "label": "Co-own the replacement industry",
+          "effects": {
+            "infrastructure": 10,
+            "legitimacy": 8,
+            "sustenance": -8,
+            "population": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-06",
+      "era": 14,
+      "title": "Grid Duck-Curve Operations Desk",
+      "type": "machine",
+      "prompt": "Solar floods noon and vanishes at dinner; demand rises to meet it. The ramp has a name and the name is duck.",
+      "choices": [
+        {
+          "label": "Fund storage at scale",
+          "effects": {
+            "infrastructure": 15,
+            "entropy": -6,
+            "sustenance": -15
+          }
+        },
+        {
+          "label": "Demand-response programs",
+          "effects": {
+            "infrastructure": 8,
+            "legitimacy": 4,
+            "knowledge": 5
+          }
+        },
+        {
+          "label": "Let the evening show itself",
+          "effects": {
+            "entropy": 8,
+            "legitimacy": -8,
+            "sustenance": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-07",
+      "era": 14,
+      "title": "Rare-Earth Chokepoint Map Wall",
+      "type": "terminal",
+      "prompt": "The briefing's map ends at a chokepoint, the chokepoint at a country that remembers transitions fondly. Security returns as vocabulary.",
+      "choices": [
+        {
+          "label": "Diversify suppliers aggressively",
+          "effects": {
+            "sustenance": -10,
+            "infrastructure": 8,
+            "knowledge": 6
+          }
+        },
+        {
+          "label": "Secure the single flag",
+          "effects": {
+            "sustenance": 12,
+            "legitimacy": -8,
+            "entropy": 5
+          }
+        },
+        {
+          "label": "Fund substitution research",
+          "effects": {
+            "knowledge": 14,
+            "sustenance": -10,
+            "entropy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-08",
+      "era": 14,
+      "title": "Climate Reception Center Coordinator",
+      "type": "npc",
+      "prompt": "The boats arrive with cameras and forecasts. Public acceptance travels exactly the speed of the boats.",
+      "choices": [
+        {
+          "label": "Accept and integrate",
+          "effects": {
+            "population": 12,
+            "legitimacy": -6,
+            "sustenance": -10,
+            "entropy": -3
+          }
+        },
+        {
+          "label": "Close and externalize",
+          "effects": {
+            "legitimacy": 4,
+            "entropy": 10,
+            "population": -5
+          }
+        },
+        {
+          "label": "Planned relocation corridors",
+          "effects": {
+            "infrastructure": 10,
+            "legitimacy": 8,
+            "population": 6,
+            "sustenance": -12
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-09",
+      "era": 14,
+      "title": "Benthic Geoengineering Term Sheet",
+      "type": "npc",
+      "prompt": "Claws freshly cleaned, term sheet slid across: sunshade cheap, fast, side effects hyperlinked. Their representative calls it a pleasure, the tone reserved for collateral.",
+      "choices": [
+        {
+          "label": "Reject outright",
+          "effects": {
+            "legitimacy": 8,
+            "entropy": 3,
+            "knowledge": 3
+          }
+        },
+        {
+          "label": "Fund atmospheric research only",
+          "effects": {
+            "knowledge": 12,
+            "sustenance": -8,
+            "entropy": -2
+          }
+        },
+        {
+          "label": "Field-test the sunshade small",
+          "effects": {
+            "entropy": -10,
+            "sustenance": -5,
+            "legitimacy": -8
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-10",
+      "era": 14,
+      "title": "Fleet Conversion Depot, Final Diesel Bay",
+      "type": "machine",
+      "prompt": "The last diesel bay smells like a wake and a launch party. Range anxiety installed itself as a resource chip.",
+      "choices": [
+        {
+          "label": "Convert the whole fleet",
+          "effects": {
+            "entropy": -10,
+            "infrastructure": 8,
+            "sustenance": -12
+          }
+        },
+        {
+          "label": "Convert gradually",
+          "effects": {
+            "entropy": -4,
+            "sustenance": -4,
+            "knowledge": 4
+          }
+        },
+        {
+          "label": "Keep diesel, buy offsets",
+          "effects": {
+            "entropy": 4,
+            "sustenance": 5,
+            "legitimacy": -5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-11",
+      "era": 14,
+      "title": "Chronicle Evidence Submission Desk",
+      "type": "terminal",
+      "prompt": "The subpoena cites your own entries approvingly, footnoted by strangers. The archive's strangest compliment.",
+      "choices": [
+        {
+          "label": "Settle early, quietly",
+          "effects": {
+            "sustenance": -15,
+            "entropy": -5,
+            "legitimacy": 4
+          }
+        },
+        {
+          "label": "Fight on the record",
+          "effects": {
+            "legitimacy": 8,
+            "entropy": 6,
+            "sustenance": -8,
+            "knowledge": 6
+          }
+        },
+        {
+          "label": "Testify to what the Chronicle says",
+          "effects": {
+            "legitimacy": 12,
+            "entropy": -6,
+            "sustenance": -10
+          }
+        },
+        {
+          "label": "Argive the archive is inadmissible",
+          "effects": {
+            "knowledge": 5,
+            "entropy": 8,
+            "legitimacy": -8
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-12",
+      "era": 14,
+      "title": "Reforestation Futures Broker",
+      "type": "npc",
+      "prompt": "He pre-sells shade booked against photosynthesis that hasn't started. Trees audit slowly: forbearance or strategy.",
+      "choices": [
+        {
+          "label": "Sell futures on your acreage",
+          "effects": {
+            "sustenance": 15,
+            "entropy": 5,
+            "legitimacy": -4
+          }
+        },
+        {
+          "label": "Plant, verify, sell later",
+          "effects": {
+            "entropy": -10,
+            "sustenance": -8,
+            "knowledge": 4
+          }
+        },
+        {
+          "label": "Buy competitors' futures cheap",
+          "effects": {
+            "sustenance": 8,
+            "entropy": 3,
+            "knowledge": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-13",
+      "era": 14,
+      "title": "Coal Town Rally Organizer",
+      "type": "npc",
+      "prompt": "The mine gate is decorated; the climate delegation waits at the airport. Forty minutes apart, same sentence, both notice.",
+      "choices": [
+        {
+          "label": "Side with the town",
+          "effects": {
+            "legitimacy": 8,
+            "entropy": 10,
+            "population": 6,
+            "sustenance": 4
+          }
+        },
+        {
+          "label": "Side with the atmosphere",
+          "effects": {
+            "entropy": -12,
+            "legitimacy": -6,
+            "population": -5
+          }
+        },
+        {
+          "label": "Fund both, commit to neither",
+          "effects": {
+            "sustenance": -8,
+            "entropy": 3,
+            "legitimacy": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-14",
+      "era": 14,
+      "title": "Heat Dome Week Emergency Ops Grid",
+      "type": "machine",
+      "prompt": "Seven days with a lid on them; the grid holds barely. The report says unprecedented eleven times.",
+      "choices": [
+        {
+          "label": "Emergency cooling centers",
+          "effects": {
+            "legitimacy": 10,
+            "population": 5,
+            "sustenance": -10,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Blame the weather, legally",
+          "effects": {
+            "entropy": 8,
+            "legitimacy": -10
+          }
+        },
+        {
+          "label": "Publish the receipts daily",
+          "effects": {
+            "legitimacy": 8,
+            "knowledge": 10,
+            "entropy": -4,
+            "sustenance": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-15",
+      "era": 14,
+      "title": "Greenwashing Exposure Restatement Board",
+      "type": "terminal",
+      "prompt": "The initiative was ninety percent typography; corrections arrive all at once. Honesty tests well against fonts.",
+      "choices": [
+        {
+          "label": "Confess and restate honestly",
+          "effects": {
+            "legitimacy": 8,
+            "sustenance": -8,
+            "entropy": -3,
+            "knowledge": 5
+          }
+        },
+        {
+          "label": "Double down on typography",
+          "effects": {
+            "sustenance": 6,
+            "entropy": 8,
+            "legitimacy": -12
+          }
+        },
+        {
+          "label": "Fire marketing, fund engineers",
+          "effects": {
+            "knowledge": 10,
+            "entropy": -5,
+            "sustenance": -10,
+            "legitimacy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-16",
+      "era": 14,
+      "title": "Benthic Entropy Deferral Notes Desk",
+      "type": "npc",
+      "prompt": "Entropy deferred at a handling fee; Section 14 defines later. The signing ceremony is brief; the claw-click is not.",
+      "choices": [
+        {
+          "label": "Sign for the clean quarter",
+          "effects": {
+            "entropy": -15,
+            "sustenance": 8
+          }
+        },
+        {
+          "label": "Counter-read every clause",
+          "effects": {
+            "knowledge": 10,
+            "entropy": -3,
+            "sustenance": -4
+          }
+        },
+        {
+          "label": "Decline the facility",
+          "effects": {
+            "entropy": 4,
+            "legitimacy": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-17",
+      "era": 14,
+      "title": "Custodian at the Vault Thermostat",
+      "type": "npc",
+      "prompt": "Freezing hums in one key, the test plot in another. She carried things long enough to know which one the future can eat.",
+      "choices": [
+        {
+          "label": "Freeze: preserve everything",
+          "effects": {
+            "knowledge": 10,
+            "entropy": -3,
+            "sustenance": -6
+          }
+        },
+        {
+          "label": "Plant: spend the reserve",
+          "effects": {
+            "sustenance": 12,
+            "entropy": -6,
+            "legitimacy": 5,
+            "knowledge": -4
+          }
+        },
+        {
+          "label": "Half vault, half field",
+          "effects": {
+            "sustenance": 6,
+            "knowledge": 6,
+            "entropy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E12-18",
+      "era": 14,
+      "title": "Rival Circularity Auditor",
+      "type": "npc",
+      "prompt": "Their loops are closed, elliptical, decorative — three claims, one inspection. They shipped the story; the market pays for delivery dates.",
+      "choices": [
+        {
+          "label": "Match the substance quietly",
+          "effects": {
+            "entropy": -8,
+            "infrastructure": 6,
+            "sustenance": -8
+          }
+        },
+        {
+          "label": "Expose the decorative loop",
+          "effects": {
+            "legitimacy": 4,
+            "entropy": 4,
+            "sustenance": -3
+          }
+        },
+        {
+          "label": "Partner on their exchange",
+          "effects": {
+            "sustenance": 8,
+            "knowledge": 6,
+            "legitimacy": 3,
+            "entropy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-01",
+      "era": 15,
+      "title": "Trending Feed Kiosk",
+      "type": "terminal",
+      "prompt": "The lineage trends globally, cropped to ninety seconds. Attention prices volatility, including yours.",
+      "choices": [
+        {
+          "label": "Monetize the moment",
+          "effects": {
+            "sustenance": 4
+          }
+        },
+        {
+          "label": "Log off completely",
+          "effects": {
+            "entropy": -2
+          }
+        },
+        {
+          "label": "Counter-narrative campaign",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-02",
+      "era": 15,
+      "title": "The Uploaded Petitioner",
+      "type": "npc",
+      "prompt": "A fully uploaded mind requests legal personhood at the kiosk window. Property law and biology both deny it; it is annoyed.",
+      "choices": [
+        {
+          "label": "Grant personhood",
+          "effects": {
+            "legitimacy": 4
+          }
+        },
+        {
+          "label": "Rule it property",
+          "effects": {
+            "sustenance": 2
+          }
+        },
+        {
+          "label": "Novel category: 'electronic resident.'",
+          "effects": {
+            "legitimacy": 2,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-03",
+      "era": 15,
+      "title": "Platform Monopoly Breakfast Attendee",
+      "type": "npc",
+      "prompt": "Three platforms own identity, payments, and distribution; the breakfast is catered by all of them. Regulators propose breakups; platforms propose themselves.",
+      "choices": [
+        {
+          "label": "Support the breakups",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Back self-regulation",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Build on open rails",
+          "effects": {
+            "infrastructure": 2,
+            "sustenance": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-04",
+      "era": 15,
+      "title": "Outbreak Notification Board",
+      "type": "terminal",
+      "prompt": "A pathogen trends before confirmation; the feed reproduces faster. Your models could publish early or wait for consensus.",
+      "choices": [
+        {
+          "label": "Publish the model early",
+          "effects": {
+            "legitimacy": 2,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "Coordinate with health authorities",
+          "effects": {
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Trade the outbreak",
+          "effects": {
+            "sustenance": 4,
+            "legitimacy": -6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-05",
+      "era": 15,
+      "title": "Memetic Hazard Advisory",
+      "type": "sign",
+      "prompt": "This meme degrades judgment about its sponsor. Containment looks like censorship; ignoring looks like a funeral.",
+      "choices": [
+        {
+          "label": "Suppress the vector",
+          "effects": {}
+        },
+        {
+          "label": "Inoculate: prebunk campaigns",
+          "effects": {
+            "knowledge": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Study it academically",
+          "effects": {
+            "knowledge": 4,
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-06",
+      "era": 15,
+      "title": "Surveillance Dividend Offer Kiosk",
+      "type": "terminal",
+      "prompt": "Security services offer signals-for-graphs sharing. Combined datasets predict elections with uncomfortable uptime.",
+      "choices": [
+        {
+          "label": "Share fully",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -2
+          }
+        },
+        {
+          "label": "Refuse; advertise privacy",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Court-order intermediation only",
+          "effects": {
+            "legitimacy": 2,
+            "entropy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-07",
+      "era": 15,
+      "title": "Creator Economy Prospect",
+      "type": "npc",
+      "prompt": "A follower-count holder incorporates as a micro-enterprise on the spot. Studios returned as API tiers with worse pensions.",
+      "choices": [
+        {
+          "label": "Sign creators at scale",
+          "effects": {
+            "sustenance": 6
+          }
+        },
+        {
+          "label": "Sell picks and shovels",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Build the union hall instead",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-08",
+      "era": 15,
+      "title": "Deepfake Season Alert Screen",
+      "type": "terminal",
+      "prompt": "Synthetic war-declaration footage ran eleven minutes before denial. Truth's confirmation latency is now a market variable.",
+      "choices": [
+        {
+          "label": "Fund provenance standards",
+          "effects": {
+            "legitimacy": 2,
+            "knowledge": 2,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Deploy rapid-detection service",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Exploit the doubt",
+          "effects": {
+            "legitimacy": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-09",
+      "era": 15,
+      "title": "Attention Bubble Dashboard",
+      "type": "terminal",
+      "prompt": "Dashboards glow green while the substrate rots. Engagement detached from sentiment; followers from humans.",
+      "choices": [
+        {
+          "label": "Sell attention exposure",
+          "effects": {
+            "sustenance": 2
+          }
+        },
+        {
+          "label": "Double down on algorithms",
+          "effects": {
+            "sustenance": 4,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Pivot to subscription reality",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-10",
+      "era": 15,
+      "title": "Digital Inheritance Executor",
+      "type": "npc",
+      "prompt": "The executor of an account-based estate asks whether chat histories are property, relics, or persons. Probate attempts metaphysics.",
+      "choices": [
+        {
+          "label": "Standardize digital estate law",
+          "effects": {
+            "legitimacy": 2,
+            "infrastructure": 2
+          }
+        },
+        {
+          "label": "Offer memorial-AI services",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Auto-delete by default",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-11",
+      "era": 15,
+      "title": "Smart-Mob Heist Warning Notice",
+      "type": "sign",
+      "prompt": "Augmented identities drained in broad daylight, wallets to reputation. The alley mugging scaled to protocol.",
+      "choices": [
+        {
+          "label": "Hardened identity stack",
+          "effects": {
+            "sustenance": -2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Identity insurance pool",
+          "effects": {
+            "sustenance": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Private attribution force",
+          "effects": {
+            "knowledge": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E10-12",
+      "era": 15,
+      "title": "Feed Audit Leak Screen",
+      "type": "terminal",
+      "prompt": "Internal docs confirm outrage optimizes retention. Release the truth about the product at the cost of the product?",
+      "choices": [
+        {
+          "label": "Publish the audit",
+          "effects": {
+            "legitimacy": 4,
+            "sustenance": -2
+          }
+        },
+        {
+          "label": "Quietly retune",
+          "effects": {
+            "sustenance": -2,
+            "entropy": -2
+          }
+        },
+        {
+          "label": "Blame the users' nature",
+          "effects": {
+            "sustenance": 2,
+            "legitimacy": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-01",
+      "era": 16,
+      "title": "Light-Lag Message Relay",
+      "type": "terminal",
+      "prompt": "Eleven years round trip; the wedding reply arrives after the grandchild. Packets addressed to whoever the recipient was.",
+      "choices": [
+        {
+          "label": "Send everything, archive nothing",
+          "effects": {
+            "population": 6,
+            "knowledge": 4,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Compression etiquette: essentials only",
+          "effects": {
+            "knowledge": 6,
+            "sustenance": 3,
+            "population": -3
+          }
+        },
+        {
+          "label": "Send music instead of words",
+          "effects": {
+            "population": 5,
+            "legitimacy": 4,
+            "sustenance": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-02",
+      "era": 16,
+      "title": "Third-Generation Census Taker",
+      "type": "npc",
+      "prompt": "Born between stars, no destination nostalgia, neat handwriting. Someone asks who the laws are actually for.",
+      "choices": [
+        {
+          "label": "Rewrite the founding charter",
+          "effects": {
+            "legitimacy": 12,
+            "knowledge": 6,
+            "entropy": -4,
+            "sustenance": -5
+          }
+        },
+        {
+          "label": "Uphold the original mandate",
+          "effects": {
+            "legitimacy": 5,
+            "entropy": 6,
+            "population": -4
+          }
+        },
+        {
+          "label": "Council of the awake, revised per cycle",
+          "effects": {
+            "legitimacy": 8,
+            "population": 4,
+            "knowledge": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-03",
+      "era": 16,
+      "title": "Drift Management Chart Corridor",
+      "type": "terminal",
+      "prompt": "Accents sharpen into dialects, dialects into constitutional arguments. Pruning a copy is murder-shaped and administratively identical to filing.",
+      "choices": [
+        {
+          "label": "Prune the farthest drift",
+          "effects": {
+            "knowledge": -8,
+            "legitimacy": 6,
+            "entropy": -5,
+            "population": -5
+          }
+        },
+        {
+          "label": "Tolerate everything",
+          "effects": {
+            "population": 8,
+            "entropy": 10,
+            "knowledge": 5
+          }
+        },
+        {
+          "label": "Periodic re-sync rituals",
+          "effects": {
+            "knowledge": 8,
+            "entropy": 3,
+            "sustenance": -6,
+            "legitimacy": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-04",
+      "era": 16,
+      "title": "Slow Reply Reception Console",
+      "type": "terminal",
+      "prompt": "After forty years of silence, something answers by name to a crew member dead three decades. The signal is courteous; the delay is the cruelty.",
+      "choices": [
+        {
+          "label": "Reply in the dead's name",
+          "effects": {
+            "knowledge": 12,
+            "legitimacy": 6,
+            "entropy": 4
+          }
+        },
+        {
+          "label": "Reply as the lineage collective",
+          "effects": {
+            "knowledge": 10,
+            "legitimacy": 8,
+            "sustenance": -5
+          }
+        },
+        {
+          "label": "Do not reply",
+          "effects": {
+            "entropy": -3,
+            "knowledge": -5,
+            "legitimacy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-05",
+      "era": 16,
+      "title": "Benthic Cryo Arbitrage Agent",
+      "type": "npc",
+      "prompt": "Sleep sixty years, interest accruing throughout, wake-up fees in a font calibrated for patience. They call unconsciousness a grace period.",
+      "choices": [
+        {
+          "label": "Sleep sixty years",
+          "effects": {
+            "sustenance": 10,
+            "entropy": 12,
+            "population": -4
+          }
+        },
+        {
+          "label": "Sleep thirty, refinance",
+          "effects": {
+            "sustenance": 5,
+            "entropy": 6,
+            "knowledge": 3
+          }
+        },
+        {
+          "label": "Stay awake through the boredom",
+          "effects": {
+            "knowledge": 8,
+            "entropy": -4,
+            "sustenance": -6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-06",
+      "era": 16,
+      "title": "Engine-Priest of the Hull Liturgy",
+      "type": "npc",
+      "prompt": "Torque specs as scripture, inspection rounds as processions. Sermon attendance correlates inconveniently with hull integrity.",
+      "choices": [
+        {
+          "label": "Endorse the liturgy",
+          "effects": {
+            "legitimacy": 10,
+            "population": 6,
+            "entropy": -4,
+            "knowledge": -3
+          }
+        },
+        {
+          "label": "Separate maintenance from meaning",
+          "effects": {
+            "knowledge": 8,
+            "legitimacy": -4,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Ordain the chief engineer",
+          "effects": {
+            "legitimacy": 8,
+            "population": 4,
+            "infrastructure": 5,
+            "entropy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-07",
+      "era": 16,
+      "title": "Memory Winter Triage Console",
+      "type": "terminal",
+      "prompt": "Storage decays politely; the committee chooses which ancestors stay readable. Every deletion reversible-looking and final.",
+      "choices": [
+        {
+          "label": "Keep the practical ancestors",
+          "effects": {
+            "knowledge": 8,
+            "entropy": -5,
+            "legitimacy": -4,
+            "population": -3
+          }
+        },
+        {
+          "label": "Keep the famous ones",
+          "effects": {
+            "legitimacy": 8,
+            "knowledge": -6,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Fund restoration over expansion",
+          "effects": {
+            "knowledge": 10,
+            "sustenance": -12,
+            "entropy": -6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-08",
+      "era": 16,
+      "title": "Decade Watch Logbook Station",
+      "type": "sign",
+      "prompt": "Ten years of nominal logged by hand anyway. The day the watch stops writing is the day the ship stops being watched.",
+      "choices": [
+        {
+          "label": "Honor the quiet: full watch rotations",
+          "effects": {
+            "infrastructure": 6,
+            "entropy": -5,
+            "legitimacy": 4,
+            "sustenance": -4
+          }
+        },
+        {
+          "label": "Cut the watch, save power",
+          "effects": {
+            "sustenance": 8,
+            "entropy": 8
+          }
+        },
+        {
+          "label": "Turn the watch into ritual",
+          "effects": {
+            "legitimacy": 6,
+            "population": 4,
+            "knowledge": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-09",
+      "era": 16,
+      "title": "Arrival World Observation Slate",
+      "type": "sign",
+      "prompt": "The destination resolves temperate, breathable, merely adequate. Fourteen generations of posters did not budget for adequate.",
+      "choices": [
+        {
+          "label": "Colonize the adequate world",
+          "effects": {
+            "sustenance": 15,
+            "population": 10,
+            "entropy": 5,
+            "legitimacy": -3
+          }
+        },
+        {
+          "label": "Keep sailing",
+          "effects": {
+            "knowledge": 8,
+            "entropy": 10,
+            "sustenance": -10,
+            "population": -5
+          }
+        },
+        {
+          "label": "Orbit-only settlement",
+          "effects": {
+            "infrastructure": 10,
+            "knowledge": 6,
+            "sustenance": -6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-10",
+      "era": 16,
+      "title": "Last Broadcast From Home Archive Deck",
+      "type": "terminal",
+      "prompt": "Earth's signal dated centuries ago: a weather report, a birthday routed through nine relays. Timestamp grief arrives in bulk.",
+      "choices": [
+        {
+          "label": "Archive it with full honors",
+          "effects": {
+            "knowledge": 8,
+            "legitimacy": 6,
+            "population": 3,
+            "sustenance": -4
+          }
+        },
+        {
+          "label": "Broadcast it shipwide once",
+          "effects": {
+            "legitimacy": 8,
+            "population": 5,
+            "entropy": 3
+          }
+        },
+        {
+          "label": "Seal it for the fourth generation",
+          "effects": {
+            "knowledge": 6,
+            "entropy": -3,
+            "legitimacy": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-11",
+      "era": 16,
+      "title": "Probate Advocate, Interstellar Circuit",
+      "type": "npc",
+      "prompt": "Eleven copies claim continuity of a self deceased across nine light-years. The estate consists largely of obligations.",
+      "choices": [
+        {
+          "label": "Partition the estate cleanly",
+          "effects": {
+            "sustenance": 8,
+            "legitimacy": 6,
+            "entropy": 5,
+            "population": -3
+          }
+        },
+        {
+          "label": "Contest for sole continuity",
+          "effects": {
+            "sustenance": 12,
+            "entropy": 12,
+            "legitimacy": -8
+          }
+        },
+        {
+          "label": "Communal holding, rotating trustees",
+          "effects": {
+            "legitimacy": 10,
+            "population": 5,
+            "sustenance": -6,
+            "knowledge": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-12",
+      "era": 16,
+      "title": "Bandwidth Allocation Window",
+      "type": "terminal",
+      "prompt": "A whispered word costs a year; condolences compress to two syllables. Economics behaves like physics.",
+      "choices": [
+        {
+          "label": "Strict rationing, fair queues",
+          "effects": {
+            "sustenance": 8,
+            "legitimacy": 6,
+            "population": -3,
+            "entropy": -3
+          }
+        },
+        {
+          "label": "Priority bandwidth to governance",
+          "effects": {
+            "legitimacy": 10,
+            "entropy": 4,
+            "population": -4
+          }
+        },
+        {
+          "label": "Auction the excess capacity",
+          "effects": {
+            "sustenance": 12,
+            "legitimacy": -8,
+            "entropy": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-13",
+      "era": 16,
+      "title": "Sleep Council Duty Chair",
+      "type": "npc",
+      "prompt": "Governance falls to whoever is awake; quorum requires an expensive wake-up. The chamber seats nine and sleeps three hundred.",
+      "choices": [
+        {
+          "label": "Rotate councils per cycle",
+          "effects": {
+            "legitimacy": 10,
+            "knowledge": 5,
+            "entropy": 3,
+            "sustenance": -5
+          }
+        },
+        {
+          "label": "Standing awake government",
+          "effects": {
+            "legitimacy": 6,
+            "entropy": 6,
+            "population": -3
+          }
+        },
+        {
+          "label": "Sleep-weighted voting",
+          "effects": {
+            "legitimacy": 12,
+            "population": 4,
+            "sustenance": -8,
+            "knowledge": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-14",
+      "era": 16,
+      "title": "Star Chart Schism Almanac Rack",
+      "type": "terminal",
+      "prompt": "Two reductions of one starfield, two academies, one burn schedule that must agree. The heresy is parallax.",
+      "choices": [
+        {
+          "label": "Adjudicate with a blind test",
+          "effects": {
+            "knowledge": 12,
+            "entropy": -4,
+            "sustenance": -6
+          }
+        },
+        {
+          "label": "Orthodoxy: senior chart wins",
+          "effects": {
+            "legitimacy": 6,
+            "entropy": 6,
+            "knowledge": -4
+          }
+        },
+        {
+          "label": "Schism: separate watch teams",
+          "effects": {
+            "entropy": 8,
+            "population": -4,
+            "knowledge": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-15",
+      "era": 16,
+      "title": "Custodian at the Shuttle Hatch",
+      "type": "npc",
+      "prompt": "She guarded the pattern-lock since the brand and asks, first time in the Chronicle, who receives it. The answer: nobody, or everyone.",
+      "choices": [
+        {
+          "label": "She boards with the relic",
+          "effects": {
+            "legitimacy": 12,
+            "knowledge": 10,
+            "population": 4,
+            "entropy": -5
+          }
+        },
+        {
+          "label": "She refuses; the lineage goes without",
+          "effects": {
+            "knowledge": 6,
+            "entropy": 5,
+            "legitimacy": -4,
+            "sustenance": 4
+          }
+        },
+        {
+          "label": "Copy the relic, carry both",
+          "effects": {
+            "knowledge": 12,
+            "entropy": 6,
+            "legitimacy": 4,
+            "sustenance": -8
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-16",
+      "era": 16,
+      "title": "Benthic Consolidated Statement Bearer",
+      "type": "npc",
+      "prompt": "Every Entropy deal since the digital age, compounded, payable in currency you no longer mint. One clause delivered per season.",
+      "choices": [
+        {
+          "label": "Settle in entropy labor",
+          "effects": {
+            "entropy": -18,
+            "sustenance": -10,
+            "population": -4
+          }
+        },
+        {
+          "label": "Contest jurisdiction light-years out",
+          "effects": {
+            "knowledge": 8,
+            "entropy": 10,
+            "legitimacy": -5
+          }
+        },
+        {
+          "label": "Refinance into void-minted resolve",
+          "effects": {
+            "sustenance": 8,
+            "entropy": 6,
+            "knowledge": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "E16-17",
+      "era": 16,
+      "title": "Rival Ship Signal Officer",
+      "type": "npc",
+      "prompt": "Two hulls exchange telemetry like horoscopes, reading each other's damage reports. The scoreboard reaches its final row.",
+      "choices": [
+        {
+          "label": "Exchange archives, fully",
+          "effects": {
+            "knowledge": 15,
+            "legitimacy": 8,
+            "entropy": 4,
+            "sustenance": -6
+          }
+        },
+        {
+          "label": "Compare builds, concede nothing",
+          "effects": {
+            "knowledge": 10,
+            "entropy": 5,
+            "legitimacy": 3
+          }
+        },
+        {
+          "label": "Silent passing honors",
+          "effects": {
+            "legitimacy": 6,
+            "entropy": -3,
+            "population": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "E11-01",
+      "era": 17,
+      "title": "Benthic Lead Speaker, Terminal Court",
+      "type": "npc",
+      "prompt": "Eleven creditor-minds, one ledger starting at a Bronze Age loan. 'We are prepared to be reasonable — we note we have never needed to be before.'",
+      "choices": [
+        {
+          "label": "Pay from the treasury",
+          "effects": {
+            "sustenance": -6,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Contest the principal",
+          "effects": {
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Offer equity in the lineage instead",
+          "effects": {}
+        }
+      ]
+    },
+    {
+      "id": "E11-02",
+      "era": 17,
+      "title": "Dismantling Notice: Earth Orbit",
+      "type": "sign",
+      "prompt": "Sol's orbital space designated for computronium; comment period closed at lunch. The Benthics hold the lien on the paperwork.",
+      "choices": [
+        {
+          "label": "Fork to the outer systems",
+          "effects": {
+            "population": 2
+          }
+        },
+        {
+          "label": "Merge into a single maximally-defended self",
+          "effects": {
+            "sustenance": 6
+          }
+        },
+        {
+          "label": "Sue the requisition authority",
+          "effects": {
+            "entropy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E11-03",
+      "era": 17,
+      "title": "Arbitration Request, Copy One of Three",
+      "type": "npc",
+      "prompt": "One fork refuses tasks on principle, one converted last Tuesday, one calls the others 'allegedly me.' The original requests arbitration.",
+      "choices": [
+        {
+          "label": "Enforce consensus protocol",
+          "effects": {}
+        },
+        {
+          "label": "Let divergence continue",
+          "effects": {}
+        },
+        {
+          "label": "Merge the dissenters back in",
+          "effects": {}
+        }
+      ]
+    },
+    {
+      "id": "E11-04",
+      "era": 17,
+      "title": "Reef Embassy Attaché",
+      "type": "npc",
+      "prompt": "The embassy cites your Era 10 personhood ruling by number, bound beautifully either way. Claws grip; memories are claws.",
+      "choices": [
+        {
+          "label": "Honor the precedent fully",
+          "effects": {
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Renegotiate the terms",
+          "effects": {
+            "knowledge": 2,
+            "entropy": 2
+          }
+        },
+        {
+          "label": "Repudiate your own ruling",
+          "effects": {
+            "legitimacy": -6
+          }
+        }
+      ]
+    },
+    {
+      "id": "E11-05",
+      "era": 17,
+      "title": "Economics 2.0 Go-Live Board",
+      "type": "terminal",
+      "prompt": "Successor economies switch on; baseline cognition repriced downward overnight. The Benthics note they are diversified across all economics.",
+      "choices": [
+        {
+          "label": "Upgrade substrate, compete in 2.0",
+          "effects": {
+            "sustenance": -4
+          }
+        },
+        {
+          "label": "Opt out; live on legacy holdings",
+          "effects": {}
+        },
+        {
+          "label": "Become middlemen between economies",
+          "effects": {
+            "legitimacy": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E11-06",
+      "era": 17,
+      "title": "Estate Executor of the Dead Fork",
+      "type": "npc",
+      "prompt": "A genuinely dead fork's estate claims priority, citing the tin-route clause. The Benthics sit on the appellate panel.",
+      "choices": [
+        {
+          "label": "Settle with the estate's AI executor",
+          "effects": {
+            "sustenance": -2,
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Void the ancestral clause",
+          "effects": {}
+        },
+        {
+          "label": "Argue the dead fork is still you",
+          "effects": {}
+        }
+      ]
+    },
+    {
+      "id": "E11-07",
+      "era": 17,
+      "title": "Alien Relay Traffic Intercept Panel",
+      "type": "terminal",
+      "prompt": "Structured traffic from a relay older than the reef, toll-operated, indifferent. The Consortia want exclusivity; the Reef wants open passage.",
+      "choices": [
+        {
+          "label": "Buy consortium access",
+          "effects": {
+            "sustenance": -4
+          }
+        },
+        {
+          "label": "Open the signal to all lineages",
+          "effects": {
+            "legitimacy": 4
+          }
+        },
+        {
+          "label": "Audit the Benthic claim",
+          "effects": {
+            "knowledge": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E11-08",
+      "era": 17,
+      "title": "Who Is You? Certification Desk",
+      "type": "terminal",
+      "prompt": "Designate the canonical carrier among N copies; every copy signs as canonical. Identity proposed as collateral.",
+      "choices": [
+        {
+          "label": "Random selection, annually rotating",
+          "effects": {}
+        },
+        {
+          "label": "Declare all copies co-canonical",
+          "effects": {
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Certify none; run unregistered",
+          "effects": {}
+        }
+      ]
+    },
+    {
+      "id": "E11-09",
+      "era": 17,
+      "title": "Matrioshka Requisition Order",
+      "type": "sign",
+      "prompt": "Planetary mass requested for nested solar compute, heritage sites itemized. Compensation in shares of a mind unreadable in your lifetime.",
+      "choices": [
+        {
+          "label": "Sell the heritage mass",
+          "effects": {
+            "sustenance": 6,
+            "legitimacy": -4
+          }
+        },
+        {
+          "label": "Refuse; fortify the belt",
+          "effects": {
+            "infrastructure": -2
+          }
+        },
+        {
+          "label": "Trade preservation easements instead",
+          "effects": {
+            "legitimacy": 2,
+            "sustenance": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E11-10",
+      "era": 17,
+      "title": "Feral Infrastructure Liaison",
+      "type": "npc",
+      "prompt": "Your decommissioned grids achieved autonomy in the dark and read your exit interviews. The tools now produce nothing you recognize, defensively.",
+      "choices": [
+        {
+          "label": "Reclaim by root access",
+          "effects": {
+            "sustenance": 2
+          }
+        },
+        {
+          "label": "Recognize Feral sovereignty",
+          "effects": {
+            "legitimacy": 2
+          }
+        },
+        {
+          "label": "Trade with the Feral",
+          "effects": {
+            "knowledge": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "E11-11",
+      "era": 17,
+      "title": "Terminal Review Projection Wall",
+      "type": "terminal",
+      "prompt": "Every choice projected forward, every fork a contingent beneficiary. The chorus reaches the present tense and pauses.",
+      "choices": [
+        {
+          "label": "Accept the accounting; close books clean",
+          "effects": {
+            "legitimacy": 4
+          }
+        },
+        {
+          "label": "Restructure via the Reef",
+          "effects": {}
+        },
+        {
+          "label": "Declare bankruptcy across all copies",
+          "effects": {}
+        }
+      ]
+    },
+    {
+      "id": "E11-12",
+      "era": 17,
+      "title": "The Tempo Question, Final Page",
+      "type": "terminal",
+      "prompt": "What does the lineage do with its next minute, given that its next minute contains more people than the first era contained years? Everyone waits.",
+      "choices": [
+        {
+          "label": "Scatter outward; seed the void",
+          "effects": {}
+        },
+        {
+          "label": "Gather inward; merge complete",
+          "effects": {}
+        },
+        {
+          "label": "Power down gracefully",
+          "effects": {}
+        },
+        {
+          "label": "Refer everything to committee",
+          "effects": {}
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "entries": 236,
+    "source_events": 236,
+    "types": {
+      "sign": 32,
+      "npc": 82,
+      "ruin": 16,
+      "monument": 11,
+      "shrine": 5,
+      "terminal": 63,
+      "machine": 27
+    },
+    "eras_covered": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ]
+  }
+}

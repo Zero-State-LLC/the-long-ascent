@@ -1,0 +1,221 @@
+{
+  "arcs": [
+    {
+      "arc": "custodian",
+      "era": 4,
+      "position_hint": "early era-4 stretch, at the first crossroads after the collapsed bridge",
+      "npc": "The Custodian of the Moving Shrine",
+      "prompt": "She arrives with the portable shrine, the relic inside, and a route mapped three regimes ago. She asks which lord currently owns the concept of safekeeping.",
+      "choices": [
+        {"label": "Answer: whoever holds the frontier", "source_event": "E4-16"},
+        {"label": "Answer: nobody; the relic travels free", "source_event": "E4-16"},
+        {"label": "Ask to see the route map", "source_event": "E4-16"}
+      ]
+    },
+    {
+      "arc": "custodian",
+      "era": 7,
+      "position_hint": "era-7 midpoint, outside the constituent assembly hall",
+      "npc": "The Custodian, Now Lawyerly",
+      "prompt": "The Custodian guards a ledger — the state's debts bound as an heirloom — and cites clause chains at the assembly door. She wants the new constitution to name custody as property's senior claim.",
+      "choices": [
+        {"label": "Write custody into the code", "source_event": "E5-16"},
+        {"label": "Keep the ledger private law", "source_event": "E5-16"},
+        {"label": "Compromise: schedule public audits", "source_event": "E5-16"}
+      ]
+    },
+    {
+      "arc": "custodian",
+      "era": 10,
+      "position_hint": "late era-10, in the evacuation corridor behind the field office",
+      "npc": "The Custodian in the Bunker Stairwell",
+      "prompt": "She carries the ledger through the evacuation and visibly ages decades inside one scene. The handoff requires a living witness and there is exactly one available.",
+      "choices": [
+        {"label": "Accept the handoff personally", "source_event": "E8-16"},
+        {"label": "Depute it to the archivist", "source_event": "E8-16"},
+        {"label": "Seal it until after the armistice", "source_event": "E8-16"}
+      ]
+    },
+    {
+      "arc": "custodian",
+      "era": 12,
+      "position_hint": "era-12 finale approach, at the launch-weight weighing station",
+      "npc": "The Custodian Refusing Zero Gravity",
+      "prompt": "Launch mass is priced per gram and the relic has not been weighed in nine eras. She refuses the orbital assignment outright: the relic has weight for a reason.",
+      "choices": [
+        {"label": "Ground the relic; send a copy", "source_event": "E10-16"},
+        {"label": "Weigh it and manifest it anyway", "source_event": "E10-16"},
+        {"label": "Withdraw it from the program entirely", "source_event": "E10-16"}
+      ]
+    },
+    {
+      "arc": "custodian",
+      "era": 14,
+      "position_hint": "era-14 third act, at the seed vault threshold beside the test plot",
+      "npc": "The Custodian at the Vault Thermostat",
+      "prompt": "Freezing hums in one key, the test plot in another. She carried things long enough to know which one the future can actually eat, and she wants the lineage to pick a key.",
+      "choices": [
+        {"label": "Freeze: preserve everything", "source_event": "E12-17"},
+        {"label": "Plant: spend the reserve", "source_event": "E12-17"},
+        {"label": "Half vault, half field", "source_event": "E12-17"}
+      ]
+    },
+    {
+      "arc": "custodian",
+      "era": 16,
+      "position_hint": "era-16 final chapter, at the shuttle hatch, no return date posted",
+      "npc": "Custodian at the Shuttle Hatch",
+      "prompt": "She guarded the pattern-lock since the brand and asks, first time in the Chronicle, who receives it. The honest answer is nobody, or everyone; she nods. She expected both.",
+      "choices": [
+        {"label": "She boards with the relic", "source_event": "E16-15"},
+        {"label": "She refuses; the lineage goes without", "source_event": "E16-15"},
+        {"label": "Copy the relic, carry both", "source_event": "E16-15"}
+      ]
+    },
+    {
+      "arc": "benthic",
+      "era": 14,
+      "position_hint": "era-14 mid-late, at the geoengineering trial pier",
+      "npc": "Benthic Geoengineering Term Sheet",
+      "prompt": "Claws freshly cleaned, term sheet slid across: sunshade cheap, fast, side effects hyperlinked. Their representative calls it a pleasure, the tone reserved for collateral.",
+      "choices": [
+        {"label": "Reject outright", "source_event": "E12-09"},
+        {"label": "Fund atmospheric research only", "source_event": "E12-09"},
+        {"label": "Field-test the sunshade small", "source_event": "E12-09"}
+      ]
+    },
+    {
+      "arc": "benthic",
+      "era": 14,
+      "position_hint": "era-14 late, at the balance-sheet window after the audit",
+      "npc": "Benthic Entropy Deferral Desk",
+      "prompt": "Entropy deferred at a handling fee; Section 14 defines later, Section 15 defines later again, more strictly. The signing ceremony is brief; the claw-click is not.",
+      "choices": [
+        {"label": "Sign for the clean quarter", "source_event": "E12-16"},
+        {"label": "Counter-read every clause", "source_event": "E12-16"},
+        {"label": "Decline the facility", "source_event": "E12-16"}
+      ]
+    },
+    {
+      "arc": "benthic",
+      "era": 16,
+      "position_hint": "era-16 early-middle, at the cryo-bay admissions counter",
+      "npc": "Benthic Cryo Arbitrage Agent",
+      "prompt": "Sleep sixty years, interest accruing throughout, wake-up fees in a font calibrated for patience. They call unconsciousness a grace period.",
+      "choices": [
+        {"label": "Sleep sixty years", "source_event": "E16-05"},
+        {"label": "Sleep thirty, refinance", "source_event": "E16-05"},
+        {"label": "Stay awake through the boredom", "source_event": "E16-05"}
+      ]
+    },
+    {
+      "arc": "benthic",
+      "era": 16,
+      "position_hint": "era-16 late, at the consolidated statement delivery, one clause per season",
+      "npc": "Benthic Statement Bearer",
+      "prompt": "Every Entropy deal since the digital age, compounded, payable in currency you no longer mint. The final page thanks the lineage for its continued liability, warmly.",
+      "choices": [
+        {"label": "Settle in entropy labor", "source_event": "E16-16"},
+        {"label": "Contest jurisdiction light-years out", "source_event": "E16-16"},
+        {"label": "Refinance into void-minted resolve", "source_event": "E16-16"}
+      ]
+    },
+    {
+      "arc": "benthic",
+      "era": 17,
+      "position_hint": "era-17 opening set piece, terminal court, eleven seats identical",
+      "npc": "Benthic Lead Speaker, Terminal Court",
+      "prompt": "Eleven creditor-minds, one ledger starting at a Bronze Age loan. 'We are prepared to be reasonable — we note we have never needed to be before.'",
+      "choices": [
+        {"label": "Pay from the treasury", "source_event": "E11-01"},
+        {"label": "Contest the principal", "source_event": "E11-01"},
+        {"label": "Offer equity in the lineage instead", "source_event": "E11-01"}
+      ]
+    },
+    {
+      "arc": "benthic",
+      "era": 17,
+      "position_hint": "era-17 finale approach, the terminal review projection wall",
+      "npc": "Benthic Final Accounting Chorus",
+      "prompt": "Every choice projected forward, every fork a contingent beneficiary, recited in order with annotations. They reach the present tense and pause — their first ever suspense.",
+      "choices": [
+        {"label": "Accept the accounting; close books clean", "source_event": "E11-11"},
+        {"label": "Restructure via the Reef", "source_event": "E11-11"},
+        {"label": "Declare bankruptcy across all copies", "source_event": "E11-11"}
+      ]
+    },
+    {
+      "arc": "rival",
+      "era": 6,
+      "position_hint": "era-6 opening divergence, west-bound anchorage at dawn",
+      "npc": "The Rival Lineage's Envoy",
+      "prompt": "The envoy compliments your granaries and leaves measuring tapes behind, visible on purpose. Their house sails west tomorrow; somebody must.",
+      "choices": [
+        {"label": "Match the voyage, sail south", "source_event": "E4-17"},
+        {"label": "Buy the measuring tapes honestly", "source_event": "E4-17"},
+        {"label": "Propose divided oceans by treaty", "source_event": "E4-17"}
+      ]
+    },
+    {
+      "arc": "rival",
+      "era": 7,
+      "position_hint": "era-7 middle, at the imperial ennobment ceremony you opposed",
+      "npc": "The Rival's Newly Ennobled Head",
+      "prompt": "The rival accepts a title from the emperor you opposed and his descendants already salute him. He offers friendship at exactly the market price of your principles.",
+      "choices": [
+        {"label": "Condemn publicly", "source_event": "E5-17"},
+        {"label": "Attend and network", "source_event": "E5-17"},
+        {"label": "Secure your own patent of nobility", "source_event": "E5-17"}
+      ]
+    },
+    {
+      "arc": "rival",
+      "era": 10,
+      "position_hint": "era-10 finale, opposite flags at the armistice table",
+      "npc": "The Rival's Delegate, Opposite Flag",
+      "prompt": "Both houses sign the same paper from opposite sides; the scoreboard since the space age's prequel era adds rows nightly. Their border, your grandchildren, one pencil line.",
+      "choices": [
+        {"label": "Negotiate the border quietly", "source_event": "E8-17"},
+        {"label": "Take the moral line, lose the valley", "source_event": "E8-17"},
+        {"label": "Trade reconstruction aid for position", "source_event": "E8-17"}
+      ]
+    },
+    {
+      "arc": "rival",
+      "era": 12,
+      "position_hint": "era-12 climax lane, just past the milestone photo op",
+      "npc": "Rival Claims the Milestone",
+      "prompt": "The rival house plants its flag on the same milestone, photograph first. The scoreboard from this era will be cited at the end of everything.",
+      "choices": [
+        {"label": "Contest the milestone officially", "source_event": "E10-17"},
+        {"label": "Claim the next milestone pre-emptively", "source_event": "E10-17"},
+        {"label": "Joint plaque, dual inscription", "source_event": "E10-17"}
+      ]
+    },
+    {
+      "arc": "rival",
+      "era": 14,
+      "position_hint": "era-14 late, at the circular-economy expo floor",
+      "npc": "Rival Circularity Auditor",
+      "prompt": "Their loops are closed, elliptical, decorative — three claims, one inspection away. They shipped the story; the market pays for stories with delivery dates.",
+      "choices": [
+        {"label": "Match the substance quietly", "source_event": "E12-18"},
+        {"label": "Expose the decorative loop", "source_event": "E12-18"},
+        {"label": "Partner on their exchange", "source_event": "E12-18"}
+      ]
+    },
+    {
+      "arc": "rival",
+      "era": 16,
+      "position_hint": "era-16 final beat, mirror ship passing in the router lane",
+      "npc": "Rival Ship Signal Officer",
+      "prompt": "Two hulls exchange telemetry like horoscopes, reading each other's damage reports. The scoreboard reaches its final row: two builds, same void, both still moving.",
+      "choices": [
+        {"label": "Exchange archives, fully", "source_event": "E16-17"},
+        {"label": "Compare builds, concede nothing", "source_event": "E16-17"},
+        {"label": "Silent passing honors", "source_event": "E16-17"}
+      ]
+    }
+  ],
+  "summary": {"entries": 18, "custodian": 6, "benthic": 6, "rival": 6, "all_source_events_exist": true}
+}
