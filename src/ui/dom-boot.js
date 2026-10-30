@@ -236,7 +236,7 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
       // figure on the floor line over the scene
       const ch = h * 0.5;
       const cw = stageCostume.naturalWidth && stageCostume.naturalHeight ? ch * (stageCostume.naturalWidth / 4) / stageCostume.naturalHeight : ch / 2;
-      drawFrame(stageCostume, walk.frame(t), w * walk.x - cw / 2, h * FLOOR_FRAC - ch, cw, ch, 4);
+      drawFrame(stageCtx, stageCostume, walk.frame(t), w * walk.x - cw / 2, h * FLOOR_FRAC - ch, cw, ch, 4);
     }
     for (let i = 0; i < stageMarkers.length; i++) {
       stageMarkers[i].style.left = `${walk.markers[i] * 100}%`;
@@ -433,6 +433,7 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
   }
 
   function renderEventCard() {
+    if (mgSession) return; // v5: never tear down the stage under a live run
     const wrap = $('#card-wrap');
     wrap.replaceChildren();
     stopStageLoop(); // SPEC v4: previous card's stage loop/markers are gone
@@ -872,14 +873,16 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
     acc += Number(document.documentElement.dataset.speed || 2);
     // §9.1: production pauses while an event card is open (setting, default ON).
     const paused = settings.pauseDuringChoices !== false && !!game.currentEvent();
-    while (acc >= 1) { acc -= 1; game.tick(paused); }
+    while (acc >= 1) { acc -= 1; game.tick(paused, !!mgSession); } // frozen while a minigame is live
     if (game.state.phase === 'ending') { autosave(); showEnding(); return; }
     if (game.state.resources.entropy > prevEntropy + 0.5) audio.play('entropy_tick');
     prevEntropy = game.state.resources.entropy;
     ambientBgm();
     renderHeader();
     renderResourceBar();
-    if (!game.currentEvent()) renderEventCard();
+    // v5: a live minigame pins the card — re-rendering mid-run would kill its rAF loop
+    // (stopStageLoop) and detach its canvas. The session ends before any legit re-render.
+    if (!mgSession && !game.currentEvent()) renderEventCard();
   }, 400);
 
   // §9.4 audio beds: bgm_choice under open event cards, bgm_high_entropy when

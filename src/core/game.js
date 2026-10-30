@@ -381,8 +381,9 @@ export function createGame({ erasData, eventsData, copyData = null, miniData = n
     return state.resources.entropy > ENTROPY_EVENT_BOOST ? Math.max(3, Math.ceil(base / 2)) : base;
   }
 
-  function tick(paused = false) {
+  function tick(paused = false, frozen = false) {
     if (state.phase === 'ending') return;
+    if (frozen) return; // minigame live: the world holds its breath (spec §2 trigger rules)
     // Pause during choices (SPEC §9.1): the UI passes paused=true while an event
     // card is open so reading doesn't cost resources. Progress still advances —
     // "it advances regardless" is the game's thesis, not a bug to pause away.
