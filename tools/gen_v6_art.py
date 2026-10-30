@@ -34,6 +34,14 @@ def png(path,w,h,pixels):
     path.parent.mkdir(parents=True,exist_ok=True); path.write_bytes(data)
 
 def hexrgb(c): return tuple(bytes.fromhex(c[1:]))
+
+def shade(p,w,h,top_k=0.88,bot_k=1.10):
+    # vertical ramp: darken zenith, lighten horizon (keeps hues, adds depth)
+    for y in range(h):
+        k=top_k+(bot_k-top_k)*(y/(h-1))
+        for x in range(w):
+            o=(y*w+x)*3
+            p[o]=min(255,int(p[o]*k)); p[o+1]=min(255,int(p[o+1]*k)); p[o+2]=min(255,int(p[o+2]*k))
 def canvas(w,h,c): return list(hexrgb(c))*(w*h)
 def dot(p,w,h,x,y,c):
     x=int(x); y=int(y)
@@ -155,6 +163,9 @@ def layer(i,kind):
                 rect(p,w,h,x,y+5,5,90,fill); line(p,w,h,(x+2,y+10),(x+40,y-6),fill,3); line(p,w,h,(x+2,y+18),(x-23,y+4),fill,2)
             else:
                 rect(p,w,h,x,y+8,24,80,fill); rect(p,w,h,x-7,y+24,38,6,acc)
+    # vertical depth ramp: sky strongest, far medium, near/ground subtle
+    sk={'sky':(0.80,1.22),'far':(0.88,1.10),'near':(0.93,1.06),'ground':(0.96,1.04)}[kind]
+    shade(p,w,h,*sk)
     png(ASSETS/f'bg{i+1:02}_{kind}.png',w,h,p)
 
 def prop(name,idx):
