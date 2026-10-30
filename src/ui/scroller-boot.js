@@ -25,6 +25,7 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
   const reducedMotion = () =>
     settings.reduceMotion || (typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches);
 
+  let toastTimer = null; // TDZ fix: toast() fires during save-load, before its old declaration
   // ---- core state (unchanged contracts; idle paths simply never called) ----
   let game = createGame({ erasData, eventsData: { events: [] }, rng: mulberry32Local(0xacce66) });
   attachV6Fields(game.state);
@@ -340,7 +341,6 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
 
   // ---- lifecycle --------------------------------------------------------------------
   function autosave() { try { safeSet(SAVE_KEY, saveStringV6(game)); } catch { /* storage unavailable */ } }
-  let toastTimer = null;
   function toast(msg) {
     if (!toastRoot) return;
     toastRoot.hidden = false;
