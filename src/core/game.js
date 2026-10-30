@@ -8,6 +8,7 @@
 import { createArcState, observeEvent, applyTransitionEntropy, convergenceSummary } from './arcs.js';
 import { migrateV2toV3, isLegacySave, SAVE_VERSION_V3 } from './migration.js';
 import { checkCrossings, createCrisisTracker } from './crisisPulses.js';
+import { createTracker as createMinigameTracker, recordResult, resetEra } from './minigames.js';
 import { createOpportunityTracker, canOfferOpportunity, pickOpportunity, consumeSlot, applyOpportunity, OPP_CHANCE } from './opportunities.js';
 
 export const POOLS = ['sustenance', 'knowledge', 'population', 'infrastructure', 'legitimacy', 'entropy'];
@@ -139,12 +140,17 @@ export function createGame({ erasData, eventsData, copyData = null, miniData = n
     // v3 (SPEC §10.2): story-arc ledger — custodian relics, benthic deals, rival mirrors.
     arcs: createArcState(),
     crossingUnlocked: false, // set on era-16 arrival; title screen offers THE CROSSING (§11.4)
+    minigames: createMinigameTracker(), // v5 (SPEC §3): per-era rate limits + best-score ledger
     rngSeedNote: 'rng not serialized; saves resume deterministically from state only',
   };
 
   // UI-facing trackers (not serialized): opportunity rate-limit + crisis latch.
   const oppTracker = createOpportunityTracker();
   const crisisTracker = createCrisisTracker();
+
+  // v5 §3: minigame offers must never fire during a crisis pulse — expose the
+  // live latch (crisisPulses keeps it UI-side, not in the save).
+  Object.defineProperty(state, 'crisisLatched', { get: () => crisisTracker.latched, enumerable: false });
 
   const hasFlag = (f) => state.flags.includes(f);
   const addFlag = (f) => { if (!hasFlag(f)) state.flags.push(f); };
@@ -213,6 +219,35 @@ export function createGame({ erasData, eventsData, copyData = null, miniData = n
   }
   const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
 
+  // ------------------------------------------------------------- minigames (SPEC v5 §3)
+  // Apply a completed run's reward deltas onto the world. Deltas come from
+  // minigames.reward(run) — already tier-capped there; this clamps to pool
+  // bounds exactly like applyEffects and records the ledger best + era slot.
+  function applyMinigameReward(family, deltas, { score = 0 } = {}) {
+    const applied = {};
+    for (const [k, v] of Object.entries(deltas || {})) {
+      if (POOLS.includes(k)) {
+        const before = state.resources[k];
+        state.resources[k] = clamp(before + v, k === 'entropy' ? 0 : -CEILING, CEILING);
+        applied[k] = Math.round((state.resources[k] - before) * 100) / 100;
+      } else if (k === 'morale') {
+        const before = state.morale;
+        state.morale = clamp(state.morale + v, 0, 100);
+        applied.morale = Math.round((state.morale - before) * 100) / 100;
+      }
+    }
+    recordResult(state.minigames, family, { eraNum: state.era, score });
+    state.lastDeltas = applied; // outcome chips on the end card read this (spec §4)
+    return applied;
+  }
+
+  // The era's offered family (eras.json `minigame.family`), or null. 'crossing'
+  // is a trigger record, not a playable overlay — Crossing II keeps its screen.
+  function eraMinigame(n = state.era) {
+    const def = eraDef(n);
+    return def?.minigame?.family || null;
+  }
+
   // ------------------------------------------------------------- choices
   function choose(choiceLabel) {
     const ev = currentEvent();
@@ -223,6 +258,9 @@ export function createGame({ erasData, eventsData, copyData = null, miniData = n
     const before = { ...state.resources };
     applyEffects(choice.effects, ev.id);
     state.lastDeltas = deltaSnapshot(before, state.resources);
+    // v5 §3 rate-limit support: keep the crisis latch current so the UI knows a
+    // pulse is live (latched per pool until recovery; 30s global cooldown).
+    checkCrossings(crisisTracker, before, state.resources, MINI.crisis_pulses, Date.now());
     for (const f of choice.flags) addFlag(f);
     harvestModifiers(choice.flags);
     // v3 (§10.2): the arc ledger mirrors every resolved arc event.
@@ -401,6 +439,7 @@ export function createGame({ erasData, eventsData, copyData = null, miniData = n
     state.progress = 0;
     state.ticksSinceChoice = 0;
     state.phase = 'event';
+    resetEra(state.minigames, state.era); // v5 §3: fresh 2-per-era budget each era
     state.pendingEventId = pickNextEventId();
     chronicle(`Era ${state.era} begins: ${eraDef().name}. The pace quickens. It always quickens.`, 'era');
   }
@@ -517,6 +556,7 @@ export function createGame({ erasData, eventsData, copyData = null, miniData = n
     if (!Array.isArray(state.lineageMods)) state.lineageMods = []; // v2.1
     if (!Array.isArray(state.eraGoalsDone)) state.eraGoalsDone = []; // v2.1
     if (!state.arcs) state.arcs = createArcState(); // v3 arc ledger
+    if (!state.minigames) state.minigames = createMinigameTracker(); // v5 §3 (pre-v5 saves)
     harvestModifiers(state.flags); // rebuild modifier pane for saves written pre-v2.1
     return state;
   }
@@ -571,6 +611,8 @@ export function createGame({ erasData, eventsData, copyData = null, miniData = n
     chronicle,
     hasFlag,
     addFlag,
+    applyMinigameReward, // v5 §3: apply capped run rewards + ledger record
+    eraMinigame,         // v5 §3: this era's offered family from eras.json
     eligibleEvents,
     endingText,
     serialize,

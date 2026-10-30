@@ -143,7 +143,13 @@ test('keyAction maps arrows, WASD, Enter/Space, digits; ignores the rest', () =>
   assert.equal(w.keyAction(' '), 'confirm');
   assert.equal(w.keyAction('3'), 'select:3');
   assert.equal(w.keyAction('Escape'), 'ignore');
-  assert.equal(w.keyAction('ArrowUp'), 'ignore', 'vertical keys are not walk input');
+  // SPEC v5 §1 supersedes the v4 line below: with roam ON (default), vertical
+  // keys ARE walk input. The v4 contract is pinned separately on a v2:false rig.
+  assert.equal(w.keyAction('ArrowUp'), 'up', 'v5 free-roam: ArrowUp walks up');
+  assert.equal(w.keyAction('ArrowDown'), 'down');
+  const legacy = new StageWalk({ count: 2, v2: false });
+  assert.equal(legacy.keyAction('ArrowUp'), 'ignore', 'v4 mode: vertical keys are not walk input');
+  assert.equal(legacy.keyAction('w'), 'ignore');
 });
 
 // ---------------------------------------------------------------- reduced motion
