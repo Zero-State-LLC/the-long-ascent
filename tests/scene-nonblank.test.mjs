@@ -114,12 +114,15 @@ test('drawStageFallback paints background layers + idle figure when the scene is
 
 test('fallback with ONLY the costume still paints (stage never empty)', () => {
   const ctx = recordingCtx();
+  ctx.fillRect = (...a) => ctx.ops.push({ op: 'fillRect', a });
   const drew = drawStageFallback(ctx, { bgFar: null, bgNear: null, costume: imgStub(512, 256) }, 480, 270, 2);
   assert.equal(drew, true);
   assert.ok(paintedPixels(ctx).length >= 1);
 });
 
-test('fallback with nothing at all reports false so callers can react', () => {
+test('fallback with nothing at all still paints (solid backdrop, stage never empty)', () => {
   const ctx = recordingCtx();
-  assert.equal(drawStageFallback(ctx, {}, 480, 270, 0), false);
+  ctx.fillRect = (...a) => ctx.ops.push({ op: 'fillRect', a });
+  assert.equal(drawStageFallback(ctx, {}, 480, 270, 0), true);
+  assert.ok(ctx.ops.some((o) => o.op === 'fillRect' && o.a[2] > 0 && o.a[3] > 0), 'solid backdrop blit');
 });

@@ -13,7 +13,7 @@
 export const MAX_MARKERS = 4;
 export const DEFAULT_X = 0.25;        // idle spot: stage-x 25%
 export const WALK_SPEED = 0.38;       // stage-widths per second
-export const ARM_RADIUS = 0.06;       // |figure - marker| within this arms it
+export const ARM_RADIUS = 0.10;       // |figure - marker| within this arms it (marker gap 0.25 => no dead floor)
 export const DISARM_HYSTERESIS = 1.5; // disarm once outside radius * this
 export const WALK_FPS = 10;           // costume frames 3-4 alternate at 10fps
 export const IDLE_FPS = 6;            // idle cycles the 4-frame costume row

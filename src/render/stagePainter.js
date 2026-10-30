@@ -74,6 +74,15 @@ export function drawStageFallback(ctx, { bgFar = null, bgNear = null, costume = 
   // far layer fills above the floor line, near layer hugs it
   drew = tile(bgFar, 0, h * FLOOR_FRAC, 0.85) || drew;
   drew = tile(bgNear, h * FLOOR_FRAC - h * 0.18, h * (1 - FLOOR_FRAC) + h * 0.18, 1) || drew;
+  if (!drew) {
+    // No layers available at all: paint a solid era-tinted backdrop so the
+    // stage is never empty even before/without any sprite asset (offline boot).
+    ctx.fillStyle = '#141a2b';
+    ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = 'rgba(90, 110, 150, 0.35)';
+    ctx.fillRect(0, Math.round(h * FLOOR_FRAC), w, h - Math.round(h * FLOOR_FRAC));
+    drew = true;
+  }
   // idle costume figure on the floor line, stage-left of center
   const ch = h * FIGURE_H_FRAC;
   const cw = costume?.naturalWidth && costume?.naturalHeight ? ch * (costume.naturalWidth / 4) / costume.naturalHeight : ch / 2;

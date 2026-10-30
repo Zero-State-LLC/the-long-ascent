@@ -77,9 +77,10 @@ test('walking onto a marker arms it; walking away disarms', () => {
   // Idle at .25 sits within ARM_RADIUS (.06) of marker .2 — by design the start
   // spot touches the first marker; card swap re-derives it.
   assert.equal(w.armed, 0);
-  w.setChoiceCount(2); // markers .33 .67; idle .25 far from both
-  assert.equal(w.armed, null);
-  w.hold('right');
+  w.setChoiceCount(3); // markers .25 .5 .75; idle .25 still touches marker 0 — instead pick count where idle is clear:
+  w.x = 0.1;
+  w.setChoiceCount(2); // markers .33 .67; x=.1 far from both
+  assert.equal(w.armed, null);  w.hold('right');
   let armedAt = null;
   for (let t = 0; t < 3 && armedAt == null; t += 0.05) {
     w.update(0.05);

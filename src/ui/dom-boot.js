@@ -327,13 +327,15 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
       wrap.append(wait);
       return;
     }
+    // Lineage (heir-naming) cards get the ledger only: no stage, no walk mode.
+    const isLineage = ev.kind === 'lineage';
     const card = el('article', 'card' + (ev.kind === 'transition' ? ' card-transition' : ''));
     // SPEC v4 §1: two-stage layout — RIGHT column is the stage shell (canvas +
     // marker rail + caption), LEFT column is the ledger (title → body → choices).
     // CSS puts them side by side >=900px, stacked stage-on-top below that.
     let sceneCanvas = null;
     const stage = el('div', 'card-stage');
-    if (ev.scene_id) {
+    if (ev.scene_id && !isLineage) {
       sceneCanvas = document.createElement('canvas');
       sceneCanvas.className = 'card-scene card-scene-active';
       sceneCanvas.width = 480;
@@ -341,11 +343,14 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
       sceneCanvas.setAttribute('aria-hidden', 'true');
       stage.append(sceneCanvas);
     }
-    const rail = el('div', 'choice-marker-rail');
-    rail.setAttribute('aria-hidden', 'true');
-    stage.append(rail);
-    stage.append(el('p', 'stage-caption', `${game.eraDef().name || ''} · ${ev.scene_id || 'no scene'}`));
-    card.append(stage);
+    let rail = null;
+    if (!isLineage) {
+      rail = el('div', 'choice-marker-rail');
+      rail.setAttribute('aria-hidden', 'true');
+      stage.append(rail);
+      stage.append(el('p', 'stage-caption', `${game.eraDef().name || ''} · ${ev.scene_id || 'no scene'}`));
+      card.append(stage);
+    }
     const ledger = el('div', 'card-ledger');
     ledger.append(el('p', 'card-kicker', ev.kind === 'lineage' ? 'Lineage' : U.eventModal[0]));
     ledger.append(el('h2', 'card-title', ev.title || ''));
@@ -368,14 +373,14 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
     wrap.append(card);
 
     // ---- wire the walkable stage (§2) --------------------------------------
-    walk.setChoiceCount(ev.choices.length);
+    walk.setChoiceCount(isLineage ? 0 : ev.choices.length);
     stageButtons = [...choices.children]; // .choice buttons (querySelectorAll-free)
-    stageMarkers = walk.markers.map(() => {
+    stageMarkers = rail ? walk.markers.map(() => {
       const dot = el('div', 'choice-marker');
       dot.style.left = '0%';
       rail.append(dot);
       return dot;
-    });
+    }) : [];
     syncArmedUi();
     if (sceneCanvas) {
       const ctx = sceneCanvas.getContext?.('2d'); // shim canvases without 2D: no walk render
@@ -409,9 +414,9 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
         sceneAnim.play(true);
         startStageLoop(); // figure + markers ride on top of the scene frames
       });
-    } else if (stageCtx) {
+    } else if (stageCtx && !isLineage) {
       // No scene_id: still never empty — fallback layers behind the ledger view.
-      drawStageFallback(stageCtx, { bgFar: stageBg.far, bgNear: stageBg.near, costume: stageCostume }, sceneCanvas?.width || 480, sceneCanvas?.height || 270, 0);
+      drawStageFallback(stageCtx, { bgFar: stageBg.far, bgNear: stageBg.near, costume: stageCostume }, 480, 270, 0);
       startStageLoop();
     }
   }
@@ -785,5 +790,5 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
 
   showTitle();
   renderAll();
-  return { get game() { return game; }, renderer, toast, audio, sprites, parallax };
+  return { get game() { return game; }, renderer, toast, audio, sprites, parallax, walk };
 }
