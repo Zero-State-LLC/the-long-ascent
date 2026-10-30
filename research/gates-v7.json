@@ -1,0 +1,106 @@
+{
+  "gates": [
+    {
+      "era": 1,
+      "advantage": "The hidden larder behind the back wall: two seasons of dried meat and a spare torch cache.",
+      "requirement": { "kind": "item", "key": "torch", "amount": null },
+      "sign": "Light shows the crack. Carry a torch, enter free."
+    },
+    {
+      "era": 2,
+      "advantage": "The sealed granary bypass: skip the toll yard and arrive with reserves intact.",
+      "requirement": { "kind": "resource", "key": "grain", "amount": 8 },
+      "sign": "Eight measures of grain open this door."
+    },
+    {
+      "era": 3,
+      "advantage": "The legion cache beyond the gate: bronze gear at quartermaster prices.",
+      "requirement": { "kind": "item", "key": "bronze sword", "amount": null },
+      "sign": "A bronze sword speaks pass. Enter unarmed, pay."
+    },
+    {
+      "era": 4,
+      "advantage": "The scriptorium undercroft: copied texts that shorten the era's knowledge decay.",
+      "requirement": { "kind": "resource", "key": "faith", "amount": 8 },
+      "sign": "Show eight of faith. The brothers admit believers."
+    },
+    {
+      "era": 5,
+      "advantage": "Rung bell: the era-6 merchant stocks torches you couldn't otherwise afford.",
+      "requirement": { "kind": "action", "key": "rung_bell", "amount": null },
+      "sign": "Rang the bell? The bell-tower door is yours."
+    },
+    {
+      "era": 6,
+      "advantage": "The charter factor's shortcut: cleared papers, no anchorage quarantine.",
+      "requirement": { "kind": "resource", "key": "coin", "amount": 10 },
+      "sign": "Ten coin buys the factor's cleared papers."
+    },
+    {
+      "era": 7,
+      "advantage": "The deputation lane: past the pickets and straight to the drafting room.",
+      "requirement": { "kind": "resource", "key": "legitimacy", "amount": 8 },
+      "sign": "Citizens of standing pass. Legitimacy eight, shown."
+    },
+    {
+      "era": 8,
+      "advantage": "The company siding: freight passage without the navvy toll or the walk.",
+      "requirement": { "kind": "item", "key": "company scrip", "amount": null },
+      "sign": "Company men only. Present scrip, ride the siding."
+    },
+    {
+      "era": 9,
+      "advantage": "The bank road: preferred routing past the checkpoint line, quarter after quarter.",
+      "requirement": { "kind": "resource", "key": "credit", "amount": 10 },
+      "sign": "Credit of ten gets the bank road. Cash waits."
+    },
+    {
+      "era": 10,
+      "advantage": "The priority corridor: requisition transport, rations, and a mapped route.",
+      "requirement": { "kind": "item", "key": "ration book", "amount": null },
+      "sign": "Priority corridor. Stamped ration book required."
+    },
+    {
+      "era": 11,
+      "advantage": "The hardened route: fallout-sheltered way through with the crossing kit.",
+      "requirement": { "kind": "item", "key": "fallout mask", "amount": null },
+      "sign": "Mask on past this point. No mask, no passage."
+    },
+    {
+      "era": 12,
+      "advantage": "The contractor lane: launch traffic, clear of the queue and the cameras.",
+      "requirement": { "kind": "item", "key": "contractor badge", "amount": null },
+      "sign": "Contractor badge admits one. Visitors queue."
+    },
+    {
+      "era": 13,
+      "advantage": "The fiber shed cut-through: an unmetered line and a head start on the decade.",
+      "requirement": { "kind": "item", "key": "access chip", "amount": null },
+      "sign": "Badge the chip, take the fiber shed cut-through."
+    },
+    {
+      "era": 14,
+      "advantage": "The transition lane: grid-side passage and a market-rate price on your carbon.",
+      "requirement": { "kind": "resource", "key": "carbon credits", "amount": 10 },
+      "sign": "Transition lane: ten carbon credits, verified."
+    },
+    {
+      "era": 15,
+      "advantage": "The verified gate: fast lane past the mob, identity pre-cleared.",
+      "requirement": { "kind": "item", "key": "verified seal", "amount": null },
+      "sign": "Verified identities only. Show the seal, pass."
+    },
+    {
+      "era": 16,
+      "advantage": "The thaw roster: early wake-cycle and the reserve stores that go with it.",
+      "requirement": { "kind": "resource", "key": "resolve", "amount": 8 },
+      "sign": "Resolve eight qualifies for the thaw roster."
+    },
+    {
+      "era": 17,
+      "advantage": "The solvent list: standing terms with the Consortia and first call on good orbits.",
+      "requirement": { "kind": "resource", "key": "selfhood", "amount": 10 },
+      "sign": "Solvent selves only. Selfhood ten, notarized."
+    }
+  ]
+}
