@@ -3,53 +3,43 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="description" content="THE LONG ASCENT — you are a lineage, not a person. Eleven eras, six resources, five trajectories." />
+  <meta name="description" content="THE LONG ASCENT — walk the line. Seventeen eras, six resources, one way forward." />
   <title>THE LONG ASCENT</title>
   <link rel="stylesheet" href="./styles.css?v=e99640c" />
 </head>
 <body data-view="game">
+  <!-- v6: the world is the canvas; idle/quiz DOM views are retired (SPEC §5). -->
   <canvas id="scene" aria-hidden="true"></canvas>
 
   <header id="era-header">
     <h1 id="era-title">ERA 1 — THE CAVE</h1>
     <p id="era-sub"></p>
-    <p id="era-meta"></p>
-    <div id="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Era progress">
+    <div id="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Walk to the era boundary">
       <div id="progress-fill"></div>
     </div>
-    <p id="progress-label" aria-live="polite"></p>
-    <p id="era-goal"></p>
   </header>
 
+  <!-- v6 HUD: thin top resource strip, purple-bar language, no /s chips -->
   <aside id="resource-bar" aria-label="Resources"></aside>
 
   <main id="stage">
-    <div id="card-wrap" aria-live="polite"></div>
+    <canvas id="world-canvas" width="1280" height="720" tabindex="0"
+            aria-label="The long ascent: walk right, jump, read the stones"></canvas>
+    <!-- in-world overlays, anchored above their objects by scroller-boot -->
+    <div id="world-prompt" hidden></div>
+    <div id="world-menu" hidden></div>
   </main>
 
-  <section id="chronicle-screen" hidden>
-    <h2>Chronicle</h2>
-    <ul id="chronicle-list"></ul>
-  </section>
-
-  <section id="lineage-screen" hidden>
-    <h2>Lineage</h2>
-    <ul id="lineage-list"></ul>
-  </section>
+  <footer id="controls-hint">
+    ← → / A D walk · ↑ / W / Space jump (hold = higher) · ↓ / E interact · Esc close menu
+  </footer>
 
   <section id="settings-screen" hidden>
     <h2>Settings</h2>
     <div id="settings-form"></div>
   </section>
 
-  <section id="ending-screen" hidden></section>
-  <section id="title-screen" hidden></section>
-  <section id="primer-screen" hidden></section>
-
   <nav id="nav-rail" aria-label="Views">
-    <button type="button" data-view="game">Game</button>
-    <button type="button" data-view="chronicle">Chronicle</button>
-    <button type="button" data-view="lineage">Lineage</button>
     <button type="button" data-view="settings">Settings</button>
   </nav>
 
