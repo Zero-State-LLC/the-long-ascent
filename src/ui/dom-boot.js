@@ -4,7 +4,9 @@
 import { createGame, POOLS, ENTROPY_BGM_THRESHOLD } from '../core/game.js';
 import { createRenderer } from '../render/renderer.js';
 import { SpriteAnimator, loadAssets, ERA_IDS, BADGE_NAMES } from '../render/SpriteAnimator.js';
-import { AnimScene } from '../render/AnimScene.js';
+import { AnimScene, drawFrame } from '../render/AnimScene.js';
+import { checkSceneSheet, drawSceneFrame, drawStageFallback, FLOOR_FRAC } from '../render/stagePainter.js';
+import { StageWalk } from './stageWalk.js';
 import { ParallaxBg } from '../render/ParallaxBg.js';
 import { AudioManager } from '../render/AudioManager.js';
 
@@ -48,6 +50,21 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
   let sceneAnim = null; // AnimScene for the open event card
   const sheetCache = new Map(); // sprite url -> Promise<img|null>
   const bgCache = new Map();    // `${eraId}` -> {far,near} promises
+
+  // ---- SPEC v4 §2: walkable figure on the event-card stage -----------------
+  // Pure state machine (stageWalk.js); this block is its only DOM adapter.
+  const walk = new StageWalk({ count: 0, reducedMotion: settings.reduceMotion });
+  let stageCtx = null;        // 2D ctx of the open card's stage canvas
+  let stageCanvasRef = null;  // the open card's stage canvas element
+  let stageSheet = null;      // scene sheet img (null => fallback layers)
+  let stageCostume = null;    // era costume img for the walking figure
+  let stageBg = { far: null, near: null }; // era background layers for the fallback
+  let stageMarkers = [];      // DOM dots positioned over the floor
+  let stageButtons = [];      // choice buttons (armed class target)
+  let stageRaf = null;        // rAF handle for the walk render loop
+  let stageLastT = 0;
+  const prefersReducedMotion = () =>
+    settings.reduceMotion || (typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches);
 
   function loadImage(src) {
     return new Promise((res) => {
@@ -196,9 +213,113 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
   }
 
   // -------------------------------------------------------------- event card
+  // SPEC v4 §2 stage loop: scene frame + walking figure + marker dots. Runs
+  // while a card with a stage is open; draws the fallback layers when the scene
+  // sheet is unavailable so the stage is never empty (§3).
+  function stageFrame(t) {
+    if (!stageCtx) return;
+    const cv = stageCtx.canvas;
+    const w = cv.width, h = cv.height;
+    let drewScene = false;
+    if (stageSheet) {
+      const f = sceneAnim && sceneAnim.mode !== 'stopped' ? sceneAnim.currentFrame : Math.floor(t * 8) % 5;
+      drewScene = drawSceneFrame(stageCtx, stageSheet, f, w, h, 8);
+    }
+    if (!drewScene) {
+      drawStageFallback(stageCtx, { bgFar: stageBg.far, bgNear: stageBg.near, costume: stageCostume }, w, h, walk.frame(t));
+    } else if (stageCostume) {
+      // figure on the floor line over the scene
+      const ch = h * 0.5;
+      const cw = stageCostume.naturalWidth && stageCostume.naturalHeight ? ch * (stageCostume.naturalWidth / 4) / stageCostume.naturalHeight : ch / 2;
+      drawFrame(stageCostume, walk.frame(t), w * walk.x - cw / 2, h * FLOOR_FRAC - ch, cw, ch, 4);
+    }
+    for (let i = 0; i < stageMarkers.length; i++) {
+      stageMarkers[i].style.left = `${walk.markers[i] * 100}%`;
+    }
+  }
+
+  function stageLoop(now) {
+    stageRaf = null;
+    if (!stageCtx || (stageCtx.canvas && stageCtx.canvas.isConnected === false)) { stopStageLoop(); return; }
+    const t = now / 1000;
+    const dt = stageLastT ? Math.min(0.25, t - stageLastT) : 0;
+    stageLastT = t;
+    walk.reducedMotion = prefersReducedMotion();
+    walk.update(dt);
+    syncArmedUi();
+    stageFrame(t);
+    stageRaf = requestAnimationFrame(stageLoop);
+  }
+  function startStageLoop() {
+    if (stageRaf != null || typeof requestAnimationFrame === 'undefined') return;
+    stageLastT = 0;
+    stageRaf = requestAnimationFrame(stageLoop);
+  }
+  function stopStageLoop() {
+    if (stageRaf != null && typeof cancelAnimationFrame !== 'undefined') cancelAnimationFrame(stageRaf);
+    stageRaf = null;
+    stageCtx = null; stageSheet = null; stageMarkers = []; stageButtons = []; stageCanvasRef = null;
+  }
+
+  // SPEC v4 §2: while an event card is open the stage owns ←/→, Enter, Space and
+  // digits — the page must not scroll underneath the card.
+  if (typeof document !== 'undefined' && document.addEventListener) {
+    document.addEventListener('keydown', stageKeydown);
+    document.addEventListener('keyup', stageKeyup);
+  }
+
+  // Highlight ring follows the armed marker; its choice button gets .armed.
+  // classList-free (classList.toggle is undefined on some minimal DOM shims).
+  function setArmedClass(node, on) {
+    if (!node) return;
+    const cls = (node.className || '').split(/\s+/).filter(Boolean);
+    const i = cls.indexOf('armed');
+    if (on && i < 0) cls.push('armed');
+    if (!on && i >= 0) cls.splice(i, 1);
+    node.className = cls.join(' ');
+  }
+  function syncArmedUi() {
+    for (let i = 0; i < stageMarkers.length; i++) setArmedClass(stageMarkers[i], walk.armed === i);
+    for (let i = 0; i < stageButtons.length; i++) setArmedClass(stageButtons[i], walk.armed === i);
+  }
+
+  // Keyboard adapter: consumes arrows/Enter/Space/digits while a card is open so
+  // the page never scrolls under it. Mounted once; reads live stage state.
+  function stageKeydown(e) {
+    if (viewMode !== 'game' || (!stageButtons.length && !stageCtx)) return; // no card stage open
+    const action = walk.keyAction(e.key);
+    if (action === 'ignore') return;
+    e.preventDefault();
+    if (action === 'left' || action === 'right') {
+      walk.apply(action);
+      startStageLoop();
+      return;
+    }
+    if (action.startsWith('select:')) {
+      const r = walk.apply(action);
+      syncArmedUi();
+      if (r.selected != null && stageButtons[r.selected]) focusButton(stageButtons[r.selected]);
+      stageTickOnce();
+      return;
+    }
+    if (action === 'confirm') {
+      const r = walk.apply(action);
+      if (r.confirm != null && stageButtons[r.confirm]) onChoose(stageButtons[r.confirm].dataset.label, stageCanvasRef);
+    }
+  }
+  function stageKeyup(e) {
+    const action = walk.keyAction(e.key);
+    if (action === 'left' || action === 'right') walk.release(action);
+  }
+  function focusButton(btn) { try { btn.focus({ preventScroll: true }); } catch { /* older DOM shims */ } }
+  function stageTickOnce() {
+    if (stageRaf == null) stageFrame((typeof performance !== 'undefined' ? performance.now() : Date.now()) / 1000);
+  }
+
   function renderEventCard() {
     const wrap = $('#card-wrap');
     wrap.replaceChildren();
+    stopStageLoop(); // SPEC v4: previous card's stage loop/markers are gone
     const ev = game.currentEvent();
     if (!ev) {
       const wait = el('div', 'card waiting');
@@ -206,26 +327,40 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
       wrap.append(wait);
       return;
     }
+    // Lineage (heir-naming) cards get the ledger only: no stage, no walk mode.
+    const isLineage = ev.kind === 'lineage';
     const card = el('article', 'card' + (ev.kind === 'transition' ? ' card-transition' : ''));
-    // §9.3: scene canvas is the star — 480x270, ABOVE the title, card order
-    // scene → title → body → choices (vignette + drop shadow live in styles.css).
+    // SPEC v4 §1: two-stage layout — RIGHT column is the stage shell (canvas +
+    // marker rail + caption), LEFT column is the ledger (title → body → choices).
+    // CSS puts them side by side >=900px, stacked stage-on-top below that.
     let sceneCanvas = null;
-    if (ev.scene_id) {
+    const stage = el('div', 'card-stage');
+    if (ev.scene_id && !isLineage) {
       sceneCanvas = document.createElement('canvas');
-      sceneCanvas.className = 'card-scene';
+      sceneCanvas.className = 'card-scene card-scene-active';
       sceneCanvas.width = 480;
       sceneCanvas.height = 270;
       sceneCanvas.setAttribute('aria-hidden', 'true');
-      card.append(sceneCanvas);
+      stage.append(sceneCanvas);
     }
-    card.append(el('p', 'card-kicker', ev.kind === 'lineage' ? 'Lineage' : U.eventModal[0]));
-    card.append(el('h2', 'card-title', ev.title || ''));
-    card.append(el('p', 'card-body', ev.body || ev.prompt || ''));
-    if (ev.kind !== 'lineage') card.append(el('p', 'card-sub', U.eventModal[1]));
+    let rail = null;
+    if (!isLineage) {
+      rail = el('div', 'choice-marker-rail');
+      rail.setAttribute('aria-hidden', 'true');
+      stage.append(rail);
+      stage.append(el('p', 'stage-caption', `${game.eraDef().name || ''} · ${ev.scene_id || 'no scene'}`));
+      card.append(stage);
+    }
+    const ledger = el('div', 'card-ledger');
+    ledger.append(el('p', 'card-kicker', ev.kind === 'lineage' ? 'Lineage' : U.eventModal[0]));
+    ledger.append(el('h2', 'card-title', ev.title || ''));
+    ledger.append(el('p', 'card-body', ev.body || ev.prompt || ''));
+    if (ev.kind !== 'lineage') ledger.append(el('p', 'card-sub', U.eventModal[1]));
     const choices = el('div', 'choices');
     for (const c of ev.choices) {
       const btn = el('button', 'choice');
       btn.type = 'button';
+      btn.dataset.label = c.label;
       btn.append(el('span', 'choice-label', c.label));
       const hint = effectHint(c);
       if (hint) btn.append(el('span', 'choice-hint', hint));
@@ -233,19 +368,56 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
       btn.addEventListener('click', () => onChoose(c.label, sceneCanvas));
       choices.append(btn);
     }
-    card.append(choices);
+    ledger.append(choices);
+    card.append(ledger);
     wrap.append(card);
 
+    // ---- wire the walkable stage (§2) --------------------------------------
+    walk.setChoiceCount(isLineage ? 0 : ev.choices.length);
+    stageButtons = [...choices.children]; // .choice buttons (querySelectorAll-free)
+    stageMarkers = rail ? walk.markers.map(() => {
+      const dot = el('div', 'choice-marker');
+      dot.style.left = '0%';
+      rail.append(dot);
+      return dot;
+    }) : [];
+    syncArmedUi();
+    if (sceneCanvas) {
+      const ctx = sceneCanvas.getContext?.('2d'); // shim canvases without 2D: no walk render
+      stageCtx = ctx || null;
+      stageCanvasRef = ctx ? sceneCanvas : null;
+    }
+    // Era costume for the figure (missing sheet => no figure, keys 1-4 still work).
+    const eraId = ERA_IDS[game.state.era - 1];
+    stageCostume = sprites.assets?.costumes?.get(eraId) || null;
+    cachedSheet(`assets/sprites/costume_${eraId}.png`).then((img) => {
+      if (img && stageCanvasRef === sceneCanvas) stageCostume = img;
+    });
+    bgCache.get(eraId)?.then(([far, near]) => { stageBg = { far, near }; });
     // Start (or restart) the scene loop for this event once its sheet resolves.
     if (sceneAnim) { sceneAnim.stop(); sceneAnim = null; }
     if (sceneCanvas && ev.scene_id) {
       cachedSheet(`assets/sprites/scene_${ev.scene_id}.png`).then((img) => {
-        if (!img || !sceneCanvas.isConnected) return; // sheet missing or card replaced: stay static
-        const ctx = sceneCanvas.getContext('2d');
+        if (!stageCanvasRef || stageCanvasRef !== sceneCanvas) return; // card replaced
+        const check = checkSceneSheet(img, (m) => console.debug(m));
+        if (!check.ok) {
+          // §3: unavailable scene -> mark it so and paint the fallback immediately.
+          stageSheet = null;
+          sceneCanvas.classList.remove('card-scene-active');
+          drawStageFallback(stageCtx, { bgFar: stageBg.far, bgNear: stageBg.near, costume: stageCostume }, sceneCanvas.width, sceneCanvas.height, 0);
+          startStageLoop(); // keep the idle figure animating on the fallback
+          return;
+        }
+        stageSheet = img;
         sceneCanvas.classList.add('card-scene-active');
-        sceneAnim = new AnimScene(ctx, img, 160, 180, 8, {});
+        sceneAnim = new AnimScene(stageCtx, img, 160, 180, 8, {});
         sceneAnim.play(true);
+        startStageLoop(); // figure + markers ride on top of the scene frames
       });
+    } else if (stageCtx && !isLineage) {
+      // No scene_id: still never empty — fallback layers behind the ledger view.
+      drawStageFallback(stageCtx, { bgFar: stageBg.far, bgNear: stageBg.near, costume: stageCostume }, 480, 270, 0);
+      startStageLoop();
     }
   }
 
@@ -618,5 +790,5 @@ export function bootApp({ erasData, eventsData, copyData = null }) {
 
   showTitle();
   renderAll();
-  return { get game() { return game; }, renderer, toast, audio, sprites, parallax };
+  return { get game() { return game; }, renderer, toast, audio, sprites, parallax, walk };
 }
