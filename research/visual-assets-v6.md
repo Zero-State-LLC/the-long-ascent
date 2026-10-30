@@ -1,0 +1,136 @@
+# Visual assets v6 inventory
+
+Generated polished pixel-art deliverables. PNG prop sheets are two 96x96 frames side-by-side (192x192 total); player sheets are 18 frames, 64x128 (1152x128).
+
+- `assets/bg01_far.png` — 1024x540 PNG
+- `assets/bg01_ground.png` — 1024x540 PNG
+- `assets/bg01_near.png` — 1024x540 PNG
+- `assets/bg01_sky.png` — 1024x540 PNG
+- `assets/bg02_far.png` — 1024x540 PNG
+- `assets/bg02_ground.png` — 1024x540 PNG
+- `assets/bg02_near.png` — 1024x540 PNG
+- `assets/bg02_sky.png` — 1024x540 PNG
+- `assets/bg03_far.png` — 1024x540 PNG
+- `assets/bg03_ground.png` — 1024x540 PNG
+- `assets/bg03_near.png` — 1024x540 PNG
+- `assets/bg03_sky.png` — 1024x540 PNG
+- `assets/bg04_far.png` — 1024x540 PNG
+- `assets/bg04_ground.png` — 1024x540 PNG
+- `assets/bg04_near.png` — 1024x540 PNG
+- `assets/bg04_sky.png` — 1024x540 PNG
+- `assets/bg05_far.png` — 1024x540 PNG
+- `assets/bg05_ground.png` — 1024x540 PNG
+- `assets/bg05_near.png` — 1024x540 PNG
+- `assets/bg05_sky.png` — 1024x540 PNG
+- `assets/bg06_far.png` — 1024x540 PNG
+- `assets/bg06_ground.png` — 1024x540 PNG
+- `assets/bg06_near.png` — 1024x540 PNG
+- `assets/bg06_sky.png` — 1024x540 PNG
+- `assets/bg07_far.png` — 1024x540 PNG
+- `assets/bg07_ground.png` — 1024x540 PNG
+- `assets/bg07_near.png` — 1024x540 PNG
+- `assets/bg07_sky.png` — 1024x540 PNG
+- `assets/bg08_far.png` — 1024x540 PNG
+- `assets/bg08_ground.png` — 1024x540 PNG
+- `assets/bg08_near.png` — 1024x540 PNG
+- `assets/bg08_sky.png` — 1024x540 PNG
+- `assets/bg09_far.png` — 1024x540 PNG
+- `assets/bg09_ground.png` — 1024x540 PNG
+- `assets/bg09_near.png` — 1024x540 PNG
+- `assets/bg09_sky.png` — 1024x540 PNG
+- `assets/bg10_far.png` — 1024x540 PNG
+- `assets/bg10_ground.png` — 1024x540 PNG
+- `assets/bg10_near.png` — 1024x540 PNG
+- `assets/bg10_sky.png` — 1024x540 PNG
+- `assets/bg11_far.png` — 1024x540 PNG
+- `assets/bg11_ground.png` — 1024x540 PNG
+- `assets/bg11_near.png` — 1024x540 PNG
+- `assets/bg11_sky.png` — 1024x540 PNG
+- `assets/bg12_far.png` — 1024x540 PNG
+- `assets/bg12_ground.png` — 1024x540 PNG
+- `assets/bg12_near.png` — 1024x540 PNG
+- `assets/bg12_sky.png` — 1024x540 PNG
+- `assets/bg13_far.png` — 1024x540 PNG
+- `assets/bg13_ground.png` — 1024x540 PNG
+- `assets/bg13_near.png` — 1024x540 PNG
+- `assets/bg13_sky.png` — 1024x540 PNG
+- `assets/bg14_far.png` — 1024x540 PNG
+- `assets/bg14_ground.png` — 1024x540 PNG
+- `assets/bg14_near.png` — 1024x540 PNG
+- `assets/bg14_sky.png` — 1024x540 PNG
+- `assets/bg15_far.png` — 1024x540 PNG
+- `assets/bg15_ground.png` — 1024x540 PNG
+- `assets/bg15_near.png` — 1024x540 PNG
+- `assets/bg15_sky.png` — 1024x540 PNG
+- `assets/bg16_far.png` — 1024x540 PNG
+- `assets/bg16_ground.png` — 1024x540 PNG
+- `assets/bg16_near.png` — 1024x540 PNG
+- `assets/bg16_sky.png` — 1024x540 PNG
+- `assets/bg17_far.png` — 1024x540 PNG
+- `assets/bg17_ground.png` — 1024x540 PNG
+- `assets/bg17_near.png` — 1024x540 PNG
+- `assets/bg17_sky.png` — 1024x540 PNG
+- `assets/palette_era01.json` — JSON palette (sky, far, near, ground, ink, accent)
+- `assets/palette_era02.json` — JSON palette (sky, far, near, ground, ink, accent)
+- `assets/palette_era03.json` — JSON palette (sky, far, near, ground, ink, accent)
+- `assets/palette_era04.json` — JSON palette (sky, far, near, ground, ink, accent)
+- `assets/palette_era05.json` — JSON palette (sky, far, near, ground, ink, accent)
+- `assets/palette_era06.json` — JSON palette (sky, far, near, ground, ink, accent)
+- `assets/palette_era07.json` — JSON palette (sky, far, near, ground, ink, accent)
+- `assets/palette_era08.json` — JSON palette (sky, far, near, ground, ink, accent)
+- `assets/palette_era09.json` — JSON palette (sky, far, near, ground, ink, accent)
+- `assets/palette_era10.json` — JSON palette (sky, far, near, ground, ink, accent)
+- `assets/palette_era11.json` — JSON palette (sky, far, near, ground, ink, accent)
+- `assets/palette_era12.json` — JSON palette (sky, far, near, ground, ink, accent)
+- `assets/palette_era13.json` — JSON palette (sky, far, near, ground, ink, accent)
+- `assets/palette_era14.json` — JSON palette (sky, far, near, ground, ink, accent)
+- `assets/palette_era15.json` — JSON palette (sky, far, near, ground, ink, accent)
+- `assets/palette_era16.json` — JSON palette (sky, far, near, ground, ink, accent)
+- `assets/palette_era17.json` — JSON palette (sky, far, near, ground, ink, accent)
+- `assets/player_era01.png` — 1152x128 PNG
+- `assets/player_era02.png` — 1152x128 PNG
+- `assets/player_era03.png` — 1152x128 PNG
+- `assets/player_era04.png` — 1152x128 PNG
+- `assets/player_era05.png` — 1152x128 PNG
+- `assets/player_era06.png` — 1152x128 PNG
+- `assets/player_era07.png` — 1152x128 PNG
+- `assets/player_era08.png` — 1152x128 PNG
+- `assets/player_era09.png` — 1152x128 PNG
+- `assets/player_era10.png` — 1152x128 PNG
+- `assets/player_era11.png` — 1152x128 PNG
+- `assets/player_era12.png` — 1152x128 PNG
+- `assets/player_era13.png` — 1152x128 PNG
+- `assets/player_era14.png` — 1152x128 PNG
+- `assets/player_era15.png` — 1152x128 PNG
+- `assets/player_era16.png` — 1152x128 PNG
+- `assets/player_era17.png` — 1152x128 PNG
+- `assets/prop_antenna.png` — 192x192 PNG
+- `assets/prop_beacon.png` — 192x192 PNG
+- `assets/prop_campfire.png` — 192x192 PNG
+- `assets/prop_cave_mouth.png` — 192x192 PNG
+- `assets/prop_factory_gate.png` — 192x192 PNG
+- `assets/prop_granary.png` — 192x192 PNG
+- `assets/prop_launch_gantry.png` — 192x192 PNG
+- `assets/prop_machine_wreck.png` — 192x192 PNG
+- `assets/prop_market_stall.png` — 192x192 PNG
+- `assets/prop_monolith.png` — 192x192 PNG
+- `assets/prop_monument.png` — 192x192 PNG
+- `assets/prop_npc_child.png` — 192x192 PNG
+- `assets/prop_npc_elder.png` — 192x192 PNG
+- `assets/prop_npc_merchant.png` — 192x192 PNG
+- `assets/prop_npc_scientist.png` — 192x192 PNG
+- `assets/prop_obelisk.png` — 192x192 PNG
+- `assets/prop_ruin_column.png` — 192x192 PNG
+- `assets/prop_shelter_door.png` — 192x192 PNG
+- `assets/prop_shrine.png` — 192x192 PNG
+- `assets/prop_sign.png` — 192x192 PNG
+- `assets/prop_stone_gate.png` — 192x192 PNG
+- `assets/prop_terminal.png` — 192x192 PNG
+- `assets/prop_well.png` — 192x192 PNG
+- `assets/prop_world_tree.png` — 192x192 PNG
+
+Generator and validation tooling:
+- `tools/gen_v6_art.py` — stdlib procedural art generator
+- `tools/verify_v6.py` — PNG signature/dimension and palette contrast validator
+
+Palette constraint: every ink/ground pair is checked against WCAG relative luminance contrast >= 4.5:1.
