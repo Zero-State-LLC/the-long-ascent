@@ -1,0 +1,90 @@
+{
+  "version": "8.0",
+  "source": "SPEC-v8-undeniable.md §3 (Scribe): ambient world lines — one-line thoughts the figure has while walking, shown in a whisper bubble ~45s into each era's walk. Voice per src/data/v3-copy.json: terse, ledger-brained interior monologue. 17 eras × 4 = 68 lines, ≤60 chars each. Naming per SPEC §8.",
+  "lines": [
+    { "era": 1, "text": "Cold is a debt the body pays daily." },
+    { "era": 1, "text": "Two fires counted. One more than yesterday." },
+    { "era": 1, "text": "The dark keeps no ledger. We do." },
+    { "era": 1, "text": "Every step out is a loan against the cave." },
+
+    { "era": 2, "text": "Seed now, harvest later. The oldest deal." },
+    { "era": 2, "text": "The field owes. The field always pays late." },
+    { "era": 2, "text": "A season kept is a season itemized." },
+    { "era": 2, "text": "We traded standing still for waiting rich." },
+
+    { "era": 3, "text": "Bronze remembers who paid for it." },
+    { "era": 3, "text": "Roads are receipts with mileage." },
+    { "era": 3, "text": "The law is stone until someone chips it." },
+    { "era": 3, "text": "Empire: interest compounded over people." },
+
+    { "era": 4, "text": "Knowledge decays at one copy per winter." },
+    { "era": 4, "text": "The road to town is longer than it was." },
+    { "era": 4, "text": "What isn't copied is already lost." },
+    { "era": 4, "text": "Rome lives on installment plans now." },
+
+    { "era": 5, "text": "A printed page argues cheaper than a priest." },
+    { "era": 5, "text": "The guild counts me; I count the guild." },
+    { "era": 5, "text": "Bell rung, debt entered. Both ring true." },
+    { "era": 5, "text": "Interest learned its alphabet here." },
+
+    { "era": 6, "text": "Wind is free labor. It invoices anyway." },
+    { "era": 6, "text": "Every map is a claim with coastline." },
+    { "era": 6, "text": "Cargo rots slower than credit. Barely." },
+    { "era": 6, "text": "The ocean keeps a parallel ledger." },
+
+    { "era": 7, "text": "Rights read better than they audit." },
+    { "era": 7, "text": "A crown fits any hand firm enough." },
+    { "era": 7, "text": "Terror has its own accounting staff." },
+    { "era": 7, "text": "Ideals burn hot. Fuel bills stay due." },
+
+    { "era": 8, "text": "Coal is sunlight, billed late." },
+    { "era": 8, "text": "The timetable forgives no one, least me." },
+    { "era": 8, "text": "Machines multiply what we already owed." },
+    { "era": 8, "text": "Smoke is the invoice. The sky never disputes it." },
+
+    { "era": 9, "text": "Everything is a line item now, boots included." },
+    { "era": 9, "text": "Mass production: want, standardized." },
+    { "era": 9, "text": "The ticker knows before the street does." },
+    { "era": 9, "text": "We measure progress in tonnage and dust." },
+
+    { "era": 10, "text": "Total war: the audit that eats the auditors." },
+    { "era": 10, "text": "My ration card is my whole estate." },
+    { "era": 10, "text": "Everyone I know is on a list somewhere." },
+    { "era": 10, "text": "Victory will be an inventory count." },
+
+    { "era": 11, "text": "Half-life taught me patience in years." },
+    { "era": 11, "text": "Deterrence: a balance nobody dares withdraw." },
+    { "era": 11, "text": "The fallout lands on the unpaid." },
+    { "era": 11, "text": "Peace is just deferred settlement." },
+
+    { "era": 12, "text": "Orbit is altitude plus paperwork." },
+    { "era": 12, "text": "One small step, amortized over decades." },
+    { "era": 12, "text": "The Moon has no customs office yet." },
+    { "era": 12, "text": "Up here, every gram costs coin." },
+
+    { "era": 13, "text": "Garbage in, prophecy out. Mind the input." },
+    { "era": 13, "text": "I think in flowsheets now. So does everyone." },
+    { "era": 13, "text": "A bug is a debt that compounds nightly." },
+    { "era": 13, "text": "The mainframe rents humility by the hour." },
+
+    { "era": 14, "text": "Carbon is the ledger we forged." },
+    { "era": 14, "text": "Sunlight finally arrived on time. And tax-free." },
+    { "era": 14, "text": "Every tonne cut is a receipt for later." },
+    { "era": 14, "text": "The curve bends or the bill stands." },
+
+    { "era": 15, "text": "Attention prices everything, including this walk." },
+    { "era": 15, "text": "I am content now. So is everyone I was." },
+    { "era": 15, "text": "The feed audits me faster than I audit it." },
+    { "era": 15, "text": "Free means someone else footed it." },
+
+    { "era": 16, "text": "Silence has a delivery date: eleven years." },
+    { "era": 16, "text": "The archive thins one polite deletion at a time." },
+    { "era": 16, "text": "Between stars, a word costs a year." },
+    { "era": 16, "text": "We carry ancestors in cold storage now." },
+
+    { "era": 17, "text": "The question was asked. No one answers first." },
+    { "era": 17, "text": "Tempo is the last scarce resource." },
+    { "era": 17, "text": "Nine thousand years, closing entry pending." },
+    { "era": 17, "text": "Whatever comes next inherits this column." }
+  ]
+}

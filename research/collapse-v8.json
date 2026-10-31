@@ -1,0 +1,15 @@
+{
+  "version": "8.0",
+  "source": "SPEC-v8-undeniable.md §3 (Scribe): collapse wake lines — shown when the figure collapses, keyed to the damage source (8 variants + generic). Voice per v3-copy.json: terse, ledger-brained. ≤50 chars. Naming per SPEC §8.",
+  "reasons": [
+    { "source": "boar", "text": "Tusk through the ledger-hand. The count goes on." },
+    { "source": "wolf", "text": "The pack audited you at dusk. You lost." },
+    { "source": "stray_dog", "text": "A stray, of all things. No glory in the entry." },
+    { "source": "bandit", "text": "They took the balance and left the breath." },
+    { "source": "soldier", "text": "Requisitioned: your footing. Receipt: none." },
+    { "source": "smog", "text": "The city billed a lungful. Change due: never." },
+    { "source": "radiation", "text": "An invisible debt, compounding hourly." },
+    { "source": "datastorm", "text": "Packet loss included your knees. Resyncing." },
+    { "source": "generic", "text": "The body filed for bankruptcy. Reopen the account." }
+  ]
+}
