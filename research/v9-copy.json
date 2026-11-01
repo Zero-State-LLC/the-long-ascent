@@ -1,0 +1,137 @@
+{
+  "version": "9.0",
+  "source": "SPEC-v9-clearing.md §9 (Scribe): v9 UI/copy pack — missed-station report lines, walk-away row, dimmed-reason templates, almanac labels, render-fault copy, station chrome hints. Voice per src/data/v3-copy.json: terse, ledger-brained. Naming per SPEC §8: originals only.",
+  "missed_stations": {
+    "note": "Era report card (SPEC v9 §1.2): one line per station the route skipped. Variants rotate at runtime; each cites a stake, not a specific title, so it reads true for any missed station in the era.",
+    "era_1": [
+      "A fire-offer went out from that clearing. No answer was logged.",
+      "Someone carried a question to that ridge. The ridge kept it.",
+      "One camp on this route stayed a maybe. The cold filed it anyway."
+    ],
+    "era_2": [
+      "A field on this route stands unsurveyed. Rent accrues regardless.",
+      "The seed offer aged in the ground. Nobody signed against it.",
+      "One furrow-line was never cut. The valley tallies it as lost."
+    ],
+    "era_3": [
+      "A tablet went uncut on this march. The debt rides unsigned.",
+      "Someone waited at the ford with terms. The crossing moved on.",
+      "One claim stayed oral. Stone remembers nothing you didn't write."
+    ],
+    "era_4": [
+      "A road offered its problem here. It remains unsolved, on schedule.",
+      "One copy was never made. Whatever it held is officially lost.",
+      "A courier waited at a bridge nobody crossed. Standing time: one era."
+    ],
+    "era_5": [
+      "A printed question stayed unanswered. The press has moved on.",
+      "One shop kept its shutter down. The argument ripened without you.",
+      "A guild roll went unwritten here. Apprenticeships accrued elsewhere."
+    ],
+    "era_6": [
+      "A berth left without you. The manifest lists it as cargo.",
+      "One ledger entry sailed empty. Interest compounded on schedule.",
+      "An offer rode at anchor past this headland. It made port elsewhere."
+    ],
+    "era_7": [
+      "A clause stayed unwritten on this road. Somebody still pays for it.",
+      "One pamphlet went unread. The grievance found another reader.",
+      "A committee sat and waited. Quorum: none. History: still itemized."
+    ],
+    "era_8": [
+      "A seam stays uncut here. The smoke bill keeps its own hours.",
+      "One engine sat cold at the pit-head. Coal prices noted the gap.",
+      "A shift went unwalked. The wage book has no column for maybe."
+    ],
+    "era_9": [
+      "A valve stayed shut on this stretch. Pressure billed someone else.",
+      "One pump-house closed before you reached it. The queue dispersed.",
+      "A lease lay unsigned in a company town. Ambition filed elsewhere."
+    ],
+    "era_10": [
+      "A form stayed unstamped here. The queue forgave no one else.",
+      "One checkpoint found nothing to approve. The year was audited anyway.",
+      "A ration went uncounted on this route. The shortfall was spread evenly."
+    ],
+    "era_11": [
+      "A dial stayed unset here. Midnight declined to wait for anyone.",
+      "One bunker took no inventory. The countdown ran regardless.",
+      "A signal passed this station unread. The clock holds the message."
+    ],
+    "era_12": [
+      "A lane went unsprinted here. The scoreboard credits other names.",
+      "One exchange floor rang for no one. The quote stands corrected.",
+      "A test bench stayed cold. The beeping continued without comment."
+    ],
+    "era_13": [
+      "A cabinet hummed at this stop and got no order. Cycles were wasted.",
+      "One forecast shipped unreviewed. Interest compounds on omissions.",
+      "A patch went undeployed here. The system assumed the worst, correctly."
+    ],
+    "era_14": [
+      "A meter was never read here. The invoice arrived anyway, totalled.",
+      "One panel stayed bare of wiring. The grid priced the absence.",
+      "A hearing opened and adjourned without testimony. The climate logged it."
+    ],
+    "era_15": [
+      "A feed scrolled past this moment unwatched. The metric missed nothing.",
+      "One notification expired unread. Attention was spent downstream.",
+      "A trend crested and died unheard here. The dashboard records both."
+    ],
+    "era_16": [
+      "A message waited nine years at this relay. It was answered by other hands.",
+      "One sleep-shift went undreamed here. The roster marked it nominal.",
+      "A course correction went unsent. The drift filed it under weather."
+    ],
+    "era_17": [
+      "A fork stayed unuploaded. The estate settled without its opinion.",
+      "One deposition was never taken. The heirs proceed by assumption.",
+      "A claim went unfiled in the final court. Docketed: lost, with interest."
+    ]
+  },
+  "walk_away": [
+    "Walk away. The ledger accepts your absence.",
+    "Refuse the whole board. Entropy takes the fee.",
+    "Turn around. Unanswered questions still accrue.",
+    "Leave it standing. The world charges silence.",
+    "Decline all. Something always pays the difference."
+  ],
+  "dim_reasons": {
+    "note": "Templates for dimmed choices (SPEC v9 §2). <thing>/<pool> substituted at runtime. ≤48 chars each.",
+    "no_item_none": "Your hands are spoken for",
+    "no_item_stone": "No stone in hand",
+    "no_item_spear": "No spear in hand",
+    "no_item_torch": "Nothing lit in hand",
+    "no_item_coin": "Nothing coinable in pocket",
+    "no_item_credit": "No credit on the tally",
+    "pool_too_low_sustenance": "Too hungry for this deal",
+    "pool_too_low_knowledge": "You don't know enough to sign",
+    "pool_too_low_population": "Not enough hands to pledge",
+    "pool_too_low_infrastructure": "Nothing built to carry this",
+    "pool_too_low_legitimacy": "No one would honor your word",
+    "pool_too_low_entropy": "Too much entropy already",
+    "entropy_tier_1": "The low zones won't hear it",
+    "entropy_tier_2": "Mid zones: noise, then doubt",
+    "entropy_tier_3": "The high zones smell this",
+    "entropy_tier_4": "Only the deep zones would take it",
+    "verb_climb": "No handhold within reach",
+    "verb_sneak": "Standing upright; crouch first"
+  },
+  "almanac_labels": {
+    "pools_title": "The Six Accounts",
+    "stations_visited": "Stations witnessed",
+    "stations_missed": "Stations missed",
+    "era_progress": "Road walked to the stone",
+    "keys_title": "Keys of the Ascent"
+  },
+  "render_fault": {
+    "stripe": "RENDER FAULT — the world holds its last good frame. Press R.",
+    "toast": "Three faults running. Paused on the last good frame. Press R to repaint."
+  },
+  "station_ui": {
+    "select_hint": "↑↓ select · ⏎ commit",
+    "commit_hint": "⏎ commits. Numbers land after.",
+    "leave_hint": "Esc leaves it open. Nothing is owed yet.",
+    "consequence_pending": "The consequences are walking over."
+  }
+}
