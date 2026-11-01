@@ -15,9 +15,15 @@ import { createTransition } from '../engine/transition.js';
 import { createSim } from '../engine/tick.js';
 import { createHud } from '../engine/hud.js';
 import { drawFigure, sheetUrl } from '../engine/figure.js';
-import { PARALLAX, VIEW_W, VIEW_H, TILE, HINT_R } from '../engine/feel.js';
+import { PARALLAX, VIEW_W, VIEW_H, TILE, HINT_R, FLASH_MS } from '../engine/feel.js';
 import * as gatesMod from '../engine/gates.js';           // v7 §3
 import * as choicesMod from '../engine/actionChoices.js'; // v7 §4
+import { createJuice, easeOutQuad, gradeEra } from '../engine/juice.js'; // v8 §1/§2
+import { createSfx, pickupVoice } from '../engine/sfx.js'; // v8 §2
+import { setCollapseDoc } from '../engine/collapse.js';   // v8 §3 copy
+import {
+  ambientLinesForEra, indexEchoes, echoForEncounter, markEchoSeen, collapseLine,
+} from '../engine/copy-v8.js';                            // v8 §3 copy
 
 const SAVE_KEY = 'long-ascent-save-v1'; // same key: old saves migrate in place
 const SETTINGS_KEY = 'long-ascent-settings-v1';
@@ -50,7 +56,11 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
   if (options.actionsModule && options.entitySystemFactory) {
     actions = options.actionsModule.createActionSystem({
       game, player,
-      onThrow: (spec) => entities && entities.throwProjectile(spec),
+      onThrow: (spec) => {
+        if (!entities) return;
+        entities.throwProjectile(spec); // v8 §1: whoosh + arc trail (the trail renders from projFx tracking)
+        sfx.play('throw');
+      },
     });
   }
 
@@ -62,6 +72,22 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
     });
     sim.attachEntities(entities);
   }
+
+  // ---- v8: juice + audio + copy (SPEC §1–§3; all optional, headless-safe) ------
+  const juice = createJuice({ reducedMotion, rng: mulberry32Local(0x5eed17), state: game.state });
+  if (entities) entities.attachV8Fx(juice);
+  const sfx = createSfx({
+    ctx: options.audioContext || null,
+    getSettings: () => ({ volume: settings.volume, music: settings.music, sfx: settings.sfx }),
+  });
+  sfx.setEra(game.state.era);
+  if (options.collapseDoc) setCollapseDoc(options.collapseDoc);
+  const echoIndex = indexEchoes(options.echoesDoc);
+  const whisperEras = new Map(); // era -> ambient line pool (research/ambient-v8.json)
+  let pendingEcho = null;        // consequence sign waiting for the next boundary
+  let lastComboCount = 0;        // chain-tick detector for menu-click sfx
+  // Per-era walk ledger feeding the boundary report card (SPEC §2).
+  const eraLedger = { era: game.state.era, dist: 0, timeS: 0, gained: 0, multSum: 0, multN: 0, collapsed: false };
 
   // Continue: restart at the last boundary reached (SPEC §2).
   const rawSave = safeGet(SAVE_KEY);
@@ -95,6 +121,8 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
 
   function onKeyDown(e) {
     const k = e.key;
+    // v8 §1: any key skips the era sequence once past the 400 ms beat.
+    if (juice.eraSeq.active) { juice.eraSeq.skip(); return; }
     if (encounters.active) return menuKey(e);
     if (k === 'Shift') keys.sprint = true;
     else if (k === 'c' || k === 'C') keys.crouch = !keys.crouch; // toggle: hold-free
@@ -132,12 +160,16 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
     // v7 §4: greyed action-choices cannot be picked (keyboard path too).
     const act = encounters.active;
     const raw = act?.choices.find((c) => c.label === label);
-    if (raw?.disabled) return;
+    if (raw?.disabled) { juice.menu.denied(); sfx.play('denied-buzz'); return; }
     const res = encounters.choose(label);
     if (res.ok) {
+      sfx.play('menu-click');
       autosave();
       toast(describeDeltas(res.deltas));
       renderHud();
+      // v8 §3: remember the consequence echo for the NEXT boundary sign.
+      const echo = echoForEncounter(echoIndex, act?.id, game.state.v8);
+      if (echo) pendingEcho = echo;
     }
   }
 
@@ -200,6 +232,9 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
       progress01: boundaryProgress(player.x),
       label: '',
       hand: actions ? { held: actions.held, staminaFrac: actions.staminaFrac(), aiming: actions.aiming } : null,
+      comboMult: juice.combo.mult(), // v8 §2: multiplier chip when a chain is live
+      // v8 §1: stamina bar pulses when drained below 20% (hud.js paints the class).
+      staminaLow: actions ? actions.staminaFrac() < 0.2 : false,
     });
     // Keep the header in sync (same element contract as v4/v5).
     const title = document.getElementById('era-title');
@@ -219,18 +254,187 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
     const dt = lastT ? Math.min(0.25, (tms - lastT) / 1000) : 0;
     lastT = tms;
 
+    // v8 §1: era transition sequence owns the clock — skippable after 400 ms.
+    if (juice.eraSeq.active) {
+      juice.eraSeq.update(dt);
+      paint();
+      raf = requestAnimationFrame(frame);
+      return;
+    }
+
+    const prevX = player.x;
     const snap = inputSnapshot();
     const events = sim.frame(dt, snap);
     // v7 §2: E interacts with entities when no encounter object owns the press.
     if (snap.downEdge && !encounters.active && entities) {
       const r = entities.interact(player);
-      if (r.ok) { autosave(); renderHud(); }
+      if (r.ok) { entityInteractFx(r); autosave(); renderHud(); }
+      else if (r.reason === 'hand busy') sfx.play('denied-buzz');
     }
     for (const ev of events) handleEvent(ev);
+    v8Tick(dt, prevX);
 
     paint();
     hudTick(dt);
     raf = requestAnimationFrame(frame);
+  }
+
+  // ---- v8 per-frame feel/copy/depth tick ----------------------------------------
+  function v8Tick(dt, prevX) {
+    if (dt <= 0) return;
+    juice.update(dt);
+    if (actions) actions.inputLocked = juice.hit.locked;
+    // projectile spin + trail points
+    if (entities) {
+      for (const p of entities.projectiles) {
+        if (p.done) { juice.projFx.release(p.id); continue; }
+        juice.projFx.track(p.id, p.x, p.y);
+        juice.projFx.advance(p.id, dt);
+      }
+    }
+    // combo chain ledger (menu-click on each new link; avg for the report card)
+    if (juice.combo.count > lastComboCount) {
+      eraLedger.multSum += juice.combo.mult();
+      eraLedger.multN += 1;
+      sfx.play('menu-click');
+    }
+    lastComboCount = juice.combo.count;
+    // sprint dust: a puff every ~0.28 s while sprinting on the ground (juice §3)
+    if (actions && actions.sprinting && player.grounded) {
+      sprintDustAcc += dt;
+      if (sprintDustAcc >= 0.28) {
+        sprintDustAcc = 0;
+        juice.particles.sprintPuff(player.x + player.w / 2, player.y + player.h, Math.sign(player.vx) || 1);
+      }
+    } else sprintDustAcc = 0;
+    // whisper bubbles above the figure every ~45 s of walking (SPEC §3)
+    const moving = Math.abs(player.x - prevX) > 0.01;
+    if (moving) {
+      eraLedger.dist += Math.abs(player.x - prevX);
+      eraLedger.timeS += dt;
+      game.state.v8.runTimeS = (game.state.v8.runTimeS || 0) + dt;
+      const era = world.eraAtX(player.x + player.w / 2);
+      if (!whisperEras.has(era)) whisperEras.set(era, ambientLinesForEra(options.ambientDoc, era));
+      juice.whisper.update(dt, true, era, whisperEras.get(era));
+    } else {
+      juice.whisper.update(dt, false, game.state.era, []);
+    }
+    // HUD repaint while a multiplier chip or hit blink is live
+    if (juice.combo.count > 0 || juice.hit.flashLeftMs > 0) hudComboTick(dt);
+  }
+
+  let hudComboAcc = 0, sprintDustAcc = 0;
+  function hudComboTick(dt) {
+    hudComboAcc += dt;
+    if (hudComboAcc >= 0.2) { hudComboAcc = 0; renderHud(); }
+  }
+
+  /** Juice + audio reaction to a successful entity interact (pickup/gather). */
+  function entityInteractFx(r) {
+    const px = player.x + player.w / 2, feet = player.y + player.h;
+    if (r.took || r.gathered) {
+      sfx.play('pickup', { pool: r.pool });
+      if (r.amount > 0) eraLedger.gained += r.amount;
+      if (r.amount > 0 || r.took) {
+        juice.pickup.pickupTaken({ took: r.took || r.gathered, amount: r.amount || 0, pool: r.pool || null, x: px, y: feet - 32 });
+        juice.particles.pickupSparkle(px, feet - 20);
+      }
+    }
+  }
+
+  // ---- v8: era sequence, report cards, whisper bubble ---------------------------
+
+  /** Snapshot the live frame once so the set piece can push in on it. */
+  let seqSnapCanvas = null;
+  function captureSeqSnapshot() {
+    if (!canvas || !canvas.toDataURL && !canvas.getContext) return;
+    try {
+      const src = canvas;
+      if (!seqSnapCanvas) seqSnapCanvas = (typeof document !== 'undefined' ? document.createElement('canvas') : null);
+      if (!seqSnapCanvas) return;
+      seqSnapCanvas.width = src.width; seqSnapCanvas.height = src.height;
+      const sctx = seqSnapCanvas.getContext('2d');
+      if (sctx && src.width > 0) sctx.drawImage(src, 0, 0);
+    } catch { /* headless or tainted canvas: sequence paints without the snapshot */ }
+  }
+
+  /** Kick off the 1.2 s boundary set piece + audio swell + report card. */
+  function beginEraSequence(toEra) {
+    const fromEra = Math.max(1, toEra - 1);
+    captureSeqSnapshot();
+    juice.eraSeq.begin(toEra, {
+      fromEra,
+      name: erasData?.eras?.find((e) => e.num === toEra)?.name || erasData?.eras?.[toEra - 1]?.name || '',
+    });
+    sfx.play('era-swell');
+    sfx.setEra(toEra); // bed crossfade by era group (1-5 / 6-11 / 12-17)
+    gradeAndShowEra(fromEra);
+    // SPEC §3: consequence echo near the boundary we just crossed (once per run).
+    if (pendingEcho) {
+      toast(pendingEcho.text);
+      markEchoSeen(game.state.v8, pendingEcho.id);
+      pendingEcho = null;
+    }
+  }
+
+  /** SPEC §2: per-era report card at the boundary; persisted in state.v8.eraScores. */
+  function gradeAndShowEra(era) {
+    const total = world.objects.filter((o) => o.choices?.length && o.era === era).length;
+    const resolvedList = game.state.resolvedEncounters || [];
+    const resolved = resolvedList.filter((r) => r.era === era).length;
+    const comboAvg = eraLedger.multN > 0 ? eraLedger.multSum / eraLedger.multN : 1;
+    const resources = Math.round(eraLedger.gained);
+    const stars = gradeEra({ encountersResolved: resolved, encountersTotal: total, collapsed: eraLedger.collapsed, comboAvg });
+    const card = { era, stars, timeS: Math.round(eraLedger.timeS), resources, encountersResolved: resolved, encountersTotal: total, comboAvg: Math.round(comboAvg * 100) / 100 };
+    juice.scores.record(era, card);
+    showReportCard(card);
+    // reset the ledger for the era we are walking INTO
+    eraLedger.era = era + 1; eraLedger.dist = 0; eraLedger.timeS = 0; eraLedger.gained = 0;
+    eraLedger.multSum = 0; eraLedger.multN = 0; eraLedger.collapsed = false;
+    autosave();
+  }
+
+  let reportEl = null, reportTimer = null;
+  function showReportCard(card) {
+    if (typeof document === 'undefined' || !toastRoot?.parentElement) return;
+    if (!reportEl) {
+      reportEl = makeEl('div', 'v8-report');
+      reportEl.style.cssText = 'position:fixed;top:14%;left:50%;transform:translateX(-50%);z-index:9;'
+        + 'background:rgba(8,10,24,.92);color:#F4E9C8;padding:10px 18px;border:1px solid #f4bd68;'
+        + 'font:600 13px ui-monospace,monospace;text-align:center;pointer-events:none';
+      toastRoot.parentElement.appendChild(reportEl);
+    }
+    const starStr = '★'.repeat(card.stars) + '☆'.repeat(3 - card.stars);
+    reportEl.textContent = `ERA ${card.era} — ${starStr} · ${card.encountersResolved}/${card.encountersTotal} encounters · +${card.resources} res · ${card.timeS}s · ×${card.comboAvg.toFixed(2)}`;
+    reportEl.hidden = false;
+    clearTimeout(reportTimer);
+    reportTimer = setTimeout(() => { if (reportEl) reportEl.hidden = true; }, 2600);
+  }
+
+  // Whisper bubble element (SPEC §3): rides above the figure while walking.
+  let whisperEl = null;
+  function ensureWhisperEl() {
+    if (whisperEl || typeof document === 'undefined' || !toastRoot?.parentElement) return whisperEl;
+    whisperEl = makeEl('div', 'v8-whisper');
+    whisperEl.style.cssText = 'position:fixed;z-index:6;background:rgba(244,233,200,.92);color:#1a1a22;'
+      + 'padding:4px 10px;border-radius:10px;font:500 12px ui-monospace,monospace;'
+      + 'max-width:260px;text-align:center;pointer-events:none';
+    whisperEl.hidden = true;
+    toastRoot.parentElement.appendChild(whisperEl);
+    return whisperEl;
+  }
+  function paintWhisperBubble() {
+    const el = ensureWhisperEl();
+    if (!el || !canvas?.getBoundingClientRect) return;
+    if (!juice.whisper.bubbleText) { el.hidden = true; return; }
+    const rect = canvas.getBoundingClientRect();
+    const sx = ((player.x + player.w / 2 - camera.x) / VIEW_W) * rect.width;
+    const sy = ((player.y - 18 - camera.y) / VIEW_H) * rect.height;
+    el.textContent = juice.whisper.bubbleText;
+    el.hidden = false;
+    el.style.left = `${rect.left + sx}px`;
+    el.style.top = `${rect.top + sy}px`;
+    el.style.transform = 'translate(-50%, -100%)';
   }
 
   // HUD repaints only on change or on a visible meter beat (stamina drains).
@@ -243,20 +447,69 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
 
   function handleEvent(ev) {
     if (ev.type === 'reequip') loadEraArt(game.state.era);
-    if (ev.type === 'era-begin' || ev.type === 'era-done') { onEraBoundary(ev); autosave(); renderHud(); }
+    if (ev.type === 'era-begin') { beginEraSequence(ev.toEra); onEraBoundary(ev); autosave(); renderHud(); }
+    else if (ev.type === 'era-done') { onEraBoundary(ev); autosave(); renderHud(); }
     if (ev.type === 'crossing-unlocked') toast('THE CROSSING is open — the gantry stands lit.');
-    if (ev.type === 'menu-open') { menuIndex = 0; }
+    if (ev.type === 'menu-open') { menuIndex = 0; juice.menu.opened(); sfx.play('menu-click'); }
     if (ev.type === 'menu-close') { /* menu painted from state each frame */ }
     // ---- v7 events -----------------------------------------------------------
-    if (ev.type === 'contact') { toast(`The ${ev.hazard} catches you. −${ev.cost} sustenance.`); renderHud(); }
-    if (ev.type === 'shakedown') { toast(`${ev.guard} shakes you down for passage.`); renderHud(); }
-    if (ev.type === 'zone-drain') renderHud();
+    if (ev.type === 'contact') {
+      toast(`The ${ev.hazard} catches you. −${ev.cost} sustenance.`);
+      hitFx(ev);
+      renderHud();
+    }
+    if (ev.type === 'shakedown') {
+      toast(`${ev.guard} shakes you down for passage.`);
+      hitFx(ev);
+      renderHud();
+    }
+    if (ev.type === 'zone-drain') {
+      if (juice.combo) juice.combo.damage(); // belt-and-suspenders: damage breaks chain
+      renderHud();
+    }
     if (ev.type === 'throw-hit') { autosave(); }
     if (ev.type === 'light-change') lightLevel = ev.level;
     if (ev.type === 'collapse') {
-      fadeOutThen(() => toast(`You collapse — ${ev.reason}. Woke at the boundary stone. −1 ${ev.lost.pool}.`));
+      const line = options.collapseDoc
+        ? collapseLine(options.collapseDoc, game.state.__lastHazardHit)
+        : `You collapse — ${ev.reason}.`;
+      eraLedger.collapsed = true;
+      juice.shake.kick('collapse');
+      sfx.play('collapse');
+      fadeOutThen(() => toast(`${line} Woke at the boundary stone. −1 ${ev.lost.pool}.`));
       autosave(); renderHud();
     }
+    // ---- v8 events -----------------------------------------------------------
+    if (ev.type === 'jump') {
+      juice.squash.jump();
+      juice.particles.jumpDust(player.x + player.w / 2, player.y + player.h);
+      sfx.play('jump');
+    }
+    if (ev.type === 'land') {
+      const sq = juice.squash.land(ev.fallVy ?? 0);
+      juice.particles.landDust(player.x + player.w / 2, player.y + player.h, ev.fallVy ?? 0);
+      if (sq.t >= 0.6) juice.shake.kick('heavy'); // heavy landing: 1 px / 80 ms
+      sfx.play('land');
+    }
+    if (ev.type === 'throw-land' || ev.type === 'fuse-out') sfx.play('throw');
+    if (ev.type === 'hazard-kill') {
+      juice.shake.kick('hazard');
+      juice.particles.hitSparks(ev.x ?? player.x, ev.y ?? player.y);
+      sfx.play('hit');
+      if (ev.mastered) toast(`${ev.hazard} mastered. Your throws stun them now.`);
+    }
+    if (ev.type === 'mastery-stun') sfx.play('hit');
+  }
+
+  /** Hit feedback: white flash + knockback impulse + 200 ms input lock (SPEC §1). */
+  function hitFx(ev) {
+    const srcX = Number.isFinite(ev.sourceX) ? ev.sourceX : player.x - 40;
+    const imp = juice.hit.hit(srcX);
+    player.vx = imp.vx;
+    if (player.grounded) player.vy = imp.vy;
+    juice.shake.kick('hazard');
+    juice.particles.hitSparks(player.x + player.w / 2, player.y + player.h - 12);
+    sfx.play('hit');
   }
 
   // §4 gate sign: reading the seam before entering era N offers advantage/open.
@@ -267,7 +520,7 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
     const chk = gatesMod.checkGate(gate, game.state, actions);
     if (chk.met && !gatesMod.gateTaken(game.state, ev.toEra)) {
       const adv = gatesMod.takeGate(options.gatesDoc, game.state, actions, ev.toEra);
-      if (adv.ok) toast(`${gate.sign} — ADVANTAGE PATH OPEN: ${adv.advantage}`);
+      if (adv.ok) { toast(`${gate.sign} — ADVANTAGE PATH OPEN: ${adv.advantage}`); sfx.play('gate-open'); }
     } else {
       toast(chk.met ? `${gate.sign}.` : `${gate.sign} — ${chk.reason}. The open path remains.`);
     }
@@ -282,7 +535,12 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     fitCanvas(canvas, ctx);
-    const off = camera.renderOffset();
+    // v8 §1: the era sequence owns the whole frame while it plays (its own
+    // snapshot + beat overlays; reduced-motion paints the plain live frame).
+    if (juice.eraSeq.active) { paintEraSequenceFrame(ctx); return; }
+
+    // v8 shake: juice offset ADDS to the engine camera shake (SPEC §1).
+    const off = juice.renderOffset(camera.renderOffset());
     const eraShown = world.eraAtX(player.x + player.w / 2);
 
     // Parallax: four depths, seamless tiling, per-era layers (SPEC §1/§3).
@@ -319,7 +577,7 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
       }
     }
 
-    drawFigure(ctx, currentSheet, player, sim.clock, {});
+    drawFigure(ctx, currentSheet, v8Figure(), sim.clock, {});
 
     // v7 §2: thrown projectiles + transient drops (meat etc.)
     if (entities) {
@@ -330,12 +588,36 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
         else { ctx.fillStyle = '#f4bd68'; ctx.fillRect(Math.round(dr.x - 5), Math.round(feet - 10), 10, 10); }
       }
       for (const p of entities.projectiles) {
-        const img = images.get(`assets/held_${p.item}.png`);
-        if (img?.img) ctx.drawImage(img.img, Math.round(p.x - 12), Math.round(p.y - 12), 24, 24);
-        else { ctx.fillStyle = '#DAE8FF'; ctx.fillRect(Math.round(p.x - 4), Math.round(p.y - 4), 8, 8); }
+        drawProjectile(ctx, p);
       }
     }
+
+    // v8 §1: particles (dust/spark/sparkle) in world space.
+    drawParticles(ctx);
     ctx.restore();
+
+    // ---- screen-space v8 layers -----------------------------------------------
+    // Hit white-flash (color-only: stays on under reduced motion, juice rule 6).
+    if (juice.hit.flashing) {
+      ctx.fillStyle = `rgba(255,255,255,${(0.55 * (juice.hit.flashLeftMs / FLASH_MS)).toFixed(3)})`;
+      ctx.fillRect(0, 0, VIEW_W, VIEW_H);
+    }
+    // Floating '+N Resource' texts (world coords → screen via camera offset).
+    ctx.textAlign = 'center';
+    ctx.font = '700 13px ui-monospace, monospace';
+    for (const t of juice.pickup.viewModel()) {
+      ctx.globalAlpha = t.alpha;
+      ctx.fillStyle = '#F4E9C8';
+      ctx.fillText(t.text, t.x - off.x, t.y - off.y);
+    }
+    ctx.globalAlpha = 1;
+    // Pickup flights toward the HUD strip.
+    for (const f of juice.pickup.flights) {
+      const img = images.get(`assets/pickup_${f.type}.png`);
+      const fx = f.x - off.x, fy = f.y - off.y;
+      if (img?.img) ctx.drawImage(img.img, Math.round(fx - 10), Math.round(fy - 10), 20, 20);
+      else { ctx.fillStyle = '#F4E9C8'; ctx.fillRect(Math.round(fx - 4), Math.round(fy - 4), 8, 8); }
+    }
 
     // v7: dark_cave overlay — pitch black beyond the mouth without a torch.
     if (lightLevel < 1) {
@@ -352,6 +634,107 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
 
     // In-world UI overlays (prompt bubble + anchored choice menu).
     paintOverlays();
+    paintWhisperBubble();
+  }
+
+  // ---- v8 paint helpers -------------------------------------------------------
+
+  /** The figure with squash&stretch applied about its feet (SPEC §1). */
+  function v8Figure() {
+    const sq = juice.squash.current();
+    if (sq.sx === 1 && sq.sy === 1) return player;
+    const h = player.h * sq.sy, w = player.w * sq.sx;
+    return { ...player, w, h, x: player.x + (player.w - w) / 2, y: player.y + (player.h - h) };
+  }
+
+  /** Projectile with spin rotation + 8-point ribbon trail (SPEC §1). */
+  function drawProjectile(ctx, p) {
+    const fx = juice.projFx.fx(p.id);
+    for (let i = 0; i < fx.trail.length; i++) {
+      const t = fx.trail[i];
+      const a = ((i + 1) / fx.trail.length) * 0.35;
+      ctx.fillStyle = `rgba(218, 232, 255, ${a.toFixed(3)})`;
+      ctx.fillRect(Math.round(t.x - 2), Math.round(t.y - 2), 4, 4);
+    }
+    ctx.save();
+    ctx.translate(Math.round(p.x), Math.round(p.y));
+    ctx.rotate(fx.spin);
+    const img = images.get(`assets/held_${p.item}.png`);
+    if (img?.img) ctx.drawImage(img.img, -12, -12, 24, 24);
+    else { ctx.fillStyle = '#DAE8FF'; ctx.fillRect(-4, -4, 8, 8); }
+    ctx.restore();
+  }
+
+  /** Juice particles in world space (dust/spark/sparkle; sparkle maps to Studio's particle_star). */
+  const PARTICLE_SRC = { sparkle: 'star' }; // kind → studio asset suffix
+  function drawParticles(ctx) {
+    for (const pt of juice.particles.list()) {
+      const img = images.get(`assets/particle_${PARTICLE_SRC[pt.kind] || pt.kind}.png`);
+      const s = pt.size;
+      ctx.globalAlpha = pt.alpha;
+      if (img?.img) ctx.drawImage(img.img, Math.round(pt.x - s / 2), Math.round(pt.y - s / 2), s, s);
+      else { ctx.fillStyle = pt.kind === 'spark' ? '#FFE9B0' : '#C9BCA6'; ctx.fillRect(Math.round(pt.x - 2), Math.round(pt.y - 2), 4, 4); }
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  /** Full-frame era transition sequence (SPEC §1 beat table). */
+  function paintEraSequenceFrame(ctx) {
+    const seq = juice.eraSeq.sample(juice.eraSeq.elapsed);
+    const off = camera.renderOffset();
+    const fromPal = PALETTES[seq.fromEra] || PALETTES[1];
+    const toPal = PALETTES[seq.toEra] || PALETTES[1];
+    // Palette crossfade backdrop.
+    ctx.fillStyle = mixCss(fromPal.sky, toPal.sky, seq.fade);
+    ctx.fillRect(0, 0, VIEW_W, VIEW_H);
+    // Snapshot of the live scene, pushed in 8% around the figure's feet.
+    if (seqSnapCanvas && seqSnapCanvas.width > 0) {
+      const ax = player.x + player.w / 2 - off.x, ay = player.y + player.h - off.y;
+      ctx.save();
+      ctx.translate(ax, ay);
+      ctx.scale(seq.push, seq.push);
+      ctx.translate(-ax, -ay);
+      ctx.drawImage(seqSnapCanvas, 0, 0, VIEW_W, VIEW_H);
+      ctx.restore();
+    }
+    // Desaturate wash over the snapshot.
+    if (seq.desat > 0) { ctx.fillStyle = `rgba(120, 120, 130, ${(seq.desat * 0.35).toFixed(3)})`; ctx.fillRect(0, 0, VIEW_W, VIEW_H); }
+    // Light column at the boundary structure.
+    if (seq.column > 0) {
+      const bx = world.boundaryFor(seq.toEra)?.x ?? player.x;
+      const sxp = bx - off.x;
+      const g = ctx.createLinearGradient(sxp - 60, 0, sxp + 60, 0);
+      g.addColorStop(0, 'rgba(255,244,214,0)');
+      g.addColorStop(0.5, `rgba(255,244,214,${(0.5 * seq.column).toFixed(3)})`);
+      g.addColorStop(1, 'rgba(255,244,214,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(sxp - 60, 0, 120, VIEW_H);
+    }
+    // Re-equip white flash.
+    if (seq.flash) { ctx.fillStyle = 'rgba(255,255,255,0.85)'; ctx.fillRect(0, 0, VIEW_W, VIEW_H); }
+    // Title card slide in/out.
+    if (seq.cardAlpha > 0) drawTitleCard(ctx, seq);
+  }
+
+  function drawTitleCard(ctx, seq) {
+    const num = String(seq.toEra).padStart(2, '0');
+    const img = images.get(`assets/titlecard_era${num}.png`);
+    const slideIn = Math.min(1, seq.cardT / 0.25);
+    const slideOut = Math.min(1, Math.max(0, (seq.cardT - 0.75) / 0.25));
+    const x = -VIEW_W + easeOutQuad(slideIn) * (VIEW_W * 0.5) - easeOutQuad(slideOut) * (VIEW_W * 0.5);
+    ctx.globalAlpha = seq.cardAlpha;
+    if (img?.img) {
+      const h = Math.round(VIEW_H * 0.5);
+      ctx.drawImage(img.img, Math.round(x), Math.round(VIEW_H * 0.25), VIEW_W, h);
+    } else {
+      ctx.fillStyle = 'rgba(8, 10, 24, 0.85)';
+      ctx.fillRect(Math.round(x), Math.round(VIEW_H * 0.35), VIEW_W, 90);
+      ctx.fillStyle = '#F4E9C8';
+      ctx.font = '700 28px ui-monospace, monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(`${seq.toEra} — ${seq.name}`, x + VIEW_W / 2, VIEW_H * 0.35 + 52);
+    }
+    ctx.globalAlpha = 1;
   }
 
   function paintOverlays() {
@@ -378,6 +761,8 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
       hud.renderMenu(menuRoot, act ? {
         title: act.title || '', prompt: act.prompt || '', choices: decorated,
         onPick: pickChoice, selectedIndex: menuIndex,
+        scale: juice.menu.scale(), // v8 §1: 120 ms scale-in
+        deniedOffset: juice.menu.deniedOffset(), deniedIndex: menuIndex, // denied wiggle on the highlighted row
       } : { choices: [] });
       positionWorldElement(menuRoot, act);
     }
@@ -531,6 +916,15 @@ function makeEl(tag, cls, text) {
   if (cls) n.className = cls;
   if (text != null) n.textContent = text;
   return n;
+}
+
+/** Mix two #rrggbb colors, t in [0,1]. */
+function mixCss(a, b, t) {
+  const pa = parseInt(a.slice(1), 16), pb = parseInt(b.slice(1), 16);
+  const r = Math.round(((pa >> 16) & 255) + (((pb >> 16) & 255) - ((pa >> 16) & 255)) * t);
+  const g = Math.round(((pa >> 8) & 255) + (((pb >> 8) & 255) - ((pa >> 8) & 255)) * t);
+  const bl = Math.round((pa & 255) + ((pb & 255) - (pa & 255)) * t);
+  return `rgb(${r}, ${g}, ${bl})`;
 }
 
 function safeGet(k) { try { return localStorage.getItem(k); } catch { return null; } }

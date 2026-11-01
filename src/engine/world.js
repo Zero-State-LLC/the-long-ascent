@@ -175,11 +175,17 @@ function buildTerrain(rng) {
     }
 
     // Pit: occasionally drop a gap of 2–4 tiles mid-segment (never near seams).
+    // v8 passability fix (feel §1 "gaps must stay jumpable"): the pit FLOOR sits
+    // one tile below the current surface instead of clearing to the void — a
+    // full-depth carve made 3-tile-walled, box-width traps the player could
+    // enter but never leave (corner-bonk on both escape routes, found by
+    // tools/sim-playthrough-v8.mjs).
     const pitHere = !nearSeam && rng() < 0.012;
     if (pitHere) {
       const width = 2 + Math.floor(rng() * 3); // 2..4 tiles ≤ 4.5 budget
+      const floor = h + 1;                     // 1 tile down: walls stay ≤1 tile climbable
       for (let w = 0; w < width && c + w < WORLD_COLS; w++) {
-        for (let r = 0; r < WORLD_ROWS; r++) grid[r][c + w] = 0;
+        for (let r = 0; r < WORLD_ROWS; r++) grid[r][c + w] = r >= floor ? 1 : 0;
       }
       c += width - 1;
       continue;
@@ -188,10 +194,15 @@ function buildTerrain(rng) {
     fillBelow(c, h);
 
     // Floating platform above ground sometimes (mantle-reachable: ≤3 tiles up).
+    // v8 passability fix: platforms live at a FIXED high band (row 7) so they never
+    // form jump-height lids over the h random-walk's higher floors — h reaches row
+    // 11, and a platform at h−N over rising ground left <96px of headroom (jump
+    // bonk, found by tools/sim-playthrough-v8.mjs). Row 7 leaves ≥4 rows of air
+    // over the highest floor (row 11) and stays ≥2 rows below the world top.
     if (!nearSeam && rng() < 0.03) {
-      const pr = Math.max(2, h - 3);
+      const pr = 7;
       const plen = 3 + Math.floor(rng() * 4);
-      for (let w = 0; w < plen && c + w < WORLD_COLS; w++) grid[pr][c + w] = 1;
+      for (let w = 0; w < plen && c + w < WORLD_COLS; w++) if (grid[pr][c + w] === 0) grid[pr][c + w] = 1;
     }
   }
   // Guarantee the opening runway is flat (first screen teaches walking).

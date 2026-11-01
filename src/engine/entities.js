@@ -113,7 +113,11 @@ export function createEntitySystem({ world, game, actions, surfaceFeet, toast = 
     v7.depletedBushes = [...depletedSet];
   };
   // collapse-reason hook (§5): remember the last hazard that touched the player
-  const state_lastHit = (type) => { game.state.__lastHazardHit = type; };
+  // (v8: mirrored onto v7.lastHazardHit so it rides the serialized save).
+  const state_lastHit = (type) => {
+    game.state.__lastHazardHit = type;
+    if (v7) v7.lastHazardHit = type;
+  };
 
   // Choke-point guards stand at 92% of their own segment — just before the era
   // seam, "between you and a choke point" (SPEC §2).
@@ -137,7 +141,25 @@ export function createEntitySystem({ world, game, actions, surfaceFeet, toast = 
     return Math.round((res[pool] - before) * 100) / 100;
   }
 
+  // v8 juice hooks (SPEC §1/§2): optional { combo, mastery } — when attached,
+  // pool/countable gathers route through the combo multiplier and throws honor
+  // per-family hazard mastery. Absent → byte-identical v7 behavior.
+  let v8fx = null;
+  function attachV8Fx(fx) { v8fx = fx || null; }
+  /** Combo-scaled positive gain into a pool or countable pocket key. */
+  function scaledPool(pool, amount) {
+    if (v8fx && v8fx.combo && amount > 0) { v8fx.combo.gather(); amount = v8fx.combo.apply(amount); }
+    return applyPool(pool, amount);
+  }
+  function scaledCountable(key, amount) {
+    if (v8fx && v8fx.combo && amount > 0) { v8fx.combo.gather(); amount = v8fx.combo.apply(amount); }
+    actions.addCountable(key, amount);
+    return amount;
+  }
+
   // ---- throwing ------------------------------------------------------------------
+  /** v8 events queued by resolveImpact (drained by update(), which owns `events`). */
+  const impactEvents = [];
   /** Launch a projectile spec produced by actions.releaseThrow(). */
   function throwProjectile(spec) {
     projectiles.push({
@@ -147,6 +169,7 @@ export function createEntitySystem({ world, game, actions, surfaceFeet, toast = 
       vx: spec.vx, vy: spec.vy,
       fuseLeft: spec.fuse ?? null,
       done: false,
+      stunFamily: spec.stunFamily ?? null, // v8 mastery: throws honor per-family mastery
     });
   }
 
@@ -155,12 +178,22 @@ export function createEntitySystem({ world, game, actions, surfaceFeet, toast = 
     proj.done = true;
     if (hitHazard) {
       const h = hitHazard;
+      // v8 hazard mastery (SPEC §2): once the family is mastered, ANY throw
+      // against it stuns for MASTERY_STUN_S (the distracted freeze machinery).
+      if (v8fx?.mastery && v8fx.mastery.armed(h.def.type) && !h.rt.dead) {
+        h.rt.distracted = Math.max(h.rt.distracted, v8fx.mastery.stunFor(h.def.type));
+        impactEvents.push({ type: 'mastery-stun', hazard: h.def.type, ms: v8fx.mastery.stunFor(h.def.type) });
+      }
       if (proj.item === 'spear') {
         // spear kills a chaser → drops meat (acceptance: stone does NOT).
         h.rt.dead = true;
         deadSet.add(h.def.id);
         spawnDrop(h.def.x, 'meat');
         toast(`${h.def.type} down. Meat on the ground.`);
+        if (v8fx?.mastery) { // v8 mastery counter (persists via state.v8.mastery)
+          const n = v8fx.mastery.recordKill(h.def.type);
+          impactEvents.push({ type: 'hazard-kill', hazard: h.def.type, total: n, mastered: v8fx.mastery.armed(h.def.type) });
+        }
       } else if (proj.item === 'torch') {
         // torch scares chasers off (flees; not killed) and distracts guards.
         if (isChaser(h.def.type)) {
@@ -233,12 +266,13 @@ export function createEntitySystem({ world, game, actions, surfaceFeet, toast = 
       // interact gathers slower: one unit per press, depletes the bush for the run
       if (v7.held !== null) return { ok: false, reason: 'hand busy' };
       const direct = PICKUP_EFFECTS[GATHER_YIELD[d.type]];
-      if (GATHER_YIELD[d.type] === 'fruit') actions.pickup('fruit');
-      else if (direct?.pool) applyPool(direct.pool, direct.amount);
+      let gAmount = 0;
+      if (GATHER_YIELD[d.type] === 'fruit') { actions.pickup('fruit'); gAmount = 1; }
+      else if (direct?.pool) gAmount = scaledPool(direct.pool, direct.amount);
       depletedSet.add(d.id);
       r.depleted = true;
       persistSets();
-      return { ok: true, gathered: d.type, depleted: true };
+      return { ok: true, gathered: d.type, depleted: true, amount: gAmount, pool: direct?.pool || null, mult: v8fx?.combo ? v8fx.combo.mult() : 1 };
     }
     if (d.kind === 'terrain' && d.type === 'anchor') {
       // rope placement requires a held item? SPEC: throw rope at anchors. We accept
@@ -252,18 +286,20 @@ export function createEntitySystem({ world, game, actions, surfaceFeet, toast = 
 
   function takePickup(d) {
     const r = d.kind === 'drop' ? null : rt.get(d.id);
+    let amount = 0, mult = 1, eff = null; // v8: reported for the pickup juice (amount/mult)
     if (HAND_PICKUPS.has(d.type)) {
       if (v7.held !== null) return { ok: false, reason: 'hand busy' };
       actions.pickup(d.type);
     } else {
-      const eff = PICKUP_EFFECTS[d.type];
+      eff = PICKUP_EFFECTS[d.type];
       if (!eff) return { ok: false, reason: 'unknown pickup' };
-      if (eff.pool) applyPool(eff.pool, eff.amount);
-      else actions.addCountable(eff.countable, eff.amount);
+      if (eff.pool) amount = scaledPool(eff.pool, eff.amount);
+      else amount = scaledCountable(eff.countable, eff.amount);
     }
     if (d.kind === 'drop') { drops.splice(drops.indexOf(d), 1); }
     else { r.taken = true; takenSet.add(d.id); persistSets(); }
-    return { ok: true, took: d.type };
+    if (v8fx && v8fx.combo && amount > 0) mult = v8fx.combo.mult(); // HUD multiplier after the chain tick
+    return { ok: true, took: d.type, amount, pool: eff?.pool || null, countable: eff?.countable || null, mult };
   }
 
   // ---- per-tick update -----------------------------------------------------------
@@ -273,6 +309,7 @@ export function createEntitySystem({ world, game, actions, surfaceFeet, toast = 
    */
   function update({ player, dt, era }) {
     const events = [];
+    impactEvents.length = 0; // reset the impact queue each tick (resolveImpact appends here)
     const cx = playerCenter(player);
     const py = player.y + player.h; // feet
 
@@ -284,16 +321,16 @@ export function createEntitySystem({ world, game, actions, surfaceFeet, toast = 
       p.y += p.vy * dt;
       if (p.fuseLeft != null) {
         p.fuseLeft -= dt;
-        if (p.fuseLeft <= 0) { resolveImpact(p, null); events.push({ type: 'fuse-out', item: p.item, x: p.x }); continue; }
+        if (p.fuseLeft <= 0) { resolveImpact(p, null); events.push({ type: 'fuse-out', item: p.item, x: p.x, y: p.y }); continue; }
       }
       // hazard hit test (point vs body box around the hazard standing spot)
       const hit = hazardAt(p.x, p.y);
-      if (hit) { resolveImpact(p, hit); events.push({ type: 'throw-hit', item: p.item, hazard: hit.def.type, hazardId: hit.def.id }); continue; }
+      if (hit) { resolveImpact(p, hit); events.push({ type: 'throw-hit', item: p.item, hazard: hit.def.type, hazardId: hit.def.id, x: p.x, y: p.y }); continue; }
       // terrain/gone: landed on ground or left the world. Landing samples just
       // below the point so a projectile resting exactly on the surface registers.
       if (world.collider.solidAt(p.x, p.y + 1) || p.x < 0 || p.x > world.worldW) {
         resolveImpact(p, null);
-        events.push({ type: 'throw-land', item: p.item, x: Math.round(p.x) });
+        events.push({ type: 'throw-land', item: p.item, x: Math.round(p.x), y: p.y });
       }
     }
     for (let i = projectiles.length - 1; i >= 0; i--) if (projectiles[i].done) projectiles.splice(i, 1);
@@ -316,8 +353,12 @@ export function createEntitySystem({ world, game, actions, surfaceFeet, toast = 
         if (!r.fleeing && dx <= TILE * 0.75 && Math.abs(py - (surfaceFeet ? surfaceFeet(d.x) : py)) <= TILE * 2 && r.contactCd === 0) {
           applyPool('sustenance', -CONTACT_COST);
           r.contactCd = CONTACT_COOLDOWN_S;
-          events.push({ type: 'contact', hazard: d.type, cost: CONTACT_COST });
+          // v8 juice: knockback impulse away from the hazard (host applies to
+          // the player body + input lock via createHitFeedback). Absent → v7.
+          const kbDir = cx >= d.x ? 1 : -1;
+          events.push({ type: 'contact', hazard: d.type, cost: CONTACT_COST, sourceX: d.x, kbDir });
           state_lastHit(d.type); // collapse-reason hook (§5)
+          if (v8fx?.combo) v8fx.combo.damage(); // v8: damage breaks the gather chain
         }
       } else if (d.type === 'bandit' || d.type === 'soldier_patrol') {
         // choke-point guard: pressure when in range and not dealt with.
@@ -331,6 +372,7 @@ export function createEntitySystem({ world, game, actions, surfaceFeet, toast = 
             r.shakedowned = true;
             events.push({ type: 'shakedown', guard: d.type, id: d.id });
             state_lastHit(d.type);
+            if (v8fx?.combo) v8fx.combo.damage(); // v8: damage breaks the gather chain
           }
         }
       } else if (ZONE_DRAIN[d.type]) {
@@ -344,6 +386,7 @@ export function createEntitySystem({ world, game, actions, surfaceFeet, toast = 
             applyPool(z.pool, -1 * dt); // 1 per second (fractional accrual)
             events.push({ type: 'zone-drain', zone: d.type, pool: z.pool });
             state_lastHit(d.type);
+            if (v8fx?.combo) v8fx.combo.damage(); // v8: damage breaks the gather chain
           }
         }
       }
@@ -353,7 +396,7 @@ export function createEntitySystem({ world, game, actions, surfaceFeet, toast = 
     const light = caveLight(player, era);
     if (light !== lastLight) { lastLight = light; events.push({ type: 'light-change', level: light }); }
 
-    return { events };
+    return { events: events.concat(impactEvents) };
   }
   let lastLight = 1;
 
@@ -395,7 +438,7 @@ export function createEntitySystem({ world, game, actions, surfaceFeet, toast = 
   return {
     defs, projectiles, drops,
     update, interact, nearestInteractable, throwProjectile, payGuard, caveLight,
-    byId,
+    byId, attachV8Fx,
     entityAt: (id) => byId.get(id),
     runtimeOf: (id) => rt.get(id),
   };

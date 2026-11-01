@@ -48,12 +48,16 @@ export function createSim({ world, player, camera, encounters, transition, game,
     //    "the game only moves when you move"; reading signage freezes time).
     if (!menuOpen && !transitioning) {
       // v7 §1: action verbs run BEFORE physics so speedCap/crouch apply this tick.
-      if (actions) actions.update(input || {}, dt);
+      // v8 juice: input lock (hit knockback, 200 ms) zeroes movement + jump.
+      const locked = actions && actions.inputLocked;
+      if (actions) actions.update(locked ? { era: input?.era } : (input || {}), dt);
       const wasAirborne = !player.grounded;
-      player.update(inputForPlayer(input), dt);
+      // v8 juice: capture the fall velocity BEFORE update() zeroes it on land.
+      const fallVy = player.vy;
+      player.update(inputForPlayer(locked ? null : input), dt);
       if (player.landed && wasAirborne) {
         camera.shake(Math.min(0.5, Math.abs(player.vy) / 600 + 0.15));
-        events.push({ type: 'land' });
+        events.push({ type: 'land', fallVy });
       }
       if (player.jumped) events.push({ type: 'jump' });
 

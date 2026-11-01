@@ -7,7 +7,7 @@
 import { ERA_HOLD_S } from './feel.js';
 
 export const TR_PHASE = { NONE: 'none', HOLD: 'hold', CROSSFADE: 'crossfade', DONE: 'done' };
-export const CROSSFADE_S = 2.0; // SPEC §2: palette crossfade + re-equip ≈ 2 s
+export const CROSSFADE_S = ERA_HOLD_S; // v8 SPEC §1: the whole set piece is 1.2 s (eraSequence mirrors this)
 
 /**
  * @param {object} game core createGame() instance (advanceEra lives behind it)

@@ -22,10 +22,29 @@ const REASON_BY_HAZARD = {
   datastorm: 'The storm took your bearings',
 };
 
+const SOURCE_ALIASES = {
+  boar: 'boar', wolf: 'wolf', stray_dog: 'stray_dog', bandit: 'bandit',
+  soldier_patrol: 'soldier', smog: 'smog', radiation_zone: 'radiation',
+  datastorm: 'datastorm',
+};
+
 /** Human collapse reason from the last hazard that touched you (SPEC §5:
- *  "The collapse reason is shown"). Falls back to plain hunger. */
+ *  "The collapse reason is shown"). Falls back to plain hunger.
+ *  v8 (§3): when a research/collapse-v8.json doc is attached via
+ *  setCollapseDoc(), its source-keyed lines take precedence. */
+let COLLAPSE_DOC = null;
+export function setCollapseDoc(doc) { COLLAPSE_DOC = doc || null; }
+
 export function collapseReason(state) {
   const h = state.__lastHazardHit || state.v7?.lastHazardHit;
+  if (COLLAPSE_DOC) {
+    const reasons = COLLAPSE_DOC.reasons || [];
+    const key = SOURCE_ALIASES[h] || 'generic';
+    const hit = reasons.find((r) => r.source === key);
+    if (hit) return hit.text;
+    const gen = reasons.find((r) => r.source === 'generic');
+    if (gen) return gen.text;
+  }
   if (h && REASON_BY_HAZARD[h]) return REASON_BY_HAZARD[h];
   return 'Hunger took you at the edge of the era';
 }

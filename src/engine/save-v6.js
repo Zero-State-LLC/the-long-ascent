@@ -12,6 +12,7 @@
 import { OLD_TO_NEW_ERA, SAVE_VERSION_V3 } from '../core/migration.js';
 import { SEG_W } from './world.js';
 import { ensureV7State } from './actions.js';
+import { ensureV8State } from './juice.js';
 
 export const SAVE_V6_FIELDS = ['walkX', 'lastBoundaryEra', 'resolvedEncounters'];
 export const SAVE_V7_FIELDS = ['held', 'depletedBushes', 'placedRopes', 'gatesUsed', 'inventory', 'stamina'];
@@ -53,6 +54,11 @@ export function attachV7Fields(state) {
   return v;
 }
 
+/** v8 (SPEC §2): mastery counters, era report cards, echo ledger ride the save. */
+export function attachV8Fields(state) {
+  return ensureV8State(state);
+}
+
 /**
  * Full-load pipeline used by the boot layer: raw JSON (v2/v3/v6) → game state
  * with v6 fields. `game` must be a fresh createGame() instance; this applies
@@ -65,6 +71,7 @@ export function loadStateV6(game, json) {
   if (!Number.isFinite(state.walkX) || state.walkX < 0) state.walkX = entryXForEra(state.era);
   attachV6Fields(state);
   attachV7Fields(state); // v7: pre-v7 saves gain defaults; v7 saves survive structuredClone as-is
+  attachV8Fields(state); // v8: mastery/scores/echo ledger defaults for pre-v8 saves
   return state;
 }
 
@@ -72,6 +79,7 @@ export function loadStateV6(game, json) {
 export function saveStringV6(game) {
   attachV6Fields(game.state);
   attachV7Fields(game.state);
+  attachV8Fields(game.state);
   return game.serialize();
 }
 
