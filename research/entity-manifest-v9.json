@@ -1,0 +1,244 @@
+{
+  "entities": [
+    {
+      "src": "assets/hazard_bandit.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 48,
+      "label": "ochre"
+    },
+    {
+      "src": "assets/hazard_boar.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 48,
+      "label": "rust"
+    },
+    {
+      "src": "assets/hazard_datastorm.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 48,
+      "label": "violet"
+    },
+    {
+      "src": "assets/hazard_radiation_zone.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 48,
+      "label": "toxic-green"
+    },
+    {
+      "src": "assets/hazard_smog.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 48,
+      "label": "slate"
+    },
+    {
+      "src": "assets/hazard_soldier_patrol.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 48,
+      "label": "iron-red"
+    },
+    {
+      "src": "assets/hazard_stray_dog.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 48,
+      "label": "sand"
+    },
+    {
+      "src": "assets/hazard_wolf.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 48,
+      "label": "ice-blue"
+    },
+    {
+      "src": "assets/pickup_berry.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 24,
+      "label": "berry-red"
+    },
+    {
+      "src": "assets/pickup_book.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 24,
+      "label": "parchment"
+    },
+    {
+      "src": "assets/pickup_chip.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 24,
+      "label": "cyan"
+    },
+    {
+      "src": "assets/pickup_coin.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 24,
+      "label": "gold"
+    },
+    {
+      "src": "assets/pickup_credit.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 24,
+      "label": "mint"
+    },
+    {
+      "src": "assets/pickup_grain.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 24,
+      "label": "straw"
+    },
+    {
+      "src": "assets/pickup_invoice.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 24,
+      "label": "paper-white"
+    },
+    {
+      "src": "assets/pickup_meat.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 24,
+      "label": "meat-red"
+    },
+    {
+      "src": "assets/pickup_scroll.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 24,
+      "label": "scroll-tan"
+    },
+    {
+      "src": "assets/pickup_spear.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 24,
+      "label": "steel"
+    },
+    {
+      "src": "assets/pickup_stone.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 24,
+      "label": "granite"
+    },
+    {
+      "src": "assets/pickup_torch.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 24,
+      "label": "ember-orange"
+    },
+    {
+      "src": "assets/terr_anchor.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 48,
+      "label": "stone-gray"
+    },
+    {
+      "src": "assets/terr_berry_bush.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 48,
+      "label": "leaf-green"
+    },
+    {
+      "src": "assets/terr_crawl_gap.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 48,
+      "label": "earth-brown"
+    },
+    {
+      "src": "assets/terr_dark_cave.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 48,
+      "label": "cave-black"
+    },
+    {
+      "src": "assets/terr_fruit_tree.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 48,
+      "label": "canopy-green"
+    },
+    {
+      "src": "assets/terr_grain_stalk.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 48,
+      "label": "straw-gold"
+    },
+    {
+      "src": "assets/terr_ledgevine.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 48,
+      "label": "vine-green"
+    },
+    {
+      "src": "assets/terr_rubble_ramp.png",
+      "srcW": 192,
+      "srcH": 96,
+      "destH": 48,
+      "label": "rubble-gray"
+    },
+    {
+      "src": "assets/held_fruit.png",
+      "srcW": 32,
+      "srcH": 32,
+      "destH": 20,
+      "label": "fruit-red"
+    },
+    {
+      "src": "assets/held_spear.png",
+      "srcW": 32,
+      "srcH": 32,
+      "destH": 32,
+      "label": "steel"
+    },
+    {
+      "src": "assets/held_stone.png",
+      "srcW": 32,
+      "srcH": 32,
+      "destH": 32,
+      "label": "granite"
+    },
+    {
+      "src": "assets/held_tool.png",
+      "srcW": 32,
+      "srcH": 32,
+      "destH": 20,
+      "label": "bronze"
+    },
+    {
+      "src": "assets/held_torch.png",
+      "srcW": 32,
+      "srcH": 32,
+      "destH": 32,
+      "label": "ember-orange"
+    },
+    {
+      "src": "assets/station_glow.png",
+      "srcW": 256,
+      "srcH": 128,
+      "destH": 64,
+      "label": "ember-orange, 30% alpha behind terrain",
+      "frames": 2,
+      "note": "station glow marker, SPEC v9 s1; 2-frame ember pulse, frame-sliced by engine"
+    }
+  ]
+}
