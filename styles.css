@@ -342,6 +342,18 @@ body[data-view="ending"] #ending-screen[hidden] { display: none; }
 .hud-hand-icon { width: 26px; height: 26px; image-rendering: pixelated; }
 .hud-stamina { flex: 0 0 64px; height: 4px; border-radius: 2px; background: rgba(218, 232, 255, 0.14); overflow: hidden; display: inline-block; }
 .hud-stamina-fill { display: block; height: 100%; background: #7de08a; }
+/* v8 §1: stamina bar pulses when drained below 20%. */
+.hud-stamina-low .hud-stamina-fill { background: #f4bd68; animation: hud-stamina-pulse 0.9s ease-in-out infinite; }
+@keyframes hud-stamina-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+@media (prefers-reduced-motion: reduce) { .hud-stamina-low .hud-stamina-fill { animation: none; } }
+
+/* v8 §2: live gather-combo multiplier chip. */
+.hud-combo {
+  position: fixed; top: 0.6rem; right: 1rem; z-index: 8;
+  padding: 0.2rem 0.55rem; border-radius: 999px;
+  background: rgba(9, 15, 28, 0.88); border: 1px solid var(--accent);
+  font: 700 0.78rem ui-monospace, monospace; color: var(--accent); pointer-events: none;
+}
 
 @media (max-width: 720px) {
   #resource-bar { top: 5.2rem; }

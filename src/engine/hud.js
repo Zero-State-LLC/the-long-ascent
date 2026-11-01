@@ -67,13 +67,20 @@ export function createHud({ root, el = defaultEl }) {
         slot.append(icon);
       }
       hand.append(slot);
-      const stam = el('span', 'hud-stamina');
+      const stam = el('span', 'hud-stamina' + (opts.staminaLow ? ' hud-stamina-low' : ''));
       const sw = el('span', 'hud-stamina-fill');
       sw.style.width = `${Math.round(Math.min(1, Math.max(0, opts.hand.staminaFrac ?? 1)) * 100)}%`;
       stam.append(sw);
       stam.title = 'Stamina';
       hand.append(stam);
       root.append(hand);
+    }
+    // v8 §2: combo multiplier chip (only while a chain is live).
+    if (opts.comboMult > 1) {
+      const chip = el('div', 'hud-combo');
+      chip.setAttribute?.('aria-label', 'Gather combo');
+      chip.append(el('span', 'hud-combo-x', `×${Number(opts.comboMult).toFixed(1)}`));
+      root.append(chip);
     }
     lastEraName = eraName;
   }
@@ -92,12 +99,14 @@ export function createHud({ root, el = defaultEl }) {
   }
 
   /** In-world choice menu anchored to the object (never full-screen). */
-  function renderMenu(menuRoot, { title = '', prompt = '', choices = [], onPick = null, selectedIndex = 0 }) {
+  function renderMenu(menuRoot, { title = '', prompt = '', choices = [], onPick = null, selectedIndex = 0, scale = 1, deniedOffset = 0, deniedIndex = -1 } = {}) {
     if (!menuRoot) return;
     menuRoot.replaceChildren();
     if (!choices.length) { menuRoot.hidden = true; return; }
     menuRoot.hidden = false;
     const card = el('div', 'hud-menu');
+    // v8 §1: 120 ms scale-in + denied shake — pure transforms on the card/row.
+    if (scale !== 1) card.style.transform = `scale(${Math.max(0.5, Math.min(1.2, scale)).toFixed(3)})`;
     if (title) card.append(el('p', 'hud-menu-title', title));
     if (prompt) card.append(el('p', 'hud-menu-prompt', prompt));
     const list = el('div', 'hud-menu-choices');
@@ -105,6 +114,7 @@ export function createHud({ root, el = defaultEl }) {
       const btn = el('button', 'hud-choice' + (i === selectedIndex ? ' hud-choice-sel' : '') + (c.disabled ? ' hud-choice-off' : ''), c.label);
       btn.type = 'button';
       btn.dataset.label = c.label;
+      if (i === deniedIndex && deniedOffset) btn.style.transform = `translateX(${deniedOffset.toFixed(1)}px)`;
       if (c.disabled) {
         btn.disabled = true;
         if (c.requirement) btn.append(el('span', 'hud-choice-req', ` — ${c.requirement}`));

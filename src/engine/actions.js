@@ -190,5 +190,8 @@ export function createActionSystem({ game, player, onThrow }) {
     update, pickup, drop, swapHand, releaseThrow, speedCap, staminaFrac,
     addCountable, spendCountable, countable,
     get held() { return v7.held; },
+    // v8 juice: boot sets this to a 0/1 flag while the hit input-lock (200 ms)
+    // is active; tick.js zeroes movement + verbs while truthy.
+    inputLocked: false,
   });
 }
