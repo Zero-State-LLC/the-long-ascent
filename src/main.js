@@ -6,7 +6,7 @@ import { bootScroller, setPalettes } from './ui/scroller-boot.js';
 import { createEntitySystem } from './engine/entities.js';
 import * as actionsModule from './engine/actions.js';
 
-const [erasData, encounters, stones, arcs, actionChoices, gatesDoc, spawnTables] = await Promise.all([
+const [erasData, encounters, stones, arcs, actionChoices, gatesDoc, spawnTables, v9CopyDoc, entityManifest, echoesDoc, collapseDoc] = await Promise.all([
   fetch('src/data/eras.json').then((r) => r.json()),
   fetch('research/encounters-v6.json').then((r) => r.json()).catch(() => []),
   fetch('research/boundary-stones-v6.json').then((r) => r.json()).catch(() => []),
@@ -14,6 +14,10 @@ const [erasData, encounters, stones, arcs, actionChoices, gatesDoc, spawnTables]
   fetch('research/action-choices-v7.json').then((r) => r.json()).catch(() => null),
   fetch('research/gates-v7.json').then((r) => r.json()).catch(() => null),
   fetch('research/spawn-tables-v7.json').then((r) => r.json()).catch(() => null),
+  fetch('research/v9-copy.json').then((r) => r.json()).catch(() => null),       // v9 §9 Scribe
+  fetch('research/entity-manifest-v9.json').then((r) => r.json()).catch(() => null), // v9 D1 Studio
+  fetch('research/echoes-v8.json').then((r) => r.json()).catch(() => null),
+  fetch('research/collapse-v8.json').then((r) => r.json()).catch(() => null),
 ]);
 
 // Studio palettes: fetch per era, tolerate missing files (defaults in boot).
@@ -32,14 +36,20 @@ bootScroller({
   content: { encounters, stones, arcs },
   canvas: document.getElementById('world-canvas'),
   hudRoot: document.getElementById('resource-bar'),
-  promptRoot: document.getElementById('world-prompt'),
-  menuRoot: document.getElementById('world-menu'),
+  promptRoot: null,  // v9 D3: anchored overlays deleted
+  menuRoot: null,    // v9 D3: station panel lives in the chrome band
   toastRoot: document.getElementById('toast'),
+  chromeTop: document.getElementById('chrome-top'),
+  chromeBottom: document.getElementById('chrome-bottom'),
   options: {
     actionsModule,
     entitySystemFactory: createEntitySystem,
     spawnTables,
     gatesDoc,
     actionChoices,
+    v9CopyDoc,
+    entityManifest,
+    echoesDoc,
+    collapseDoc,
   },
 });

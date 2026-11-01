@@ -15,7 +15,7 @@ import { createTransition } from '../engine/transition.js';
 import { createSim } from '../engine/tick.js';
 import { createHud } from '../engine/hud.js';
 import { drawFigure, sheetUrl } from '../engine/figure.js';
-import { PARALLAX, VIEW_W, VIEW_H, TILE, HINT_R, FLASH_MS } from '../engine/feel.js';
+import { PARALLAX, VIEW_W, VIEW_H, TILE, HINT_R, FLASH_MS, GLOW_FRAMES, GLOW_ALPHA, DESAT_WASH } from '../engine/feel.js';
 import * as gatesMod from '../engine/gates.js';           // v7 §3
 import * as choicesMod from '../engine/actionChoices.js'; // v7 §4
 import { createJuice, easeOutQuad, gradeEra } from '../engine/juice.js'; // v8 §1/§2
@@ -24,11 +24,15 @@ import { setCollapseDoc } from '../engine/collapse.js';   // v8 §3 copy
 import {
   ambientLinesForEra, indexEchoes, echoForEncounter, markEchoSeen, collapseLine,
 } from '../engine/copy-v8.js';                            // v8 §3 copy
+import { loadV9Copy, dimReasonKeyFor, ambientHookLine } from '../engine/v9copy.js'; // v9 §9 copy
+import { createStations } from '../engine/stations.js';   // v9 §1 stations
+import { createLayout, createGuardedLoop, drawClampedText, blitEntity, drawStationGlow } from './worldview.js'; // v9 §4
+import { createChrome } from './chrome.js';               // v9 §5 chrome bands
 
 const SAVE_KEY = 'long-ascent-save-v1'; // same key: old saves migrate in place
 const SETTINGS_KEY = 'long-ascent-settings-v1';
 
-export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, menuRoot, toastRoot, options = {} }) {
+export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, menuRoot, toastRoot, chromeTop, chromeBottom, options = {} }) {
   const settings = loadSettings();
   const reducedMotion = () =>
     settings.reduceMotion || (typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -37,6 +41,11 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
   // ---- core state (unchanged contracts; idle paths simply never called) ----
   let game = createGame({ erasData, eventsData: { events: [] }, rng: mulberry32Local(0xacce66) });
   attachV6Fields(game.state);
+
+  // ---- v9 copy + stations ----------------------------------------------------
+  const copy = loadV9Copy(options.v9CopyDoc);
+  const entityManifest = options.entityManifest || { entities: [] };
+  const manifestBySrc = new Map(entityManifest.entities.map((r) => [r.src, r]));
 
   // ---- world + entities ------------------------------------------------------
   const world = createWorld({
@@ -73,6 +82,13 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
     sim.attachEntities(entities);
   }
 
+  // ---- v9: stations + chrome + guarded loop ------------------------------------
+  const stations = createStations({ encounters, game, actions, copy, rng: mulberry32Local(0x57a710) });
+  stations.attachDimReasonLookup(dimReasonKeyFor);
+  const chrome = createChrome({ topRoot: chromeTop, bottomRoot: chromeBottom, hud: null, hudRoot, copy, el: makeEl });
+  const layout = createLayout({ canvas });
+  layout.layout();
+
   // ---- v8: juice + audio + copy (SPEC §1–§3; all optional, headless-safe) ------
   const juice = createJuice({ reducedMotion, rng: mulberry32Local(0x5eed17), state: game.state });
   if (entities) entities.attachV8Fx(juice);
@@ -87,7 +103,7 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
   let pendingEcho = null;        // consequence sign waiting for the next boundary
   let lastComboCount = 0;        // chain-tick detector for menu-click sfx
   // Per-era walk ledger feeding the boundary report card (SPEC §2).
-  const eraLedger = { era: game.state.era, dist: 0, timeS: 0, gained: 0, multSum: 0, multN: 0, collapsed: false };
+  const eraLedger = { era: game.state.era, dist: 0, timeS: 0, gained: 0, multSum: 0, multN: 0, collapsed: false, route: null };
 
   // Continue: restart at the last boundary reached (SPEC §2).
   const rawSave = safeGet(SAVE_KEY);
@@ -107,15 +123,17 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
   }
 
   // ---- input ------------------------------------------------------------------
-  const keys = { left: false, right: false, jumpHeld: false, down: false, sprint: false, crouch: false, aimHeld: false };
-  let downEdgeQueued = false;
-  let dropQueued = false;
+  // SPEC v9 §3 (normative, one-handed laptop): ←/→ or A/D walk · ↑/W/Space jump
+  // (hold=higher) · ↓/S crouch-hold (C toggle REMOVED) · E ask/interact
+  // (station-only trigger) · X hold→release throw · Shift sprint · ↑↓⏎ station
+  // panel nav/commit · Esc leave station unresolved · Tab era almanac.
+  // Mouse fallback REMOVED — keyboard-only mandate.
+  const keys = { left: false, right: false, jumpHeld: false, down: false, sprint: false, aimHeld: false };
+  let almanacQueued = false;
   let menuIndex = 0;
 
   function inputSnapshot() {
-    const s = { ...keys, downEdge: downEdgeQueued, dropPressed: dropQueued, era: world.eraAtX(player.x + player.w / 2) };
-    downEdgeQueued = false;
-    dropQueued = false;
+    const s = { ...keys, era: world.eraAtX(player.x + player.w / 2) };
     return s;
   }
 
@@ -123,20 +141,17 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
     const k = e.key;
     // v8 §1: any key skips the era sequence once past the 400 ms beat.
     if (juice.eraSeq.active) { juice.eraSeq.skip(); return; }
-    if (encounters.active) return menuKey(e);
+    // v9: station panel owns ↑↓⏎/Esc while open.
+    if (stations.active) return stationKey(e);
     if (k === 'Shift') keys.sprint = true;
-    else if (k === 'c' || k === 'C') keys.crouch = !keys.crouch; // toggle: hold-free
     else if (k === 'x' || k === 'X') keys.aimHeld = true;
-    else if (k === 'q' || k === 'Q') dropQueued = true;
+    else if (k === 'q' || k === 'Q') keys.dropQueued = true;
     else if (k === 'ArrowLeft' || k === 'a') keys.left = true;
     else if (k === 'ArrowRight' || k === 'd') keys.right = true;
     else if (k === 'ArrowUp' || k === 'w' || k === ' ') { keys.jumpHeld = true; e.preventDefault?.(); }
-    else if (k === 'ArrowDown' || k === 's' || k === 'e' || k === 'Enter') {
-      // ↓ interact; Space-as-interact only when grounded (jump wins otherwise, feel §6)
-      if (k === ' ' && !player.grounded) return;
-      downEdgeQueued = true;
-      e.preventDefault?.();
-    }
+    else if (k === 'ArrowDown' || k === 's') keys.down = true; // crouch-HOLD (v9: toggle gone)
+    else if (k === 'e' || k === 'E') keys.eQueued = true;      // ask/interact (station-only trigger)
+    else if (k === 'Tab') { almanacQueued = true; e.preventDefault?.(); }
   }
   function onKeyUp(e) {
     const k = e.key;
@@ -147,45 +162,29 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
     else if (k === 'ArrowUp' || k === 'w' || k === ' ') keys.jumpHeld = false;
     else if (k === 'ArrowDown' || k === 's') keys.down = false;
   }
-  function menuKey(e) {
-    const obj = encounters.active;
-    const n = obj.choices.length;
-    if (e.key === 'ArrowDown' || e.key === 's') { menuIndex = (menuIndex + 1) % n; e.preventDefault?.(); }
-    else if (e.key === 'ArrowUp' || e.key === 'w') { menuIndex = (menuIndex + n - 1) % n; e.preventDefault?.(); }
-    else if (e.key === 'Enter' || e.key === ' ') { pickChoice(obj.choices[menuIndex]?.label); e.preventDefault?.(); }
-    else if (e.key === 'Escape') { encounters.closeMenu('user'); }
-  }
-  function pickChoice(label) {
-    if (!label) return;
-    // v7 §4: greyed action-choices cannot be picked (keyboard path too).
-    const act = encounters.active;
-    const raw = act?.choices.find((c) => c.label === label);
-    if (raw?.disabled) { juice.menu.denied(); sfx.play('denied-buzz'); return; }
-    const res = encounters.choose(label);
-    if (res.ok) {
+  // Station panel nav (SPEC §3): ↑↓ move, ⏎/Enter commit, Esc leave unresolved.
+  function stationKey(e) {
+    if (e.key === 'ArrowDown' || e.key === 's') { stations.move('down'); e.preventDefault?.(); }
+    else if (e.key === 'ArrowUp' || e.key === 'w') { stations.move('up'); e.preventDefault?.(); }
+    else if (e.key === 'Enter' || e.key === ' ') { commitStation(); e.preventDefault?.(); }
+    else if (e.key === 'Escape') {
+      stations.leave();
+      sim.setPaused(false);
       sfx.play('menu-click');
-      autosave();
-      toast(describeDeltas(res.deltas));
-      renderHud();
-      // v8 §3: remember the consequence echo for the NEXT boundary sign.
-      const echo = echoForEncounter(echoIndex, act?.id, game.state.v8);
-      if (echo) pendingEcho = echo;
+      e.preventDefault?.();
     }
   }
-
-  // touch/mouse fallback: tap left/right half walks; double-tap jumps (SPEC §1)
-  function pointerFallback(e) {
-    if (encounters.active) return;
-    const rect = canvas?.getBoundingClientRect?.();
-    if (!rect) return;
-    const now = Date.now();
-    if (now - (pointerFallback._last || 0) < 300) { keys.jumpHeld = true; setTimeout(() => { keys.jumpHeld = false; }, 250); }
-    else {
-      const dir = (e.clientX - rect.left) < rect.width / 2 ? 'left' : 'right';
-      keys[dir] = true;
-      setTimeout(() => { keys[dir] = false; }, 400);
-    }
-    pointerFallback._last = now;
+  function commitStation() {
+    const res = stations.commit();
+    if (!res.ok) { juice.menu.denied(); sfx.play('denied-buzz'); return; }
+    sfx.play('menu-click');
+    sim.setPaused(false); // world re-animates; the beat carries the numbers
+    autosave();
+    renderHud();
+    toast(describeDeltas(res.deltas));
+    // v8 §3: remember the consequence echo for the NEXT boundary sign.
+    const echo = echoForEncounter(echoIndex, res.id, game.state.v8);
+    if (echo) pendingEcho = echo;
   }
 
   // ---- assets (non-blocking; every consumer degrades gracefully) ---------------
@@ -245,39 +244,48 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
     if (fill) fill.style.width = `${Math.round(boundaryProgress(player.x) * 100)}%`;
   }
 
-  // ---- render loop ---------------------------------------------------------------
+  // ---- render loop (D2: guarded, never dies) -----------------------------------
   let raf = 0, lastT = 0, running = true;
   let lightLevel = 1; // v7: dark_cave overlay (entities 'light-change' event)
 
-  function frame(tms) {
-    if (!running) return;
-    const dt = lastT ? Math.min(0.25, (tms - lastT) / 1000) : 0;
-    lastT = tms;
-
+  function stepFrame(dt) {
     // v8 §1: era transition sequence owns the clock — skippable after 400 ms.
     if (juice.eraSeq.active) {
       juice.eraSeq.update(dt);
       paint();
-      raf = requestAnimationFrame(frame);
       return;
     }
-
     const prevX = player.x;
     const snap = inputSnapshot();
+    // v9: stations update BEFORE the sim so the freeze applies same-tick; the
+    // panel opens when the body is within 40 px of a READY station.
+    const st = stations.update(player, dt);
+    if (st.opened) { sim.setPaused(true); juice.menu.opened(); sfx.play('menu-click'); }
     const events = sim.frame(dt, snap);
     // v7 §2: E interacts with entities when no encounter object owns the press.
-    if (snap.downEdge && !encounters.active && entities) {
+    if (snap.eQueued && !stations.active && entities) {
       const r = entities.interact(player);
       if (r.ok) { entityInteractFx(r); autosave(); renderHud(); }
       else if (r.reason === 'hand busy') sfx.play('denied-buzz');
+      snap.eQueued = false;
     }
     for (const ev of events) handleEvent(ev);
     v8Tick(dt, prevX);
-
     paint();
     hudTick(dt);
-    raf = requestAnimationFrame(frame);
+    renderChrome();
   }
+
+  // D2: the guarded loop owns the rAF chain — a throw anywhere in update+paint
+  // paints a diagnostic stripe on the last-good framebuffer and keeps going.
+  const guarded = createGuardedLoop({
+    canvas,
+    paint: () => {},
+    update: (dt) => stepFrame(dt),
+    faultCopy: copy.renderFault(),
+    onPause: () => { sim.setPaused(true); toast(copy.renderFault().toast); },
+  });
+  function frame(tms) { guarded._frameExternal?.(tms); }
 
   // ---- v8 per-frame feel/copy/depth tick ----------------------------------------
   function v8Tick(dt, prevX) {
@@ -307,6 +315,9 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
         juice.particles.sprintPuff(player.x + player.w / 2, player.y + player.h, Math.sign(player.vx) || 1);
       }
     } else sprintDustAcc = 0;
+    // v9 §1.2: track the walked fork route for the era report card.
+    const route = world.routeAtX(player.x + player.w / 2);
+    if (route) eraLedger.route = route;
     // whisper bubbles above the figure every ~45 s of walking (SPEC §3)
     const moving = Math.abs(player.x - prevX) > 0.01;
     if (moving) {
@@ -377,20 +388,24 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
     }
   }
 
-  /** SPEC §2: per-era report card at the boundary; persisted in state.v8.eraScores. */
+  /** SPEC §2: per-era report card at the boundary; persisted in state.v8. */
   function gradeAndShowEra(era) {
     const total = world.objects.filter((o) => o.choices?.length && o.era === era).length;
     const resolvedList = game.state.resolvedEncounters || [];
     const resolved = resolvedList.filter((r) => r.era === era).length;
     const comboAvg = eraLedger.multN > 0 ? eraLedger.multSum / eraLedger.multN : 1;
     const resources = Math.round(eraLedger.gained);
+    // v9 §1.2: the route actually walked — the majority route under the body.
+    const walkedRoute = eraLedger.route || null;
+    const missedIds = world.missedStations(era, walkedRoute);
     const stars = gradeEra({ encountersResolved: resolved, encountersTotal: total, collapsed: eraLedger.collapsed, comboAvg });
-    const card = { era, stars, timeS: Math.round(eraLedger.timeS), resources, encountersResolved: resolved, encountersTotal: total, comboAvg: Math.round(comboAvg * 100) / 100 };
+    const missedLine = missedIds.length ? copy.missedLine(era, mulberry32Local(era * 7919)) : null;
+    const card = { era, stars, timeS: Math.round(eraLedger.timeS), resources, encountersResolved: resolved, encountersTotal: total, comboAvg: Math.round(comboAvg * 100) / 100, missedStations: missedIds, missedLine };
     juice.scores.record(era, card);
     showReportCard(card);
     // reset the ledger for the era we are walking INTO
     eraLedger.era = era + 1; eraLedger.dist = 0; eraLedger.timeS = 0; eraLedger.gained = 0;
-    eraLedger.multSum = 0; eraLedger.multN = 0; eraLedger.collapsed = false;
+    eraLedger.multSum = 0; eraLedger.multN = 0; eraLedger.collapsed = false; eraLedger.route = null;
     autosave();
   }
 
@@ -497,6 +512,22 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
       juice.particles.hitSparks(ev.x ?? player.x, ev.y ?? player.y);
       sfx.play('hit');
       if (ev.mastered) toast(`${ev.hazard} mastered. Your throws stun them now.`);
+      // v9 §1.3 ambient hook: first hazard death of an era → fixed caption.
+      const key = `hazard-death-${world.eraAtX(player.x)}`;
+      if (!game.state.v9?.captions?.includes(key)) {
+        if (!game.state.v9) game.state.v9 = {};
+        if (!Array.isArray(game.state.v9.captions)) game.state.v9.captions = [];
+        game.state.v9.captions.push(key);
+        const line = ambientHookLine('first-hazard-death', { era: world.eraAtX(player.x), echoesDoc: options.echoesDoc });
+        if (line) chrome.caption(line.text);
+      }
+    }
+    if (ev.type === 'era-begin') {
+      // v9 §1.3 ambient hook: era entry with <30 sustenance → caption, no pause.
+      if (game.state.resources.sustenance < 30) {
+        const line = ambientHookLine('low-sustenance-entry', { era: ev.toEra, collapseDoc: options.collapseDoc });
+        if (line) chrome.caption(line.text);
+      }
     }
     if (ev.type === 'mastery-stun') sfx.play('hit');
   }
@@ -552,28 +583,31 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
     // Objects in view: props anchored to terrain surface; resolved ones keep
     // rendering (funded granaries stand for the run, SPEC §1).
     const viewL = off.x - 96, viewR = off.x + VIEW_W + 96;
+    // v9 §1: station glow markers first (behind terrain, ember pulse).
+    paintStationGlow(ctx, off);
     for (const o of world.objects) {
       if (o.x < viewL || o.x > viewR) continue;
       drawObject(ctx, o);
     }
 
-    // v7 §2: entities in view (hazards, pickups, terrain, stone piles).
+    // v7 §2: entities in view — D1 render contract blits (manifest rows,
+    // feet-anchored, aspect-correct destW). Missing art falls back to a
+    // labeled silhouette; dev mode throws loudly (guarded loop shows it).
     if (entities) {
       for (const d of entities.defs) {
         if (d.x < viewL || d.x > viewR) continue;
         const r = entities.runtimeOf(d.id);
         if (r.taken || r.dead) continue;
         if (d.kind === 'terrain' && (game.state.v7.depletedBushes || []).includes(d.id)) continue;
-        let src;
-        if (d.kind === 'hazard') src = `assets/hazard_${d.type}.png`;
-        else if (d.kind === 'pickup') src = `assets/pickup_${d.type}.png`;
-        else if (d.kind === 'stone_pile') src = 'assets/terr_stone_pile.png';
-        else src = `assets/terr_${d.type}.png`;
-        const img = images.get(src);
+        const src = entitySrcFor(d);
+        const row = manifestBySrc.get(src) || { src, srcW: 192, srcH: 96, destH: d.kind === 'hazard' ? 48 : 56, label: d.type };
+        const img = images.get(src)?.img;
         const feet = surfaceFeetAt(d.x);
-        const H = d.kind === 'hazard' ? 48 : 56;
-        if (img?.img) ctx.drawImage(img.img, Math.round(d.x - H / 2), Math.round(feet - H), H, H);
-        else { ctx.fillStyle = '#7de08a'; ctx.fillRect(Math.round(d.x - 6), Math.round(feet - 24), 12, 24); }
+        try {
+          blitEntity(ctx, row, img, d.x, feet, { dev: false, label: d.type });
+        } catch {
+          drawLabeledSilhouetteSafe(ctx, d.x, feet, row.destH, d.type);
+        }
       }
     }
 
@@ -632,9 +666,36 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
       if (fading >= 2.2) { fading = 0; if (fadeDone) { fadeDone(); fadeDone = null; } }
     }
 
-    // In-world UI overlays (prompt bubble + anchored choice menu).
+    // In-world UI overlays (v9: diegetic text only, via drawClampedText).
     paintOverlays();
     paintWhisperBubble();
+    // v9 §1: desaturation wash while a station panel is up (world keeps painting).
+    if (stations.active) {
+      ctx.fillStyle = `rgba(120, 120, 130, ${DESAT_WASH.toFixed(3)})`;
+      ctx.fillRect(0, 0, VIEW_W, VIEW_H);
+    }
+  }
+
+  /** Entity → manifest src (D1 render contract). */
+  function entitySrcFor(d) {
+    if (d.kind === 'hazard') return `assets/hazard_${d.type}.png`;
+    if (d.kind === 'pickup') return `assets/pickup_${d.type}.png`;
+    if (d.kind === 'stone_pile') return 'assets/terr_stone_pile.png';
+    return `assets/terr_${d.type}.png`;
+  }
+  /** Silhouette fallback helper (never an anonymous rect — D1). */
+  function drawLabeledSilhouetteSafe(ctx, x, feetY, destH, label) {
+    ctx.save();
+    ctx.fillStyle = 'rgba(125, 224, 138, 0.3)';
+    ctx.beginPath();
+    const w = 16, h = Math.max(12, destH || 24);
+    ctx.roundRect ? ctx.roundRect(x - w / 2, feetY - h, w, h, 4) : ctx.rect(x - w / 2, feetY - h, w, h);
+    ctx.fill();
+    ctx.fillStyle = '#DAE8FF';
+    ctx.font = '600 9px ui-monospace, monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(String(label || 'entity').slice(0, 14), x, feetY - h - 3);
+    ctx.restore();
   }
 
   // ---- v8 paint helpers -------------------------------------------------------
@@ -738,46 +799,37 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
   }
 
   function paintOverlays() {
-    // Prompt: nearest READY/PROMPT object.
-    let best = null, bestD = Infinity;
-    for (const o of world.objects) {
-      const s = encounters.stateOf(o.id);
-      if (s !== 'ready' && s !== 'prompt') continue;
-      const d = Math.abs(o.x - (player.x + player.w / 2));
-      if (d < bestD) { bestD = d; best = o; }
-    }
-    if (promptRoot) {
-      hud.renderPrompt(promptRoot, {
-        visible: !!best && !encounters.active,
-        text: best?.inscription ? 'Read the stone' : best?.kind === 'arc' ? 'Speak with ' + best.title : 'Interact',
-      });
-      positionWorldElement(promptRoot, best);
-    }
-    if (menuRoot) {
-      const act = encounters.active;
-      const decorated = act && actions
-        ? choicesMod.decorateChoices(act.choices, { state: game.state, actions })
-        : act?.choices || [];
-      hud.renderMenu(menuRoot, act ? {
-        title: act.title || '', prompt: act.prompt || '', choices: decorated,
-        onPick: pickChoice, selectedIndex: menuIndex,
-        scale: juice.menu.scale(), // v8 §1: 120 ms scale-in
-        deniedOffset: juice.menu.deniedOffset(), deniedIndex: menuIndex, // denied wiggle on the highlighted row
-      } : { choices: [] });
-      positionWorldElement(menuRoot, act);
-    }
+    // v9 D3: no anchored overlays — the deleted anchored-overlay path is
+    // not coming back. The station panel lives in the fixed bottom chrome
+    // band (renderChrome); diegetic prompts draw in-canvas only via
+    // drawClampedText (world rect). Station glow markers are diegetic
+    // (paintStationGlow in the objects pass above).
   }
 
-  function positionWorldElement(root, obj) {
-    if (!root?.style || !obj || !canvas?.getBoundingClientRect) return;
-    const rect = canvas.getBoundingClientRect();
-    const sx = ((obj.x - camera.x) / VIEW_W) * rect.width;
-    const sy = (((surfaceFeetAt(obj.x) || 400) - camera.y) / VIEW_H) * rect.height;
-    root.style.position = 'fixed';
-    root.style.left = `${rect.left + sx}px`;
-    root.style.top = `${rect.top + sy - 8}px`;
-    root.style.transform = 'translate(-50%, -100%)';
-    root.style.zIndex = '5';
+  /** Chrome bands render (D3): top pools/hairline + bottom panel or key strip. */
+  function renderChrome() {
+    const eraDef = game.eraDef();
+    chrome.renderTop({
+      era: game.state.era,
+      eraName: `ERA ${game.state.era} — ${(eraDef?.name || '').toUpperCase()}`,
+      progress01: boundaryProgress(player.x),
+      state: game.state,
+    });
+    chrome.renderBottom(stations.panel());
+  }
+
+  /** Station glow blit for READY/PROMPT encounter objects (diegetic marker). */
+  function paintStationGlow(ctx, off) {
+    if (!images.get('assets/station_glow.png')?.img) return;
+    const t = performance.now() / 1000;
+    for (const o of world.objects) {
+      if (!o.choices?.length || encounters.isResolved(o.id)) continue;
+      const s = encounters.stateOf(o.id);
+      if (s !== 'ready' && s !== 'prompt') continue;
+      const feet = surfaceFeetAt(o.x);
+      const sx = o.x - off.x;
+      drawStationGlow(ctx, images.get('assets/station_glow.png').img, sx, feet, t, { destH: 64, alpha: GLOW_ALPHA });
+    }
   }
 
   // ---- drawing helpers ------------------------------------------------------------
@@ -875,26 +927,29 @@ export function bootScroller({ erasData, content, canvas, hudRoot, promptRoot, m
   if (typeof document !== 'undefined') {
     document.addEventListener('keydown', onKeyDown);
     document.addEventListener('keyup', onKeyUp);
-    canvas?.addEventListener?.('pointerdown', pointerFallback);
+    window?.addEventListener?.('resize', () => layout.resize());
   }
   renderHud();
-  if (typeof requestAnimationFrame !== 'undefined') raf = requestAnimationFrame(frame);
+  // D2: the guarded loop owns the rAF chain (never dies on a paint fault).
+  if (typeof requestAnimationFrame !== 'undefined') guarded.start();
+  const rafProxy = { get current() { return guarded.running ? 1 : 0; } };
+  void rafProxy;
 
   return {
     game, world, player, camera, encounters, transition, sim, hud,
+    stations, chrome, layout, guarded,
     get paused() { return !running; },
-    pause() { running = false; cancelAnimationFrame(raf); },
-    resume() { if (!running) { running = true; lastT = 0; raf = requestAnimationFrame(frame); } },
+    pause() { running = false; guarded.stop(); },
+    resume() { if (!running) { running = true; guarded.resume(); } },
     autosave, toast,
     _input: keys,
-    _pickChoice: pickChoice,
+    _commitStation: commitStation,
     destroy() {
       running = false;
-      cancelAnimationFrame(raf);
+      guarded.stop();
       if (typeof document !== 'undefined') {
         document.removeEventListener('keydown', onKeyDown);
         document.removeEventListener('keyup', onKeyUp);
-        canvas?.removeEventListener?.('pointerdown', pointerFallback);
       }
     },
   };

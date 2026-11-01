@@ -8,16 +8,10 @@
   <link rel="stylesheet" href="./styles.css?v=f795103" />
 </head>
 <body data-view="game">
-  <!-- v6: the world is the canvas; idle/quiz DOM views are retired (SPEC §5). -->
+  <!-- v9 THE CLEARING: fixed chrome bands (D3) own all persistent UI. -->
   <canvas id="scene" aria-hidden="true"></canvas>
 
-  <header id="era-header">
-    <h1 id="era-title">ERA 1 — THE CAVE</h1>
-    <p id="era-sub"></p>
-    <div id="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Walk to the era boundary">
-      <div id="progress-fill"></div>
-    </div>
-  </header>
+  <header id="chrome-top" class="chrome-top"></header>
 
   <!-- v6 HUD: thin top resource strip, purple-bar language, no /s chips -->
   <aside id="resource-bar" aria-label="Resources"></aside>
@@ -25,14 +19,9 @@
   <main id="stage">
     <canvas id="world-canvas" width="1280" height="720" tabindex="0"
             aria-label="The long ascent: walk right, jump, read the stones"></canvas>
-    <!-- in-world overlays, anchored above their objects by scroller-boot -->
-    <div id="world-prompt" hidden></div>
-    <div id="world-menu" hidden></div>
   </main>
 
-  <footer id="controls-hint">
-    ← → / A D walk · ↑ / W / Space jump (hold = higher) · ↓ / E interact · Esc close menu
-  </footer>
+  <footer id="chrome-bottom" class="chrome-bottom"></footer>
 
   <section id="settings-screen" hidden>
     <h2>Settings</h2>

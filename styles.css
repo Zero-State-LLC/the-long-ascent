@@ -359,3 +359,58 @@ body[data-view="ending"] #ending-screen[hidden] { display: none; }
   #resource-bar { top: 5.2rem; }
   .hud-meter { width: 28px; }
 }
+
+/* ============================================================ v9 THE CLEARING */
+/* Fixed chrome bands (D3) own ALL persistent UI — the world layer owns
+   everything between. Tokens: research/chrome-tokens-v9.md. */
+#chrome-top {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 4;
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center;
+  gap: 0.9rem; padding: 0.45rem 0.9rem;
+  background: #090F1C; border-bottom: 1px solid #394969;
+  pointer-events: none; font-family: ui-monospace, monospace;
+}
+.chrome-top-left { display: flex; align-items: baseline; gap: 0.5rem; }
+.chrome-era-num { color: #71809A; font-size: 0.62rem; letter-spacing: 0.12em; }
+.chrome-era-name { color: #DAE8FF; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.chrome-hairline { height: 3px; border-radius: 2px; background: rgba(218, 232, 255, 0.14); overflow: hidden; align-self: center; }
+.chrome-hairline-fill { height: 100%; width: 0%; background: #B79CFF; transition: width 0.4s ease; }
+.chrome-pools { display: flex; gap: 0.35rem; justify-content: flex-end; }
+
+#chrome-bottom {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 4;
+  min-height: 2.2rem; padding: 0.4rem 0.9rem;
+  background: #090F1C; border-top: 1px solid #394969;
+  display: flex; align-items: center; justify-content: center;
+  font-family: ui-monospace, monospace; color: #AAB7D0;
+}
+#chrome-bottom.chrome-bottom-active { align-items: stretch; padding: 0.6rem 1rem; }
+.chrome-keys { font-size: 0.66rem; letter-spacing: 0.06em; opacity: 0.75; text-align: center; }
+.chrome-caption {
+  position: fixed; left: 50%; transform: translateX(-50%); bottom: 3rem; z-index: 5;
+  background: rgba(20, 29, 49, 0.92); border: 1px solid #394969; border-radius: 8px;
+  padding: 0.3rem 0.8rem; font-size: 0.72rem; color: #DAE8FF; pointer-events: none;
+  font-style: italic;
+}
+
+/* Station panel (active bottom band) — SPEC §5 lower-third chrome. */
+.station-panel {
+  width: min(720px, 92vw); margin: 0 auto;
+  background: #141D31; border: 1px solid #394969; border-radius: 10px;
+  padding: 0.55rem 0.8rem 0.5rem;
+}
+.station-title { margin: 0 0 0.15rem; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: #B79CFF; }
+.station-prompt { margin: 0 0 0.4rem; font-size: 0.8rem; line-height: 1.4; color: #DAE8FF; }
+.station-choices { display: flex; flex-direction: column; gap: 0.3rem; }
+.station-choice {
+  text-align: left; font: inherit; font-size: 0.76rem; color: #DAE8FF;
+  border: 1px solid #394969; border-radius: 7px; padding: 0.4rem 0.6rem;
+  background: rgba(0, 0, 0, 0.25); cursor: pointer; display: flex; gap: 0.5rem; align-items: baseline;
+}
+.station-choice-sel { border-color: #B79CFF; background: rgba(183, 156, 255, 0.14); }
+.station-choice-walkaway { border-style: dashed; border-color: #E65B4B; }
+.station-choice-off { color: #71809A; cursor: not-allowed; }
+.station-choice-off .station-choice-label { flex: 0 1 auto; }
+.station-choice-reason { color: #E65B4B; font-size: 0.66rem; margin-left: auto; }
+.station-hints { margin: 0.4rem 0 0; font-size: 0.62rem; color: #71809A; }
+.station-beat { margin: 0.25rem 0 0; font-size: 0.66rem; color: #AAB7D0; font-style: italic; }

@@ -23,12 +23,19 @@ export function createSim({ world, player, camera, encounters, transition, game,
   let shownEra = game.state.era || 1; // physical era underfoot (monotonic)
   const listeners = [];
   let entities = null; // v7: attached via attachEntities() after construction
+  let paused = false;  // v9: station freeze — the world holds, painting continues
 
   /** v7: wire the entity system in (boot layer calls this once). */
   function attachEntities(es) { entities = es; }
 
+  /** v9: pause/unpause the fixed-step sim (station panel up). Pure gate: no
+   *  state resets, so resume continues exactly where the freeze caught it. */
+  function setPaused(v) { paused = !!v; }
+  function isPaused() { return paused; }
+
   /** Feed wall-clock seconds (rAF delta). Runs whole fixed steps only. */
   function frame(dtSeconds, input) {
+    if (paused) return []; // frozen: no accumulator growth, no steps, clock holds
     acc += Math.min(dtSeconds, 0.25); // tab-switch guard
     const events = [];
     while (acc >= FIXED_DT) {
@@ -131,6 +138,8 @@ export function createSim({ world, player, camera, encounters, transition, game,
   return {
     frame,
     attachEntities,
+    setPaused,
+    isPaused,
     get clock() { return clock; },
     on(fn) { listeners.push(fn); },
     /** Place the player at an era entry pad (Continue / debug jump). */
