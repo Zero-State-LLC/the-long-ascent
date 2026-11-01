@@ -4,7 +4,7 @@
 // answers era lookup / boundary placement / parallax layer queries for the
 // renderer. Deterministic on `seed` — same seed, same terrain.
 
-import { TILE, VIEW_W } from './feel.js';
+import { TILE, VIEW_W, FORK_FRACTION } from './feel.js';
 import { mulberry32 } from '../core/crossing.js'; // seeded PRNG lineage (same as Starfield/palettes)
 
 export const SEG_SCREENS = 3;                    // ~3 screens per era (SPEC §2)
@@ -60,6 +60,18 @@ export function createWorld({ erasData, encounters = [], stones = [], arcs = [] 
 
   const segStart = (eraNum) => (eraNum - 1) * SEG_W;              // era 1..17
   const eraAtX = (x) => Math.min(17, Math.max(1, Math.floor(x / SEG_W) + 1));
+
+  // ---------------------------------------------------------- v9 §1.2 micro-fork
+  // The era's tail third splits into two x-ranges tagged
+  // `route: 'ridge' | 'valley'`, rejoining at the boundary stone (the seam).
+  const FORK_START = 1 - FORK_FRACTION;
+  /** Which fork route world x belongs to: 'ridge' | 'valley', or null (spine). */
+  const forkRouteFor = (era, x) => {
+    const rel = (x - (era - 1) * SEG_W) / SEG_W;
+    if (rel < FORK_START) return null; // shared spine
+    // Ridge = the first half of the tail; valley = the second.
+    return rel < FORK_START + FORK_FRACTION / 2 ? 'ridge' : 'valley';
+  };
 
   // ------------------------------------------------------------- collider API
   const collider = {
@@ -146,6 +158,37 @@ export function createWorld({ erasData, encounters = [], stones = [], arcs = [] 
         ground: `assets/bg${n}_ground.png`,
       };
     },
+    /**
+     * v9 §1.2: which fork route does world x walk? 'ridge' | 'valley' inside
+     * the era tail, or null on the shared spine. The two routes are x-ranges
+     * that rejoin at the boundary stone (era seam).
+     */
+    routeAtX(x) {
+      const era = eraAtX(x);
+      return forkRouteFor(era, x);
+    },
+    /**
+     * v9 §1.2: era report card data — the stations an era holds that the
+     * walked route did NOT include (plus spine stations actually reached).
+     * `walkedRoute` is 'ridge' | 'valley'; null = walked the spine only.
+     */
+    missedStations(eraNum, walkedRoute) {
+      return objects.filter((o) =>
+        o.kind === 'encounter' && o.era === eraNum && o.choices?.length
+        && walkedRoute != null && o.route != null && o.route !== walkedRoute
+      ).map((o) => o.id);
+    },
+    /** The fork x-ranges for an era (renderer paints the visible split). */
+    forkRanges(eraNum) {
+      const start = segStartOf(eraNum);
+      const tail = SEG_W * FORK_FRACTION;
+      return {
+        spineEnd: start + SEG_W - tail,
+        ridge: { from: start + SEG_W - tail, to: start + SEG_W - tail / 2 },
+        valley: { from: start + SEG_W - tail / 2, to: start + SEG_W },
+        rejoin: start + SEG_W,
+      };
+    },
   };
 }
 
@@ -216,6 +259,12 @@ function buildTerrain(rng) {
 // Every interactive thing lives in ONE list with stable ids and spread x
 // positions inside its era segment (SPEC §4: encounter objects keep effects
 // verbatim; prompts are in-world signage).
+//
+// v9 §1.2 micro-fork: before each boundary stone the era's tail third splits
+// into two x-ranges tagged `route: 'ridge' | 'valley'` with different
+// encounter/spawn density, rejoining at the stone. No vertical lanes, no
+// camera changes — the route choice is which ~⅔ of the era's stations you
+// meet; the era report card lists missed stations.
 function placeObjects({ encounters, stones, arcs }, rng) {
   const objects = [];
 
@@ -251,6 +300,9 @@ function placeObjects({ encounters, stones, arcs }, rng) {
   }
 
   // Encounters: spread evenly through their era segment with jitter, sorted by x.
+  // v9: era-tail encounters distribute across the two fork routes with route
+  // density weights (FORK_DENSITY); spine encounters are untouched. The player
+  // walks one route's x-range, so the other route's stations are missed.
   const encList = Array.isArray(encounters) ? encounters : (encounters.encounters || []);
   const byEra = new Map();
   for (const e of encList) {
@@ -262,8 +314,23 @@ function placeObjects({ encounters, stones, arcs }, rng) {
     // Keep clear of the seam pads (±14 tiles) so objects never hang over pits/gates.
     const usable = SEG_W - 2 * 14 * TILE;
     const step = usable / (list.length + 1);
+    // Route split: shuffle deterministically, then deal ~half to each route.
+    const sorted = [...list].sort((a, b) => String(a.id).localeCompare(String(b.id)));
+    const ridge = [], valley = [];
+    sorted.forEach((e, i) => {
+      const rel = (i + 0.5) / sorted.length;
+      // Deal by id parity for determinism; density knob favors valley (richer).
+      (i % 2 === 0 ? valley : ridge).push(e);
+    });
     list.forEach((e, i) => {
       const jitter = (rng() - 0.5) * step * 0.4;
+      // Where does this encounter land? Spine encounters keep even spacing;
+      // fork-tail encounters route by the deal above. The x spread below
+      // already spans the whole segment; the route tag rides on the object.
+      const x = Math.round(start + 14 * TILE + step * (i + 1) + jitter);
+      const rel = (x - start) / SEG_W;
+      const inFork = rel >= (1 - FORK_FRACTION);
+      const route = inFork ? (ridge.includes(e) ? 'ridge' : 'valley') : null;
       objects.push({
         id: e.id,
         kind: 'encounter',
@@ -271,7 +338,8 @@ function placeObjects({ encounters, stones, arcs }, rng) {
         type: e.type,
         title: e.title,
         prop: PROP_BY_TYPE[e.type] || 'sign',
-        x: Math.round(start + 14 * TILE + step * (i + 1) + jitter),
+        x,
+        route, // 'ridge' | 'valley' | inherited for spine objects
         prompt: e.prompt,
         choices: e.choices || [],
       });

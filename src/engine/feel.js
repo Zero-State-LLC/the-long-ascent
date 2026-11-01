@@ -105,3 +105,22 @@ export const WHISPER_INTERVAL_S = 45;
 
 // --- parallax depths (SPEC §1/§3: scroll 4 layers) --------------------------------
 export const PARALLAX = { sky: 0.1, far: 0.3, near: 0.6, ground: 1.0 };
+
+// --- v9 THE CLEARING (SPEC-v9 §1/§2/§4) -------------------------------------------
+// Station approach: the world freezes within 40 px of a READY station (§1).
+export const STATION_APPROACH_PX = 40;
+// Consequence beat: deltas land visibly for ≤3 s on resume (§1).
+export const CONSEQUENCE_BEAT_S = 3.0;
+// Station glow: 2-frame ember pulse at 30% alpha behind terrain (§1; Studio v9).
+export const GLOW_FRAMES = 2;
+export const GLOW_ALPHA = 0.3;
+// Desaturation wash strength when a station panel is up (chrome-tokens-v9.md).
+export const DESAT_WASH = 0.35;
+// Render-fault rule (§4 D2): 3 consecutive faults → auto-pause.
+export const RENDER_FAULT_LIMIT = 3;
+// Text margins for measured & clamped text (§4 D4), logical px.
+export const TEXT_MARGIN = 24;
+// Micro-fork (§1.2): the era-tail fraction that splits into two routes.
+export const FORK_FRACTION = 1 / 3;
+// Fork route density multipliers (spawn/encounter density knobs, §1.2).
+export const FORK_DENSITY = { ridge: 0.7, valley: 1.4 };
