@@ -376,6 +376,12 @@ body[data-view="ending"] #ending-screen[hidden] { display: none; }
 .chrome-hairline { height: 3px; border-radius: 2px; background: rgba(218, 232, 255, 0.14); overflow: hidden; align-self: center; }
 .chrome-hairline-fill { height: 100%; width: 0%; background: #B79CFF; transition: width 0.4s ease; }
 .chrome-pools { display: flex; gap: 0.35rem; justify-content: flex-end; }
+/* D3: when the legacy #resource-bar is re-parented into the chrome band, its
+   old fixed/anchored positioning must not resurrect it mid-screen. */
+#chrome-top #resource-bar {
+  position: static; inset: auto; transform: none; bottom: auto; top: auto; left: auto; right: auto;
+  flex-wrap: nowrap; max-width: none; padding: 0;
+}
 
 #chrome-bottom {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 4;
